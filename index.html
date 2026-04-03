@@ -1,0 +1,208 @@
+<!DOCTYPE html> 
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Codes - 1 tot 20</title>
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f0f0f;
+            color: #fff;
+            height: 100vh;
+            display: grid;
+            grid-template-rows: 70px 1fr;
+        }
+        
+        header {
+            background: #1a1a1a;
+            border-bottom: 2px solid #333;
+            display: flex;
+            align-items: center;
+            padding: 0 30px;
+            gap: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 600;
+            color: #00ffaa;
+        }
+        
+        .back-btn {
+            background: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+        
+        .back-btn:hover {
+            background: #00ffaa;
+            color: #000;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            height: 100%;
+        }
+        
+        nav {
+            background: #1a1a1a;
+            padding: 30px 20px;
+            border-right: 2px solid #333;
+            overflow-y: auto;
+        }
+        
+        h1 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding-left: 10px;
+            color: #aaa;
+        }
+        
+        .projects {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .project-btn {
+            background: #222;
+            color: #fff;
+            border: none;
+            padding: 16px 20px;
+            border-radius: 12px;
+            text-align: left;
+            font-size: 17px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .project-btn:hover {
+            background: #00ffaa;
+            color: #000;
+            transform: translateX(8px);
+        }
+        
+        .project-btn::before {
+            content: "📂";
+            font-size: 20px;
+        }
+        
+        main {
+            padding: 20px;
+            background: #111;
+            position: relative;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 255, 170, 0.1);
+            background: #fff;
+        }
+        
+        .empty-state {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #666;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">My Codes</div>
+        <button class="back-btn" onclick="goHome()">
+            ← Terug naar overzicht
+        </button>
+        <div style="margin-left: auto; color: #666; font-size: 14px;">
+            Leerprojecten 1 - 20
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Sidebar met alle projecten -->
+        <nav>
+            <h1>Projecten</h1>
+            <div class="projects" id="projectList"></div>
+        </nav>
+
+        <!-- Hier komt het gekozen project te staan -->
+        <main>
+            <iframe id="projectFrame" src="" frameborder="0"></iframe>
+            
+            <!-- Welkomstbericht als er nog niks is gekozen -->
+            <div id="emptyMessage" class="empty-state">
+                <h2>👋 Welkom bij je codeswebsite!</h2>
+                <p>Klik links op een project (1 t/m 20)<br>en het verschijnt hier.</p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Maak automatisch de 20 knoppen
+        function createProjectButtons() {
+            const list = document.getElementById('projectList');
+            
+            for (let i = 1; i <= 20; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'project-btn';
+                btn.innerHTML = `<span>Project ${i}</span>`;
+                btn.onclick = () => loadProject(i);
+                list.appendChild(btn);
+            } 
+        }
+
+        // Laad het project in de iframe
+        function loadProject(num) {
+            const frame = document.getElementById('projectFrame');
+            const empty = document.getElementById('emptyMessage');
+            
+            // Aangepast pad: nu zit codeswebsite één niveau dieper
+            // Dus we moeten twee mappen omhoog: ../../codes/
+            frame.src = `../codeswebsite/codes/${num}/index.html`;
+            
+            // Verberg welkomstbericht
+            empty.style.display = 'none';
+        }
+
+        // Terug naar overzicht (leeg iframe)
+        function goHome() {
+            const frame = document.getElementById('projectFrame');
+            const empty = document.getElementById('emptyMessage');
+            
+            frame.src = '';
+            empty.style.display = 'block';
+        }
+
+        // Start alles
+        window.onload = createProjectButtons;
+    </script>
+</body>
+</html>
