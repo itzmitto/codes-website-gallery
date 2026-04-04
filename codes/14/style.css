@@ -1,22 +1,57 @@
+.card {
+    width: 300px;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
 .skeleton {
-    background-color: #e5e5e5;                   
+    background-color: #e5e5e5;
     background-image: linear-gradient(110deg,
-        rgba(255, 255, 255, 0) 10%,     
-        rgba(255, 255, 255, 0.6) 50%,   
-        rgba(255, 255, 255, 0) 60%      
-    );
+            rgba(255, 255, 255, 0) 10%,
+            rgba(255, 255, 255, 0.6) 50%,
+            rgba(255, 255, 255, 0) 60%);
     background-size: 200% 100%;
     background-repeat: no-repeat;
     animation: shimmer 2.5s ease-in-out infinite;
     border-radius: 8px;
 }
 
+.square {
+    width: 100%;
+    height: 160px;
+    border-radius: 8px;
+}
+
+.line {
+    width: 100%;
+    height: 16px;
+}
+
+.medium {
+    width: 75%;
+}
+
+.short {
+    width: 50%;
+}
+
 @keyframes shimmer {
     0% {
-        background-position: 200% 0;
-    }
-    100% {
         background-position: -200% 0;
     }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
