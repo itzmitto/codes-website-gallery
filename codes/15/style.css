@@ -1,0 +1,16 @@
+body {
+    background: rgb(46, 70, 107);
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input {
+    padding: 10px 20px;
+    font-size: 20px;
+    width: 320px;
+    border: none;
+    border-radius: 10px;
+}
