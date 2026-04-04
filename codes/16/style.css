@@ -27,18 +27,6 @@ footer {
     transform: translateX(-50%) translateY(-50%);
 }
 
-svg {
-    position: absolute;
-    bottom: 0;
-    max-height: 520px;
-    min-height: 480px;
-    width: 100%;
-    transform:
-        scaleX(2.25) scaleY(3) translateX(-25%);
-    transform-origin: bottom;
-    pointer-events: none;
-}
-
 ul {
     display: flex;
     list-style: none;
