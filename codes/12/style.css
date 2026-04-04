@@ -1,0 +1,38 @@
+.card{
+    width: 300px;
+    height: 350px;
+    background: #111;
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    height: 150%;
+    width: 150%;
+    background: conic-gradient(
+        transparent,
+        transparent,
+        transparent,
+        #ff007a);
+    animation:rotate 2s linear infinite;
+}
+
+.card::after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    background: #111;
+    border-radius: 16px;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

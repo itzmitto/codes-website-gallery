@@ -1,0 +1,91 @@
+body {
+    background: rgb(46, 70, 107);
+    color: white;
+    font-family: system-ui, sans-serif;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+}
+
+.main-text {
+    font-size: 4.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.rotating-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.words {
+    position: relative;
+    width: 320px;
+    height: 4.5rem;
+    perspective: 600px;
+}
+
+.word {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    line-height: 1;
+    font-size: 3rem;
+    font-weight: bold;
+    white-space: nowrap;
+    animation: rotateWord 5s infinite ease-in-out;
+    animation-delay: var(--d);
+}
+
+.word:nth-child(1) {
+    --d: 0s;
+    color: #4ade80;
+}
+
+.word:nth-child(2) {
+    --d: 1.67s;
+    color: #c084fc;
+}
+
+.word:nth-child(3) {
+    --d: 3.33s;
+    color: #facc15;
+}
+
+@keyframes rotateWord {
+    0% {
+        transform: rotateX(90deg);
+        opacity: 0;
+    }
+
+    5% {
+        transform: rotateX(0deg);
+        opacity: 1;
+    }
+
+    28% {
+        transform: rotateX(0deg);
+        opacity: 1;
+    }
+
+    33% {
+        transform: rotateX(-90deg);
+        opacity: 0;
+    }
+
+    100% {
+        transform: rotateX(-90deg);
+        opacity: 0;
+    }
+}
