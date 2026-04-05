@@ -19,7 +19,7 @@ allLinks.forEach((elem) => {
         link.classList.remove("active");
       }
     });
-  });
+  }); 
 });
 
 const searchInput = document.querySelector(".search_wrapper input");
