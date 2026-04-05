@@ -18,7 +18,7 @@ allLinks.forEach((elem) => {
       } else {
         link.classList.remove("active");
       }
-    });
+    }); 
   }); 
 });
 
