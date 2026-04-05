@@ -1,3 +1,37 @@
 body {
     background: rgb(90, 81, 81);
+    margin: 0;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+}
+
+.input-box {
+    width: 230px;
+    padding: 20px 10px;
+    border: 2px solid black;
+    outline: none;
+    border-radius: 8px;
+}
+
+.input-box {
+    position: relative;
+}
+
+.input-box label {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    color: black;
+    transition: .3s;
+}
+
+.input-box input:focus+label,
+.input-box input:valid+label {
+    top: -9px;
+    color: white;
+    background-color: black;
+    padding: 2px 7px;
+    border-radius: 12px;
+    font-size: 13px;
 }
