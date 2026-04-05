@@ -1,3 +1,43 @@
 body {
-    background: rgb(90, 81, 81);
+    background: black;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Poppins, sans-serif;
+    color: white;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rainbow {
+   font-size: 4rem;
+   font-weight: 800;
+   background: linear-gradient(90deg,
+   #ff004d,
+   #ff7300,
+   #ffd500,
+   #00c853,
+   #00b0ff,
+   #6a00ff,
+   #ff00d4,
+   #ff004d);
+   background-size: 200% 200%;
+   -webkit-background-clip: text;
+   background-clip: text;
+   color: transparent;
+   animation: rainbow 3s linear infinite;
+}
+
+@keyframes rainbow {
+    0% {
+        background-position: 200% 0;
+    }
 }
