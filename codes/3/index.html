@@ -1,13 +1,101 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-         <link rel="stylesheet" href="style.css">
- 
-</head>
-<body> 
+    <title>Modern Sidebar</title>
     
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="sidebar">
+        
+        <!-- Sidebar Top -->
+        <div class="sidebar-top-wrapper">
+            <div class="sidebar-top">
+                <a href="#" class="logo_wrapper">
+                    <i class="fa-solid fa-rocket logo-small"></i>
+                    <span class="hide">Astra</span>
+                </a>
+            </div>
+            <div class="expand-btn">
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+        </div>
+
+        <!-- Search -->
+        <div class="search_wrapper">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="search" placeholder="Search for anything...">
+        </div>
+
+        <!-- Main Links -->
+        <div class="sidebar-links">
+            <h2>Main</h2>
+            <ul>
+                <li>
+                    <a href="#dashboard" class="tooltip" title="Dashboard">
+                        <i class="fa-solid fa-gauge-high"></i>
+                        <span class="link hide">Dashboard</span>
+                        <span class="tooltip_content">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#analytics" class="tooltip" title="Analytics">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span class="link hide">Analytics</span>
+                        <span class="tooltip_content">Analytics</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#users" class="tooltip" title="Users">
+                        <i class="fa-solid fa-users"></i>
+                        <span class="link hide">Users</span>
+                        <span class="tooltip_content">Users</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Bottom Links -->
+        <div class="sidebar-links bottom-links">
+            <h2>Settings</h2>
+            <ul>
+                <li>
+                    <a href="#settings" class="tooltip" title="Settings">
+                        <i class="fa-solid fa-cog"></i>
+                        <span class="link hide">Settings</span>
+                        <span class="tooltip_content">Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Profile Section -->
+        <div class="sidebar_profile">
+            <div class="avatar_wrapper">
+                <img class="avatar" src="assets/profile.png" alt="Joe Doe">
+                <div class="online_status"></div>
+            </div>
+
+            <section class="avatar_name hide">
+                <div class="user-name">Joe Doe</div>
+                <div class="email">joe.doe@theros.ai</div>
+            </section>
+
+            <a href="#logout" class="logout tooltip" title="Logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span class="tooltip_content">Logout</span>
+            </a>
+        </div>
+    </nav>
+
+    <script src="script.js"></script>
 </body>
 </html>

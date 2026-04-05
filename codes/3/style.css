@@ -289,3 +289,18 @@ body.collapsed .expand-btn svg {
   from { opacity: 0; width: 0; }
   to { opacity: 1; width: 100%; }
 }
+
+/* Font Awesome icons in sidebar */
+.sidebar-links i,
+.search_wrapper i,
+.expand-btn i,
+.logout i {
+    font-size: 1.4rem;
+    width: 1.75rem;
+    text-align: center;
+}
+
+/* Zorg dat icons dezelfde kleur krijgen */
+.sidebar i {
+    color: var(--text-link);
+}
