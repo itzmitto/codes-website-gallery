@@ -1,101 +1,97 @@
 <!DOCTYPE html>
 <html lang="nl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modern Sidebar</title>
-    
-    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <nav class="sidebar">
-        
-        <!-- Sidebar Top -->
+    <nav class="sidebar" role="navigation" aria-label="Hoofdmenu">
+
         <div class="sidebar-top-wrapper">
             <div class="sidebar-top">
-                <a href="#" class="logo_wrapper">
-                    <i class="fa-solid fa-rocket logo-small"></i>
-                    <span class="hide">Astra</span>
+                <a href="#" class="logo_wrapper" aria-label="Astra home">
+                    <i class="fa-solid fa-rocket logo-small" aria-hidden="true"></i>
+                    <span class="hide">SIDEBAR</span>
                 </a>
             </div>
-            <div class="expand-btn">
-                <i class="fa-solid fa-chevron-right"></i>
-            </div>
+            <button class="expand-btn" aria-label="Sidebar in-/uitklappen" aria-expanded="true">
+                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            </button>
         </div>
 
-        <!-- Search -->
         <div class="search_wrapper">
-            <i class="fa-solid fa-magnifying-glass search-icon"></i>
-            <input type="search" placeholder="Search for anything...">
+            <i class="fa-solid fa-magnifying-glass search-icon" aria-hidden="true"></i>
+            <input type="search" placeholder="Zoek naar alles..." aria-label="Zoeken">
         </div>
 
-        <!-- Main Links -->
         <div class="sidebar-links">
-            <h2>Main</h2>
+            <h2 class="hide">Hoofdmenu</h2>
             <ul>
                 <li>
-                    <a href="#dashboard" class="tooltip" title="Dashboard">
-                        <i class="fa-solid fa-gauge-high"></i>
+                    <a href="#dashboard" class="tooltip active" aria-label="Dashboard">
+                        <i class="fa-solid fa-gauge-high" aria-hidden="true"></i>
                         <span class="link hide">Dashboard</span>
-                        <span class="tooltip_content">Dashboard</span>
+                        <span class="tooltip_content" role="tooltip">Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#analytics" class="tooltip" title="Analytics">
-                        <i class="fa-solid fa-chart-line"></i>
+                    <a href="#analytics" class="tooltip" aria-label="Analytics">
+                        <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
                         <span class="link hide">Analytics</span>
-                        <span class="tooltip_content">Analytics</span>
+                        <span class="tooltip_content" role="tooltip">Analytics</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#users" class="tooltip" title="Users">
-                        <i class="fa-solid fa-users"></i>
-                        <span class="link hide">Users</span>
-                        <span class="tooltip_content">Users</span>
+                    <a href="#users" class="tooltip" aria-label="Gebruikers">
+                        <i class="fa-solid fa-users" aria-hidden="true"></i>
+                        <span class="link hide">Gebruikers</span>
+                        <span class="tooltip_content" role="tooltip">Gebruikers</span>
                     </a>
                 </li>
             </ul>
         </div>
 
-        <!-- Bottom Links -->
         <div class="sidebar-links bottom-links">
-            <h2>Settings</h2>
+            <h2 class="hide">Instellingen</h2>
             <ul>
                 <li>
-                    <a href="#settings" class="tooltip" title="Settings">
-                        <i class="fa-solid fa-cog"></i>
-                        <span class="link hide">Settings</span>
-                        <span class="tooltip_content">Settings</span>
+                    <a href="#settings" class="tooltip" aria-label="Instellingen">
+                        <i class="fa-solid fa-cog" aria-hidden="true"></i>
+                        <span class="link hide">Instellingen</span>
+                        <span class="tooltip_content" role="tooltip">Instellingen</span>
                     </a>
                 </li>
             </ul>
         </div>
 
-        <div class="divider"></div>
+        <div class="divider" role="separator"></div>
 
-        <!-- Profile Section -->
-        <div class="sidebar_profile">
+        <div class="sidebar_profile" aria-label="Gebruikersprofiel">
             <div class="avatar_wrapper">
-                <img class="avatar" src="assets/profile.png" alt="Joe Doe">
-                <div class="online_status"></div>
+                <img class="avatar" src="profile.png" alt="Profielfoto van Joe Doe">
+                <div class="online_status" aria-label="Online" title="Online"></div>
             </div>
 
-            <section class="avatar_name hide">
-                <div class="user-name">Joe Doe</div>
-                <div class="email">joe.doe@theros.ai</div>
-            </section>
+            <div class="avatar_name hide">
+                <span class="user-name">Andre</span>
+                <span class="email">Andre@gmail.com</span>
+            </div>
 
-            <a href="#logout" class="logout tooltip" title="Logout">
-                <i class="fa-solid fa-right-from-bracket"></i>
-                <span class="tooltip_content">Logout</span>
+            <a href="#logout" class="logout tooltip" aria-label="Uitloggen">
+                <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
+                <span class="tooltip_content" role="tooltip">Uitloggen</span>
             </a>
         </div>
+
     </nav>
 
     <script src="script.js"></script>
 </body>
+
 </html>
