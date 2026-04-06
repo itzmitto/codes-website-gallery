@@ -2,7 +2,7 @@ body {
     background: rgb(90, 81, 81);
     margin: 0;
     height: 100vh;
-    display: grid; 
+    display: grid;  
     place-items: center;
 }
 
