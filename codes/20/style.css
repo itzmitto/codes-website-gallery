@@ -8,9 +8,9 @@ body {
     min-height: 100vh;
     display: grid;
     place-items: center;
-    background: #0a0a0a;
+    background: black;
 }
-
+ 
 .orb {
     width: 200px;
     height: 200px;
