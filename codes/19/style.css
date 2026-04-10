@@ -1,0 +1,190 @@
+/* ==============================================
+   ORB NAV — reusable component styles
+   Drop-in: link this CSS on any page
+   ============================================== */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --orb-size: 52px;
+  --orb-accent: #5b3ef5;
+  --orb-accent-glow: rgba(91, 62, 245, 0.35);
+  --orb-surface: #ffffff;
+  --orb-border: rgba(0,0,0,0.08);
+  --orb-text: #1a1a2e;
+  --orb-text-muted: #6b7280;
+  --orb-hover-bg: #f4f2ff;
+  --orb-shadow: 0 8px 32px rgba(91,62,245,0.18), 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* ── Wrapper ── */
+.orb-nav {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ── Orb Button ── */
+.orb-btn {
+  position: relative;
+  width: var(--orb-size);
+  height: var(--orb-size);
+  border-radius: 50%;
+  border: none;
+  background: var(--orb-accent);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px var(--orb-accent-glow), 0 0 0 0 var(--orb-accent-glow);
+  transition: transform 0.2s ease, box-shadow 0.25s ease;
+  outline: none;
+}
+
+.orb-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 28px var(--orb-accent-glow), 0 0 0 6px rgba(91,62,245,0.1);
+}
+
+.orb-btn:active {
+  transform: scale(0.95);
+}
+
+.orb-btn.open {
+  box-shadow: 0 4px 20px var(--orb-accent-glow), 0 0 0 8px rgba(91,62,245,0.12);
+}
+
+/* Pulse ring */
+.orb-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(91,62,245,0.5);
+  animation: orb-ring 2s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes orb-ring {
+  0%   { transform: scale(1);   opacity: 0.6; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+
+.orb-btn.open .orb-pulse {
+  animation: none;
+  opacity: 0;
+}
+
+/* Icons */
+.icon {
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  transition: opacity 0.2s ease, transform 0.25s cubic-bezier(0.34,1.5,0.64,1);
+}
+
+.icon-menu  { opacity: 1; transform: scale(1) rotate(0deg); }
+.icon-close { opacity: 0; transform: scale(0.5) rotate(-45deg); }
+
+.orb-btn.open .icon-menu  { opacity: 0; transform: scale(0.5) rotate(45deg); }
+.orb-btn.open .icon-close { opacity: 1; transform: scale(1) rotate(0deg); }
+
+/* ── Dropdown ── */
+.orb-dropdown {
+  background: var(--orb-surface);
+  border: 1px solid var(--orb-border);
+  border-radius: 16px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 160px;
+  box-shadow: var(--orb-shadow);
+  pointer-events: none;
+
+  opacity: 0;
+  transform: translateY(-10px) scale(0.95);
+  transform-origin: top center;
+  transition: opacity 0.2s ease, transform 0.25s cubic-bezier(0.34,1.4,0.64,1);
+}
+
+.orb-dropdown.open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: all;
+}
+
+/* ── Nav Items ── */
+.orb-item {
+  display: block;
+  padding: 9px 14px;
+  border-radius: 10px;
+  font-family: system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--orb-text);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.orb-item:hover {
+  background: var(--orb-hover-bg);
+  color: var(--orb-accent);
+}
+
+/* Active page highlight — add class="orb-item active" on current page */
+.orb-item.active {
+  background: var(--orb-hover-bg);
+  color: var(--orb-accent);
+}
+
+/* ── Dark mode auto-support ── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --orb-surface: #1c1b2e;
+    --orb-border: rgba(255,255,255,0.08);
+    --orb-text: #e9e6ff;
+    --orb-text-muted: #9ca3af;
+    --orb-hover-bg: rgba(91,62,245,0.18);
+    --orb-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3);
+  }
+}
+
+/* ==============================================
+   Demo page styles — not part of the component
+   ============================================== */
+body {
+  font-family: system-ui, sans-serif;
+  background: #f8f7ff;
+  color: #1a1a2e;
+  min-height: 100vh;
+}
+
+@media (prefers-color-scheme: dark) {
+  body { background: #0f0e1a; color: #e9e6ff; }
+}
+
+.demo-content {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 120px 24px 48px;
+}
+
+.demo-content h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.demo-content p {
+  font-size: 1rem;
+  color: var(--orb-text-muted);
+  line-height: 1.6;
+}

@@ -1,0 +1,144 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #0a0a1f;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  overflow-x: hidden;
+}
+
+.orb-header {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+.orb {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 30%, #ffffff, #00ddff, #6600ff);
+  box-shadow: 
+    0 0 60px #00ddff,
+    0 0 120px #6600ff,
+    inset 0 0 40px rgba(255,255,255,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  user-select: none;
+}
+
+.orb:hover {
+  transform: scale(1.1);
+}
+
+.orb-glow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 10%, transparent 70%);
+  animation: pulse 3s infinite ease-in-out;
+}
+
+.orb-text {
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  color: #0a0a1f;
+  text-shadow: 0 0 10px white;
+  z-index: 2;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* Expanded Menu */
+.expanded-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 31, 0.95);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.expanded-menu.active {
+  display: flex;
+  opacity: 1;
+}
+
+.menu-content {
+  text-align: center;
+  max-width: 900px;
+  padding: 40px;
+}
+
+.menu-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  background: linear-gradient(90deg, #00ddff, #ff00ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.pages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.page-card {
+  background: rgba(255,255,255,0.08);
+  border: 2px solid rgba(0, 221, 255, 0.3);
+  border-radius: 16px;
+  padding: 30px 20px;
+  transition: all 0.3s;
+  text-decoration: none;
+  color: white;
+}
+
+.page-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  border-color: #00ddff;
+  box-shadow: 0 0 30px rgba(0, 221, 255, 0.6);
+}
+
+.page-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+}
+
+.close-btn {
+  padding: 12px 40px;
+  font-size: 1.1rem;
+  background: transparent;
+  border: 2px solid #ff00ff;
+  color: #ff00ff;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.close-btn:hover {
+  background: #ff00ff;
+  color: white;
+}

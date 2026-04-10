@@ -1,0 +1,261 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --orb-size: 64px;
+  --orb-color-1: #7c3aed;
+  --orb-color-2: #6d28d9;
+  --orb-color-3: #5b21b6;
+  --orb-glow: rgba(124, 58, 237, 0.4);
+  --nav-bg: rgba(15, 10, 30, 0.96);
+  --nav-expand: 360px;
+  --transition: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  background: #0f0a1e;
+  color: #e2d9f3;
+  min-height: 100vh;
+}
+
+/* ─── Header ─────────────────────────────────── */
+.orb-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.orb-wrapper {
+  position: relative;
+  pointer-events: all;
+}
+
+.header-label {
+  margin-left: auto;
+  font-size: 13px;
+  color: rgba(226, 217, 243, 0.35);
+  pointer-events: none;
+  letter-spacing: 0.04em;
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: opacity 0.4s;
+}
+
+.orb-header.open .header-label {
+  opacity: 0;
+}
+
+/* ─── Orb Button ──────────────────────────────── */
+.orb {
+  position: relative;
+  width: var(--orb-size);
+  height: var(--orb-size);
+  border-radius: 50%;
+  border: none;
+  background: var(--orb-color-2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: transform var(--transition), box-shadow 0.3s;
+  box-shadow:
+    0 0 0 0 var(--orb-glow),
+    0 4px 24px rgba(124, 58, 237, 0.5);
+  outline: none;
+  flex-shrink: 0;
+}
+
+.orb:hover {
+  transform: scale(1.08);
+  box-shadow:
+    0 0 0 8px rgba(124, 58, 237, 0.15),
+    0 4px 32px rgba(124, 58, 237, 0.7);
+}
+
+.orb.active {
+  transform: scale(0.92);
+  box-shadow:
+    0 0 0 14px rgba(124, 58, 237, 0.12),
+    0 2px 16px rgba(124, 58, 237, 0.5);
+}
+
+/* ─── Pulsing Rings ───────────────────────────── */
+.orb-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid rgba(167, 139, 250, 0.45);
+  animation: pulse 2.4s ease-out infinite;
+  pointer-events: none;
+}
+
+.orb-ring--1 { width: 100%; height: 100%; animation-delay: 0s; }
+.orb-ring--2 { width: 100%; height: 100%; animation-delay: 0.8s; }
+.orb-ring--3 { width: 100%; height: 100%; animation-delay: 1.6s; }
+
+@keyframes pulse {
+  0%   { transform: scale(1);   opacity: 0.7; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+.orb.active .orb-ring {
+  animation-play-state: paused;
+  opacity: 0;
+}
+
+/* ─── Orb Core / Icons ────────────────────────── */
+.orb-core {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 18px;
+}
+
+.orb-icon {
+  position: absolute;
+  transition: opacity 0.25s, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.close-icon {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.6);
+}
+
+.orb.active .open-icon {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.6);
+}
+
+.orb.active .close-icon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+/* ─── Expanded Nav Panel ──────────────────────── */
+.orb-nav {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transform-origin: center center;
+  width: var(--nav-expand);
+  height: var(--nav-expand);
+  border-radius: 50%;
+  background: var(--nav-bg);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.5s cubic-bezier(0.34, 1.4, 0.64, 1), opacity 0.35s ease;
+  z-index: 5;
+  box-shadow: 0 0 60px rgba(109, 40, 217, 0.35), 0 0 120px rgba(109, 40, 217, 0.15);
+}
+
+.orb-nav.open {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ─── Nav Links ───────────────────────────────── */
+.nav-links {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+  width: 200px;
+}
+
+.nav-link {
+  display: block;
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: rgba(226, 217, 243, 0.75);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  border: 1px solid rgba(167, 139, 250, 0.12);
+  background: rgba(124, 58, 237, 0.08);
+  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+  opacity: 0;
+  transform: scale(0.7);
+  text-align: center;
+}
+
+.orb-nav.open .nav-link {
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border-color 0.2s,
+    transform 0.35s cubic-bezier(0.34, 1.6, 0.64, 1) calc(var(--i) * 35ms + 120ms),
+    opacity 0.3s ease calc(var(--i) * 35ms + 100ms);
+}
+
+.nav-link:hover {
+  background: rgba(124, 58, 237, 0.28);
+  color: #fff;
+  border-color: rgba(167, 139, 250, 0.4);
+  transform: scale(1.05) !important;
+}
+
+.nav-link:active {
+  transform: scale(0.97) !important;
+}
+
+/* ─── Backdrop ────────────────────────────────── */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  z-index: 4;
+  pointer-events: none;
+  transition: background 0.4s;
+}
+
+.backdrop.visible {
+  background: rgba(0, 0, 0, 0.45);
+  pointer-events: all;
+}
+
+/* ─── Main Content ────────────────────────────── */
+.main-content {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 120px 24px 48px;
+}
+
+.main-content h1 {
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: #ede9fe;
+  margin-bottom: 16px;
+}
+
+.main-content p {
+  font-size: 1rem;
+  color: rgba(226, 217, 243, 0.6);
+  line-height: 1.7;
+}
