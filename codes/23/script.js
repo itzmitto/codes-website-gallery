@@ -1,7 +1,7 @@
 const menuBtn = document.getElementById('menuBtn');
 const socialGrid = document.getElementById('socialGrid');
 
-menuBtn.addEventListener('click', () => {
+menuBtn.addEventListener('click', () => { 
   socialGrid.classList.toggle('active');
   
   // Hamburger animation
