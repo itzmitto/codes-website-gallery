@@ -106,7 +106,7 @@ h1 {
 
 .social-grid.active .icon {
     opacity: 1;
-    transform: scale(1); 
+    transform: scale(1);  
 }
 
 .icon:hover {
