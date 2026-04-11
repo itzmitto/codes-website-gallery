@@ -12,7 +12,7 @@ hamburger.addEventListener('click', () => {
         hamburger.style.transform = 'translate(-50%, -50%) rotate(90deg)';
     } else {
         socialGrid.classList.remove('active');
-        hamburger.style.transform = 'translate(-50%, -50%)';
+        hamburger.style.transform = 'translate(-50%, -50%)'; 
     }
 });
 
