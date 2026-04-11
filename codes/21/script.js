@@ -1,8 +1,8 @@
-const hamburger = document.getElementById('hamburger');
+const hamburger = document.getElementById('hamburger'); 
 const socialGrid = document.getElementById('socialGrid');
 
 let isOpen = false;
-
+ 
 hamburger.addEventListener('click', () => {
     isOpen = !isOpen;
     
