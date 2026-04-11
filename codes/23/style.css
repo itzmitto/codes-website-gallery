@@ -39,7 +39,7 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer; 
+  cursor: pointer;  
   transition: all 0.4s ease;
   margin: 0 auto;
 }
