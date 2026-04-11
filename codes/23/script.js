@@ -1,4 +1,4 @@
-const menuBtn = document.getElementById('menuBtn');
+const menuBtn = document.getElementById('menuBtn');  
 const socialGrid = document.getElementById('socialGrid');
 
 menuBtn.addEventListener('click', () => {   
