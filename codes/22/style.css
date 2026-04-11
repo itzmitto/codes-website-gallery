@@ -1,3 +1,268 @@
+/* ─── Reset & Base ─── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap');
+
+:root {
+  --bg: #0d0d0d;
+  --card: #161616;
+  --border: rgba(255, 255, 255, 0.07);
+  --text: #f0f0f0;
+  --muted: #666;
+  --accent: #ffffff;
+  --radius: 16px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html, body {
+  height: 100%;
+}
+
 body {
-    background-color: aquamarine;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Syne', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+  overflow-x: hidden;
+}
+
+/* Subtle animated grain overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.3;
+}
+
+/* ─── Container ─── */
+.container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+/* ─── Profile ─── */
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  animation: fadeUp 0.6s ease both;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--border);
+  background: var(--card);
+  box-shadow: 0 0 0 4px rgba(255,255,255,0.04);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.avatar:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 0 6px rgba(255,255,255,0.08);
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.name {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.bio {
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-family: 'Space Mono', monospace;
+  letter-spacing: 0.04em;
+}
+
+/* ─── Links List ─── */
+.links {
+  list-style: none;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ─── Link Item ─── */
+.link-item {
+  width: 100%;
+  border-radius: var(--radius);
+  background: var(--card);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  position: relative;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  animation: fadeUp 0.6s ease both;
+}
+
+/* stagger animation per item */
+.link-item:nth-child(1) { animation-delay: 0.1s; }
+.link-item:nth-child(2) { animation-delay: 0.15s; }
+.link-item:nth-child(3) { animation-delay: 0.2s; }
+.link-item:nth-child(4) { animation-delay: 0.25s; }
+.link-item:nth-child(5) { animation-delay: 0.3s; }
+.link-item:nth-child(6) { animation-delay: 0.35s; }
+
+/* Hover glow bar on left */
+.link-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--hover-color, #fff);
+  opacity: 0;
+  transition: opacity var(--transition);
+  border-radius: 0 2px 2px 0;
+}
+
+.link-item:hover::before {
+  opacity: 1;
+}
+
+/* Background fill on hover */
+.link-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--hover-color, #fff);
+  opacity: 0;
+  transition: opacity var(--transition);
+  z-index: 0;
+}
+
+.link-item:hover::after {
+  opacity: 0.06;
+}
+
+.link-item:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--hover-color, transparent);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+/* ─── Link Anchor ─── */
+.link-item a {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  text-decoration: none;
+  color: var(--text);
+}
+
+/* ─── Icon ─── */
+.icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: background var(--transition), transform var(--transition);
+}
+
+.link-item:hover .icon {
+  background: var(--hover-color, rgba(255,255,255,0.1));
+  transform: scale(1.08) rotate(-4deg);
+}
+
+.icon img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+/* ─── Label ─── */
+.label {
+  flex: 1;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition: color var(--transition);
+}
+
+/* ─── Arrow ─── */
+.arrow {
+  font-size: 1rem;
+  color: var(--muted);
+  transition: transform var(--transition), color var(--transition);
+  font-family: 'Space Mono', monospace;
+}
+
+.link-item:hover .arrow {
+  transform: translateX(4px);
+  color: var(--text);
+}
+
+/* ─── Footer ─── */
+.footer {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  animation: fadeUp 0.6s 0.5s ease both;
+}
+
+/* ─── Keyframes ─── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 520px) {
+  .container {
+    gap: 24px;
+  }
+
+  .link-item a {
+    padding: 14px 16px;
+    gap: 12px;
+  }
+
+  .label {
+    font-size: 0.88rem;
+  }
 }
