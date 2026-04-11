@@ -25,4 +25,4 @@ document.addEventListener('click', (e) => {
             hamburger.style.transform = 'translate(-50%, -50%)';
         }
     }
-}); 
+});  

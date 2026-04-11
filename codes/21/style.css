@@ -73,7 +73,7 @@ h1 {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); 
     display: grid;
     grid-template-columns: 0fr 0fr 0fr;
     grid-template-rows: 0fr 0fr 0fr;
