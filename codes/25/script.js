@@ -3,7 +3,7 @@ let memory = 0;
 
 function append(value) {
     display.value += value;
-}
+} 
 
 function clearDisplay() {
     display.value = "";
@@ -16,7 +16,7 @@ function deleteLast() {
 function calculate() {
     try {
         display.value = eval(display.value);
-    } catch (error) {
+    } catch (error) { 
         display.value = "Error";
     }   
 }
