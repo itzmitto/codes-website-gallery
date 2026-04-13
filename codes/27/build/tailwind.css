@@ -1307,7 +1307,7 @@ section {
   opacity: 1;
 }
 .dark\:shadow-blue-700\/10:is(.dark *) {
-  --tw-shadow-color: rgb(29 78 216 / 0.1);
+  --tw-shadow-color: rgb(29 78 216 / 0.1); 
   --tw-shadow: var(--tw-shadow-colored);
 }
 .dark\:hover\:border-white:hover:is(.dark *) {
