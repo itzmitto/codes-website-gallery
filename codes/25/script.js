@@ -1,27 +1,28 @@
-let display = document.getElementById("display");
-let memory = 0;
+const display = document.getElementById('display');
+const getVal = () => display.value;
+const setVal = (v) => display.value = v;
 
-function append(value) {
-    display.value += value;
-} 
+function append(value) { setVal(getVal() + value); }
+function clearDisplay() { setVal(''); }
+function deleteLast() { setVal(getVal().slice(0, -1)); }
 
-function clearDisplay() {
-    display.value = "";
-}
-
-function deleteLast() {
-    display.value = display.value.slice(0, -1);
+function toggleSign() {
+    const v = getVal();
+    if (!v) return;
+    setVal(v.startsWith('-') ? v.slice(1) : '-' + v);
 }
 
 function calculate() {
     try {
-        display.value = eval(display.value);
-    } catch (error) {  
-        display.value = "Error";
-    }   
+        setVal(parseFloat(eval(getVal()).toPrecision(10)).toString());
+    } catch {
+        setVal('Fout');
+    }
 }
-function sqrt() {
-        display.value = Math.sqrt(eval(display.value));
-    } 
 
-    function power() {
+document.addEventListener('keydown', (e) => {
+    if (!isNaN(e.key) || '+-*/.%'.includes(e.key)) append(e.key);
+    else if (e.key === 'Enter') calculate();
+    else if (e.key === 'Backspace') deleteLast();
+    else if (e.key === 'Escape') clearDisplay();
+});
