@@ -1,0 +1,191 @@
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: lightgrey;
+  overflow: hidden;
+  gap: 3rem;
+}
+
+.div1 {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background: red;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+.div2:hover {
+  transform: translateX(30px);
+}
+
+.div2 {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background: red;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+.div1:hover {
+  transform: scale(1.1);
+}
+
+
+
+.div3:hover {
+  transform: translateX(20px) rotate(30deg);
+}
+
+.div3 {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background: red;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+
+.div4:hover {
+  transform: rotate(0.3turn);
+}
+
+.div4 {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background: red;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+.div5:hover {
+  transform: translate(20px, 20px);
+}
+
+.div5 {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background: red;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+.div6:hover {
+  transform: skew(30deg, 20deg);
+}
+
+.div6 {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background: red;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+.div7:hover {
+  transform: rotateX(50deg);
+}
+
+.div7 {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background: red;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+
+
+.cubes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.div1:hover .cubes {
+  opacity: 1;
+}
+
+.cube {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(145deg, #00ffff, #0088ff);
+  border: 2px solid white;
+  box-shadow: 0 0 15px #0ff,
+    inset 0 0 10px rgba(255, 255, 255, 0.5);
+  animation: float 3s infinite alternate ease-in-out;
+  opacity: 0.9;
+}
+
+/* Animation */
+@keyframes float {
+  from {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  to {
+    transform: translateY(-30px) rotate(15deg);
+  }
+}

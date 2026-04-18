@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<section class="page login-2-page">
+  <div class="login-2">
+
+    <!-- Card Nav -->
+    <ul class="card-nav">
+      <li>
+        <img src="logo.svg" alt="Logo" />
+        <span class="active-bar" id="active-bar" style="top: 33.33%"></span>
+      </li>
+      <li>
+        <button type="button" class="active" id="btn-signin" onclick="setView('signin')">
+          <i class="ai-person-check"></i>
+          <span>Sign In</span>
+        </button>
+      </li>
+      <li>
+        <button type="button" id="btn-signup" onclick="setView('signup')">
+          <i class="ai-person-add"></i>
+          <span>Sign Up</span>
+        </button>
+      </li>
+    </ul>
+
+    <!-- Card Hero -->
+    <div class="card-hero">
+      <div class="card-hero-inner" id="card-hero-inner" style="top: 0">
+        <div class="card-hero-content signin">
+          <h2>Welcome Back.</h2>
+          <h3>Please enter your credentials.</h3>
+          <img src="signin.svg" alt="Sign In" />
+        </div>
+        <div class="card-hero-content signup">
+          <h2>Join The Crowd.</h2>
+          <h3>Sign up now and get started today.</h3>
+          <img src="signup.svg" alt="Sign Up" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Card Forms -->
+    <div class="card-form">
+      <div class="forms" id="forms" style="top: 0">
+
+        <!-- Sign In Form -->
+        <form class="active">
+          <p>Don't have an account? <a href="#" onclick="setView('signup'); return false;">Sign Up</a>.</p>
+          <label>Email</label>
+          <div class="control">
+            <input type="email" placeholder="youremail@gmail.com" />
+            <i class="ai-envelope"></i>
+          </div>
+          <label>Password</label>
+          <div class="control">
+            <input type="password" placeholder="●●●●●●●●●●●●●●●" />
+            <i class="ai-lock-on"></i>
+          </div>
+          <button type="submit">SIGN IN</button>
+          <p class="footer">
+            By clicking Sign In you agree to our terms and conditions, privacy policy
+            and reusability rules.
+          </p>
+        </form>
+
+        <!-- Sign Up Form -->
+        <form>
+          <p>Already have an account? <a href="#" onclick="setView('signin'); return false;">Sign In</a>.</p>
+          <label>Username</label>
+          <div class="control">
+            <input type="text" placeholder="myusername" />
+            <i class="ai-person"></i>
+          </div>
+          <label>Email</label>
+          <div class="control">
+            <input type="email" placeholder="youremail@gmail.com" />
+            <i class="ai-envelope"></i>
+          </div>
+          <label>Password</label>
+          <div class="control">
+            <input type="password" placeholder="●●●●●●●●●●●●●●●" />
+            <i class="ai-lock-on"></i>
+          </div>
+          <button type="submit">SIGN UP</button>
+        </form>
+
+      </div>
+    </div>
+
+  </div>   
+</section>
+
+<script>
+  function setView(view) {
+    const isSIgnin = view === 'signin';
+
+    // Nav buttons
+    document.getElementById('btn-signin').classList.toggle('active', isSIgnin);
+    document.getElementById('btn-signup').classList.toggle('active', !isSIgnin);
+
+    // Active bar position
+    document.getElementById('active-bar').style.top = isSIgnin ? '33.33%' : '66.66%';
+
+    // Hero slide
+    document.getElementById('card-hero-inner').style.top = isSIgnin ? '0' : '-100%';
+
+    // Forms slide
+    document.getElementById('forms').style.top = isSIgnin ? '0' : '-100%';
+  }
+</script>
+
+</body>
+</html>

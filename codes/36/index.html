@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page password-strength-page">
+    <div class="login-card">
+      <!-- Logo placeholder (vervangt logo.svg) -->
+      <div class="logo">&#9670;</div>
+      <h2>Sign Up</h2>
+      <div class="login-form">
+        <div class="username">
+          <input
+            autocomplete="off"
+            spellcheck="false"
+            class="control"
+            type="email"
+            placeholder="Email"
+            value="joe@gmail.com"
+            id="email-input"
+          />
+          <div id="spinner" class="spinner"></div>
+        </div>
+
+        <!-- PasswordStrength component -->
+        <input
+          name="password"
+          spellcheck="false"
+          class="control"
+          type="password"
+          placeholder="Password"
+          id="password-input"
+        />
+        <div class="bars" id="strength-bars">
+          <div></div>
+        </div>
+        <div class="strength" id="strength-label"></div>
+
+        <button class="control" type="button">Join Now</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const strengthLabels = ["weak", "medium", "medium", "strong"];
+
+    function getStrength(password) {
+      let strengthIndicator = -1;
+      if (/[a-z]/.test(password)) strengthIndicator++;
+      if (/[A-Z]/.test(password)) strengthIndicator++;
+      if (/\d/.test(password)) strengthIndicator++;
+      if (/[^a-zA-Z0-9]/.test(password)) strengthIndicator++;
+      if (password.length >= 16) strengthIndicator++;
+      if (strengthIndicator < 0) return "";
+      return strengthLabels[Math.min(strengthIndicator, strengthLabels.length - 1)];
+    }
+
+    const passwordInput = document.getElementById("password-input");
+    const strengthBars  = document.getElementById("strength-bars");
+    const strengthLabel = document.getElementById("strength-label");
+
+    passwordInput.addEventListener("input", (e) => {
+      const value    = e.target.value;
+      const strength = value ? getStrength(value) : "";
+
+      strengthBars.className  = `bars${strength ? " " + strength : ""}`;
+      strengthLabel.textContent = strength ? `${strength} password` : "";
+    });
+
+    // Simulate email spinner on blur/focus (optional UX touch)
+    const emailInput = document.getElementById("email-input");
+    const spinner    = document.getElementById("spinner");
+
+    emailInput.addEventListener("blur", () => {
+      if (emailInput.value.includes("@")) {
+        spinner.classList.add("active");
+        setTimeout(() => spinner.classList.remove("active"), 800);
+      }
+    });
+  </script>
+</body>
+</html>

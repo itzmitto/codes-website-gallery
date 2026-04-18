@@ -1,0 +1,186 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: rgb(86, 85, 85);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero.card {
+    width: 360px;
+    padding: 40px 30px;
+    border-radius: 12px;
+    background: #e8e8e8;
+    text-align: center;
+    border: 0.5px solid #bbb;
+}
+
+.hero.card h1 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 28px;
+    color: #222;
+}
+
+.hero.card h2 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 28px;
+    color: #222;
+}
+
+#input-screen p {
+    font-size: 17px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: #222;
+}
+
+.win-input {
+    width: 100%;
+    padding: 7px 10px;
+    font-size: 15px;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    background: white;
+    margin-bottom: 18px;
+    outline: none;
+}
+
+.win-input:focus {
+    border-color: #666;
+}
+
+.win-check-btn {
+    padding: 6px 26px;
+    font-size: 15px;
+    background: #e0e0e0;
+    border: 1.5px solid #999;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #222;
+}
+
+.win-check-btn:hover {
+    background: #d0d0d0;
+}
+
+.win-check-btn:active {
+    background: #bbb;
+}
+
+#loading-screen {
+    display: none;
+}
+
+#loading-msg {
+    font-size: 15px;
+    color: #333;
+    margin-bottom: 16px;
+    min-height: 22px;
+}
+
+.progress-bar-bg {
+    width: 100%;
+    height: 22px;
+    background: #ccc;
+    border: 1px solid #999;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: #3a9a3a;
+    transition: width 0.5s linear;
+}
+
+#result-screen {
+    display: none;
+}
+
+.result-text {
+    font-size: 18px;
+    font-weight: 500;
+    color: #222;
+    margin-bottom: 16px;
+}
+
+.reset-btn {
+    padding: 5px 20px;
+    font-size: 13px;
+    background: #e0e0e0;
+    border: 1px solid #999;
+    border-radius: 3px;
+    cursor: pointer;
+    color: #222;
+}
+
+.reset-btn:hover {
+    background: #ccc;
+}
+
+
+.win-window {
+    width: 360px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #aaa;
+}
+
+.win-titlebar {
+    background: #e8e8e8;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    height: 36px;
+    gap: 8px;
+}
+
+.win-icon {
+    font-size: 16px;
+}
+
+.win-title {
+    flex: 1;
+    font-size: 13px;
+    color: #222;
+}
+
+.win-controls {
+    display: flex;
+}
+
+.win-btn {
+    width: 46px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 11px;
+    color: #222;
+    background: transparent;
+    border: none;
+}
+
+.win-btn:hover {
+    background: #d0d0d0;
+}
+
+.win-btn.close:hover {
+    background: #c42b1c;
+    color: white;
+}

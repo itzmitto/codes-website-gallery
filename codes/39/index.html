@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Register</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <section class="page signup-1-page">
+        <div class="signup-1-card">
+            
+            <!-- Background Elements -->
+            <div class="card-bg card-bg-1 login"></div>
+            <div class="card-bg card-bg-2 login"></div>
+
+            <!-- Logo Group -->
+            <div class="logo-group">
+                <img class="logo logo-1" src="logo.svg" alt="logo">
+                <img class="logo logo-2" src="logo.svg" alt="logo">
+            </div>
+
+            <!-- Login Form -->
+            <div class="form login active" id="loginForm">
+                <form>
+                    <h2>Login</h2>
+                    <input type="text" placeholder="Email" required>
+                    <input type="password" placeholder="Password" required>
+                    <p class="forgot">Forgot password?</p>
+                    <button type="submit">LOGIN</button>
+                    <a href="#" id="toRegister">
+                        Don't have an account? <em>Register here</em>
+                    </a>
+                </form>
+            </div>
+
+            <!-- Register Form -->
+            <div class="form register" id="registerForm">
+                <form>
+                    <h2>Register</h2>
+                    <input type="text" placeholder="Name" required>
+                    <input type="email" placeholder="Email" required>
+                    <input type="password" placeholder="Password" required>
+                    <button type="submit">REGISTER</button>
+                    <a href="#" id="toLogin">
+                        Already have an account? <em>Login here</em>
+                    </a>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const bg1 = document.querySelector('.card-bg-1');
+        const bg2 = document.querySelector('.card-bg-2');
+
+        function toggleView(to) {
+            if (to === 'register') {
+                loginForm.classList.remove('active');
+                registerForm.classList.add('active');
+                bg1.classList.remove('login');
+                bg1.classList.add('register');
+                bg2.classList.remove('login');
+                bg2.classList.add('register');
+            } else {
+                registerForm.classList.remove('active');
+                loginForm.classList.add('active');
+                bg1.classList.remove('register');
+                bg1.classList.add('login');
+                bg2.classList.remove('register');
+                bg2.classList.add('login');
+            }
+        }
+
+        document.getElementById('toRegister').addEventListener('click', (e) => {
+            e.preventDefault();
+            toggleView('register');
+        });
+
+        document.getElementById('toLogin').addEventListener('click', (e) => {
+            e.preventDefault();
+            toggleView('login');
+        });
+    </script>
+</body>
+</html>

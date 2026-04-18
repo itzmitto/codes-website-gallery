@@ -1,0 +1,86 @@
+<!doctype html> 
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>weather app ding</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="hero card">
+        <h1>AI weather forecast</h1>
+        <h2>very high tech next level</h2>
+
+        <div id="input-screen">
+          <label for="loc-input">Enter your location:</label>
+          <input
+            class="win-input"
+            id="loc-input"
+            type="text"
+            placeholder="e.g., Amsterdam"
+          />
+          <button class="win-check-btn" onclick="startLoading()">
+            Check weather
+          </button>
+        </div>
+
+        <div id="loading-screen">
+          <p id="loading-msg">Searching location.....</p>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progress-fill"></div>
+          </div>
+        </div>
+
+        <div id="result-screen">
+          <p class="result-text">Idk, just look outside.</p>
+          <button class="reset-btn" onclick="resetApp()">Try again</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const steps = [
+        { msg: "Searching location.....", pct: 15, duration: 1500 },
+        { msg: "Analyzing the clouds.....", pct: 30, duration: 2000 },
+        { msg: "Looking outside your window.....", pct: 50, duration: 2000 },
+        { msg: "Gathering last information.....", pct: 95, duration: 2000 },
+      ];
+
+      function startLoading() {
+        document.getElementById("input-screen").style.display = "none";
+        document.getElementById("loading-screen").style.display = "block";
+        runStep(0);
+      }
+
+      function runStep(i) {
+        if (i >= steps.length) {
+          setTimeout(showResult, 600);
+          return;
+        }
+        const { msg, pct, duration } = steps[i];
+        document.getElementById("loading-msg").textContent = msg;
+        document.getElementById("progress-fill").style.width = pct + "%";
+        setTimeout(() => runStep(i + 1), duration);
+      }
+
+      function showResult() {
+        document.getElementById("loading-screen").style.display = "none";
+        document.getElementById("result-screen").style.display = "block";
+      }
+
+      function resetApp() {
+        document.getElementById("result-screen").style.display = "none";
+        document.getElementById("progress-fill").style.width = "0%";
+        document.getElementById("loc-input").value = "";
+        document.getElementById("input-screen").style.display = "block";
+      }
+
+      document
+        .getElementById("loc-input")
+        .addEventListener("keydown", function (e) {
+          if (e.key === "Enter") startLoading();
+        });
+    </script>
+  </body>
+</html>

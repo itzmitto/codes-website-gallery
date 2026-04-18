@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Contact</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ===== CONTACT FORMULIER ===== -->
+    <div id="form-box">
+      <div>
+        <label>Naam</label>
+        <input
+          id="inp-name"
+          type="text"
+          placeholder="Jouw naam"
+          oninput="check()"
+        />
+      </div>
+      <div>
+        <label>Email</label>
+        <input
+          id="inp-email"
+          type="email"
+          placeholder="jouw@email.com"
+          oninput="check()"
+        />
+      </div>
+      <div>
+        <label>Message</label>
+        <textarea
+          id="inp-msg"
+          placeholder="Wat wil je zeggen?"
+          oninput="check()"
+        ></textarea>
+      </div>
+      <button id="send-btn" disabled onclick="submit()">→ Send message</button>
+    </div>
+
+    <script>
+      function check() {
+        var ok =
+          document.getElementById("inp-name").value.trim() &&
+          document.getElementById("inp-email").value.trim() &&
+          document.getElementById("inp-msg").value.trim();
+        document.getElementById("send-btn").disabled = !ok;
+      }
+
+      function submit() {
+        var name = document.getElementById("inp-name").value;
+        var email = document.getElementById("inp-email").value;
+        var msg = document.getElementById("inp-msg").value;
+
+        var subject = encodeURIComponent("Portfolio Contact van " + name);
+        var body = encodeURIComponent(
+          "Naam: " + name + "\nEmail: " + email + "\n\nBericht:\n" + msg,
+        );
+
+        window.open(
+          "mailto:andre.babirian@gmail.com?subject=" +
+            subject +
+            "&body=" +
+            body,
+        );
+
+        document.getElementById("inp-name").value = "";
+        document.getElementById("inp-email").value = "";
+        document.getElementById("inp-msg").value = "";
+        check();
+      }
+    </script>
+  </body>
+</html>

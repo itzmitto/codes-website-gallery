@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fuzion - Navbar</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="Navbar1.css" />
+</head>
+<body>
+
+  <div class="page navbar-1-page">
+    <nav class="navbar-1 visible" id="navbar">
+      <h1>F</h1>
+      <div class="nav-items">
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Products</a>
+        <a href="#">Contact</a>
+      </div>
+    </nav>
+
+    <section>
+      <div>
+        <h2>About</h2>
+        <p>Discover Fuzion, where innovation meets excellence. With a dedicated team, we redefine standards to deliver top-notch solutions.</p>
+      </div>
+      <img src="1.svg" alt="About illustration" />
+    </section>
+
+    <section class="shaded">
+      <img src="2.svg" alt="Services illustration" />
+      <div>
+        <h2>Services</h2>
+        <p>Explore tailored solutions at Fuzion. From consulting to technology, we propel your business forward.</p>
+      </div>
+    </section>
+
+    <section>
+      <div>
+        <h2>Products</h2>
+        <p>Experience innovation with Fuzion's exceptional products. Crafted for performance, each reflects our commitment to excellence.</p>
+      </div>
+      <img src="3.svg" alt="Products illustration" />
+    </section>
+
+    <section class="shaded">
+      <img src="4.svg" alt="Contact illustration" />
+      <div>
+        <h2>Contact</h2>
+        <p>Ready to bring ideas to life? Connect with us today. Whether questions or collaboration, we're here to assist.</p>
+      </div>
+    </section>
+
+    <section>
+      <div>
+        <h2>My Skills</h2>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse itaque corporis optio unde quia, modi pariatur ea magni dolorum?</p>
+      </div>
+      <img src="5.svg" alt="Skills illustration" />
+    </section>
+
+    <section class="shaded">
+      <img src="6.svg" alt="Skills illustration" />
+      <div>
+        <h2>My Skills</h2>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse itaque corporis optio unde quia, modi pariatur ea magni dolorum?</p>
+      </div>
+    </section>
+
+    <section>
+      <div>
+        <h2>My Skills</h2>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse itaque corporis optio unde quia, modi pariatur ea magni dolorum?</p>
+      </div>
+      <img src="1.svg" alt="Skills illustration" />
+    </section>
+  </div>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    let lastScrollTop = 0;
+
+    window.addEventListener('scroll', function () {
+      const scrollY = window.scrollY;
+      if (scrollY > lastScrollTop) {
+        navbar.classList.remove('visible');
+      } else if (scrollY < lastScrollTop) {
+        navbar.classList.add('visible');
+      }
+      lastScrollTop = scrollY <= 0 ? 0 : scrollY;
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

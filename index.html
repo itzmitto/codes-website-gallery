@@ -136,6 +136,12 @@
         overflow-y: auto;
         max-height: 100dvh;
       }
+
+      .header-info {
+        margin-left: auto;
+        color: #666;
+        font-size: 14px;
+      }
     </style>
   </head>
   <body>
@@ -144,7 +150,7 @@
       <button class="back-btn" onclick="goHome()">
         ← Terug naar overzicht
       </button>
-      <div style="margin-left: auto; color: #666; font-size: 14px">
+      <div class="header-info">
         Leerprojecten 1 - 20
       </div>
     </header>
@@ -175,7 +181,7 @@
       function createProjectButtons() {
         const list = document.getElementById("projectList");
 
-        for (let i = 1; i <= 30; i++) {
+        for (let i = 1; i <= 50; i++) {
           const btn = document.createElement("button");
           btn.className = "project-btn";
           btn.innerHTML = `<span>Project ${i}</span>`;
@@ -211,3 +217,4 @@
     </script>
   </body>
 </html>
+ 

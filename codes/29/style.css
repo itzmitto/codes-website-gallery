@@ -1,0 +1,87 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+#form-box {
+  background: #16161e;
+  padding: 32px;
+  border-radius: 12px;
+  width: 350px;
+}
+
+#form-box label {
+  color: #888899;
+}
+
+#form-box div {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px; 
+  font-weight: bold;
+}
+
+/* ==================== INPUTS & TEXTAREA ==================== */
+input, 
+textarea, 
+button {
+  width: 100%;
+  padding: 12px 10px;        
+  font-size: 15px;
+  border-radius: 6px;
+  border: 1px solid #2a2a38;
+  background-color: #111116;
+  box-sizing: border-box;
+  font-family: inherit;
+  color: #ddd;               
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #2a2a38;     /* blijft dezelfde donkere border */
+  outline: none;
+  box-shadow: none;           /* geen groene glow meer */
+}
+
+textarea {
+  resize: none;
+  height: 150px;           
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #555566;
+  opacity: 1;
+}
+
+/* ==================== BUTTON ==================== */
+button {
+  border: none;
+  background-color: #03ed9d;
+  color: #111116;          
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 10px;
+  padding: 14px 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover:not(:disabled) {
+  background-color: #02d88a;
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  background: #03ed9d;
+  color: #111116;
+  opacity: 0.6;
+  cursor: not-allowed;
+}

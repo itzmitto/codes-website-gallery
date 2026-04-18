@@ -1,0 +1,50 @@
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: url("bg.jpg") center/cover no-repeat;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-card {
+    width: 1000px;
+    padding: 100px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    color: white;
+    text-align: center;
+}
+
+.content1 {
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.content2 {
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.content3 {
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.content4 {
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+
+.hero-card h1 {
+    margin-bottom: 100px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.hero-card h2 {
+    font-size: 100px;
+    margin: 10px 0;
+}
