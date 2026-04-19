@@ -19,4 +19,6 @@ header{
     display: flex;
     align-items: center;
 }
- 
+ header a {
+    margin-right: 40px;
+ }
