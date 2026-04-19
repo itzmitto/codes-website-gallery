@@ -7,4 +7,15 @@
      margin:0;
      font-size: 12px;
  }
- 
+a{
+    text-decoration: none;
+    color:#eee;
+}
+header{
+    width: 1140px;
+    max-width: 80%;
+    margin:auto;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
