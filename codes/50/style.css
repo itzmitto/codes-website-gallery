@@ -258,5 +258,20 @@
 .carousel.prev .thumbnail .item:nth-child(1){
     width: 0;
     overflow: hidden;
+    opacity: 0;
     animation: showThumnail 0.5s linear 1 forwards;
+}
+.carousel.prev .list .item.item:nth-child(2) .author,
+.carousel.prev .list .item.item:nth-child(2) .title,
+.carousel.prev .list .item.item:nth-child(2) .topic,
+.carousel.prev .list .item.item:nth-child(2) .des,
+.carousel.prev .list .item.item:nth-child(2) .buttons{
+    animation: contentOut 1.5s linear 1 forwards;
+}
+@keyframes contentOut{
+    to{
+        transform: translateY(-150px);
+        filter:blur(20px);
+        opacity: 0;
+    }
 }
