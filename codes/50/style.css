@@ -219,4 +219,19 @@
     animation: showThumbnail .5s linear 1s forwards;
 }
 
-@keyframes showThumn
+@keyframes showThumbnail{
+    to {
+        width: 150px;
+    }
+}
+
+.carousel.next .thumbnail{
+    transform: translateX(150px);
+    animation: transformThumbnail .5s linear 1 forwards;
+}
+
+@keyframes transformThumbnail{
+    to{
+        transform: translateX(0);
+    }
+}
