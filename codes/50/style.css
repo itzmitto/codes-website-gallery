@@ -163,11 +163,11 @@
     z-index:1;
   }
 
-  .carousel .lsit .item:nth-child(1) .author,
-  .carousel .lsit .item:nth-child(1) .title,
-  .carousel .lsit .item:nth-child(1) .topic,
-  .carousel .lsit .item:nth-child(1) .des,
-  .carousel .lsit .item:nth-child(1) .buttons{
+  .carousel .list .item:nth-child(1) .author,
+  .carousel .list .item:nth-child(1) .title,
+  .carousel .list .item:nth-child(1) .topic,
+  .carousel .list .item:nth-child(1) .des,
+  .carousel .list .item:nth-child(1) .buttons{
     transform: translateY(50px);
     filter:blur(20px);
     opacity: 0;
@@ -234,4 +234,29 @@
     to{
         transform: translateX(0);
     }
+}
+/* effect prev click */
+.carousel.prev .list .item:nth-child(2){
+    z-index: 2;
+}
+.carousel.prev .list .item:nth-child(2) img{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    animation:outImage 0.5s linear 1 forwards;
+}
+@keyframes outImage{
+    to{
+        width: 150px;
+        height: 220px;
+        border-radius: 20px;
+        left: 50%;
+        bottom: 50px;
+    }
+}
+
+.carousel.prev .thumbnail .item:nth-child(1){
+    width: 0;
+    overflow: hidden;
+    animation: showThumnail 0.5s linear 1 forwards;
 }
