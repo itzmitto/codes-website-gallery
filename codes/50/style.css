@@ -158,6 +158,15 @@
     background-color: #eee;
     color: #555;
   }
-  .carousel .list .item :nth-child(1){
+  .carousel .list .item:nth-child(1){
     z-index:1;
+  }
+
+  .carousel .lsit .item:nth-child(1) .author,
+  .carousel .lsit .item:nth-child(1) .title,
+  .carousel .lsit .item:nth-child(1) .topic,
+  .carousel .lsit .item:nth-child(1) .des,
+  .carousel .lsit .item:nth-child(1) .buttons{
+    transform: translateY(50px);
+    filter:blur(20px);
   }
