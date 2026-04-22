@@ -1,0 +1,42 @@
+* {
+    background-color: grey;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.blok1 {
+    background-color: red;
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+}
+
+.blok2 {
+    background-color: green;
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+}
+
+.blok3 {
+    background-color: blue;
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+}
+
+.blok1:hover{
+    color:white;
+}
