@@ -38,5 +38,11 @@ body {
 }
 
 .blok1:hover{
-    color:white;
+    background-color:white;
+}
+.blok2:hover{
+    background-color:white;
+}
+.blok3:hover{
+    background-color:white;
 }
