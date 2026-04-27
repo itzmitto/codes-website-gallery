@@ -33,7 +33,7 @@ body {
 }
 
 .div1:hover {
-    animation: glitch 0.3s infinite;
+    animation: glitch 0.1s infinite;
 }
 
 @keyframes glitch {
@@ -59,7 +59,7 @@ body {
 }
 
 .div2:hover {
-    animation: neonPulse 1s infinite alternate;
+    animation: neonPulse 0.5s infinite alternate;
 }
 
 @keyframes neonPulse {
@@ -78,7 +78,6 @@ body {
 
 .div4:hover {
     box-shadow: 0 0 10px lime, 0 0 20px lime, 0 0 40px lime;
-    border: 2px solid lime;
 }
 
 .div5:hover {
