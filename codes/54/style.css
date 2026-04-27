@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    background: #111;
+}
+
+.div1,
+.div2,
+.div3,
+.div4,
+.div5 {
+    width: 150px;
+    height: 70px;
+    background: blue;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-family: Arial, sans-serif;
+}
+
+.div1:hover {
+    animation: glitch 0.3s infinite;
+}
+
+@keyframes glitch {
+    0% {
+        transform: translate(0);
+    }
+
+    25% {
+        transform: translate(-3px, 3px);
+    }
+
+    50% {
+        transform: translate(3px, -3px);
+    }
+
+    75% {
+        transform: translate(-3px, -3px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+}
+
+.div2:hover {
+    animation: neonPulse 1s infinite alternate;
+}
+
+@keyframes neonPulse {
+    from {
+        box-shadow: 0 0 5px cyan;
+    }
+
+    to {
+        box-shadow: 0 0 20px cyan, 0 0 40px cyan;
+    }
+}
+
+.div3:hover {
+    transform: translateX(20px);
+}
+
+.div4:hover {
+    box-shadow: 0 0 10px lime, 0 0 20px lime, 0 0 40px lime;
+    border: 2px solid lime;
+}
+
+.div5:hover {
+    transform: translateY(-10px);
+}
