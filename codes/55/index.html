@@ -18,7 +18,6 @@
                 <button onclick="resetTimer()">Reset</button>
         </div>
     </div>
-
     <script>
         let totalTime = 7200;
         let timer;
@@ -28,33 +27,27 @@
             let hours = Math.floor(totalTime / 3600);
             let minutes = Math.floor((totalTime % 3600) / 60);
             let seconds = totalTime % 60;
-
             document.getElementById("timer").innerText =
                 String(hours).padStart(2, '0') + ":" +
                 String(minutes).padStart(2, '0') + ":" +
                 String(seconds).padStart(2, '0');
-
             if (totalTime <= 0) {
                 clearInterval(timer);
                 running = false;
                 alert("🔥 Tijd om te knallen! Je 2 uur zit erop.");
             }
-
             totalTime--;
         }
-
         function startTimer() {
             if (!running) {
                 running = true;
                 timer = setInterval(updateTimer, 1000);
             }
         }
-
         function pauseTimer() {
             clearInterval(timer);
             running = false;
         }
-
         function resetTimer() {
             clearInterval(timer);
             running = false;
@@ -62,7 +55,5 @@
             document.getElementById("timer").innerText = "02:00:00";
         }
     </script>
-
 </body>
-
 </html>
