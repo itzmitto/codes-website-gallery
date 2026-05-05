@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Grand Academic Register — André Babirian</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+<style>
+:root {
+  --parchment:   #F2E8D0;
+  --parchment2:  #E8D9B5;
+  --parchment3:  #D4C49A;
+  --ink:         #1C1209;
+  --ink2:        #2E1E0A;
+  --burgundy:    #6B1A2A;
+  --burgundy2:   #8B2236;
+  --gold:        #8B6914;
+  --gold2:       #C09A28;
+  --gold3:       #E8C84A;
+  --forest:      #1A3A24;
+  --aged:        #7A6040;
+  --sepia:       #5C3D1A;
+  --rust:        #7A2E14;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--ink);
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(139,105,20,0.06) 39px, rgba(139,105,20,0.06) 40px),
+    repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(139,105,20,0.04) 39px, rgba(139,105,20,0.04) 40px);
+  color: var(--ink);
+  font-family: 'IM Fell English', serif;
+  min-height: 100vh;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cellipse cx='12' cy='3' rx='3' ry='5' fill='%238B6914'/%3E%3Cline x1='12' y1='8' x2='12' y2='22' stroke='%238B6914' stroke-width='1.5'/%3E%3C/svg%3E") 12 0, auto;
+}
+
+/* ═══════════════════════════════════
+   ORNAMENTAL SVG PATTERNS
+═══════════════════════════════════ */
+.orn-corner {
+  position: absolute;
+  width: 60px; height: 60px;
+  opacity: 0.55;
+}
+.orn-tl { top: 8px; left: 8px; }
+.orn-tr { top: 8px; right: 8px; transform: scaleX(-1); }
+.orn-bl { bottom: 8px; left: 8px; transform: scaleY(-1); }
+.orn-br { bottom: 8px; right: 8px; transform: scale(-1,-1); }
+
+.orn-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1rem 0;
+  color: var(--gold2);
+  font-size: 14px;
+  opacity: 0.7;
+}
+.orn-divider::before,
+.orn-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold2), transparent);
+}
+
+/* ═══════════════════════════════════
+   LAYOUT
+═══════════════════════════════════ */
+.layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+}
+
+/* ═══════════════════════════════════
+   SIDEBAR
+═══════════════════════════════════ */
+.sidebar {
+  background: var(--ink2);
+  background-image:
+    repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(139,105,20,0.03) 10px, rgba(139,105,20,0.03) 11px);
+  border-right: 3px solid var(--gold);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0;
+}
+
+/* thick double border effect */
+.sidebar::after {
+  content: '';
+  position: absolute;
+  top: 6px; left: 6px; right: 6px; bottom: 6px;
+  border: 1px solid rgba(139,105,20,0.25);
+  pointer-events: none;
+}
+
+.sidebar-crest {
+  text-align: center;
+  padding: 2rem 1.5rem 1rem;
+  border-bottom: 2px solid rgba(139,105,20,0.3);
+  position: relative;
+}
+
+.crest-svg {
+  margin: 0 auto 0.75rem;
+  display: block;
+}
+
+.sidebar-school {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: var(--gold2);
+  text-transform: uppercase;
+  line-height: 1.8;
+  margin-bottom: 0.25rem;
+}
+.sidebar-year {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 11px;
+  color: rgba(192,154,40,0.55);
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 1.5rem 0;
+  overflow-y: auto;
+}
+
+.nav-section-title {
+  font-family: 'Cinzel', serif;
+  font-size: 7px;
+  letter-spacing: 0.35em;
+  color: rgba(139,105,20,0.45);
+  text-transform: uppercase;
+  padding: 0 1.5rem 0.5rem;
+  border-bottom: 1px solid rgba(139,105,20,0.15);
+  margin-bottom: 0.25rem;
+}
+
+.nav-list { list-style: none; }
+
+.nav-item button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 1.75rem;
+  background: none;
+  border: none;
+  color: rgba(242,232,208,0.5);
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-align: left;
+  transition: color 0.3s, background 0.3s;
+  position: relative;
+}
+
+.nav-item button .nav-roman {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 12px;
+  color: rgba(139,105,20,0.4);
+  min-width: 20px;
+  transition: color 0.3s;
+}
+
+.nav-item button:hover,
+.nav-item.active button {
+  color: var(--parchment);
+  background: rgba(139,105,20,0.1);
+}
+.nav-item.active button {
+  background: rgba(139,105,20,0.15);
+  border-left: 3px solid var(--gold2);
+  padding-left: calc(1.75rem - 3px);
+}
+.nav-item.active button .nav-roman {
+  color: var(--gold2);
+}
+
+.sidebar-footer {
+  padding: 1.25rem 1.5rem;
+  border-top: 2px solid rgba(139,105,20,0.2);
+  text-align: center;
+}
+.sidebar-footer p {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 9px;
+  color: rgba(139,105,20,0.35);
+  line-height: 1.7;
+}
+.sidebar-footer .footer-motto {
+  font-family: 'Cinzel', serif;
+  font-size: 7px;
+  letter-spacing: 0.2em;
+  color: rgba(139,105,20,0.4);
+  text-transform: uppercase;
+  margin-top: 0.4rem;
+}
+
+/* ═══════════════════════════════════
+   MAIN CONTENT
+═══════════════════════════════════ */
+.main-content {
+  background: var(--parchment);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E"),
+    repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(92,61,26,0.04) 79px, rgba(92,61,26,0.04) 80px),
+    repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(92,61,26,0.04) 79px, rgba(92,61,26,0.04) 80px);
+  min-height: 100vh;
+  padding: 3rem 3.5rem;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* corner flourishes on main */
+.main-content::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 6px;
+  background: repeating-linear-gradient(90deg, var(--gold) 0px, var(--gold) 4px, transparent 4px, transparent 8px, var(--burgundy) 8px, var(--burgundy) 12px, transparent 12px, transparent 16px);
+  opacity: 0.6;
+}
+.main-content::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 6px;
+  background: repeating-linear-gradient(90deg, var(--gold) 0px, var(--gold) 4px, transparent 4px, transparent 8px, var(--burgundy) 8px, var(--burgundy) 12px, transparent 12px, transparent 16px);
+  opacity: 0.6;
+}
+
+/* ═══════════════════════════════════
+   PAGES
+═══════════════════════════════════ */
+.page { display: none; animation: unfurl 0.6s ease; }
+.page.active { display: block; }
+
+@keyframes unfurl {
+  from { opacity: 0; transform: translateY(16px) rotate(-0.3deg); }
+  to   { opacity: 1; transform: translateY(0) rotate(0deg); }
+}
+
+/* ═══════════════════════════════════
+   PAGE HEADER
+═══════════════════════════════════ */
+.page-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  position: relative;
+  padding: 2rem 3rem;
+  border: 2px solid var(--gold);
+  background: rgba(139,105,20,0.04);
+}
+
+.page-header::before,
+.page-header::after {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 1px solid rgba(139,105,20,0.3);
+  pointer-events: none;
+}
+.page-header::after {
+  inset: 8px;
+  border-color: rgba(139,105,20,0.12);
+}
+
+.ph-chapter {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 0.35em;
+  color: var(--aged);
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.ph-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.6rem, 3vw, 2.8rem);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.15;
+  margin-bottom: 0.5rem;
+}
+
+.ph-subtitle {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--aged);
+}
+
+/* corner ornaments for page header */
+.ph-corner {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  opacity: 0.5;
+}
+.ph-corner.tl { top: -1px; left: -1px; }
+.ph-corner.tr { top: -1px; right: -1px; transform: scaleX(-1); }
+.ph-corner.bl { bottom: -1px; left: -1px; transform: scaleY(-1); }
+.ph-corner.br { bottom: -1px; right: -1px; transform: scale(-1,-1); }
+
+/* ═══════════════════════════════════
+   VICTORIAN CARDS — base
+═══════════════════════════════════ */
+.vic-card {
+  background: rgba(255,251,240,0.7);
+  border: 2px solid var(--gold);
+  position: relative;
+  padding: 2rem;
+  overflow: hidden;
+}
+.vic-card::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(139,105,20,0.2);
+  pointer-events: none;
+}
+
+.vic-card-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.25rem;
+}
+.vic-card-sub {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 11px;
+  color: var(--aged);
+}
+
+/* ═══════════════════════════════════
+   HOME PAGE
+═══════════════════════════════════ */
+.home-herald {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 2px;
+  margin-bottom: 2px;
+}
+
+.herald-cell {
+  background: rgba(255,251,240,0.65);
+  border: 2px solid var(--gold);
+  padding: 1.75rem 1.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+.herald-cell:hover { background: rgba(255,251,240,0.9); }
+.herald-cell::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(139,105,20,0.18);
+  pointer-events: none;
+}
+
+.hc-roman {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--burgundy);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.hc-label {
+  font-family: 'Cinzel', serif;
+  font-size: 7px;
+  letter-spacing: 0.2em;
+  color: var(--aged);
+  text-transform: uppercase;
+}
+.hc-desc {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 10px;
+  color: rgba(92,61,26,0.6);
+  margin-top: 0.3rem;
+}
+
+.home-timetable {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2px;
+  margin-bottom: 2px;
+}
+
+.tt-day {
+  background: linear-gradient(180deg, rgba(255,251,240,0.8) 0%, rgba(232,217,181,0.5) 100%);
+  border: 2px solid var(--gold);
+  padding: 1.5rem 1rem;
+  text-align: center;
+  position: relative;
+  transition: transform 0.3s;
+}
+.tt-day:hover { transform: translateY(-3px); }
+.tt-day::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(139,105,20,0.15);
+  pointer-events: none;
+}
+
+.tt-dayname {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--burgundy);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(139,105,20,0.25);
+}
+.tt-subject {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+  font-weight: bold;
+}
+.tt-time {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  color: var(--aged);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+.tt-room {
+  display: inline-block;
+  font-family: 'Cinzel', serif;
+  font-size: 7px;
+  letter-spacing: 0.12em;
+  color: var(--burgundy);
+  border: 1px solid rgba(107,26,42,0.3);
+  padding: 2px 6px;
+}
+
+.home-notice {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+
+.notice-box {
+  background: rgba(255,251,240,0.65);
+  border: 2px solid var(--gold);
+  padding: 1.75rem;
+  position: relative;
+}
+.notice-box::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(139,105,20,0.18);
+  pointer-events: none;
+}
+
+.nb-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--burgundy);
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(139,105,20,0.2);
+  text-align: center;
+}
+
+.notice-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 0.6rem 0;
+  border-bottom: 1px dotted rgba(139,105,20,0.2);
+  font-size: 11px;
+  color: var(--ink2);
+  font-family: 'IM Fell English', serif;
+}
+.notice-item:last-child { border-bottom: none; }
+.notice-bullet {
+  color: var(--burgundy);
+  font-size: 14px;
+  line-height: 1.2;
+  flex-shrink: 0;
+}
+.notice-urgency {
+  display: inline-block;
+  font-family: 'Cinzel', serif;
+  font-size: 6px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 2px 5px;
+  border: 1px solid;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.u-urgent { border-color: var(--burgundy); color: var(--burgundy); }
+.u-soon   { border-color: var(--gold);     color: var(--gold); }
+.u-later  { border-color: var(--aged);     color: var(--aged); }
+.u-done   { border-color: var(--forest);   color: var(--forest); }
+
+/* ═══════════════════════════════════
+   ROOSTER PAGE
+═══════════════════════════════════ */
+.rooster-scroll {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2px;
+}
+
+.rs-card {
+  background: linear-gradient(180deg, rgba(255,251,240,0.9) 0%, rgba(232,217,181,0.4) 100%);
+  border: 2px solid var(--gold);
+  padding: 0;
+  position: relative;
+  transition: transform 0.3s;
+  overflow: hidden;
+}
+.rs-card:hover { transform: translateY(-4px); }
+
+.rs-header {
+  background: var(--burgundy);
+  padding: 0.9rem 1rem;
+  text-align: center;
+  border-bottom: 2px solid var(--gold);
+}
+.rs-dayname {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--parchment2);
+  letter-spacing: 0.05em;
+}
+.rs-body {
+  padding: 1.5rem 1.25rem;
+  position: relative;
+}
+.rs-body::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 1px solid rgba(139,105,20,0.18);
+  pointer-events: none;
+}
+
+.rs-time-display {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.rs-time {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--ink);
+  line-height: 1.1;
+}
+.rs-time-sep {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 10px;
+  color: var(--aged);
+  display: block;
+  margin: 0.2rem 0;
+}
+
+.rs-divider {
+  text-align: center;
+  color: var(--gold2);
+  font-size: 14px;
+  margin: 0.75rem 0;
+  opacity: 0.7;
+}
+
+.rs-lokaal {
+  font-family: 'Cinzel', serif;
+  font-size: 7px;
+  letter-spacing: 0.15em;
+  color: var(--aged);
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.rs-vak {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--burgundy);
+  text-align: center;
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+/* ═══════════════════════════════════
+   LERAREN PAGE
+═══════════════════════════════════ */
+.leraren-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.leraar-portrait {
+  background: linear-gradient(160deg, rgba(255,251,240,0.95) 0%, rgba(232,217,181,0.6) 100%);
+  border: 2px solid var(--gold);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s;
+}
+.leraar-portrait:hover { transform: scale(1.02); }
+.leraar-portrait::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 1px solid rgba(139,105,20,0.2);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.lp-crest-area {
+  background: var(--ink2);
+  padding: 1.5rem;
+  text-align: center;
+  border-bottom: 2px solid var(--gold);
+  position: relative;
+}
+.lp-initial {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 4rem;
+  font-weight: 900;
+  color: var(--gold2);
+  line-height: 1;
+  text-shadow: 0 0 40px rgba(139,105,20,0.4);
+}
+.lp-roman {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 10px;
+  color: rgba(192,154,40,0.45);
+  margin-top: 0.25rem;
+}
+
+.lp-body {
+  padding: 1.5rem;
+  text-align: center;
+}
+.lp-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.25rem;
+}
+.lp-role {
+  font-family: 'Cinzel', serif;
+  font-size: 7px;
+  letter-spacing: 0.2em;
+  color: var(--aged);
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.lp-ornament {
+  text-align: center;
+  color: var(--gold2);
+  font-size: 16px;
+  margin: 0.5rem 0;
+  opacity: 0.6;
+}
+
+.lp-vak-label {
+  font-family: 'Cinzel', serif;
+  font-size: 7px;
+  letter-spacing: 0.2em;
+  color: rgba(139,105,20,0.5);
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+.lp-vak {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--burgundy);
+  font-weight: bold;
+}
+
+/* ═══════════════════════════════════
+   TAKEN PAGE
+═══════════════════════════════════ */
+.taken-ledger {
+  border: 2px solid var(--gold);
+  background: rgba(255,251,240,0.8);
+  position: relative;
+  overflow: hidden;
+}
+.taken-ledger::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(139,105,20,0.18);
+  pointer-events: none;
+}
+
+.ledger-header {
+  display: grid;
+  grid-template-columns: 40px 1fr 100px 140px 90px;
+  gap: 1rem;
+  padding: 0.9rem 1.5rem;
+  background: var(--ink2);
+  border-bottom: 2px solid var(--gold);
+  align-items: center;
+}
+.lh-col {
+  font-family: 'Cinzel', serif;
+  font-size: 7px;
+  letter-spacing: 0.2em;
+  color: var(--gold2);
+  text-transform: uppercase;
+}
+
+.ledger-row {
+  display: grid;
+  grid-template-columns: 40px 1fr 100px 140px 90px;
+  gap: 1rem;
+  padding: 1.1rem 1.5rem;
+  border-bottom: 1px solid rgba(139,105,20,0.12);
+  align-items: center;
+  transition: background 0.3s;
+}
+.ledger-row:hover { background: rgba(139,105,20,0.05); }
+.ledger-row:last-child { border-bottom: none; }
+.ledger-row.done-row { opacity: 0.45; }
+
+.lr-number {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1rem;
+  font-weight: 900;
+  color: var(--burgundy);
+  text-align: center;
+}
+.lr-number.done-n {
+  text-decoration: line-through;
+  color: var(--aged);
+}
+
+.lr-task-name {
+  font-family: 'IM Fell English', serif;
+  font-size: 15px;
+  color: var(--ink);
+  font-weight: bold;
+}
+.lr-task-sub {
+  font-size: 10px;
+  font-style: italic;
+  color: var(--aged);
+  margin-top: 2px;
+}
+.lr-task-name.done-t { text-decoration: line-through; color: var(--aged); }
+
+.vellum-tag {
+  display: inline-block;
+  font-family: 'Cinzel', serif;
+  font-size: 7px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border: 1px solid;
+}
+.vt-crit   { border-color: var(--burgundy2); color: var(--burgundy2); background: rgba(107,26,42,0.06); }
+.vt-soon   { border-color: var(--gold);      color: var(--gold);      background: rgba(139,105,20,0.06); }
+.vt-later  { border-color: var(--aged);      color: var(--aged);      background: transparent; }
+.vt-done   { border-color: var(--forest);    color: var(--forest);    background: rgba(26,58,36,0.05); }
+
+.lr-deadline {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  color: var(--aged);
+}
+
+/* ═══════════════════════════════════
+   PROFIEL PAGE
+═══════════════════════════════════ */
+.profiel-manuscript {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2px;
+  margin-bottom: 2px;
+}
+
+.manuscript-main {
+  background: rgba(255,251,240,0.85);
+  border: 2px solid var(--gold);
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.manuscript-main::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(139,105,20,0.18);
+  pointer-events: none;
+}
+
+/* decorative initial cap */
+.initial-cap {
+  float: left;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 5.5rem;
+  font-weight: 900;
+  color: var(--burgundy);
+  line-height: 0.75;
+  margin-right: 0.25rem;
+  margin-top: 0.1rem;
+  opacity: 0.8;
+}
+
+.ms-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--ink);
+  line-height: 1.1;
+  margin-bottom: 0.25rem;
+}
+.ms-title {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 0.25em;
+  color: var(--aged);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.ms-details {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  clear: both;
+}
+.ms-detail-row {
+  display: flex;
+  gap: 1.5rem;
+  align-items: baseline;
+  font-size: 12px;
+  border-bottom: 1px dotted rgba(139,105,20,0.2);
+  padding-bottom: 0.5rem;
+}
+.ms-detail-key {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: var(--aged);
+  text-transform: uppercase;
+  min-width: 100px;
+  flex-shrink: 0;
+}
+.ms-detail-val {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.stats-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stat-plaque {
+  background: var(--ink2);
+  border: 2px solid var(--gold);
+  padding: 1.5rem;
+  text-align: center;
+  position: relative;
+  flex: 1;
+}
+.stat-plaque::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(139,105,20,0.25);
+  pointer-events: none;
+}
+.sp-value {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--gold2);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.sp-label {
+  font-family: 'Cinzel', serif;
+  font-size: 7px;
+  letter-spacing: 0.18em;
+  color: rgba(192,154,40,0.55);
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+
+.skills-frieze {
+  background: rgba(255,251,240,0.7);
+  border: 2px solid var(--gold);
+  padding: 1.75rem 2.5rem;
+  position: relative;
+}
+.skills-frieze::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 1px solid rgba(139,105,20,0.15);
+  pointer-events: none;
+}
+
+.sf-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--burgundy);
+  text-align: center;
+  margin-bottom: 1.25rem;
+  letter-spacing: 0.05em;
+}
+.skills-row {
+  display: flex;
+  gap: 2.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.skill-entry {
+  text-align: center;
+  min-width: 80px;
+}
+.skill-name-s {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  color: var(--aged);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.skill-track {
+  width: 80px;
+  height: 3px;
+  background: rgba(139,105,20,0.15);
+  border: 1px solid rgba(139,105,20,0.2);
+  position: relative;
+  margin: 0 auto;
+}
+.skill-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--burgundy), var(--gold2));
+  position: absolute;
+  top: 0; left: 0;
+}
+.skill-pct {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  color: var(--aged);
+  margin-top: 0.3rem;
+}
+
+/* ═══════════════════════════════════
+   SETTINGS PAGE
+═══════════════════════════════════ */
+.settings-proclamations {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.proclamation-row {
+  background: rgba(255,251,240,0.7);
+  border: 2px solid var(--gold);
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  position: relative;
+  transition: background 0.3s;
+}
+.proclamation-row:hover { background: rgba(255,251,240,0.95); }
+.proclamation-row::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(139,105,20,0.15);
+  pointer-events: none;
+}
+
+.pr-info {}
+.pr-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.2rem;
+}
+.pr-desc {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 11px;
+  color: var(--aged);
+}
+
+.wax-seal {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, var(--burgundy2), var(--burgundy) 60%, #3D0A12);
+  border: 2px solid rgba(139,105,20,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  color: var(--parchment2);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 2px 3px 8px rgba(0,0,0,0.35);
+  flex-shrink: 0;
+  user-select: none;
+}
+.wax-seal:hover { transform: scale(1.08) rotate(-3deg); }
+.wax-seal.active {
+  background: radial-gradient(circle at 40% 35%, var(--forest), #0D2614 70%);
+  border-color: rgba(26,90,40,0.5);
+}
+.wax-seal.active::after { content: '✓'; }
+.wax-seal:not(.active)::after { content: '✗'; }
+
+/* ═══════════════════════════════════
+   SHARED ORNAMENTAL ELEMENTS
+═══════════════════════════════════ */
+.section-ornament {
+  text-align: center;
+  font-size: 18px;
+  color: var(--gold2);
+  opacity: 0.55;
+  margin: 0.5rem 0 1.25rem;
+  letter-spacing: 0.5rem;
+}
+
+/* scroll animation on load */
+@keyframes stampIn {
+  from { opacity: 0; transform: scale(0.97) rotate(-0.5deg); }
+  to   { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+.vic-card, .herald-cell, .tt-day, .rs-card, .leraar-portrait,
+.taken-ledger, .manuscript-main, .stat-plaque, .proclamation-row {
+  animation: stampIn 0.5s ease both;
+}
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- ══════════ SIDEBAR ══════════ -->
+  <nav class="sidebar">
+    <!-- Heraldic Crest -->
+    <div class="sidebar-crest">
+      <svg class="crest-svg" width="72" height="80" viewBox="0 0 72 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- shield shape -->
+        <path d="M6 8 L66 8 L66 52 Q36 76 6 52 Z" fill="rgba(139,105,20,0.1)" stroke="#8B6914" stroke-width="1.5"/>
+        <path d="M10 11 L62 11 L62 51 Q36 72 10 51 Z" fill="none" stroke="rgba(139,105,20,0.3)" stroke-width="0.75"/>
+        <!-- crown -->
+        <path d="M18 8 L18 2 L24 5 L30 1 L36 5 L42 1 L48 5 L54 2 L54 8" fill="none" stroke="#C09A28" stroke-width="1.5" stroke-linejoin="round"/>
+        <!-- inner decoration -->
+        <line x1="36" y1="15" x2="36" y2="55" stroke="rgba(139,105,20,0.4)" stroke-width="0.75"/>
+        <line x1="16" y1="30" x2="56" y2="30" stroke="rgba(139,105,20,0.4)" stroke-width="0.75"/>
+        <!-- diamond center -->
+        <polygon points="36,20 44,30 36,40 28,30" fill="none" stroke="#C09A28" stroke-width="1"/>
+        <circle cx="36" cy="30" r="3" fill="#8B6914" opacity="0.6"/>
+      </svg>
+      <div class="sidebar-school">Academisch<br>Leerregister</div>
+      <div class="sidebar-year">Anno Domini MMXXVI</div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Registers</div>
+      <ul class="nav-list">
+        <li class="nav-item active" id="nav-home">
+          <button onclick="showPage('home')">
+            <span class="nav-roman">I.</span> Home
+          </button>
+        </li>
+        <li class="nav-item" id="nav-rooster">
+          <button onclick="showPage('rooster')">
+            <span class="nav-roman">II.</span> Rooster
+          </button>
+        </li>
+        <li class="nav-item" id="nav-taken">
+          <button onclick="showPage('taken')">
+            <span class="nav-roman">III.</span> Taken
+          </button>
+        </li>
+        <li class="nav-item" id="nav-leraren">
+          <button onclick="showPage('leraren')">
+            <span class="nav-roman">IV.</span> Leraren
+          </button>
+        </li>
+        <li class="nav-item" id="nav-profiel">
+          <button onclick="showPage('profiel')">
+            <span class="nav-roman">V.</span> Profiel
+          </button>
+        </li>
+        <li class="nav-item" id="nav-settings">
+          <button onclick="showPage('settings')">
+            <span class="nav-roman">VI.</span> Instellingen
+          </button>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <p>André Babirian<br>ICT Software Developer<br>Klas XSB1B</p>
+      <div class="footer-motto">✦ Per Aspera Ad Astra ✦</div>
+    </div>
+  </nav>
+
+  <!-- ══════════ MAIN ══════════ -->
+  <main class="main-content">
+
+    <!-- ══ HOME ══ -->
+    <div class="page active" id="page-home">
+      <div class="page-header">
+        <!-- corner SVG flourishes -->
+        <svg class="ph-corner tl" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 48 L2 2 L48 2" stroke="#8B6914" stroke-width="2" fill="none"/>
+          <path d="M2 30 Q10 22 18 28 Q26 34 34 20 Q40 10 46 4" stroke="#8B6914" stroke-width="1" fill="none" opacity="0.5"/>
+          <circle cx="2" cy="2" r="3" fill="#8B6914" opacity="0.7"/>
+        </svg>
+        <svg class="ph-corner tr" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 48 L2 2 L48 2" stroke="#8B6914" stroke-width="2" fill="none"/>
+          <path d="M2 30 Q10 22 18 28 Q26 34 34 20 Q40 10 46 4" stroke="#8B6914" stroke-width="1" fill="none" opacity="0.5"/>
+          <circle cx="2" cy="2" r="3" fill="#8B6914" opacity="0.7"/>
+        </svg>
+        <svg class="ph-corner bl" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 48 L2 2 L48 2" stroke="#8B6914" stroke-width="2" fill="none"/>
+          <path d="M2 30 Q10 22 18 28 Q26 34 34 20 Q40 10 46 4" stroke="#8B6914" stroke-width="1" fill="none" opacity="0.5"/>
+          <circle cx="2" cy="2" r="3" fill="#8B6914" opacity="0.7"/>
+        </svg>
+        <svg class="ph-corner br" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 48 L2 2 L48 2" stroke="#8B6914" stroke-width="2" fill="none"/>
+          <path d="M2 30 Q10 22 18 28 Q26 34 34 20 Q40 10 46 4" stroke="#8B6914" stroke-width="1" fill="none" opacity="0.5"/>
+          <circle cx="2" cy="2" r="3" fill="#8B6914" opacity="0.7"/>
+        </svg>
+
+        <div class="ph-chapter">Hoofdstuk I — Introductie</div>
+        <h1 class="ph-title">The Grand<br>Academic Register</h1>
+        <p class="ph-subtitle">School Dashboard — Windesheim · Week XIX · Anno Domini MMXXVI</p>
+      </div>
+
+      <div class="section-ornament">✦ ❧ ✦ ❧ ✦</div>
+
+      <div class="home-herald">
+        <div class="herald-cell">
+          <div class="hc-roman">IV</div>
+          <div class="hc-label">Open Taken</div>
+          <div class="hc-desc">Waarvan twee<br>urgent zijn</div>
+        </div>
+        <div class="herald-cell">
+          <div class="hc-roman">7·6</div>
+          <div class="hc-label">Gem. Cijfer</div>
+          <div class="hc-desc">Semester twee<br>2025–2026</div>
+        </div>
+        <div class="herald-cell">
+          <div class="hc-roman">V</div>
+          <div class="hc-label">Vak­ken</div>
+          <div class="hc-desc">Dit semester<br>in behandeling</div>
+        </div>
+        <div class="herald-cell">
+          <div class="hc-roman">VI</div>
+          <div class="hc-label">Weken tot Examen</div>
+          <div class="hc-desc">Voortgang:<br>goed op schema</div>
+        </div>
+      </div>
+
+      <div style="height:2px"></div>
+
+      <div class="home-timetable">
+        <div class="tt-day">
+          <div class="tt-dayname">Maandag</div>
+          <div class="tt-subject">Flex</div>
+          <div class="tt-time">08:30 — 17:00</div>
+          <span class="tt-room">2.073</span>
+        </div>
+        <div class="tt-day">
+          <div class="tt-dayname">Dinsdag</div>
+          <div class="tt-subject">Flex</div>
+          <div class="tt-time">08:30 — 17:00</div>
+          <span class="tt-room">2.073</span>
+        </div>
+        <div class="tt-day">
+          <div class="tt-dayname">Woensdag</div>
+          <div class="tt-subject">Flex & Rekenen</div>
+          <div class="tt-time">08:30 — 17:00</div>
+          <span class="tt-room">2.073</span>
+        </div>
+        <div class="tt-day">
+          <div class="tt-dayname">Donderdag</div>
+          <div class="tt-subject">Flex & NL</div>
+          <div class="tt-time">08:30 — 17:00</div>
+          <span class="tt-room">2.073</span>
+        </div>
+        <div class="tt-day">
+          <div class="tt-dayname">Vrijdag</div>
+          <div class="tt-subject">Flex</div>
+          <div class="tt-time">08:30 — 13:30</div>
+          <span class="tt-room">2.073</span>
+        </div>
+      </div>
+
+      <div style="height:2px"></div>
+
+      <div class="home-notice">
+        <div class="notice-box">
+          <div class="nb-title">✦ Aankomende Taken ✦</div>
+          <div class="notice-item">
+            <span class="notice-bullet">❧</span>
+            <span>UML diagram afmaken</span>
+            <span class="notice-urgency u-urgent">Urgent</span>
+          </div>
+          <div class="notice-item">
+            <span class="notice-bullet">❧</span>
+            <span>Portfolio bijwerken</span>
+            <span class="notice-urgency u-soon">Spoedig</span>
+          </div>
+          <div class="notice-item">
+            <span class="notice-bullet">❧</span>
+            <span>GitHub README schrijven</span>
+            <span class="notice-urgency u-later">Later</span>
+          </div>
+          <div class="notice-item">
+            <span class="notice-bullet">❧</span>
+            <span style="text-decoration:line-through;opacity:0.5">Retrospective inleveren</span>
+            <span class="notice-urgency u-done">Voltooid</span>
+          </div>
+        </div>
+        <div class="notice-box">
+          <div class="nb-title">✦ Heden's Bijzonderheden ✦</div>
+          <div class="notice-item">
+            <span class="notice-bullet">⁂</span>
+            <span>Volgende les: Maandag 08:30 — Flex in lokaal 2.073</span>
+          </div>
+          <div class="notice-item">
+            <span class="notice-bullet">⁂</span>
+            <span>Gemiddeld cijfer dit semester: 7.6 — uitmuntend!</span>
+          </div>
+          <div class="notice-item">
+            <span class="notice-bullet">⁂</span>
+            <span>Semester twee loopt gestaag voort — 4 van 5 vakken voltooid</span>
+          </div>
+          <div class="notice-item">
+            <span class="notice-bullet">⁂</span>
+            <span>Examen over zes weken — aanvang met herhaling aanbevolen</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ ROOSTER ══ -->
+    <div class="page" id="page-rooster">
+      <div class="page-header">
+        <svg class="ph-corner tl" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 48 L2 2 L48 2" stroke="#8B6914" stroke-width="2" fill="none"/><circle cx="2" cy="2" r="3" fill="#8B6914" opacity="0.7"/></svg>
+        <svg class="ph-corner tr" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 48 L2 2 L48 2" stroke="#8B6914" stroke-width="2" fill="none"/><circle cx="2" cy="2" r="3" fill="#8B6914" opacity="0.7"/></svg>
+        <svg class="ph-corner bl" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 48 L2 2 L48 2" stroke="#8B6914" stroke-width="2" fill="none"/><circle cx="2" cy="2" r="3" fill="#8B6914" opacity="0.7"/></svg>
+        <svg class="ph-corner br" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 48 L2 2 L48 2" stroke="#8B6914" stroke-width="2" fill="none"/><circle cx="2" cy="2" r="3" fill="#8B6914" opacity="0.7"/></svg>
+        <div class="ph-chapter">Hoofdstuk II — Tijdschema</div>
+        <h1 class="ph-title">Het Weekrooster</h1>
+        <p class="ph-subtitle">Klas XSB1B · Lokaal Groen 2.073 · Week XIX</p>
+      </div>
+      <div class="section-ornament">✦ ❧ ✦ ❧ ✦</div>
+      <div class="rooster-scroll">
+        <div class="rs-card" style="animation-delay:0.05s">
+          <div class="rs-header"><div class="rs-dayname">Maandag</div></div>
+          <div class="rs-body">
+            <div class="rs-time-display">
+              <div class="rs-time">08:30</div>
+              <span class="rs-time-sep">— tot —</span>
+              <div class="rs-time">17:00</div>
+            </div>
+            <div class="rs-divider">✦ ✦ ✦</div>
+            <div class="rs-lokaal">Groen 2.073</div>
+            <div class="rs-vak">Flex</div>
+          </div>
+        </div>
+        <div class="rs-card" style="animation-delay:0.1s">
+          <div class="rs-header"><div class="rs-dayname">Dinsdag</div></div>
+          <div class="rs-body">
+            <div class="rs-time-display">
+              <div class="rs-time">08:30</div>
+              <span class="rs-time-sep">— tot —</span>
+              <div class="rs-time">17:00</div>
+            </div>
+            <div class="rs-divider">✦ ✦ ✦</div>
+            <div class="rs-lokaal">Groen 2.073</div>
+            <div class="rs-vak">Flex</div>
+          </div>
+        </div>
+        <div class="rs-card" style="animation-delay:0.15s">
+          <div class="rs-header"><div class="rs-dayname">Woensdag</div></div>
+          <div class="rs-body">
+            <div class="rs-time-display">
+              <div class="rs-time">08:30</div>
+              <span class="rs-time-sep">— tot —</span>
+              <div class="rs-time">17:00</div>
+            </div>
+            <div class="rs-divider">✦ ✦ ✦</div>
+            <div class="rs-lokaal">Groen 2.073</div>
+            <div class="rs-vak">Flex &amp;<br>Rekenen</div>
+          </div>
+        </div>
+        <div class="rs-card" style="animation-delay:0.2s">
+          <div class="rs-header"><div class="rs-dayname">Donderdag</div></div>
+          <div class="rs-body">
+            <div class="rs-time-display">
+              <div class="rs-time">08:30</div>
+              <span class="rs-time-sep">— tot —</span>
+              <div class="rs-time">17:00</div>
+            </div>
+            <div class="rs-divider">✦ ✦ ✦</div>
+            <div class="rs-lokaal">Groen 2.073</div>
+            <div class="rs-vak">Flex, Nederlands<br>&amp; Burgerschap</div>
+          </div>
+        </div>
+        <div class="rs-card" style="animation-delay:0.25s">
+          <div class="rs-header"><div class="rs-dayname">Vrijdag</div></div>
+          <div class="rs-body">
+            <div class="rs-time-display">
+              <div class="rs-time">08:30</div>
+              <span class="rs-time-sep">— tot —</span>
+              <div class="rs-time">13:30</div>
+            </div>
+            <div class="rs-divider">✦ ✦ ✦</div>
+            <div class="rs-lokaal">Groen 2.073</div>
+            <div class="rs-vak">Flex</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ TAKEN ══ -->
+    <div class="page" id="page-taken">
+      <div class="page-header">
+        <svg class="ph-corner tl" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 48 L2 2 L48 2" stroke="#8B6914" stroke-width="2" fill="none"/><circle cx="2" cy="2" r="3" fill="#8B6914" opacity="0.7"/></svg>
+        <svg class="ph-corner tr" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 48 L2 2 L48 2" stroke="#8B6914" stroke-width="2" fill="none"/><circle cx="2" cy="2" r="3" fill="#8B6914" opacity="0.7"/></svg>
+        <svg class="ph-corner bl" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 48 L2 2 L48 2" stroke="#8B6914" stroke-width="2" fill="none"/><circle cx="2" cy="2" r="3" fill="#8B6914" opacity="0.7"/></svg>
+        <svg class="ph-corner br" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 48 L2 2 L48 2" stroke="#8B6914" stroke-width="2" fill="none"/><circle cx="2" cy="2" r="3" fill="#8B6914" opacity="0.7"/></svg>
+        <div class="ph-chapter">Hoofdstuk III — Opgaven</div>
+        <h1 class="ph-title">Het Takenboek</h1>
+        <p class="ph-subtitle">Academisch jaar 2025–2026 · 4 openstaand · 2 voltooid</p>
+      </div>
+      <div class="section-ornament">✦ ❧ ✦ ❧ ✦</div>
+      <div class="taken-ledger">
+        <div class="ledger-header">
+          <div class="lh-col">Nr.</div>
+          <div class="lh-col">Opdracht</div>
+          <div class="lh-col">Prioriteit</div>
+          <div class="lh-col">Vak</div>
+          <div class="lh-col">Deadline</div>
+        </div>
+        <div class="ledger-row">
+          <div class="lr-number">I</div>
+          <div><div class="lr-task-name">UML Diagram Afmaken</div><div class="lr-task-sub">Software Architecture · Sprint 4</div></div>
+          <span class="vellum-tag vt-crit">Kritisch</span>
+          <span class="lr-deadline">Morgen 09:00</span>
+          <span></span>
+        </div>
+        <div class="ledger-row">
+          <div class="lr-number">II</div>
+          <div><div class="lr-task-name">Portfolio Bijwerken</div><div class="lr-task-sub">Persoonlijke Ontwikkeling</div></div>
+          <span class="vellum-tag vt-soon">Spoedig</span>
+          <span class="lr-deadline">Do. 23:59</span>
+          <span></span>
+        </div>
+        <div class="ledger-row">
+          <div class="lr-number">III</div>
+          <div><div class="lr-task-name">GitHub README Schrijven</div><div class="lr-task-sub">Project · Flex Opdracht</div></div>
+          <span class="vellum-tag vt-later">Later</span>
+          <span class="lr-deadline">Vr. 17:00</span>
+          <span></span>
+        </div>
+        <div class="ledger-row">
+          <div class="lr-number">IV</div>
+          <div><div class="lr-task-name">API Documentatie</div><div class="lr-task-sub">Web Development Module</div></div>
+          <span class="vellum-tag vt-later">Later</span>
+          <span class="lr-deadline">Volg. week</span>
+          <span></span>
+        </div>
+        <div class="ledger-row done-row">
+          <div class="lr-number done-n">V</div>
+          <div><div class="lr-task-name done-t">Retrospective Inleveren</div><div class="lr-task-sub">Agile · Sprint 3</div></div>
+          <span class="vellum-tag vt-done">Voltooid</span>
+          <span class="lr-deadline">Afgerond</span>
+          <span></span>
+        </div>
+        <div class="ledger-row done-row">
+          <div class="lr-number done-n">VI</div>
+          <div><div class="lr-task-name done-t">Database Schema Ontwerp</div><div class="lr-task-sub">Databases Module</div></div>
+          <span class="vellum-tag vt-done">Voltooid</span>
+          <span class="lr-deadline">Afgerond</span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ LERAREN ══ -->
+    <div class="page" id="page-leraren">
+      <div class="page-header">
+        <svg class="ph-corner tl" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 48 L2 2 L48 2" stroke="#8B6914" stroke-width="2" fill="none"/><circle cx="2" cy="2" r="3" fill="#8B6914" opacity="0.7"/></svg>
+        <svg class="ph-corner tr" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 48 L2 2 L48 2" stroke="#8B6914" stroke-width="2" fill="none"/><circle cx="2" cy="2" r="3" fill="#8B6914" opacity="0.7"/></svg>
+        <svg class="ph-corner bl" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 48 L2 2 L48 2" stroke="#8B6914" stroke-width="2" fill="none"/><circle cx="2" cy="2" r="3" fill="#8B6914" opacity="0.7"/></svg>
+        <svg class="ph-corner br" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 48 L2 2 L48 2" stroke="#8B6914" stroke-width="2" fill="none"/><circle cx="2" cy="2" r="3" fill="#8B6914" opacity="0.7"/></svg>
+        <div class="ph-chapter">Hoofdstuk IV — Docenten</div>
+        <h1 class="ph-title">De Geleerde<br>Meesters</h1>
+        <p class="ph-subtitle">Klas XSB1B · ICT Software Developer · Jaar I</p>
+      </div>
+      <div class="section-ornament">✦ ❧ ✦ ❧ ✦</div>
+      <div class="leraren-grid">
+        <div class="leraar-portrait" style="animation-delay:0.05s">
+          <div class="lp-crest-area">
+            <div class="lp-initial">P</div>
+            <div class="lp-roman">Meester I</div>
+          </div>
+          <div class="lp-body">
+            <div class="lp-name">Peter</div>
+            <div class="lp-role">Begeleider & Docent</div>
+            <div class="lp-ornament">✦ ❧ ✦</div>
+            <div class="lp-vak-label">Vakken</div>
+            <div class="lp-vak">Flex</div>
+          </div>
+        </div>
+        <div class="leraar-portrait" style="animation-delay:0.1s">
+          <div class="lp-crest-area">
+            <div class="lp-initial">J</div>
+            <div class="lp-roman">Meester II</div>
+          </div>
+          <div class="lp-body">
+            <div class="lp-name">Jeroen</div>
+            <div class="lp-role">Begeleider & Docent</div>
+            <div class="lp-ornament">✦ ❧ ✦</div>
+            <div class="lp-vak-label">Vakken</div>
+            <div class="lp-vak">Flex</div>
+          </div>
+        </div>
+        <div class="leraar-portrait" style="animation-delay:0.15s">
+          <div class="lp-crest-area">
+            <div class="lp-initial">J</div>
+            <div class="lp-roman">Meester III</div>
+          </div>
+          <div class="lp-body">
+            <div class="lp-name">Jan</div>
+            <div class="lp-role">Docent</div>
+            <div class="lp-ornament">✦ ❧ ✦</div>
+            <div class="lp-vak-label">Vakken</div>
+            <div class="lp-vak">Flex</div>
+          </div>
+        </div>
+        <div class="leraar-portrait" style="animation-delay:0.2s">
+          <div class="lp-crest-area">
+            <div class="lp-initial">A</div>
+            <div class="lp-roman">Meester IV</div>
+          </div>
+          <div class="lp-body">
+            <div class="lp-name">Alex</div>
+            <div class="lp-role">Docent</div>
+            <div class="lp-ornament">✦ ❧ ✦</div>
+            <div class="lp-vak-label">Vakken</div>
+            <div class="lp-vak">Rekenen</div>
+          </div>
+        </div>
+        <div class="leraar-portrait" style="animation-delay:0.25s">
+          <div class="lp-crest-area">
+            <div class="lp-initial">?</div>
+            <div class="lp-roman">Meester V</div>
+          </div>
+          <div class="lp-body">
+            <div class="lp-name">Onbekend</div>
+            <div class="lp-role">Docent</div>
+            <div class="lp-ornament">✦ ❧ ✦</div>
+            <div class="lp-vak-label">Vakken</div>
+            <div class="lp-vak">Nederlands</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PROFIEL ══ -->
+    <div class="page" id="page-profiel">
+      <div class="page-header">
+        <svg class="ph-corner tl" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 48 L2 2 L48 2" stroke="#8B6914" stroke-width="2" fill="none"/><circle cx="2" cy="2" r="3" fill="#8B6914" opacity="0.7"/></svg>
+        <svg class="ph-corner tr" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 48 L2 2 L48 2" stroke="#8B6914" stroke-width="2" fill="none"/><circle cx="2" cy="2" r="3" fill="#8B6914" opacity="0.7"/></svg>
+        <svg class="ph-corner bl" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 48 L2 2 L48 2" stroke="#8B6914" stroke-width="2" fill="none"/><circle cx="2" cy="2" r="3" fill="#8B6914" opacity="0.7"/></svg>
+        <svg class="ph-corner br" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 48 L2 2 L48 2" stroke="#8B6914" stroke-width="2" fill="none"/><circle cx="2" cy="2" r="3" fill="#8B6914" opacity="0.7"/></svg>
+        <div class="ph-chapter">Hoofdstuk V — Persoonsdossier</div>
+        <h1 class="ph-title">Mijn Profiel</h1>
+        <p class="ph-subtitle">Academisch Dossier — Klas XSB1B</p>
+      </div>
+      <div class="section-ornament">✦ ❧ ✦ ❧ ✦</div>
+      <div class="profiel-manuscript">
+        <div class="manuscript-main">
+          <span class="initial-cap">A</span>
+          <div class="ms-name">André Babirian</div>
+          <div class="ms-title">ICT Software Developer · Jaar I · Klas XSB1B</div>
+          <div class="ms-details">
+            <div class="ms-detail-row">
+              <span class="ms-detail-key">School</span>
+              <span class="ms-detail-val">Windesheim, Zwolle</span>
+            </div>
+            <div class="ms-detail-row">
+              <span class="ms-detail-key">Opleiding</span>
+              <span class="ms-detail-val">ICT Software Developer</span>
+            </div>
+            <div class="ms-detail-row">
+              <span class="ms-detail-key">Klas</span>
+              <span class="ms-detail-val">XSB1B — Cohort 2025</span>
+            </div>
+            <div class="ms-detail-row">
+              <span class="ms-detail-key">Academisch Jaar</span>
+              <span class="ms-detail-val">Anno Domini 2025–2026</span>
+            </div>
+            <div class="ms-detail-row">
+              <span class="ms-detail-key">Status</span>
+              <span class="ms-detail-val">Actief student — op schema</span>
+            </div>
+          </div>
+        </div>
+        <div class="stats-column">
+          <div class="stat-plaque">
+            <div class="sp-value">7·6</div>
+            <div class="sp-label">Gemiddeld<br>Cijfer</div>
+          </div>
+          <div class="stat-plaque">
+            <div class="sp-value">IV/V</div>
+            <div class="sp-label">Vakken<br>Voltooid</div>
+          </div>
+          <div class="stat-plaque">
+            <div class="sp-value">VI</div>
+            <div class="sp-label">Weken tot<br>Examen</div>
+          </div>
+        </div>
+      </div>
+      <div style="height:2px"></div>
+      <div class="skills-frieze">
+        <div class="sf-title">✦ Bekwaamheden & Vaardigheden ✦</div>
+        <div class="skills-row">
+          <div class="skill-entry">
+            <div class="skill-name-s">React</div>
+            <div class="skill-track"><div class="skill-fill" style="width:70%"></div></div>
+            <div class="skill-pct">70%</div>
+          </div>
+          <div class="skill-entry">
+            <div class="skill-name-s">TypeScript</div>
+            <div class="skill-track"><div class="skill-fill" style="width:55%"></div></div>
+            <div class="skill-pct">55%</div>
+          </div>
+          <div class="skill-entry">
+            <div class="skill-name-s">CSS</div>
+            <div class="skill-track"><div class="skill-fill" style="width:65%"></div></div>
+            <div class="skill-pct">65%</div>
+          </div>
+          <div class="skill-entry">
+            <div class="skill-name-s">Git</div>
+            <div class="skill-track"><div class="skill-fill" style="width:60%"></div></div>
+            <div class="skill-pct">60%</div>
+          </div>
+          <div class="skill-entry">
+            <div class="skill-name-s">SQL</div>
+            <div class="skill-track"><div class="skill-fill" style="width:45%"></div></div>
+            <div class="skill-pct">45%</div>
+          </div>
+          <div class="skill-entry">
+            <div class="skill-name-s">Java</div>
+            <div class="skill-track"><div class="skill-fill" style="width:40%"></div></div>
+            <div class="skill-pct">40%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SETTINGS ══ -->
+    <div class="page" id="page-settings">
+      <div class="page-header">
+        <svg class="ph-corner tl" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 48 L2 2 L48 2" stroke="#8B6914" stroke-width="2" fill="none"/><circle cx="2" cy="2" r="3" fill="#8B6914" opacity="0.7"/></svg>
+        <svg class="ph-corner tr" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 48 L2 2 L48 2" stroke="#8B6914" stroke-width="2" fill="none"/><circle cx="2" cy="2" r="3" fill="#8B6914" opacity="0.7"/></svg>
+        <svg class="ph-corner bl" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 48 L2 2 L48 2" stroke="#8B6914" stroke-width="2" fill="none"/><circle cx="2" cy="2" r="3" fill="#8B6914" opacity="0.7"/></svg>
+        <svg class="ph-corner br" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 48 L2 2 L48 2" stroke="#8B6914" stroke-width="2" fill="none"/><circle cx="2" cy="2" r="3" fill="#8B6914" opacity="0.7"/></svg>
+        <div class="ph-chapter">Hoofdstuk VI — Preferenties</div>
+        <h1 class="ph-title">Instellingen</h1>
+        <p class="ph-subtitle">Beheer van Persoonlijke Voorkeurstellingen</p>
+      </div>
+      <div class="section-ornament">✦ ❧ ✦ ❧ ✦</div>
+      <div class="settings-proclamations">
+        <div class="proclamation-row">
+          <div class="pr-info">
+            <div class="pr-name">Dark Mode</div>
+            <div class="pr-desc">Schakel tusschen het Licht & het Duister van de Interface</div>
+          </div>
+          <div class="wax-seal active" onclick="this.classList.toggle('active')"></div>
+        </div>
+        <div class="proclamation-row">
+          <div class="pr-info">
+            <div class="pr-name">Meldingen & Berichten</div>
+            <div class="pr-desc">Ontvang Tijdige Waarschuwingen omtrent Aankomende Deadlines</div>
+          </div>
+          <div class="wax-seal active" onclick="this.classList.toggle('active')"></div>
+        </div>
+        <div class="proclamation-row">
+          <div class="pr-info">
+            <div class="pr-name">Audiosaignalen</div>
+            <div class="pr-desc">Geluidssignalen bij het Verrichten van Handelingen</div>
+          </div>
+          <div class="wax-seal" onclick="this.classList.toggle('active')"></div>
+        </div>
+        <div class="proclamation-row">
+          <div class="pr-info">
+            <div class="pr-name">Compacte Weergave</div>
+            <div class="pr-desc">Verminderde Witruimte ten Gunste van Grotere Inhoudsdichtheid</div>
+          </div>
+          <div class="wax-seal" onclick="this.classList.toggle('active')"></div>
+        </div>
+        <div class="proclamation-row">
+          <div class="pr-info">
+            <div class="pr-name">Taal der Interface</div>
+            <div class="pr-desc">Huidige Instelling: Nederlands — De Moedertaal der Lage Landen</div>
+          </div>
+          <div class="wax-seal active" onclick="this.classList.toggle('active')"></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.getElementById('nav-' + id).classList.add('active');
+  document.querySelector('.main-content').scrollTop = 0;
+}
+</script>
+</body>
+</html>

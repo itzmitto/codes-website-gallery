@@ -1,0 +1,1983 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ANDRÉ BABIRIAN — DASHBOARD</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
+<style>
+
+/* ════════════════════════════════════════════════
+   ROOT TOKENS — editorial surrealism palette
+   inspired by: divided faces, collage, bold typo
+════════════════════════════════════════════════ */
+:root {
+  --paper:    #F0EBE1;
+  --paper2:   #E4DDD0;
+  --ink:      #0F0E0C;
+  --red:      #D42B2B;
+  --orange:   #E8621A;
+  --magenta:  #C4185E;
+  --cyan:     #0D8FA8;
+  --mint:     #4ABFA0;
+  --off:      #1A1814;
+  --gray:     #6B6560;
+  --lgray:    #B5AFA6;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Space Mono', monospace;
+  cursor: none;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* ─── CUSTOM CURSOR ─── */
+#cur {
+  position: fixed;
+  width: 22px; height: 22px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%,-50%);
+  mix-blend-mode: difference;
+  background: rgba(255,255,255,0.15);
+  transition: width .2s, height .2s;
+}
+body:has(button:hover, a:hover) #cur {
+  width: 40px; height: 40px;
+  background: rgba(212,43,43,0.2);
+}
+
+/* ─── GRAIN OVERLAY ─── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.055'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9000;
+  opacity: 0.6;
+}
+
+/* ════════════════════════════════════════════════
+   LAYOUT — sidebar + main
+════════════════════════════════════════════════ */
+.wrap {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* ════════════════════════════════════════════════
+   SIDEBAR — black editorial column
+════════════════════════════════════════════════ */
+.sidebar {
+  width: 200px;
+  flex-shrink: 0;
+  background: var(--off);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  border-right: 3px solid var(--ink);
+}
+
+/* big rotated number watermark */
+.sidebar::before {
+  content: '01';
+  position: absolute;
+  bottom: -30px; left: -20px;
+  font-family: 'Anton', sans-serif;
+  font-size: 18rem;
+  color: rgba(255,255,255,0.025);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  transition: content 0s;
+}
+
+/* red stripe accent */
+.sidebar::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--red) 0%, var(--magenta) 50%, var(--orange) 100%);
+}
+
+.sb-logo {
+  padding: 1.4rem 1.2rem 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  position: relative;
+}
+.sb-logo-main {
+  font-family: 'Anton', sans-serif;
+  font-size: 1.5rem;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.sb-logo-sub {
+  font-size: 7px;
+  letter-spacing: 0.35em;
+  color: rgba(255,255,255,0.3);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+/* coloured slash under logo */
+.sb-logo-bar {
+  height: 2px;
+  margin-top: 10px;
+  background: linear-gradient(90deg, var(--red), var(--orange), var(--magenta));
+}
+
+.sb-label {
+  font-size: 7px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  padding: 1rem 1.2rem 0.4rem;
+}
+
+.nav-list { list-style: none; padding: 0 0.6rem; }
+.nav-item { margin-bottom: 2px; }
+
+.nav-item button {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 9px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: none;
+  text-align: left;
+  position: relative;
+  transition: background 0.2s;
+  border-radius: 0;
+}
+.nav-item button:hover { background: rgba(255,255,255,0.05); }
+.nav-item.active button { background: rgba(255,255,255,0.08); }
+
+.nav-num {
+  font-family: 'Anton', sans-serif;
+  font-size: 10px;
+  color: rgba(255,255,255,0.2);
+  min-width: 18px;
+  transition: color 0.2s;
+}
+.nav-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.45);
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.nav-item button:hover .nav-num,
+.nav-item.active button .nav-num { color: var(--red); }
+.nav-item button:hover .nav-label,
+.nav-item.active button .nav-label { color: #fff; }
+
+/* active left stripe */
+.nav-item.active button::before {
+  content: '';
+  position: absolute;
+  left: -0.6rem; top: 15%; bottom: 15%;
+  width: 3px;
+  background: var(--red);
+}
+
+.sb-bottom {
+  margin-top: auto;
+  padding: 1rem 1.2rem;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+.sb-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sb-avatar {
+  width: 32px; height: 32px;
+  background: var(--red);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Anton', sans-serif;
+  font-size: 13px;
+  color: #fff;
+  flex-shrink: 0;
+  clip-path: polygon(0 0, 100% 0, 100% 75%, 75% 100%, 0 100%);
+}
+.sb-user-name {
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+.sb-user-name strong {
+  display: block;
+  color: rgba(255,255,255,0.7);
+  font-size: 9px;
+}
+
+/* ════════════════════════════════════════════════
+   MAIN PANEL
+════════════════════════════════════════════════ */
+.main {
+  flex: 1;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ink) var(--paper2);
+  position: relative;
+}
+
+/* ─── PAGE SHELL ─── */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ════════════════════════════════════════════════
+   SHARED — TOP BAR
+════════════════════════════════════════════════ */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 2rem;
+  border-bottom: 2px solid var(--ink);
+  background: var(--paper);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.tb-left {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+.tb-chapter {
+  font-family: 'Anton', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--gray);
+  text-transform: uppercase;
+}
+.tb-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+  line-height: 1;
+}
+.tb-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tb-tag {
+  font-size: 7px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border: 1.5px solid var(--ink);
+  color: var(--ink);
+  font-family: 'Space Mono', monospace;
+}
+.tb-tag.red { background: var(--red); color: #fff; border-color: var(--red); }
+
+/* ════════════════════════════════════════════════
+   HOME PAGE
+════════════════════════════════════════════════ */
+.home-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  border-bottom: 2px solid var(--ink);
+}
+
+.hero-cell {
+  border-right: 2px solid var(--ink);
+  padding: 1.75rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  cursor: none;
+  transition: background 0.25s;
+}
+.hero-cell:last-child { border-right: none; }
+.hero-cell:hover { background: var(--ink); }
+.hero-cell:hover .hc-value,
+.hero-cell:hover .hc-label { color: var(--paper); }
+.hero-cell:hover .hc-accent { opacity: 0.3; }
+
+/* angled coloured slash */
+.hc-slash {
+  position: absolute;
+  top: 0; right: 0;
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 0 40px 40px 0;
+  transition: border-color 0.25s;
+}
+.hc-s1 { border-color: transparent var(--red) transparent transparent; }
+.hc-s2 { border-color: transparent var(--orange) transparent transparent; }
+.hc-s3 { border-color: transparent var(--cyan) transparent transparent; }
+.hc-s4 { border-color: transparent var(--magenta) transparent transparent; }
+
+.hc-value {
+  font-family: 'Anton', sans-serif;
+  font-size: 3.5rem;
+  line-height: 1;
+  color: var(--ink);
+  margin-bottom: 0.3rem;
+  transition: color 0.25s;
+  position: relative;
+  z-index: 1;
+}
+.hc-label {
+  font-size: 7px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gray);
+  transition: color 0.25s;
+  position: relative;
+  z-index: 1;
+}
+.hc-sub {
+  font-size: 8px;
+  color: var(--lgray);
+  margin-top: 3px;
+  font-style: italic;
+}
+.hc-accent {
+  position: absolute;
+  bottom: -20px; left: -20px;
+  font-family: 'Anton', sans-serif;
+  font-size: 7rem;
+  opacity: 0.04;
+  line-height: 1;
+  transition: opacity 0.25s;
+  pointer-events: none;
+}
+
+/* HOME — week grid */
+.home-week {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border-bottom: 2px solid var(--ink);
+}
+
+.week-col {
+  border-right: 2px solid var(--ink);
+  overflow: hidden;
+  position: relative;
+  cursor: none;
+  transition: background 0.3s;
+}
+.week-col:last-child { border-right: none; }
+.week-col:hover { background: var(--ink); }
+.week-col:hover .wc-day { background: var(--red); color: #fff; }
+.week-col:hover .wc-subj,
+.week-col:hover .wc-time,
+.week-col:hover .wc-room { color: var(--paper); }
+.week-col:hover .wc-bar { background: var(--red); }
+
+.wc-day {
+  font-family: 'Anton', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 8px 1rem;
+  border-bottom: 2px solid var(--ink);
+  background: var(--paper2);
+  transition: background 0.3s, color 0.3s;
+}
+.wc-body { padding: 1rem; }
+.wc-subj {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  line-height: 1.05;
+  margin-bottom: 0.4rem;
+  transition: color 0.3s;
+}
+.wc-time {
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  color: var(--gray);
+  font-family: 'Space Mono', monospace;
+  transition: color 0.3s;
+}
+.wc-room {
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  color: var(--lgray);
+  margin-top: 4px;
+  transition: color 0.3s;
+}
+.wc-bar {
+  height: 3px;
+  background: var(--ink);
+  margin-top: 10px;
+  transition: background 0.3s;
+}
+
+/* HOME — two-col bottom */
+.home-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.hb-panel {
+  padding: 1.5rem 2rem;
+  border-right: 2px solid var(--ink);
+  position: relative;
+}
+.hb-panel:last-child { border-right: none; }
+
+.hb-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1.5px solid var(--ink);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.hb-count {
+  font-family: 'Anton', sans-serif;
+  font-size: 0.9rem;
+  color: var(--red);
+}
+
+.task-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--paper2);
+  cursor: none;
+  transition: background 0.2s;
+}
+.task-row:last-child { border-bottom: none; }
+.task-row:hover { background: var(--paper2); margin: 0 -2rem; padding-left: 2rem; padding-right: 2rem; }
+
+.tr-dot {
+  width: 7px; height: 7px;
+  flex-shrink: 0;
+}
+.tr-dot.urgent  { background: var(--red); }
+.tr-dot.soon    { background: var(--orange); }
+.tr-dot.later   { background: var(--lgray); }
+.tr-dot.done    { background: var(--mint); }
+
+.tr-name {
+  font-size: 11px;
+  flex: 1;
+  font-family: 'Space Mono', monospace;
+  letter-spacing: 0.02em;
+}
+.tr-name.done { text-decoration: line-through; opacity: 0.4; }
+
+.tr-badge {
+  font-size: 6px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border: 1.5px solid;
+  font-family: 'Space Mono', monospace;
+  flex-shrink: 0;
+}
+.tb-u { border-color: var(--red);    color: var(--red); }
+.tb-s { border-color: var(--orange); color: var(--orange); }
+.tb-l { border-color: var(--lgray);  color: var(--lgray); }
+.tb-d { border-color: var(--mint);   color: var(--mint); }
+
+/* info rows */
+.info-row {
+  display: flex;
+  gap: 8px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--paper2);
+  font-size: 10px;
+  align-items: flex-start;
+}
+.info-row:last-child { border-bottom: none; }
+.ir-glyph { color: var(--red); font-size: 8px; flex-shrink: 0; margin-top: 2px; }
+.ir-text { color: var(--gray); line-height: 1.5; }
+
+/* ════════════════════════════════════════════════
+   ROOSTER PAGE
+════════════════════════════════════════════════ */
+.rooster-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.rg-card {
+  border-right: 2px solid var(--ink);
+  overflow: hidden;
+  cursor: none;
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+  position: relative;
+}
+.rg-card:last-child { border-right: none; }
+.rg-card:hover { transform: translateY(-6px); z-index: 5; }
+.rg-card:hover .rg-head { background: var(--ink); color: var(--paper); }
+
+/* painted sky per day — surreal editorial */
+.rg-painting {
+  height: 120px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 2px solid var(--ink);
+}
+.rp-0 { background: #F0EBE1; }
+.rp-1 { background: #F0EBE1; }
+.rp-2 { background: #F0EBE1; }
+.rp-3 { background: #F0EBE1; }
+.rp-4 { background: #F0EBE1; }
+
+/* geometric collage shapes inside each day painting */
+.rg-shape1, .rg-shape2, .rg-shape3 {
+  position: absolute;
+  transition: transform 0.4s ease;
+}
+.rg-card:hover .rg-shape1 { transform: rotate(15deg) scale(1.1) !important; }
+.rg-card:hover .rg-shape2 { transform: translateX(8px) !important; }
+
+.rg-head {
+  font-family: 'Anton', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  padding: 8px 1rem;
+  background: var(--paper2);
+  border-bottom: 2px solid var(--ink);
+  transition: background 0.25s, color 0.25s;
+  text-transform: uppercase;
+}
+.rg-body { padding: 1.2rem 1rem; }
+.rg-time {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  margin-bottom: 2px;
+}
+.rg-sep {
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  color: var(--lgray);
+  margin-bottom: 8px;
+}
+.rg-ruler { height: 1.5px; background: var(--ink); margin-bottom: 8px; opacity: 0.15; }
+.rg-room {
+  font-size: 7px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--lgray);
+  margin-bottom: 4px;
+}
+.rg-vak {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+}
+/* coloured tag */
+.rg-tag {
+  display: inline-block;
+  font-size: 6px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  margin-top: 8px;
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* ════════════════════════════════════════════════
+   TAKEN PAGE — ledger style
+════════════════════════════════════════════════ */
+.taken-ledger {
+  /* no extra wrapper needed */
+}
+.tl-header {
+  display: grid;
+  grid-template-columns: 60px 1fr 100px 120px 90px;
+  padding: 0.75rem 2rem;
+  border-bottom: 2px solid var(--ink);
+  background: var(--ink);
+  gap: 1rem;
+}
+.tl-h {
+  font-size: 7px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  font-family: 'Space Mono', monospace;
+}
+
+.tl-row {
+  display: grid;
+  grid-template-columns: 60px 1fr 100px 120px 90px;
+  padding: 1.1rem 2rem;
+  border-bottom: 1.5px solid var(--paper2);
+  align-items: center;
+  gap: 1rem;
+  cursor: none;
+  position: relative;
+  transition: background 0.25s;
+}
+.tl-row::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: transparent;
+  transition: background 0.25s;
+}
+.tl-row:hover { background: var(--paper2); }
+.tl-row.row-urgent:hover::before { background: var(--red); }
+.tl-row.row-soon:hover::before   { background: var(--orange); }
+.tl-row.row-later:hover::before  { background: var(--cyan); }
+.tl-row.row-done { opacity: 0.38; }
+.tl-row:last-child { border-bottom: none; }
+
+.tl-num {
+  font-family: 'Anton', sans-serif;
+  font-size: 1.8rem;
+  color: rgba(15,14,12,0.12);
+  line-height: 1;
+}
+.tl-num.xout { text-decoration: line-through; }
+
+.tl-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+.tl-name.xout { text-decoration: line-through; opacity: 0.4; }
+.tl-sub {
+  font-size: 9px;
+  color: var(--lgray);
+  margin-top: 2px;
+  letter-spacing: 0.05em;
+}
+
+.tl-badge {
+  display: inline-block;
+  font-size: 7px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border: 1.5px solid;
+  font-family: 'Space Mono', monospace;
+}
+.tbg-u { border-color: var(--red);    color: var(--red); }
+.tbg-s { border-color: var(--orange); color: var(--orange); }
+.tbg-l { border-color: var(--cyan);   color: var(--cyan); }
+.tbg-d { border-color: var(--mint);   color: var(--mint); }
+
+.tl-dead {
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  color: var(--gray);
+  font-style: italic;
+}
+
+.tl-vak {
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  color: var(--lgray);
+  text-transform: uppercase;
+}
+
+/* ════════════════════════════════════════════════
+   LERAREN PAGE — portrait wall
+════════════════════════════════════════════════ */
+.leraren-wall {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+
+.lw-card {
+  border-right: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  overflow: hidden;
+  position: relative;
+  cursor: none;
+}
+.lw-card:nth-child(3n) { border-right: none; }
+
+/* editorial portrait painting */
+.lw-painting {
+  height: 180px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 2px solid var(--ink);
+}
+.lp-bg-0 { background: #F0EBE1; }
+.lp-bg-1 { background: #F0EBE1; }
+.lp-bg-2 { background: #1A1814; }
+.lp-bg-3 { background: #F0EBE1; }
+.lp-bg-4 { background: #1A1814; }
+
+/* big initial letter */
+.lw-initial {
+  position: absolute;
+  bottom: -15px; left: -8px;
+  font-family: 'Anton', sans-serif;
+  font-size: 11rem;
+  line-height: 1;
+  opacity: 0.08;
+  pointer-events: none;
+  user-select: none;
+  transition: opacity 0.3s;
+}
+.lw-card:hover .lw-initial { opacity: 0.14; }
+
+/* geometric shapes per card */
+.lw-geo { position: absolute; transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); }
+.lw-card:hover .lw-geo { transform: scale(1.08) rotate(5deg) !important; }
+
+.lw-body { padding: 1.2rem 1.5rem; }
+.lw-num {
+  font-family: 'Anton', sans-serif;
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  color: var(--lgray);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+.lw-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+.lw-role {
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  color: var(--lgray);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.lw-ruler { height: 1.5px; background: var(--paper2); margin-bottom: 8px; }
+.lw-vak-label {
+  font-size: 7px;
+  letter-spacing: 0.25em;
+  color: var(--lgray);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.lw-vak {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+}
+/* hover colour accent on name */
+.lw-card:hover .lw-name { color: var(--red); }
+
+/* ════════════════════════════════════════════════
+   PROFIEL PAGE
+════════════════════════════════════════════════ */
+.profiel-body {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  border-bottom: 2px solid var(--ink);
+}
+
+/* main biographical panel */
+.pr-main {
+  padding: 2rem 2.5rem;
+  border-right: 2px solid var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+
+/* giant bg letter */
+.pr-bgletter {
+  position: absolute;
+  right: -20px; top: -30px;
+  font-family: 'Anton', sans-serif;
+  font-size: 22rem;
+  line-height: 1;
+  color: rgba(15,14,12,0.035);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* collage shape on profile */
+.pr-collage {
+  position: absolute;
+  top: 1.5rem; right: 2.5rem;
+  width: 90px; height: 110px;
+  overflow: hidden;
+}
+
+.pr-eyebrow {
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 0.5rem;
+  font-family: 'Space Mono', monospace;
+}
+.pr-name {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+/* horizontal slash through name */
+.pr-name::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 55%;
+  height: 4px;
+  width: 40%;
+  background: linear-gradient(90deg, var(--magenta), var(--red));
+  opacity: 0.7;
+}
+
+.pr-title {
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 2rem;
+}
+.pr-rule { height: 2px; background: var(--ink); width: 60px; margin-bottom: 2rem; opacity: 0.2; }
+
+.pr-details { display: flex; flex-direction: column; gap: 0.6rem; }
+.pr-row {
+  display: flex;
+  gap: 1.5rem;
+  align-items: baseline;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid var(--paper2);
+  font-size: 11px;
+}
+.pr-key {
+  font-size: 7px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--lgray);
+  min-width: 80px;
+  font-family: 'Space Mono', monospace;
+}
+.pr-val { font-family: 'Space Mono', monospace; color: var(--ink); }
+
+/* stats column */
+.pr-stats {
+  display: flex;
+  flex-direction: column;
+}
+
+.pr-stat {
+  flex: 1;
+  padding: 1.5rem;
+  border-bottom: 2px solid var(--ink);
+  position: relative;
+  overflow: hidden;
+  cursor: none;
+  transition: background 0.25s;
+}
+.pr-stat:last-child { border-bottom: none; }
+.pr-stat:hover { background: var(--ink); }
+.pr-stat:hover .prs-val { color: var(--paper); }
+.pr-stat:hover .prs-lbl { color: rgba(240,235,225,0.45); }
+.pr-stat:hover .prs-slash { opacity: 0.3; }
+
+.prs-slash {
+  position: absolute;
+  top: 0; right: 0;
+  width: 0; height: 0;
+  border-style: solid;
+  transition: opacity 0.25s;
+}
+.prs-s0 { border-width: 0 30px 30px 0; border-color: transparent var(--red)    transparent transparent; }
+.prs-s1 { border-width: 0 30px 30px 0; border-color: transparent var(--orange)  transparent transparent; }
+.prs-s2 { border-width: 0 30px 30px 0; border-color: transparent var(--cyan)    transparent transparent; }
+
+.prs-val {
+  font-family: 'Anton', sans-serif;
+  font-size: 3rem;
+  line-height: 1;
+  margin-bottom: 4px;
+  transition: color 0.25s;
+}
+.prs-lbl {
+  font-size: 7px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gray);
+  transition: color 0.25s;
+}
+
+/* skills bar chart */
+.pr-skills {
+  padding: 2rem 2.5rem;
+}
+.prs-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 2px solid var(--ink);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.prs-total { font-family: 'Anton', sans-serif; font-size: 0.9rem; color: var(--red); }
+
+.skill-bars { display: flex; flex-direction: column; gap: 0.7rem; }
+.skill-bar-row { display: flex; align-items: center; gap: 1rem; }
+.sbr-name {
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  width: 90px;
+  flex-shrink: 0;
+  font-family: 'Space Mono', monospace;
+}
+.sbr-track {
+  flex: 1;
+  height: 3px;
+  background: var(--paper2);
+  position: relative;
+  overflow: hidden;
+}
+.sbr-fill {
+  height: 100%;
+  position: absolute;
+  top: 0; left: 0;
+  transition: width 1s cubic-bezier(0.16,1,0.3,1);
+}
+.sf-0 { background: var(--red); }
+.sf-1 { background: var(--orange); }
+.sf-2 { background: var(--magenta); }
+.sf-3 { background: var(--cyan); }
+.sf-4 { background: var(--mint); }
+.sf-5 { background: var(--ink); }
+
+.sbr-pct {
+  font-family: 'Anton', sans-serif;
+  font-size: 11px;
+  width: 30px;
+  text-align: right;
+  color: var(--gray);
+}
+
+/* ════════════════════════════════════════════════
+   SETTINGS PAGE
+════════════════════════════════════════════════ */
+.settings-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 2px solid var(--ink);
+}
+
+.sg-panel {
+  padding: 2rem;
+  border-right: 2px solid var(--ink);
+}
+.sg-panel:last-child { border-right: none; }
+.sg-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 2px solid var(--ink);
+}
+
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--paper2);
+  cursor: none;
+}
+.setting-row:last-child { border-bottom: none; }
+.setting-row:hover { background: none; }
+.setting-row:hover .sr-name { color: var(--red); }
+
+.sr-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  transition: color 0.2s;
+}
+.sr-desc {
+  font-size: 8px;
+  color: var(--lgray);
+  letter-spacing: 0.08em;
+  margin-top: 2px;
+}
+
+/* Toggle — hard editorial style */
+.toggle-box {
+  width: 44px; height: 22px;
+  border: 2px solid var(--ink);
+  position: relative;
+  cursor: none;
+  flex-shrink: 0;
+  transition: background 0.25s;
+  background: #fff;
+}
+.toggle-box.on { background: var(--ink); }
+.toggle-box::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 14px; height: 14px;
+  background: var(--ink);
+  transition: left 0.25s, background 0.25s;
+}
+.toggle-box.on::after {
+  left: 24px;
+  background: var(--red);
+}
+
+/* select-style */
+.sel-fake {
+  border: 2px solid var(--ink);
+  padding: 4px 10px;
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  color: var(--ink);
+  cursor: none;
+  background: #fff;
+}
+
+/* ════════════════════════════════════════════════
+   CIJFERS PAGE
+════════════════════════════════════════════════ */
+.cijfers-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.cg-panel {
+  border-right: 2px solid var(--ink);
+  padding: 2rem;
+}
+.cg-panel:last-child { border-right: none; }
+.cg-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 2px solid var(--ink);
+}
+
+.grade-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--paper2);
+  cursor: none;
+  transition: background 0.2s;
+}
+.grade-row:last-child { border-bottom: none; }
+.grade-row:hover { background: var(--paper2); margin: 0 -2rem; padding-left: 2rem; padding-right: 2rem; }
+.grade-row:hover .gr-score { color: var(--red); }
+
+.gr-vak { font-family: 'Space Mono', monospace; font-size: 10px; }
+.gr-score {
+  font-family: 'Anton', sans-serif;
+  font-size: 1.4rem;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.gr-score.high { color: var(--mint); }
+.gr-score.mid  { color: var(--orange); }
+.gr-score.none { color: var(--lgray); font-size: 1rem; }
+
+/* big average display */
+.avg-display {
+  text-align: center;
+  padding: 3rem 1rem;
+  border-bottom: 2px solid var(--ink);
+}
+.avg-num {
+  font-family: 'Anton', sans-serif;
+  font-size: 7rem;
+  line-height: 1;
+  position: relative;
+  display: inline-block;
+}
+/* angled slice through the number */
+.avg-num::after {
+  content: '';
+  position: absolute;
+  top: 30%; left: -5%; right: -5%;
+  height: 5px;
+  background: var(--red);
+  transform: rotate(-4deg);
+  opacity: 0.7;
+}
+.avg-label {
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-top: 0.5rem;
+}
+
+.mini-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-top: 2px solid var(--ink);
+}
+.ms-item {
+  padding: 1.2rem 1rem;
+  text-align: center;
+  border-right: 1.5px solid var(--ink);
+  cursor: none;
+  transition: background 0.2s;
+}
+.ms-item:last-child { border-right: none; }
+.ms-item:hover { background: var(--ink); }
+.ms-item:hover .msi-val,
+.ms-item:hover .msi-lbl { color: var(--paper); }
+.msi-val { font-family: 'Anton', sans-serif; font-size: 1.8rem; line-height: 1; margin-bottom: 4px; transition: color 0.2s; }
+.msi-lbl { font-size: 7px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--lgray); transition: color 0.2s; }
+
+/* ════════════════════════════════════════════════
+   ANIMATIONS
+════════════════════════════════════════════════ */
+.page.active { animation: pg-in 0.45s cubic-bezier(0.16,1,0.3,1); }
+@keyframes pg-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* stagger children on load */
+.hero-cell        { animation: cell-in 0.5s cubic-bezier(0.16,1,0.3,1) both; }
+.hero-cell:nth-child(1) { animation-delay: 0.05s; }
+.hero-cell:nth-child(2) { animation-delay: 0.10s; }
+.hero-cell:nth-child(3) { animation-delay: 0.15s; }
+.hero-cell:nth-child(4) { animation-delay: 0.20s; }
+@keyframes cell-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cur"></div>
+
+<div class="wrap">
+
+  <!-- ══════════ SIDEBAR ══════════ -->
+  <nav class="sidebar">
+    <div class="sb-logo">
+      <div class="sb-logo-main">DASH</div>
+      <div class="sb-logo-sub">Student Portal v2.6</div>
+      <div class="sb-logo-bar"></div>
+    </div>
+
+    <div class="sb-label">Navigation</div>
+    <ul class="nav-list">
+      <li class="nav-item active" id="nav-home">
+        <button onclick="go('home')">
+          <span class="nav-num">01</span>
+          <span class="nav-label">Home</span>
+        </button>
+      </li>
+      <li class="nav-item" id="nav-rooster">
+        <button onclick="go('rooster')">
+          <span class="nav-num">02</span>
+          <span class="nav-label">Rooster</span>
+        </button>
+      </li>
+      <li class="nav-item" id="nav-taken">
+        <button onclick="go('taken')">
+          <span class="nav-num">03</span>
+          <span class="nav-label">Taken</span>
+        </button>
+      </li>
+      <li class="nav-item" id="nav-leraren">
+        <button onclick="go('leraren')">
+          <span class="nav-num">04</span>
+          <span class="nav-label">Leraren</span>
+        </button>
+      </li>
+      <li class="nav-item" id="nav-cijfers">
+        <button onclick="go('cijfers')">
+          <span class="nav-num">05</span>
+          <span class="nav-label">Cijfers</span>
+        </button>
+      </li>
+      <li class="nav-item" id="nav-profiel">
+        <button onclick="go('profiel')">
+          <span class="nav-num">06</span>
+          <span class="nav-label">Profiel</span>
+        </button>
+      </li>
+      <li class="nav-item" id="nav-settings">
+        <button onclick="go('settings')">
+          <span class="nav-num">07</span>
+          <span class="nav-label">Settings</span>
+        </button>
+      </li>
+    </ul>
+
+    <div class="sb-bottom">
+      <div class="sb-user">
+        <div class="sb-avatar">AB</div>
+        <div class="sb-user-name">
+          <strong>André Babirian</strong>
+          ICT Softw. Dev · Yr1
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══════════ MAIN ══════════ -->
+  <div class="main">
+
+    <!-- ── HOME ── -->
+    <div class="page active" id="page-home">
+      <div class="topbar">
+        <div class="tb-left">
+          <span class="tb-chapter">01 —</span>
+          <span class="tb-title">HOME</span>
+        </div>
+        <div class="tb-right">
+          <span class="tb-tag">XSB1B</span>
+          <span class="tb-tag">Week 19</span>
+          <span class="tb-tag red">Live</span>
+        </div>
+      </div>
+
+      <div class="home-hero">
+        <div class="hero-cell">
+          <div class="hc-slash hc-s1"></div>
+          <div class="hc-accent">4</div>
+          <div class="hc-value">4</div>
+          <div class="hc-label">Open Taken</div>
+          <div class="hc-sub">2 zijn urgent</div>
+        </div>
+        <div class="hero-cell">
+          <div class="hc-slash hc-s2"></div>
+          <div class="hc-accent">7.6</div>
+          <div class="hc-value">7.6</div>
+          <div class="hc-label">Gem. Cijfer</div>
+          <div class="hc-sub">Semester II</div>
+        </div>
+        <div class="hero-cell">
+          <div class="hc-slash hc-s3"></div>
+          <div class="hc-accent">5</div>
+          <div class="hc-value">5</div>
+          <div class="hc-label">Vakken</div>
+          <div class="hc-sub">4 afgerond</div>
+        </div>
+        <div class="hero-cell">
+          <div class="hc-slash hc-s4"></div>
+          <div class="hc-accent">6</div>
+          <div class="hc-value">6</div>
+          <div class="hc-label">Weken tot Examen</div>
+          <div class="hc-sub">Op schema</div>
+        </div>
+      </div>
+
+      <div class="home-week">
+        <div class="week-col">
+          <div class="wc-day">Maandag</div>
+          <div class="wc-body">
+            <div class="wc-subj">Flex</div>
+            <div class="wc-time">08:30 — 17:00</div>
+            <div class="wc-room">Groen 2.073</div>
+            <div class="wc-bar"></div>
+          </div>
+        </div>
+        <div class="week-col">
+          <div class="wc-day">Dinsdag</div>
+          <div class="wc-body">
+            <div class="wc-subj">Flex</div>
+            <div class="wc-time">08:30 — 17:00</div>
+            <div class="wc-room">Groen 2.073</div>
+            <div class="wc-bar"></div>
+          </div>
+        </div>
+        <div class="week-col">
+          <div class="wc-day">Woensdag</div>
+          <div class="wc-body">
+            <div class="wc-subj">Flex &amp; Rekenen</div>
+            <div class="wc-time">08:30 — 17:00</div>
+            <div class="wc-room">Groen 2.073</div>
+            <div class="wc-bar"></div>
+          </div>
+        </div>
+        <div class="week-col">
+          <div class="wc-day">Donderdag</div>
+          <div class="wc-body">
+            <div class="wc-subj">Flex + NL</div>
+            <div class="wc-time">08:30 — 17:00</div>
+            <div class="wc-room">Groen 2.073</div>
+            <div class="wc-bar"></div>
+          </div>
+        </div>
+        <div class="week-col">
+          <div class="wc-day">Vrijdag</div>
+          <div class="wc-body">
+            <div class="wc-subj">Flex</div>
+            <div class="wc-time">08:30 — 13:30</div>
+            <div class="wc-room">Groen 2.073</div>
+            <div class="wc-bar"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="home-bottom">
+        <div class="hb-panel">
+          <div class="hb-title">
+            Taken Deze Week
+            <span class="hb-count">4</span>
+          </div>
+          <div class="task-row">
+            <div class="tr-dot urgent"></div>
+            <span class="tr-name">UML Diagram afmaken</span>
+            <span class="tr-badge tb-u">Urgent</span>
+          </div>
+          <div class="task-row">
+            <div class="tr-dot soon"></div>
+            <span class="tr-name">Portfolio bijwerken</span>
+            <span class="tr-badge tb-s">Spoedig</span>
+          </div>
+          <div class="task-row">
+            <div class="tr-dot later"></div>
+            <span class="tr-name">GitHub README schrijven</span>
+            <span class="tr-badge tb-l">Later</span>
+          </div>
+          <div class="task-row">
+            <div class="tr-dot done"></div>
+            <span class="tr-name done">Retrospective inleveren</span>
+            <span class="tr-badge tb-d">Klaar</span>
+          </div>
+        </div>
+        <div class="hb-panel">
+          <div class="hb-title">Notities &amp; Info</div>
+          <div class="info-row">
+            <span class="ir-glyph">▶</span>
+            <span class="ir-text">Volgende les: <strong>Maandag 08:30</strong> — Flex in lokaal 2.073</span>
+          </div>
+          <div class="info-row">
+            <span class="ir-glyph">▶</span>
+            <span class="ir-text">Gemiddeld cijfer semester II: <strong>7.6</strong> — goed op schema</span>
+          </div>
+          <div class="info-row">
+            <span class="ir-glyph">▶</span>
+            <span class="ir-text">4 van 5 vakken afgerond dit semester</span>
+          </div>
+          <div class="info-row">
+            <span class="ir-glyph">▶</span>
+            <span class="ir-text">Examen over 6 weken — begin tijdig met herhalen!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── ROOSTER ── -->
+    <div class="page" id="page-rooster">
+      <div class="topbar">
+        <div class="tb-left">
+          <span class="tb-chapter">02 —</span>
+          <span class="tb-title">ROOSTER</span>
+        </div>
+        <div class="tb-right">
+          <span class="tb-tag">Groen 2.073</span>
+          <span class="tb-tag">XSB1B</span>
+        </div>
+      </div>
+
+      <div class="rooster-grid">
+        <!-- MAANDAG -->
+        <div class="rg-card">
+          <div class="rg-painting rp-0">
+            <!-- collage shapes -->
+            <div class="rg-shape1" style="position:absolute;top:15px;left:20px;width:60px;height:60px;background:var(--red);transform:rotate(-8deg)"></div>
+            <div class="rg-shape2" style="position:absolute;top:30px;right:10px;width:40px;height:40px;background:var(--ink);clip-path:polygon(50% 0%,100% 100%,0% 100%)"></div>
+            <div class="rg-shape3" style="position:absolute;bottom:5px;left:50px;width:30px;height:30px;border:3px solid var(--ink);border-radius:50%"></div>
+          </div>
+          <div class="rg-head">Maandag</div>
+          <div class="rg-body">
+            <div class="rg-time">08:30</div>
+            <div class="rg-sep">— TOT —</div>
+            <div class="rg-time">17:00</div>
+            <div class="rg-ruler"></div>
+            <div class="rg-room">Groen 2.073</div>
+            <div class="rg-vak">Flex</div>
+            <div class="rg-tag">Fullday</div>
+          </div>
+        </div>
+
+        <!-- DINSDAG -->
+        <div class="rg-card">
+          <div class="rg-painting rp-1">
+            <div class="rg-shape1" style="position:absolute;top:10px;right:15px;width:55px;height:55px;background:var(--orange);transform:rotate(12deg)"></div>
+            <div class="rg-shape2" style="position:absolute;bottom:10px;left:15px;width:45px;height:25px;background:var(--ink)"></div>
+            <div class="rg-shape3" style="position:absolute;top:50px;left:40px;width:25px;height:25px;border:3px solid var(--orange);transform:rotate(45deg)"></div>
+          </div>
+          <div class="rg-head">Dinsdag</div>
+          <div class="rg-body">
+            <div class="rg-time">08:30</div>
+            <div class="rg-sep">— TOT —</div>
+            <div class="rg-time">17:00</div>
+            <div class="rg-ruler"></div>
+            <div class="rg-room">Groen 2.073</div>
+            <div class="rg-vak">Flex</div>
+            <div class="rg-tag">Fullday</div>
+          </div>
+        </div>
+
+        <!-- WOENSDAG -->
+        <div class="rg-card">
+          <div class="rg-painting rp-2">
+            <div class="rg-shape1" style="position:absolute;top:5px;left:10px;width:70px;height:40px;background:var(--cyan)"></div>
+            <div class="rg-shape2" style="position:absolute;bottom:0px;right:0px;width:50px;height:70px;background:var(--ink)"></div>
+            <div class="rg-shape3" style="position:absolute;top:35px;left:55px;width:30px;height:30px;background:var(--paper);border-radius:50%"></div>
+          </div>
+          <div class="rg-head">Woensdag</div>
+          <div class="rg-body">
+            <div class="rg-time">08:30</div>
+            <div class="rg-sep">— TOT —</div>
+            <div class="rg-time">17:00</div>
+            <div class="rg-ruler"></div>
+            <div class="rg-room">Groen 2.073</div>
+            <div class="rg-vak">Flex + Rekenen</div>
+            <div class="rg-tag">Fullday</div>
+          </div>
+        </div>
+
+        <!-- DONDERDAG -->
+        <div class="rg-card">
+          <div class="rg-painting rp-3">
+            <div class="rg-shape1" style="position:absolute;bottom:0;left:0;width:80px;height:50px;background:var(--magenta);transform:skewX(-10deg)"></div>
+            <div class="rg-shape2" style="position:absolute;top:10px;right:10px;width:35px;height:80px;background:var(--ink)"></div>
+            <div class="rg-shape3" style="position:absolute;top:20px;left:25px;width:40px;height:4px;background:var(--magenta);transform:rotate(-20deg)"></div>
+          </div>
+          <div class="rg-head">Donderdag</div>
+          <div class="rg-body">
+            <div class="rg-time">08:30</div>
+            <div class="rg-sep">— TOT —</div>
+            <div class="rg-time">17:00</div>
+            <div class="rg-ruler"></div>
+            <div class="rg-room">Groen 2.073</div>
+            <div class="rg-vak">Flex / NL / Burg.</div>
+            <div class="rg-tag">Fullday</div>
+          </div>
+        </div>
+
+        <!-- VRIJDAG -->
+        <div class="rg-card">
+          <div class="rg-painting rp-4">
+            <div class="rg-shape1" style="position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 90px 120px 0;border-color:transparent var(--mint) transparent transparent;opacity:0.8"></div>
+            <div class="rg-shape2" style="position:absolute;bottom:10px;left:10px;width:40px;height:40px;background:var(--ink);border-radius:50%"></div>
+            <div class="rg-shape3" style="position:absolute;top:20px;left:20px;width:50px;height:3px;background:var(--ink)"></div>
+          </div>
+          <div class="rg-head">Vrijdag</div>
+          <div class="rg-body">
+            <div class="rg-time">08:30</div>
+            <div class="rg-sep">— TOT —</div>
+            <div class="rg-time">13:30</div>
+            <div class="rg-ruler"></div>
+            <div class="rg-room">Groen 2.073</div>
+            <div class="rg-vak">Flex</div>
+            <div class="rg-tag">Halve Dag</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TAKEN ── -->
+    <div class="page" id="page-taken">
+      <div class="topbar">
+        <div class="tb-left">
+          <span class="tb-chapter">03 —</span>
+          <span class="tb-title">TAKEN</span>
+        </div>
+        <div class="tb-right">
+          <span class="tb-tag">4 Open</span>
+          <span class="tb-tag red">2 Urgent</span>
+        </div>
+      </div>
+
+      <div class="taken-ledger">
+        <div class="tl-header">
+          <div class="tl-h">Nr.</div>
+          <div class="tl-h">Opdracht</div>
+          <div class="tl-h">Prioriteit</div>
+          <div class="tl-h">Deadline</div>
+          <div class="tl-h">Vak</div>
+        </div>
+
+        <div class="tl-row row-urgent">
+          <div class="tl-num">01</div>
+          <div>
+            <div class="tl-name">UML Diagram Afmaken</div>
+            <div class="tl-sub">Software Architecture · Sprint 4</div>
+          </div>
+          <span class="tl-badge tbg-u">Kritisch</span>
+          <span class="tl-dead">Morgen 09:00</span>
+          <span class="tl-vak">Arch.</span>
+        </div>
+        <div class="tl-row row-soon">
+          <div class="tl-num">02</div>
+          <div>
+            <div class="tl-name">Portfolio Bijwerken</div>
+            <div class="tl-sub">Persoonlijke Ontwikkeling</div>
+          </div>
+          <span class="tl-badge tbg-s">Spoedig</span>
+          <span class="tl-dead">Do. 23:59</span>
+          <span class="tl-vak">PO</span>
+        </div>
+        <div class="tl-row row-later">
+          <div class="tl-num">03</div>
+          <div>
+            <div class="tl-name">GitHub README Schrijven</div>
+            <div class="tl-sub">Project · Flex Opdracht</div>
+          </div>
+          <span class="tl-badge tbg-l">Later</span>
+          <span class="tl-dead">Vr. 17:00</span>
+          <span class="tl-vak">Project</span>
+        </div>
+        <div class="tl-row row-later">
+          <div class="tl-num">04</div>
+          <div>
+            <div class="tl-name">API Documentatie Schrijven</div>
+            <div class="tl-sub">Web Development Module</div>
+          </div>
+          <span class="tl-badge tbg-l">Later</span>
+          <span class="tl-dead">Volg. week</span>
+          <span class="tl-vak">Web Dev</span>
+        </div>
+        <div class="tl-row row-done">
+          <div class="tl-num xout">05</div>
+          <div>
+            <div class="tl-name xout">Retrospective Inleveren</div>
+            <div class="tl-sub">Agile · Sprint 3</div>
+          </div>
+          <span class="tl-badge tbg-d">Klaar</span>
+          <span class="tl-dead" style="text-decoration:line-through">Afgerond</span>
+          <span class="tl-vak">Agile</span>
+        </div>
+        <div class="tl-row row-done">
+          <div class="tl-num xout">06</div>
+          <div>
+            <div class="tl-name xout">Database Schema Ontwerp</div>
+            <div class="tl-sub">Databases Module</div>
+          </div>
+          <span class="tl-badge tbg-d">Klaar</span>
+          <span class="tl-dead" style="text-decoration:line-through">Afgerond</span>
+          <span class="tl-vak">DB</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── LERAREN ── -->
+    <div class="page" id="page-leraren">
+      <div class="topbar">
+        <div class="tb-left">
+          <span class="tb-chapter">04 —</span>
+          <span class="tb-title">LERAREN</span>
+        </div>
+        <div class="tb-right">
+          <span class="tb-tag">XSB1B</span>
+          <span class="tb-tag">5 Docenten</span>
+        </div>
+      </div>
+
+      <div class="leraren-wall">
+        <!-- PETER -->
+        <div class="lw-card">
+          <div class="lw-painting lp-bg-0">
+            <div class="lw-geo" style="top:15px;left:15px;width:65px;height:65px;background:var(--red);transform:rotate(-10deg)"></div>
+            <div class="lw-geo" style="bottom:10px;right:20px;width:45px;height:45px;background:var(--ink);clip-path:polygon(50% 0%,100% 100%,0% 100%)"></div>
+            <div class="lw-initial">P</div>
+          </div>
+          <div class="lw-body">
+            <div class="lw-num">Docent 01</div>
+            <div class="lw-name">Peter</div>
+            <div class="lw-role">Begeleider & Coach</div>
+            <div class="lw-ruler"></div>
+            <div class="lw-vak-label">Vakken</div>
+            <div class="lw-vak">Flex</div>
+          </div>
+        </div>
+
+        <!-- JEROEN -->
+        <div class="lw-card">
+          <div class="lw-painting lp-bg-1">
+            <div class="lw-geo" style="top:0;right:0;width:0;height:0;border-style:solid;border-width:0 100px 100px 0;border-color:transparent var(--orange) transparent transparent"></div>
+            <div class="lw-geo" style="bottom:15px;left:10px;width:50px;height:8px;background:var(--ink)"></div>
+            <div class="lw-geo" style="top:40px;left:20px;width:35px;height:35px;border:4px solid var(--ink);border-radius:50%"></div>
+            <div class="lw-initial" style="color:rgba(15,14,12,0.06)">J</div>
+          </div>
+          <div class="lw-body">
+            <div class="lw-num">Docent 02</div>
+            <div class="lw-name">Jeroen</div>
+            <div class="lw-role">Begeleider & Coach</div>
+            <div class="lw-ruler"></div>
+            <div class="lw-vak-label">Vakken</div>
+            <div class="lw-vak">Flex</div>
+          </div>
+        </div>
+
+        <!-- JAN -->
+        <div class="lw-card">
+          <div class="lw-painting lp-bg-2">
+            <div class="lw-geo" style="top:10px;left:50%;transform:translateX(-50%);width:60px;height:60px;background:var(--paper);clip-path:polygon(50% 0%,100% 100%,0% 100%)"></div>
+            <div class="lw-geo" style="bottom:0;left:0;right:0;height:30px;background:rgba(255,255,255,0.06)"></div>
+            <div class="lw-initial" style="color:rgba(255,255,255,0.06)">J</div>
+          </div>
+          <div class="lw-body">
+            <div class="lw-num">Docent 03</div>
+            <div class="lw-name">Jan</div>
+            <div class="lw-role">Docent</div>
+            <div class="lw-ruler"></div>
+            <div class="lw-vak-label">Vakken</div>
+            <div class="lw-vak">Flex</div>
+          </div>
+        </div>
+
+        <!-- ALEX -->
+        <div class="lw-card">
+          <div class="lw-painting lp-bg-3">
+            <div class="lw-geo" style="top:5px;right:5px;width:55px;height:90px;background:var(--cyan)"></div>
+            <div class="lw-geo" style="bottom:10px;left:10px;width:50px;height:50px;background:var(--ink);transform:rotate(15deg)"></div>
+            <div class="lw-initial">A</div>
+          </div>
+          <div class="lw-body">
+            <div class="lw-num">Docent 04</div>
+            <div class="lw-name">Alex</div>
+            <div class="lw-role">Docent</div>
+            <div class="lw-ruler"></div>
+            <div class="lw-vak-label">Vakken</div>
+            <div class="lw-vak">Rekenen</div>
+          </div>
+        </div>
+
+        <!-- ONBEKEND -->
+        <div class="lw-card">
+          <div class="lw-painting lp-bg-4">
+            <div class="lw-geo" style="top:20px;left:20px;width:70px;height:4px;background:var(--paper);transform:rotate(-30deg)"></div>
+            <div class="lw-geo" style="top:50px;left:20px;width:50px;height:4px;background:var(--paper);transform:rotate(-30deg)"></div>
+            <div class="lw-geo" style="top:80px;left:20px;width:35px;height:4px;background:var(--paper);transform:rotate(-30deg)"></div>
+            <div class="lw-initial" style="color:rgba(255,255,255,0.05)">?</div>
+          </div>
+          <div class="lw-body">
+            <div class="lw-num">Docent 05</div>
+            <div class="lw-name">Onbekend</div>
+            <div class="lw-role">Docent</div>
+            <div class="lw-ruler"></div>
+            <div class="lw-vak-label">Vakken</div>
+            <div class="lw-vak">Nederlands</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CIJFERS ── -->
+    <div class="page" id="page-cijfers">
+      <div class="topbar">
+        <div class="tb-left">
+          <span class="tb-chapter">05 —</span>
+          <span class="tb-title">CIJFERS</span>
+        </div>
+        <div class="tb-right">
+          <span class="tb-tag">Semester II</span>
+          <span class="tb-tag">2025–2026</span>
+        </div>
+      </div>
+
+      <div class="cijfers-grid">
+        <div class="cg-panel">
+          <div class="cg-title">Behaalde Cijfers</div>
+          <div class="grade-row">
+            <span class="gr-vak">Algorithms & Data Structures</span>
+            <span class="gr-score high">8.2</span>
+          </div>
+          <div class="grade-row">
+            <span class="gr-vak">Web Development</span>
+            <span class="gr-score high">7.8</span>
+          </div>
+          <div class="grade-row">
+            <span class="gr-vak">Software Architecture</span>
+            <span class="gr-score mid">6.5</span>
+          </div>
+          <div class="grade-row">
+            <span class="gr-vak">Databases</span>
+            <span class="gr-score high">7.9</span>
+          </div>
+          <div class="grade-row">
+            <span class="gr-vak">Project & Agile</span>
+            <span class="gr-score none">—</span>
+          </div>
+        </div>
+
+        <div class="cg-panel" style="padding:0;border-right:none">
+          <div class="avg-display">
+            <div class="avg-num">7.6</div>
+            <div class="avg-label">Semester Gemiddelde</div>
+          </div>
+          <div class="mini-stats">
+            <div class="ms-item">
+              <div class="msi-val">4/5</div>
+              <div class="msi-lbl">Vakken Klaar</div>
+            </div>
+            <div class="ms-item">
+              <div class="msi-val">8.2</div>
+              <div class="msi-lbl">Hoogste</div>
+            </div>
+            <div class="ms-item">
+              <div class="msi-val">6.5</div>
+              <div class="msi-lbl">Laagste</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PROFIEL ── -->
+    <div class="page" id="page-profiel">
+      <div class="topbar">
+        <div class="tb-left">
+          <span class="tb-chapter">06 —</span>
+          <span class="tb-title">PROFIEL</span>
+        </div>
+        <div class="tb-right">
+          <span class="tb-tag">Student</span>
+          <span class="tb-tag red">Actief</span>
+        </div>
+      </div>
+
+      <div class="profiel-body">
+        <div class="pr-main">
+          <div class="pr-bgletter">A</div>
+          <div class="pr-eyebrow">Student — Jaar I — XSB1B</div>
+          <div class="pr-name">ANDRÉ<br>BABIRIAN</div>
+          <div class="pr-title">ICT Software Developer · Windesheim</div>
+          <div class="pr-rule"></div>
+          <div class="pr-details">
+            <div class="pr-row">
+              <span class="pr-key">School</span>
+              <span class="pr-val">Windesheim, Zwolle</span>
+            </div>
+            <div class="pr-row">
+              <span class="pr-key">Opleiding</span>
+              <span class="pr-val">ICT Software Developer</span>
+            </div>
+            <div class="pr-row">
+              <span class="pr-key">Klas</span>
+              <span class="pr-val">XSB1B — Cohort 2025</span>
+            </div>
+            <div class="pr-row">
+              <span class="pr-key">Studiejaar</span>
+              <span class="pr-val">2025 / 2026 — Semester II</span>
+            </div>
+            <div class="pr-row">
+              <span class="pr-key">Status</span>
+              <span class="pr-val">Actief — op schema</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pr-stats">
+          <div class="pr-stat">
+            <div class="prs-slash prs-s0"></div>
+            <div class="prs-val">7.6</div>
+            <div class="prs-lbl">Gem. Cijfer</div>
+          </div>
+          <div class="pr-stat">
+            <div class="prs-slash prs-s1"></div>
+            <div class="prs-val">4/5</div>
+            <div class="prs-lbl">Vakken Klaar</div>
+          </div>
+          <div class="pr-stat">
+            <div class="prs-slash prs-s2"></div>
+            <div class="prs-val">6</div>
+            <div class="prs-lbl">Weken tot Examen</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pr-skills">
+        <div class="prs-title">
+          Vaardigheden &amp; Skills
+          <span class="prs-total">6</span>
+        </div>
+        <div class="skill-bars">
+          <div class="skill-bar-row">
+            <span class="sbr-name">React</span>
+            <div class="sbr-track"><div class="sbr-fill sf-0" style="width:70%"></div></div>
+            <span class="sbr-pct">70%</span>
+          </div>
+          <div class="skill-bar-row">
+            <span class="sbr-name">TypeScript</span>
+            <div class="sbr-track"><div class="sbr-fill sf-1" style="width:55%"></div></div>
+            <span class="sbr-pct">55%</span>
+          </div>
+          <div class="skill-bar-row">
+            <span class="sbr-name">CSS</span>
+            <div class="sbr-track"><div class="sbr-fill sf-2" style="width:65%"></div></div>
+            <span class="sbr-pct">65%</span>
+          </div>
+          <div class="skill-bar-row">
+            <span class="sbr-name">Git</span>
+            <div class="sbr-track"><div class="sbr-fill sf-3" style="width:60%"></div></div>
+            <span class="sbr-pct">60%</span>
+          </div>
+          <div class="skill-bar-row">
+            <span class="sbr-name">SQL</span>
+            <div class="sbr-track"><div class="sbr-fill sf-4" style="width:45%"></div></div>
+            <span class="sbr-pct">45%</span>
+          </div>
+          <div class="skill-bar-row">
+            <span class="sbr-name">Java</span>
+            <div class="sbr-track"><div class="sbr-fill sf-5" style="width:40%"></div></div>
+            <span class="sbr-pct">40%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SETTINGS ── -->
+    <div class="page" id="page-settings">
+      <div class="topbar">
+        <div class="tb-left">
+          <span class="tb-chapter">07 —</span>
+          <span class="tb-title">SETTINGS</span>
+        </div>
+        <div class="tb-right">
+          <span class="tb-tag">Preferenties</span>
+        </div>
+      </div>
+
+      <div class="settings-grid">
+        <div class="sg-panel">
+          <div class="sg-title">Interface</div>
+          <div class="setting-row">
+            <div>
+              <div class="sr-name">Dark Mode</div>
+              <div class="sr-desc">Schakel naar donker thema</div>
+            </div>
+            <div class="toggle-box on" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="setting-row">
+            <div>
+              <div class="sr-name">Compacte Weergave</div>
+              <div class="sr-desc">Minder witruimte in de layout</div>
+            </div>
+            <div class="toggle-box" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="setting-row">
+            <div>
+              <div class="sr-name">Animaties</div>
+              <div class="sr-desc">Pagina-overgangen en hover-effecten</div>
+            </div>
+            <div class="toggle-box on" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="setting-row">
+            <div>
+              <div class="sr-name">Taal</div>
+              <div class="sr-desc">Weergavetaal van de interface</div>
+            </div>
+            <div class="sel-fake">Nederlands</div>
+          </div>
+        </div>
+
+        <div class="sg-panel">
+          <div class="sg-title">Meldingen</div>
+          <div class="setting-row">
+            <div>
+              <div class="sr-name">Push Meldingen</div>
+              <div class="sr-desc">Ontvang browser-notificaties</div>
+            </div>
+            <div class="toggle-box on" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="setting-row">
+            <div>
+              <div class="sr-name">Deadline Reminders</div>
+              <div class="sr-desc">Herinnering 24u van tevoren</div>
+            </div>
+            <div class="toggle-box on" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="setting-row">
+            <div>
+              <div class="sr-name">Geluidssignalen</div>
+              <div class="sr-desc">Audio bij actie-bevestigingen</div>
+            </div>
+            <div class="toggle-box" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="setting-row">
+            <div>
+              <div class="sr-name">E-mail Digest</div>
+              <div class="sr-desc">Wekelijkse samenvatting per mail</div>
+            </div>
+            <div class="toggle-box" onclick="this.classList.toggle('on')"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /main -->
+</div><!-- /wrap -->
+
+<script>
+/* ── cursor ── */
+const cur = document.getElementById('cur');
+document.addEventListener('mousemove', e => {
+  cur.style.left = e.clientX + 'px';
+  cur.style.top  = e.clientY + 'px';
+});
+
+/* ── navigation ── */
+function go(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.getElementById('nav-' + id).classList.add('active');
+  document.querySelector('.main').scrollTop = 0;
+
+  // update sidebar watermark number
+  const nums = {home:'01',rooster:'02',taken:'03',leraren:'04',cijfers:'05',profiel:'06',settings:'07'};
+  document.querySelector('.sidebar').style.setProperty('--sb-num', `"${nums[id]}"`);
+}
+</script>
+</body>
+</html>

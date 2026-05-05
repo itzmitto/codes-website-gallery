@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Het Droomregister — André Babirian</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;0,6..96,900;1,6..96,400;1,6..96,700&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  --sky:        #D4A5C9;
+  --sky2:       #E8C4A0;
+  --sky3:       #F2D9C8;
+  --shadow:     #1A0D2E;
+  --shadow2:    #2D1654;
+  --object:     #C4763A;
+  --surreal:    #4A7B9D;
+  --surreal2:   #2E5266;
+  --cream:      #F5EDE0;
+  --gold-dream: #C8A456;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; }
+
+body {
+  font-family: 'Cormorant Garamond', serif;
+  background: var(--shadow);
+  color: var(--cream);
+  cursor: none;
+  overflow: hidden;
+}
+
+/* ─── CUSTOM CURSOR ─── */
+#dream-cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.06s linear;
+}
+
+/* ─── FULL PAINTED BACKGROUND SCENE ─── */
+.scene {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.scene-sky {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(175deg,
+    #0A0518 0%, #1A0D2E 12%, #2D1654 22%,
+    #4A2070 33%, #7B3F8A 44%,
+    #C4763A 57%, #E8C4A0 70%,
+    #F2D9C8 82%, #D4A5C9 92%, #E8D4C0 100%
+  );
+}
+
+/* Horizon plain */
+.scene-ground {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 38%;
+  background: linear-gradient(180deg,
+    #C4763A 0%, #9B5A28 25%, #6B3A18 55%, #3D1E0A 100%
+  );
+}
+/* Ground texture lines */
+.scene-ground::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(90deg,
+    transparent, transparent 80px,
+    rgba(26,13,46,0.08) 80px, rgba(26,13,46,0.08) 81px
+  );
+}
+
+/* Long impossibly long cast shadows on the ground */
+.cast-shadow {
+  position: absolute;
+  bottom: 38%;
+  background: linear-gradient(180deg, transparent 0%, rgba(20,10,40,0.7) 100%);
+  transform-origin: bottom center;
+  z-index: 1;
+  pointer-events: none;
+}
+.cs1 { left: 8%;  width: 4px; height: 55vh; transform: skewX(-26deg); opacity: 0.55; }
+.cs2 { left: 18%; width: 3px; height: 42vh; transform: skewX(-23deg); opacity: 0.4; }
+.cs3 { left: 33%; width: 5px; height: 60vh; transform: skewX(-28deg); opacity: 0.5; }
+.cs4 { left: 52%; width: 3px; height: 48vh; transform: skewX(-25deg); opacity: 0.42; }
+.cs5 { left: 68%; width: 4px; height: 52vh; transform: skewX(-24deg); opacity: 0.45; }
+.cs6 { left: 82%; width: 3px; height: 38vh; transform: skewX(-21deg); opacity: 0.35; }
+.cs7 { left: 93%; width: 2px; height: 44vh; transform: skewX(-27deg); opacity: 0.3; }
+
+/* ─── FLOATING SURREAL OBJECTS ─── */
+.surreal-obj {
+  position: absolute;
+  pointer-events: none;
+  z-index: 3;
+  will-change: transform;
+}
+
+.obj-clock {
+  top: 8%; left: 5%;
+  animation: float-a 8s ease-in-out infinite;
+}
+.obj-eye {
+  top: 15%; right: 6%;
+  animation: float-b 10s ease-in-out infinite;
+}
+.obj-door {
+  bottom: 35%; right: 16%;
+  animation: float-c 12s ease-in-out infinite;
+}
+.obj-stairs {
+  bottom: 37%; left: 20%;
+  animation: float-d 9s ease-in-out infinite;
+  opacity: 0.4;
+}
+.obj-fish {
+  top: 32%; left: 42%;
+  animation: swim 16s ease-in-out infinite;
+}
+.obj-sphere {
+  top: 50%; right: 22%;
+  animation: float-a 11s ease-in-out infinite 1s;
+}
+.obj-key {
+  top: 60%; left: 8%;
+  animation: float-b 7s ease-in-out infinite 0.5s;
+  opacity: 0.5;
+}
+.obj-umbrella {
+  top: 22%; left: 28%;
+  animation: float-c 13s ease-in-out infinite 2s;
+  opacity: 0.55;
+}
+
+@keyframes float-a {
+  0%,100% { transform: translateY(0) rotate(-2deg); }
+  50%      { transform: translateY(-22px) rotate(2deg); }
+}
+@keyframes float-b {
+  0%,100% { transform: translateY(0) scaleX(1); }
+  40%      { transform: translateY(-18px) scaleX(1.04); }
+  70%      { transform: translateY(-8px) scaleX(0.97); }
+}
+@keyframes float-c {
+  0%,100% { transform: translateY(0) rotate(1deg); }
+  50%      { transform: translateY(-14px) rotate(-1.5deg); }
+}
+@keyframes float-d {
+  0%,100% { transform: translateY(0); opacity: 0.4; }
+  50%      { transform: translateY(-10px); opacity: 0.6; }
+}
+@keyframes swim {
+  0%   { transform: translate(0px, 0px) scaleX(1); }
+  20%  { transform: translate(35px, -18px) scaleX(1); }
+  50%  { transform: translate(70px, 8px) scaleX(1); }
+  70%  { transform: translate(40px, 22px) scaleX(-1); }
+  90%  { transform: translate(10px, 5px) scaleX(-1); }
+  100% { transform: translate(0px, 0px) scaleX(1); }
+}
+
+/* ─── LAYOUT ─── */
+.layout {
+  position: relative;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 215px 1fr;
+  height: 100vh;
+}
+
+/* ─── SIDEBAR ─── */
+.sidebar {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.5rem 1.5rem;
+  border-right: 1px solid rgba(200,164,86,0.18);
+  background: linear-gradient(180deg,
+    rgba(10,5,24,0.88) 0%,
+    rgba(26,13,46,0.82) 50%,
+    rgba(10,5,24,0.92) 100%
+  );
+  backdrop-filter: blur(14px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Arched window motif behind nav */
+.sidebar::after {
+  content: '';
+  position: absolute;
+  top: -5%; left: 50%;
+  transform: translateX(-50%);
+  width: 130px; height: 200px;
+  border-radius: 65px 65px 0 0;
+  border: 1px solid rgba(200,164,86,0.1);
+  pointer-events: none;
+}
+
+.sb-brand {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(200,164,86,0.12);
+  position: relative;
+  z-index: 1;
+}
+.sb-title {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-dream);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+.sb-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 9px;
+  color: rgba(200,164,86,0.35);
+  letter-spacing: 0.15em;
+}
+
+.nav-list { list-style: none; position: relative; z-index: 1; }
+.nav-item button {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 9px 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: rgba(245,237,224,0.42);
+  cursor: none;
+  text-align: left;
+  transition: color 0.4s;
+  position: relative;
+}
+.nav-item button::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 15%; bottom: 15%;
+  width: 2px;
+  background: var(--gold-dream);
+  transform: scaleY(0);
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+.nav-item button:hover::before,
+.nav-item.active button::before { transform: scaleY(1); }
+.nav-item button:hover,
+.nav-item.active button { color: var(--cream); }
+
+.nav-num {
+  font-family: 'Bodoni Moda', serif;
+  font-style: italic;
+  font-size: 10px;
+  color: rgba(200,164,86,0.28);
+  min-width: 16px;
+  transition: color 0.4s;
+}
+.nav-item.active button .nav-num,
+.nav-item button:hover .nav-num { color: var(--gold-dream); }
+
+.sb-quote {
+  margin-top: auto;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(200,164,86,0.1);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.sb-quote p {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 9px;
+  color: rgba(200,164,86,0.28);
+  line-height: 1.8;
+}
+
+/* ─── MAIN CONTENT ─── */
+.main-panel {
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 3rem 3rem 4rem;
+  background: rgba(10,5,24,0.12);
+  backdrop-filter: blur(3px);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(200,164,86,0.25) transparent;
+}
+
+/* ─── PAGES ─── */
+.page { display: none; }
+.page.active {
+  display: block;
+  animation: dream-in 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+@keyframes dream-in {
+  from { opacity:0; transform: perspective(900px) rotateX(5deg) translateY(18px); filter: blur(5px); }
+  to   { opacity:1; transform: perspective(900px) rotateX(0) translateY(0); filter: blur(0); }
+}
+
+/* ─── PAGE HEADER ─── */
+.page-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  position: relative;
+}
+.ph-eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: rgba(200,164,86,0.45);
+  margin-bottom: 0.4rem;
+}
+.ph-title {
+  font-family: 'Bodoni Moda', serif;
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-weight: 900;
+  font-style: italic;
+  line-height: 0.92;
+  color: var(--cream);
+  letter-spacing: -0.02em;
+}
+.ph-title span {
+  display: block;
+  font-size: 0.5em;
+  letter-spacing: 0.22em;
+  font-style: normal;
+  font-weight: 400;
+  color: rgba(245,237,224,0.28);
+  margin-top: 0.4em;
+}
+.ph-rule {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold-dream) 0%, rgba(200,164,86,0.3) 40%, transparent 70%);
+  opacity: 0.4;
+}
+
+/* ─── HOME ─── */
+.home-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin-bottom: 2px;
+}
+.stat-pillar {
+  background: linear-gradient(160deg,
+    rgba(245,237,224,0.065) 0%, rgba(74,123,157,0.05) 100%
+  );
+  border: 1px solid rgba(200,164,86,0.16);
+  padding: 1.75rem 1.25rem;
+  text-align: center;
+  position: relative;
+  cursor: none;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), border-color 0.4s;
+  overflow: hidden;
+}
+.stat-pillar::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold-dream), transparent);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.stat-pillar:hover { transform: translateY(-5px); border-color: rgba(200,164,86,0.35); }
+.stat-pillar:hover::after { opacity: 1; }
+
+.sp-value {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 2.8rem;
+  font-weight: 900;
+  font-style: italic;
+  color: var(--cream);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.sp-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 8px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(200,164,86,0.45);
+}
+.sp-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 9px;
+  color: rgba(245,237,224,0.2);
+  margin-top: 0.25rem;
+}
+
+.home-week {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2px;
+  margin-bottom: 2px;
+}
+.day-tile {
+  background: linear-gradient(160deg, rgba(74,123,157,0.1) 0%, rgba(45,22,84,0.18) 100%);
+  border: 1px solid rgba(74,123,157,0.22);
+  padding: 1.4rem 1.1rem;
+  position: relative;
+  cursor: none;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), border-color 0.4s;
+  overflow: hidden;
+}
+.day-tile:hover {
+  transform: translateY(-5px) skewX(-0.4deg);
+  border-color: rgba(74,123,157,0.45);
+}
+.dt-day {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(74,123,157,0.65);
+  margin-bottom: 0.65rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid rgba(74,123,157,0.18);
+}
+.dt-subject {
+  font-family: 'Bodoni Moda', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--cream);
+  margin-bottom: 0.35rem;
+  line-height: 1.2;
+}
+.dt-time {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 9px;
+  color: rgba(245,237,224,0.28);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.45rem;
+}
+.dt-room {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  color: rgba(200,164,86,0.4);
+  border-bottom: 1px solid rgba(200,164,86,0.2);
+  display: inline-block;
+  padding-bottom: 1px;
+}
+
+.home-notices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+.notice-slab {
+  background: linear-gradient(135deg, rgba(245,237,224,0.055) 0%, rgba(245,237,224,0.02) 100%);
+  border: 1px solid rgba(200,164,86,0.14);
+  padding: 1.75rem;
+}
+.ns-title {
+  font-family: 'Bodoni Moda', serif;
+  font-style: italic;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(200,164,86,0.5);
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(200,164,86,0.1);
+}
+.notice-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(245,237,224,0.04);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 12px;
+  color: rgba(245,237,224,0.58);
+}
+.notice-row:last-child { border-bottom: none; }
+.nr-dot { font-size: 7px; color: rgba(200,164,86,0.4); flex-shrink: 0; }
+.nr-badge {
+  margin-left: auto;
+  font-family: 'Bodoni Moda', serif;
+  font-size: 6px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border: 1px solid;
+  flex-shrink: 0;
+}
+.nb-u { border-color: rgba(200,80,60,0.5);  color: #D4806A; }
+.nb-s { border-color: rgba(200,164,86,0.4); color: var(--gold-dream); }
+.nb-l { border-color: rgba(245,237,224,0.14); color: rgba(245,237,224,0.28); }
+.nb-d { border-color: rgba(74,123,157,0.35); color: rgba(74,123,157,0.6); }
+
+/* ─── ROOSTER ─── */
+.rooster-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2px;
+}
+.r-monolith {
+  border: 1px solid rgba(200,164,86,0.17);
+  overflow: hidden;
+  position: relative;
+  cursor: none;
+  transition: transform 0.55s cubic-bezier(0.16,1,0.3,1);
+}
+.r-monolith:hover { transform: translateY(-7px) scale(1.01); }
+.r-sky {
+  height: 90px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(200,164,86,0.14);
+}
+.rs0 { background: linear-gradient(180deg, #0A0518 0%, #2D1654 45%, #C4763A 100%); }
+.rs1 { background: linear-gradient(180deg, #2D1654 0%, #7B3F8A 55%, #E8C4A0 100%); }
+.rs2 { background: linear-gradient(180deg, #1A0D2E 0%, #2E5266 50%, #4A7B9D 100%); }
+.rs3 { background: linear-gradient(180deg, #2D1654 0%, #4A2070 45%, #C4763A 100%); }
+.rs4 { background: linear-gradient(180deg, #0A0518 0%, #C4763A 65%, #F2D9C8 100%); }
+
+.r-orb {
+  position: absolute;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  top: 18px;
+  animation: orb-pulse 4s ease-in-out infinite;
+}
+.rs0 .r-orb { right: 28%; background: radial-gradient(#F2D9C8, #E8C4A0); box-shadow: 0 0 18px rgba(242,217,200,0.6); }
+.rs1 .r-orb { right: 32%; background: radial-gradient(#fff, #D4A5C9); box-shadow: 0 0 18px rgba(212,165,201,0.55); }
+.rs2 .r-orb { left:  22%; background: radial-gradient(#4A7B9D, #2E5266); box-shadow: 0 0 16px rgba(74,123,157,0.5); }
+.rs3 .r-orb { right: 22%; background: radial-gradient(#FFD700, #C8A456); box-shadow: 0 0 20px rgba(200,164,86,0.65); }
+.rs4 .r-orb { left:  28%; background: radial-gradient(#F2D9C8, #C4763A); box-shadow: 0 0 16px rgba(196,118,58,0.55); }
+@keyframes orb-pulse {
+  0%,100% { transform: scale(1); }
+  50%      { transform: scale(1.12); opacity: 0.88; }
+}
+
+.r-body {
+  padding: 1.4rem 1.25rem;
+  background: linear-gradient(180deg,
+    rgba(10,5,24,0.7) 0%, rgba(26,13,46,0.85) 100%
+  );
+}
+.r-day { font-family:'Bodoni Moda',serif; font-size:8px; font-weight:900; letter-spacing:0.22em; text-transform:uppercase; color:rgba(200,164,86,0.55); margin-bottom:0.6rem; }
+.r-time { font-family:'Bodoni Moda',serif; font-style:italic; font-size:1.4rem; font-weight:900; color:var(--cream); line-height:1; }
+.r-sep { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:9px; color:rgba(245,237,224,0.2); display:block; margin:0.25rem 0; }
+.r-end { font-family:'Bodoni Moda',serif; font-style:italic; font-size:1rem; color:rgba(245,237,224,0.45); margin-bottom:0.6rem; }
+.r-line { width:25px; height:1px; background:linear-gradient(90deg, var(--gold-dream), transparent); opacity:0.35; margin:0.6rem 0; }
+.r-room { font-family:'Cormorant Garamond',serif; font-size:8px; letter-spacing:0.15em; color:rgba(245,237,224,0.22); text-transform:uppercase; margin-bottom:0.35rem; }
+.r-vak  { font-family:'Bodoni Moda',serif; font-style:italic; font-size:11px; color:rgba(200,164,86,0.65); line-height:1.4; }
+
+/* ─── TAKEN ─── */
+.dream-ledger {
+  border: 1px solid rgba(200,164,86,0.16);
+  overflow: hidden;
+}
+.dl-head {
+  display: grid;
+  grid-template-columns: 48px 1fr 105px 130px;
+  gap: 0;
+  padding: 0.85rem 1.5rem;
+  background: rgba(10,5,24,0.65);
+  border-bottom: 1px solid rgba(200,164,86,0.18);
+}
+.dl-h { font-family:'Bodoni Moda',serif; font-size:7px; font-weight:900; letter-spacing:0.25em; text-transform:uppercase; color:rgba(200,164,86,0.38); }
+.dl-row {
+  display: grid;
+  grid-template-columns: 48px 1fr 105px 130px;
+  gap: 0;
+  padding: 1.15rem 1.5rem;
+  border-bottom: 1px solid rgba(245,237,224,0.04);
+  align-items: center;
+  position: relative;
+  cursor: none;
+  transition: background 0.4s;
+}
+.dl-row::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 0;
+  background: rgba(200,164,86,0.05);
+  transition: width 0.5s ease;
+}
+.dl-row:hover::before { width: 100%; }
+.dl-row:last-child { border-bottom: none; }
+.dl-row.faded { opacity: 0.35; }
+
+.dl-num { font-family:'Bodoni Moda',serif; font-style:italic; font-size:1.3rem; font-weight:900; color:rgba(200,164,86,0.22); line-height:1; }
+.dl-num.x { text-decoration:line-through; color:rgba(200,164,86,0.1); }
+.dl-name { font-family:'Bodoni Moda',serif; font-style:italic; font-size:14px; color:var(--cream); margin-bottom:3px; }
+.dl-name.x { text-decoration:line-through; color:rgba(245,237,224,0.28); }
+.dl-sub  { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:10px; color:rgba(245,237,224,0.22); }
+.dl-badge { display:inline-block; font-family:'Bodoni Moda',serif; font-size:7px; letter-spacing:0.14em; text-transform:uppercase; padding:3px 8px; border:1px solid; }
+.db-u { border-color:rgba(200,80,60,0.45); color:#D4806A; }
+.db-s { border-color:rgba(200,164,86,0.38); color:var(--gold-dream); }
+.db-l { border-color:rgba(74,123,157,0.28); color:rgba(74,123,157,0.55); }
+.db-d { border-color:rgba(245,237,224,0.1); color:rgba(245,237,224,0.2); }
+.dl-dead { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:11px; color:rgba(245,237,224,0.22); }
+
+/* ─── LERAREN ─── */
+.portrait-hall {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+.p-frame {
+  border: 1px solid rgba(200,164,86,0.18);
+  overflow: hidden;
+  cursor: none;
+  transition: transform 0.55s cubic-bezier(0.16,1,0.3,1);
+}
+.p-frame:hover { transform: scale(1.02) rotate(0.4deg); }
+.p-canvas {
+  height: 130px;
+  position: relative;
+  overflow: hidden;
+}
+.pc-0 { background: linear-gradient(135deg, #1A0D2E, #4A2070 45%, #C4763A 80%, #E8C4A0); }
+.pc-1 { background: linear-gradient(155deg, #2E5266, #4A7B9D 45%, #D4A5C9 85%, #F2D9C8); }
+.pc-2 { background: linear-gradient(120deg, #2D1654, #7B3F8A 55%, #C4763A); }
+.pc-3 { background: linear-gradient(150deg, #0A0518, #2E5266 45%, #E8C4A0); }
+.pc-4 { background: linear-gradient(135deg, #4A2070, #1A0D2E 50%, #4A7B9D); }
+
+.p-initial {
+  position: absolute;
+  bottom: 5px; left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Bodoni Moda', serif;
+  font-style: italic;
+  font-size: 5rem;
+  font-weight: 900;
+  color: rgba(245,237,224,0.1);
+  line-height: 1;
+}
+.p-body {
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(180deg, rgba(10,5,24,0.72) 0%, rgba(26,13,46,0.88) 100%);
+}
+.p-num  { font-family:'Bodoni Moda',serif; font-style:italic; font-size:8px; letter-spacing:0.2em; color:rgba(200,164,86,0.28); margin-bottom:0.3rem; }
+.p-name { font-family:'Bodoni Moda',serif; font-style:italic; font-size:1.35rem; font-weight:900; color:var(--cream); line-height:1; margin-bottom:0.2rem; }
+.p-role { font-family:'Cormorant Garamond',serif; font-size:8px; letter-spacing:0.18em; color:rgba(245,237,224,0.28); text-transform:uppercase; margin-bottom:0.65rem; }
+.p-line { width:18px; height:1px; background:rgba(200,164,86,0.28); margin-bottom:0.5rem; }
+.p-vak-lbl { font-family:'Cormorant Garamond',serif; font-size:8px; letter-spacing:0.18em; color:rgba(200,164,86,0.28); text-transform:uppercase; margin-bottom:0.15rem; }
+.p-vak { font-family:'Bodoni Moda',serif; font-style:italic; font-size:11px; color:rgba(200,164,86,0.58); }
+
+/* ─── PROFIEL ─── */
+.profiel-grid {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr;
+  gap: 2px;
+  margin-bottom: 2px;
+}
+.profiel-main {
+  background: linear-gradient(135deg,
+    rgba(245,237,224,0.07) 0%, rgba(74,123,157,0.05) 55%, rgba(245,237,224,0.03) 100%
+  );
+  border: 1px solid rgba(200,164,86,0.17);
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.pm-bg {
+  position: absolute;
+  top: -20px; right: -10px;
+  font-family: 'Bodoni Moda', serif;
+  font-style: italic;
+  font-weight: 900;
+  font-size: 17rem;
+  color: rgba(245,237,224,0.022);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+.pm-name { font-family:'Bodoni Moda',serif; font-style:italic; font-size: clamp(1.8rem,3.5vw,2.8rem); font-weight:900; color:var(--cream); line-height:0.92; margin-bottom:0.3rem; position:relative; }
+.pm-title-s { font-family:'Cormorant Garamond',serif; font-size:9px; letter-spacing:0.24em; color:rgba(200,164,86,0.42); text-transform:uppercase; margin-bottom:1.75rem; }
+.pm-divider { width:45px; height:1px; background:linear-gradient(90deg,var(--gold-dream),transparent); opacity:0.38; margin-bottom:1.75rem; }
+.pm-meta { display:flex; flex-direction:column; gap:0.65rem; }
+.pm-row { display:flex; align-items:baseline; gap:1.4rem; padding-bottom:0.55rem; border-bottom:1px solid rgba(245,237,224,0.04); }
+.pm-k { font-family:'Cormorant Garamond',serif; font-size:8px; letter-spacing:0.2em; color:rgba(200,164,86,0.32); text-transform:uppercase; min-width:88px; }
+.pm-v { font-family:'Bodoni Moda',serif; font-style:italic; font-size:12px; color:rgba(245,237,224,0.65); }
+
+.stats-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.ss-stone {
+  flex: 1;
+  background: rgba(10,5,24,0.6);
+  border: 1px solid rgba(200,164,86,0.14);
+  padding: 1.4rem;
+  text-align: center;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+}
+.ss-val { font-family:'Bodoni Moda',serif; font-style:italic; font-size:2rem; font-weight:900; color:var(--gold-dream); line-height:1; margin-bottom:0.35rem; }
+.ss-lbl { font-family:'Cormorant Garamond',serif; font-size:7px; letter-spacing:0.18em; color:rgba(200,164,86,0.28); text-transform:uppercase; line-height:1.6; }
+
+.skills-panel {
+  border: 1px solid rgba(200,164,86,0.14);
+  padding: 1.75rem 2.5rem;
+  background: rgba(10,5,24,0.3);
+}
+.skills-title { font-family:'Bodoni Moda',serif; font-style:italic; font-size:9px; letter-spacing:0.2em; color:rgba(200,164,86,0.38); text-transform:uppercase; margin-bottom:1.4rem; }
+.skills-row { display:grid; grid-template-columns:repeat(6,1fr); gap:1.5rem; }
+.skill-item { text-align: center; }
+.si-name { font-family:'Cormorant Garamond',serif; font-size:8px; letter-spacing:0.14em; color:rgba(245,237,224,0.28); text-transform:uppercase; margin-bottom:0.45rem; }
+.si-bar { height:2px; background:rgba(245,237,224,0.08); position:relative; margin:0 auto; }
+.si-fill { height:100%; position:absolute; top:0; left:0; background:linear-gradient(90deg, var(--surreal), var(--gold-dream)); }
+.si-pct { font-family:'Bodoni Moda',serif; font-style:italic; font-size:9px; color:rgba(200,164,86,0.35); margin-top:0.35rem; }
+
+/* ─── SETTINGS ─── */
+.settings-list { display:flex; flex-direction:column; gap:2px; }
+.s-slab {
+  background: linear-gradient(135deg, rgba(245,237,224,0.05) 0%, rgba(245,237,224,0.018) 100%);
+  border: 1px solid rgba(200,164,86,0.13);
+  padding: 1.4rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  position: relative;
+  cursor: none;
+  overflow: hidden;
+  transition: border-color 0.4s, background 0.4s;
+}
+.s-slab::before {
+  content:''; position:absolute; left:-100%; top:0; bottom:0; width:100%;
+  background:linear-gradient(90deg, transparent, rgba(200,164,86,0.05), transparent);
+  transition:left 0.6s ease;
+}
+.s-slab:hover::before { left:100%; }
+.s-slab:hover { border-color:rgba(200,164,86,0.28); }
+
+.s-name { font-family:'Bodoni Moda',serif; font-style:italic; font-size:1.05rem; font-weight:700; color:var(--cream); margin-bottom:0.18rem; }
+.s-desc { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:10px; color:rgba(245,237,224,0.25); }
+
+.dream-toggle {
+  width: 50px; height: 24px;
+  border: 1px solid rgba(200,164,86,0.22);
+  border-radius: 12px;
+  position: relative;
+  cursor: none;
+  flex-shrink: 0;
+  background: rgba(10,5,24,0.5);
+  transition: background 0.4s, border-color 0.4s;
+}
+.dream-toggle::after {
+  content:''; position:absolute; top:3px; left:3px;
+  width:16px; height:16px; border-radius:50%;
+  background: radial-gradient(circle at 40% 35%, rgba(200,164,86,0.45), rgba(200,164,86,0.18));
+  border: 1px solid rgba(200,164,86,0.28);
+  box-shadow: 0 0 6px rgba(200,164,86,0.15);
+  transition: left 0.4s cubic-bezier(0.16,1,0.3,1), background 0.4s;
+}
+.dream-toggle.on {
+  background: rgba(200,164,86,0.1);
+  border-color: rgba(200,164,86,0.5);
+}
+.dream-toggle.on::after {
+  left: 27px;
+  background: radial-gradient(circle at 40% 35%, var(--gold-dream), #A0802A);
+  box-shadow: 0 0 10px rgba(200,164,86,0.45);
+}
+</style>
+</head>
+<body>
+
+<!-- ── CURSOR ── -->
+<div id="dream-cursor">
+  <svg width="28" height="16" viewBox="0 0 28 16" fill="none">
+    <ellipse cx="14" cy="8" rx="13" ry="7" stroke="rgba(200,164,86,0.65)" stroke-width="0.8"/>
+    <ellipse cx="14" cy="8" rx="4.5" ry="4.5" fill="rgba(10,5,24,0.9)" stroke="rgba(200,164,86,0.45)" stroke-width="0.6"/>
+    <ellipse cx="14" cy="8" rx="2" ry="2" fill="rgba(200,164,86,0.8)"/>
+    <ellipse cx="15.5" cy="6.5" rx="0.7" ry="0.7" fill="rgba(245,237,224,0.6)"/>
+  </svg>
+</div>
+
+<!-- ── BACKGROUND SCENE ── -->
+<div class="scene" aria-hidden="true">
+  <div class="scene-sky"></div>
+  <div class="scene-ground"></div>
+
+  <!-- Cast shadows -->
+  <div class="cast-shadow cs1"></div>
+  <div class="cast-shadow cs2"></div>
+  <div class="cast-shadow cs3"></div>
+  <div class="cast-shadow cs4"></div>
+  <div class="cast-shadow cs5"></div>
+  <div class="cast-shadow cs6"></div>
+  <div class="cast-shadow cs7"></div>
+
+  <!-- ── Melting clock (Dalí) ── -->
+  <div class="surreal-obj obj-clock">
+    <svg width="85" height="105" viewBox="0 0 85 105">
+      <ellipse cx="42" cy="32" rx="28" ry="28" fill="rgba(232,196,160,0.22)" stroke="rgba(200,164,86,0.45)" stroke-width="1.5"/>
+      <line x1="42" y1="32" x2="42" y2="17" stroke="rgba(200,164,86,0.7)" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="42" y1="32" x2="54" y2="38" stroke="rgba(200,164,86,0.5)" stroke-width="1" stroke-linecap="round"/>
+      <circle cx="42" cy="32" r="2" fill="rgba(200,164,86,0.6)"/>
+      <path d="M28 48 Q22 65 18 85 Q20 96 25 100 Q30 103 33 96 Q34 80 36 62 Q37 52 42 48" fill="rgba(232,196,160,0.18)" stroke="rgba(200,164,86,0.38)" stroke-width="1"/>
+      <path d="M52 51 Q58 68 60 84 Q59 95 54 103 Q50 106 48 99 Q46 84 48 66 Q49 56 42 51" fill="rgba(232,196,160,0.14)" stroke="rgba(200,164,86,0.32)" stroke-width="1"/>
+      <circle cx="42" cy="7" r="1.5" fill="rgba(200,164,86,0.45)"/>
+      <circle cx="70" cy="32" r="1.5" fill="rgba(200,164,86,0.38)"/>
+      <circle cx="14" cy="32" r="1.5" fill="rgba(200,164,86,0.38)"/>
+    </svg>
+  </div>
+
+  <!-- ── Giant floating eye (Magritte) ── -->
+  <div class="surreal-obj obj-eye">
+    <svg width="115" height="55" viewBox="0 0 115 55">
+      <path d="M8 27.5 Q28 4 57.5 4 Q87 4 107 27.5 Q87 51 57.5 51 Q28 51 8 27.5Z" fill="rgba(232,196,160,0.18)" stroke="rgba(200,164,86,0.42)" stroke-width="1.5"/>
+      <circle cx="57.5" cy="27.5" r="13" fill="rgba(45,22,84,0.58)" stroke="rgba(200,164,86,0.48)" stroke-width="1"/>
+      <circle cx="57.5" cy="27.5" r="7" fill="rgba(10,5,24,0.92)"/>
+      <circle cx="57.5" cy="27.5" r="2.5" fill="rgba(200,164,86,0.85)"/>
+      <ellipse cx="61" cy="24.5" rx="1.8" ry="1.8" fill="rgba(245,237,224,0.6)"/>
+      <line x1="28" y1="17" x2="25" y2="12" stroke="rgba(200,164,86,0.28)" stroke-width="0.8"/>
+      <line x1="42" y1="10" x2="41" y2="5"  stroke="rgba(200,164,86,0.28)" stroke-width="0.8"/>
+      <line x1="57.5" y1="7"  x2="57.5" y2="2" stroke="rgba(200,164,86,0.28)" stroke-width="0.8"/>
+      <line x1="73" y1="10" x2="74" y2="5"  stroke="rgba(200,164,86,0.28)" stroke-width="0.8"/>
+      <line x1="87" y1="17" x2="89" y2="12" stroke="rgba(200,164,86,0.28)" stroke-width="0.8"/>
+    </svg>
+  </div>
+
+  <!-- ── Door to nowhere (de Chirico) ── -->
+  <div class="surreal-obj obj-door">
+    <svg width="52" height="96" viewBox="0 0 52 96">
+      <rect x="2" y="2" width="48" height="92" rx="24" fill="rgba(10,5,24,0.42)" stroke="rgba(200,164,86,0.42)" stroke-width="1.5"/>
+      <rect x="6" y="6" width="40" height="84" rx="20" fill="none" stroke="rgba(200,164,86,0.18)" stroke-width="0.75"/>
+      <rect x="11" y="18" width="30" height="36" rx="15" fill="rgba(74,123,157,0.18)"/>
+      <circle cx="20" cy="36" r="6" fill="rgba(242,217,200,0.25)"/>
+      <circle cx="37" cy="50" r="3" fill="rgba(200,164,86,0.48)" stroke="rgba(200,164,86,0.65)" stroke-width="0.8"/>
+      <circle cx="26" cy="75" r="2.5" fill="rgba(200,164,86,0.28)"/>
+      <rect x="24.5" y="77" width="3" height="6" rx="1" fill="rgba(200,164,86,0.28)"/>
+    </svg>
+  </div>
+
+  <!-- ── Impossible stairs ghost ── -->
+  <div class="surreal-obj obj-stairs">
+    <svg width="110" height="75" viewBox="0 0 110 75">
+      <polyline points="0,75 0,56 18,56 18,37 36,37 36,18 54,18 54,0 72,0 72,18 90,18 90,37 110,37 110,75"
+        fill="none" stroke="rgba(245,237,224,0.35)" stroke-width="1.5"/>
+      <polyline points="0,75 18,75 18,56 36,56 36,37 54,37 54,18 72,18 72,37 90,37 90,75"
+        fill="rgba(10,5,24,0.28)"/>
+    </svg>
+  </div>
+
+  <!-- ── Flying fish (impossible in sky) ── -->
+  <div class="surreal-obj obj-fish">
+    <svg width="62" height="28" viewBox="0 0 62 28">
+      <ellipse cx="28" cy="14" rx="26" ry="9" fill="rgba(74,123,157,0.22)" stroke="rgba(74,123,157,0.48)" stroke-width="1"/>
+      <path d="M52 14 L62 7 L62 21 Z" fill="rgba(74,123,157,0.18)" stroke="rgba(74,123,157,0.38)" stroke-width="0.8"/>
+      <circle cx="8" cy="12" r="2.5" fill="rgba(245,237,224,0.5)"/>
+      <circle cx="8" cy="12" r="1" fill="rgba(10,5,24,0.85)"/>
+      <path d="M18 9 Q23 6 28 9" fill="none" stroke="rgba(74,123,157,0.32)" stroke-width="0.7"/>
+      <path d="M28 9 Q33 6 38 9" fill="none" stroke="rgba(74,123,157,0.28)" stroke-width="0.7"/>
+      <path d="M20 16 Q25 19 30 16" fill="none" stroke="rgba(74,123,157,0.28)" stroke-width="0.7"/>
+    </svg>
+  </div>
+
+  <!-- ── Marble sphere (de Chirico) ── -->
+  <div class="surreal-obj obj-sphere">
+    <svg width="52" height="52" viewBox="0 0 52 52">
+      <defs>
+        <radialGradient id="mg" cx="35%" cy="30%" r="70%">
+          <stop offset="0%"   stop-color="rgba(245,237,224,0.38)"/>
+          <stop offset="40%"  stop-color="rgba(74,123,157,0.22)"/>
+          <stop offset="100%" stop-color="rgba(10,5,24,0.65)"/>
+        </radialGradient>
+      </defs>
+      <circle cx="26" cy="26" r="25" fill="url(#mg)" stroke="rgba(200,164,86,0.28)" stroke-width="1"/>
+      <path d="M14 9 Q22 18 18 32 Q16 40 23 46" fill="none" stroke="rgba(245,237,224,0.18)" stroke-width="0.8"/>
+      <path d="M32 7 Q28 17 36 26 Q40 32 36 43" fill="none" stroke="rgba(245,237,224,0.12)" stroke-width="0.6"/>
+      <ellipse cx="18" cy="16" rx="6" ry="4" fill="rgba(245,237,224,0.12)" transform="rotate(-30 18 16)"/>
+    </svg>
+  </div>
+
+  <!-- ── Floating key ── -->
+  <div class="surreal-obj obj-key">
+    <svg width="18" height="70" viewBox="0 0 18 70">
+      <circle cx="9" cy="9" r="8" fill="none" stroke="rgba(200,164,86,0.5)" stroke-width="1.2"/>
+      <circle cx="9" cy="9" r="4" fill="none" stroke="rgba(200,164,86,0.3)" stroke-width="0.8"/>
+      <line x1="9" y1="17" x2="9" y2="62" stroke="rgba(200,164,86,0.45)" stroke-width="1.2"/>
+      <line x1="9" y1="48" x2="14" y2="53" stroke="rgba(200,164,86,0.38)" stroke-width="1.2"/>
+      <line x1="9" y1="56" x2="14" y2="61" stroke="rgba(200,164,86,0.35)" stroke-width="1.2"/>
+    </svg>
+  </div>
+
+  <!-- ── Floating umbrella ── -->
+  <div class="surreal-obj obj-umbrella">
+    <svg width="60" height="72" viewBox="0 0 60 72">
+      <path d="M5 30 Q5 4 30 4 Q55 4 55 30 Z" fill="rgba(196,118,58,0.22)" stroke="rgba(200,164,86,0.4)" stroke-width="1.2"/>
+      <line x1="30" y1="30" x2="30" y2="65" stroke="rgba(200,164,86,0.4)" stroke-width="1.2"/>
+      <path d="M30 65 Q30 72 24 72 Q18 72 18 66" fill="none" stroke="rgba(200,164,86,0.38)" stroke-width="1.2"/>
+      <line x1="5" y1="30" x2="12" y2="30" stroke="rgba(200,164,86,0.22)" stroke-width="0.7"/>
+      <line x1="17" y1="30" x2="20" y2="30" stroke="rgba(200,164,86,0.22)" stroke-width="0.7"/>
+    </svg>
+  </div>
+</div>
+
+<!-- ── INTERFACE ── -->
+<div class="layout">
+  <nav class="sidebar">
+    <div class="sb-brand">
+      <span class="sb-title">Droomregister</span>
+      <span class="sb-sub">Anno MMXXVI</span>
+    </div>
+
+    <ul class="nav-list">
+      <li class="nav-item active" id="nav-home">
+        <button onclick="showPage('home')">
+          <span class="nav-num">i</span>Home
+        </button>
+      </li>
+      <li class="nav-item" id="nav-rooster">
+        <button onclick="showPage('rooster')">
+          <span class="nav-num">ii</span>Rooster
+        </button>
+      </li>
+      <li class="nav-item" id="nav-taken">
+        <button onclick="showPage('taken')">
+          <span class="nav-num">iii</span>Taken
+        </button>
+      </li>
+      <li class="nav-item" id="nav-leraren">
+        <button onclick="showPage('leraren')">
+          <span class="nav-num">iv</span>Leraren
+        </button>
+      </li>
+      <li class="nav-item" id="nav-profiel">
+        <button onclick="showPage('profiel')">
+          <span class="nav-num">v</span>Profiel
+        </button>
+      </li>
+      <li class="nav-item" id="nav-settings">
+        <button onclick="showPage('settings')">
+          <span class="nav-num">vi</span>Instellingen
+        </button>
+      </li>
+    </ul>
+
+    <div class="sb-quote">
+      <p>"Every object<br>dreams of itself"</p>
+    </div>
+  </nav>
+
+  <main class="main-panel">
+
+    <!-- ── HOME ── -->
+    <div class="page active" id="page-home">
+      <div class="page-header">
+        <div class="ph-eyebrow">Fragment I — Het Begin</div>
+        <h1 class="ph-title">
+          Het Droomrooster
+          <span>André Babirian · XSB1B · Week XIX</span>
+        </h1>
+        <div class="ph-rule"></div>
+      </div>
+
+      <div class="home-stats">
+        <div class="stat-pillar">
+          <div class="sp-value">4</div>
+          <div class="sp-label">Open Taken</div>
+          <div class="sp-sub">2 urgent</div>
+        </div>
+        <div class="stat-pillar">
+          <div class="sp-value">7.6</div>
+          <div class="sp-label">Gemiddeld Cijfer</div>
+          <div class="sp-sub">Semester II</div>
+        </div>
+        <div class="stat-pillar">
+          <div class="sp-value">5</div>
+          <div class="sp-label">Vakken</div>
+          <div class="sp-sub">4 voltooid</div>
+        </div>
+        <div class="stat-pillar">
+          <div class="sp-value">6</div>
+          <div class="sp-label">Weken tot Examen</div>
+          <div class="sp-sub">Op schema</div>
+        </div>
+      </div>
+
+      <div style="height:2px"></div>
+
+      <div class="home-week">
+        <div class="day-tile">
+          <div class="dt-day">Maandag</div>
+          <div class="dt-subject">Flex</div>
+          <div class="dt-time">08:30 — 17:00</div>
+          <span class="dt-room">Groen 2.073</span>
+        </div>
+        <div class="day-tile">
+          <div class="dt-day">Dinsdag</div>
+          <div class="dt-subject">Flex</div>
+          <div class="dt-time">08:30 — 17:00</div>
+          <span class="dt-room">Groen 2.073</span>
+        </div>
+        <div class="day-tile">
+          <div class="dt-day">Woensdag</div>
+          <div class="dt-subject">Flex & Rekenen</div>
+          <div class="dt-time">08:30 — 17:00</div>
+          <span class="dt-room">Groen 2.073</span>
+        </div>
+        <div class="day-tile">
+          <div class="dt-day">Donderdag</div>
+          <div class="dt-subject">Flex & NL</div>
+          <div class="dt-time">08:30 — 17:00</div>
+          <span class="dt-room">Groen 2.073</span>
+        </div>
+        <div class="day-tile">
+          <div class="dt-day">Vrijdag</div>
+          <div class="dt-subject">Flex</div>
+          <div class="dt-time">08:30 — 13:30</div>
+          <span class="dt-room">Groen 2.073</span>
+        </div>
+      </div>
+
+      <div style="height:2px"></div>
+
+      <div class="home-notices">
+        <div class="notice-slab">
+          <div class="ns-title">— Openstaande Taken —</div>
+          <div class="notice-row">
+            <span class="nr-dot">◆</span>
+            <span>UML diagram afmaken</span>
+            <span class="nr-badge nb-u">Urgent</span>
+          </div>
+          <div class="notice-row">
+            <span class="nr-dot">◆</span>
+            <span>Portfolio bijwerken</span>
+            <span class="nr-badge nb-s">Spoedig</span>
+          </div>
+          <div class="notice-row">
+            <span class="nr-dot">◆</span>
+            <span>GitHub README schrijven</span>
+            <span class="nr-badge nb-l">Later</span>
+          </div>
+          <div class="notice-row">
+            <span class="nr-dot">◆</span>
+            <span style="text-decoration:line-through;opacity:0.45">Retrospective inleveren</span>
+            <span class="nr-badge nb-d">Klaar</span>
+          </div>
+        </div>
+        <div class="notice-slab">
+          <div class="ns-title">— Heden's Visioenen —</div>
+          <div class="notice-row">
+            <span class="nr-dot">◇</span>
+            <span>Volgende les: Ma 08:30 — Flex · Lokaal 2.073</span>
+          </div>
+          <div class="notice-row">
+            <span class="nr-dot">◇</span>
+            <span>Gemiddelde 7.6 — semester II loopt uitstekend</span>
+          </div>
+          <div class="notice-row">
+            <span class="nr-dot">◇</span>
+            <span>4 van 5 vakken voltooid dit semester</span>
+          </div>
+          <div class="notice-row">
+            <span class="nr-dot">◇</span>
+            <span>Examen over 6 weken — begin tijdig met herhalen</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── ROOSTER ── -->
+    <div class="page" id="page-rooster">
+      <div class="page-header">
+        <div class="ph-eyebrow">Fragment II — De Tijdloze Uren</div>
+        <h1 class="ph-title">Het Weekrooster<span>Klas XSB1B · Lokaal Groen 2.073</span></h1>
+        <div class="ph-rule"></div>
+      </div>
+      <div class="rooster-row">
+        <div class="r-monolith">
+          <div class="r-sky rs0"><div class="r-orb"></div></div>
+          <div class="r-body">
+            <div class="r-day">Maandag</div>
+            <div class="r-time">08:30</div>
+            <div class="r-sep">— tot —</div>
+            <div class="r-end">17:00</div>
+            <div class="r-line"></div>
+            <div class="r-room">Groen 2.073</div>
+            <div class="r-vak">Flex</div>
+          </div>
+        </div>
+        <div class="r-monolith">
+          <div class="r-sky rs1"><div class="r-orb"></div></div>
+          <div class="r-body">
+            <div class="r-day">Dinsdag</div>
+            <div class="r-time">08:30</div>
+            <div class="r-sep">— tot —</div>
+            <div class="r-end">17:00</div>
+            <div class="r-line"></div>
+            <div class="r-room">Groen 2.073</div>
+            <div class="r-vak">Flex</div>
+          </div>
+        </div>
+        <div class="r-monolith">
+          <div class="r-sky rs2"><div class="r-orb"></div></div>
+          <div class="r-body">
+            <div class="r-day">Woensdag</div>
+            <div class="r-time">08:30</div>
+            <div class="r-sep">— tot —</div>
+            <div class="r-end">17:00</div>
+            <div class="r-line"></div>
+            <div class="r-room">Groen 2.073</div>
+            <div class="r-vak">Flex &amp;<br>Rekenen</div>
+          </div>
+        </div>
+        <div class="r-monolith">
+          <div class="r-sky rs3"><div class="r-orb"></div></div>
+          <div class="r-body">
+            <div class="r-day">Donderdag</div>
+            <div class="r-time">08:30</div>
+            <div class="r-sep">— tot —</div>
+            <div class="r-end">17:00</div>
+            <div class="r-line"></div>
+            <div class="r-room">Groen 2.073</div>
+            <div class="r-vak">Flex, NL<br>&amp; Burgerschap</div>
+          </div>
+        </div>
+        <div class="r-monolith">
+          <div class="r-sky rs4"><div class="r-orb"></div></div>
+          <div class="r-body">
+            <div class="r-day">Vrijdag</div>
+            <div class="r-time">08:30</div>
+            <div class="r-sep">— tot —</div>
+            <div class="r-end">13:30</div>
+            <div class="r-line"></div>
+            <div class="r-room">Groen 2.073</div>
+            <div class="r-vak">Flex</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TAKEN ── -->
+    <div class="page" id="page-taken">
+      <div class="page-header">
+        <div class="ph-eyebrow">Fragment III — De Zwevende Lasten</div>
+        <h1 class="ph-title">Het Takenboek<span>4 zwevend · 2 tot stof geworden</span></h1>
+        <div class="ph-rule"></div>
+      </div>
+      <div class="dream-ledger">
+        <div class="dl-head">
+          <div class="dl-h">Nr.</div>
+          <div class="dl-h">Opdracht</div>
+          <div class="dl-h">Gewicht</div>
+          <div class="dl-h">Tijdshorizon</div>
+        </div>
+        <div class="dl-row">
+          <div class="dl-num">I</div>
+          <div><div class="dl-name">UML Diagram Afmaken</div><div class="dl-sub">Software Architecture · Sprint 4</div></div>
+          <span class="dl-badge db-u">Kritisch</span>
+          <span class="dl-dead">Morgen 09:00</span>
+        </div>
+        <div class="dl-row">
+          <div class="dl-num">II</div>
+          <div><div class="dl-name">Portfolio Bijwerken</div><div class="dl-sub">Persoonlijke Ontwikkeling</div></div>
+          <span class="dl-badge db-s">Spoedig</span>
+          <span class="dl-dead">Do. 23:59</span>
+        </div>
+        <div class="dl-row">
+          <div class="dl-num">III</div>
+          <div><div class="dl-name">GitHub README Schrijven</div><div class="dl-sub">Project · Flex Opdracht</div></div>
+          <span class="dl-badge db-l">Later</span>
+          <span class="dl-dead">Vr. 17:00</span>
+        </div>
+        <div class="dl-row">
+          <div class="dl-num">IV</div>
+          <div><div class="dl-name">API Documentatie</div><div class="dl-sub">Web Development Module</div></div>
+          <span class="dl-badge db-l">Later</span>
+          <span class="dl-dead">Volgende week</span>
+        </div>
+        <div class="dl-row faded">
+          <div class="dl-num x">V</div>
+          <div><div class="dl-name x">Retrospective Inleveren</div><div class="dl-sub">Agile · Sprint 3</div></div>
+          <span class="dl-badge db-d">Voltooid</span>
+          <span class="dl-dead" style="text-decoration:line-through">Afgerond</span>
+        </div>
+        <div class="dl-row faded">
+          <div class="dl-num x">VI</div>
+          <div><div class="dl-name x">Database Schema Ontwerp</div><div class="dl-sub">Databases Module</div></div>
+          <span class="dl-badge db-d">Voltooid</span>
+          <span class="dl-dead" style="text-decoration:line-through">Afgerond</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── LERAREN ── -->
+    <div class="page" id="page-leraren">
+      <div class="page-header">
+        <div class="ph-eyebrow">Fragment IV — De Gidsen</div>
+        <h1 class="ph-title">De Meesters<span>Klas XSB1B · ICT Software Developer · Jaar I</span></h1>
+        <div class="ph-rule"></div>
+      </div>
+      <div class="portrait-hall">
+        <div class="p-frame">
+          <div class="p-canvas pc-0"><div class="p-initial">P</div></div>
+          <div class="p-body">
+            <div class="p-num">Portret I</div>
+            <div class="p-name">Peter</div>
+            <div class="p-role">Begeleider & Docent</div>
+            <div class="p-line"></div>
+            <div class="p-vak-lbl">Vakken</div>
+            <div class="p-vak">Flex</div>
+          </div>
+        </div>
+        <div class="p-frame">
+          <div class="p-canvas pc-1"><div class="p-initial">J</div></div>
+          <div class="p-body">
+            <div class="p-num">Portret II</div>
+            <div class="p-name">Jeroen</div>
+            <div class="p-role">Begeleider & Docent</div>
+            <div class="p-line"></div>
+            <div class="p-vak-lbl">Vakken</div>
+            <div class="p-vak">Flex</div>
+          </div>
+        </div>
+        <div class="p-frame">
+          <div class="p-canvas pc-2"><div class="p-initial">J</div></div>
+          <div class="p-body">
+            <div class="p-num">Portret III</div>
+            <div class="p-name">Jan</div>
+            <div class="p-role">Docent</div>
+            <div class="p-line"></div>
+            <div class="p-vak-lbl">Vakken</div>
+            <div class="p-vak">Flex</div>
+          </div>
+        </div>
+        <div class="p-frame">
+          <div class="p-canvas pc-3"><div class="p-initial">A</div></div>
+          <div class="p-body">
+            <div class="p-num">Portret IV</div>
+            <div class="p-name">Alex</div>
+            <div class="p-role">Docent</div>
+            <div class="p-line"></div>
+            <div class="p-vak-lbl">Vakken</div>
+            <div class="p-vak">Rekenen</div>
+          </div>
+        </div>
+        <div class="p-frame">
+          <div class="p-canvas pc-4"><div class="p-initial">?</div></div>
+          <div class="p-body">
+            <div class="p-num">Portret V</div>
+            <div class="p-name">Onbekend</div>
+            <div class="p-role">Docent</div>
+            <div class="p-line"></div>
+            <div class="p-vak-lbl">Vakken</div>
+            <div class="p-vak">Nederlands</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PROFIEL ── -->
+    <div class="page" id="page-profiel">
+      <div class="page-header">
+        <div class="ph-eyebrow">Fragment V — De Identiteit</div>
+        <h1 class="ph-title">Mijn Profiel<span>Het Academisch Dossier</span></h1>
+        <div class="ph-rule"></div>
+      </div>
+      <div class="profiel-grid">
+        <div class="profiel-main">
+          <div class="pm-bg">A</div>
+          <div class="pm-name">André Babirian</div>
+          <div class="pm-title-s">ICT Software Developer · Jaar I · Klas XSB1B</div>
+          <div class="pm-divider"></div>
+          <div class="pm-meta">
+            <div class="pm-row"><span class="pm-k">School</span><span class="pm-v">Windesheim, Zwolle</span></div>
+            <div class="pm-row"><span class="pm-k">Opleiding</span><span class="pm-v">ICT Software Developer</span></div>
+            <div class="pm-row"><span class="pm-k">Klas</span><span class="pm-v">XSB1B — Cohort 2025</span></div>
+            <div class="pm-row"><span class="pm-k">Studiejaar</span><span class="pm-v">2025 / 2026</span></div>
+            <div class="pm-row"><span class="pm-k">Status</span><span class="pm-v">Actief — op schema</span></div>
+          </div>
+        </div>
+        <div class="stats-col">
+          <div class="ss-stone"><div class="ss-val">7.6</div><div class="ss-lbl">Gemiddeld<br>Cijfer</div></div>
+          <div class="ss-stone"><div class="ss-val">4/5</div><div class="ss-lbl">Vakken<br>Voltooid</div></div>
+          <div class="ss-stone"><div class="ss-val">6</div><div class="ss-lbl">Weken tot<br>Examen</div></div>
+        </div>
+      </div>
+      <div style="height:2px"></div>
+      <div class="skills-panel">
+        <div class="skills-title">— Bekwaamheden & Vaardigheden —</div>
+        <div class="skills-row">
+          <div class="skill-item">
+            <div class="si-name">React</div>
+            <div class="si-bar"><div class="si-fill" style="width:70%"></div></div>
+            <div class="si-pct">70</div>
+          </div>
+          <div class="skill-item">
+            <div class="si-name">TypeScript</div>
+            <div class="si-bar"><div class="si-fill" style="width:55%"></div></div>
+            <div class="si-pct">55</div>
+          </div>
+          <div class="skill-item">
+            <div class="si-name">CSS</div>
+            <div class="si-bar"><div class="si-fill" style="width:65%"></div></div>
+            <div class="si-pct">65</div>
+          </div>
+          <div class="skill-item">
+            <div class="si-name">Git</div>
+            <div class="si-bar"><div class="si-fill" style="width:60%"></div></div>
+            <div class="si-pct">60</div>
+          </div>
+          <div class="skill-item">
+            <div class="si-name">SQL</div>
+            <div class="si-bar"><div class="si-fill" style="width:45%"></div></div>
+            <div class="si-pct">45</div>
+          </div>
+          <div class="skill-item">
+            <div class="si-name">Java</div>
+            <div class="si-bar"><div class="si-fill" style="width:40%"></div></div>
+            <div class="si-pct">40</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SETTINGS ── -->
+    <div class="page" id="page-settings">
+      <div class="page-header">
+        <div class="ph-eyebrow">Fragment VI — De Preferenties</div>
+        <h1 class="ph-title">Instellingen<span>Beheer van Persoonlijke Voorkeurstellingen</span></h1>
+        <div class="ph-rule"></div>
+      </div>
+      <div class="settings-list">
+        <div class="s-slab">
+          <div><div class="s-name">Dark Mode</div><div class="s-desc">Schakel tusschen licht en duisternis</div></div>
+          <div class="dream-toggle on" onclick="this.classList.toggle('on')"></div>
+        </div>
+        <div class="s-slab">
+          <div><div class="s-name">Meldingen</div><div class="s-desc">Ontvang tijdige waarschuwingen omtrent deadlines</div></div>
+          <div class="dream-toggle on" onclick="this.classList.toggle('on')"></div>
+        </div>
+        <div class="s-slab">
+          <div><div class="s-name">Geluidssignalen</div><div class="s-desc">Audiofeedback bij handelingen</div></div>
+          <div class="dream-toggle" onclick="this.classList.toggle('on')"></div>
+        </div>
+        <div class="s-slab">
+          <div><div class="s-name">Compacte Weergave</div><div class="s-desc">Verminderde witruimte, grotere inhoudsdichtheid</div></div>
+          <div class="dream-toggle" onclick="this.classList.toggle('on')"></div>
+        </div>
+        <div class="s-slab">
+          <div><div class="s-name">Taal der Interface</div><div class="s-desc">Huidig: Nederlands</div></div>
+          <div class="dream-toggle on" onclick="this.classList.toggle('on')"></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+/* ── Custom cursor ── */
+const cursor = document.getElementById('dream-cursor');
+let mx = window.innerWidth/2, my = window.innerHeight/2;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx + 'px';
+  cursor.style.top  = my + 'px';
+});
+
+/* ── Navigation ── */
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.getElementById('nav-' + id).classList.add('active');
+  document.querySelector('.main-panel').scrollTop = 0;
+}
+
+/* ── Parallax: dream objects follow mouse with depth ── */
+const parallaxTargets = [
+  { sel: '.obj-clock',    sx: -0.014, sy: -0.009 },
+  { sel: '.obj-eye',      sx:  0.019, sy: -0.013 },
+  { sel: '.obj-door',     sx: -0.011, sy:  0.012 },
+  { sel: '.obj-stairs',   sx:  0.015, sy:  0.009 },
+  { sel: '.obj-fish',     sx:  0.022, sy: -0.016 },
+  { sel: '.obj-sphere',   sx: -0.017, sy:  0.011 },
+  { sel: '.obj-key',      sx:  0.010, sy: -0.020 },
+  { sel: '.obj-umbrella', sx: -0.020, sy:  0.013 },
+];
+
+const objs = parallaxTargets.map(t => ({
+  el: document.querySelector(t.sel),
+  sx: t.sx, sy: t.sy,
+  cx: 0, cy: 0,
+}));
+
+let cx = 0, cy = 0;
+const cx0 = window.innerWidth / 2;
+const cy0 = window.innerHeight / 2;
+
+(function tick() {
+  const tx = mx - cx0;
+  const ty = my - cy0;
+  cx += (tx - cx) * 0.035;
+  cy += (ty - cy) * 0.035;
+
+  objs.forEach(o => {
+    if (o.el) {
+      const dx = cx * o.sx;
+      const dy = cy * o.sy;
+      o.el.style.transform = `translate(${dx}px,${dy}px)`;
+    }
+  });
+
+  requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>

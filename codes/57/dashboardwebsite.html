@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Surrealism</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #F5ECD7;
+  --deep: #1A0A2E;
+  --gold: #C8963C;
+  --rust: #8B2E1A;
+  --sage: #3D5A45;
+  --lavender: #7B6B9E;
+  --bone: #E8DECA;
+  --ink: #0D0620;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--ink);
+  color: var(--cream);
+  font-family: 'Space Mono', monospace;
+  min-height: 100vh;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* Custom cursor */
+.cursor {
+  width: 16px; height: 16px;
+  border: 1.5px solid var(--gold);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.1s ease, opacity 0.2s;
+  transform: translate(-50%, -50%);
+}
+.cursor-dot {
+  width: 4px; height: 4px;
+  background: var(--gold);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}
+
+/* Noise overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.4;
+}
+
+/* Layout */
+.layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding: 3rem 2rem;
+  border-right: 1px solid rgba(200,150,60,0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow: hidden;
+}
+
+.sidebar::before {
+  content: '';
+  position: absolute;
+  top: -80px; left: -80px;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(123,107,158,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.sidebar-eye {
+  width: 48px; height: 28px;
+  border: 1.5px solid var(--gold);
+  border-radius: 50%;
+  margin-bottom: 2.5rem;
+  position: relative;
+  animation: blink 6s ease-in-out infinite;
+}
+.sidebar-eye::after {
+  content: '';
+  width: 12px; height: 12px;
+  background: var(--gold);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+@keyframes blink {
+  0%,90%,100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.05); }
+}
+
+.sidebar-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: rgba(200,150,60,0.6);
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.nav-list { list-style: none; display: flex; flex-direction: column; gap: 4px; flex: 1; }
+
+.nav-item a, .nav-item button {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  color: rgba(245,236,215,0.55);
+  text-decoration: none;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
+  background: none;
+  width: 100%;
+  cursor: none;
+  transition: color 0.3s, background 0.3s;
+  border-radius: 2px;
+  position: relative;
+}
+.nav-item a::before, .nav-item button::before {
+  content: '';
+  width: 6px; height: 6px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: background 0.3s;
+}
+.nav-item a:hover, .nav-item button:hover,
+.nav-item.active a, .nav-item.active button {
+  color: var(--cream);
+  background: rgba(200,150,60,0.08);
+}
+.nav-item.active a::before, .nav-item.active button::before {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(200,150,60,0.15);
+}
+.sidebar-bottom p {
+  font-size: 9px;
+  color: rgba(245,236,215,0.25);
+  letter-spacing: 0.1em;
+  line-height: 1.8;
+}
+
+/* Main content */
+.main-content {
+  padding: 4rem 4rem 4rem 3rem;
+  position: relative;
+}
+
+/* Pages */
+.page { display: none; animation: fadeIn 0.5s ease; }
+.page.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Page header */
+.page-header {
+  margin-bottom: 3.5rem;
+  position: relative;
+}
+.page-header::after {
+  content: '';
+  position: absolute;
+  bottom: -1.5rem; left: 0;
+  width: 60px; height: 1px;
+  background: var(--gold);
+}
+
+.page-number {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: rgba(200,150,60,0.5);
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+.page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+.page-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+.page-subtitle {
+  margin-top: 1rem;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: rgba(245,236,215,0.4);
+  text-transform: uppercase;
+}
+
+/* HOME PAGE */
+.home-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 1.5px;
+}
+
+.home-cell {
+  padding: 2.5rem;
+  border: 1px solid rgba(200,150,60,0.12);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.4s;
+}
+.home-cell:hover { border-color: rgba(200,150,60,0.4); }
+.home-cell::before {
+  content: attr(data-num);
+  position: absolute;
+  top: 1.25rem; right: 1.5rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 5rem;
+  font-weight: 900;
+  color: rgba(200,150,60,0.05);
+  line-height: 1;
+  pointer-events: none;
+  transition: color 0.4s;
+}
+.home-cell:hover::before { color: rgba(200,150,60,0.08); }
+
+.cell-label {
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(200,150,60,0.5);
+  margin-bottom: 1rem;
+}
+.cell-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--cream);
+}
+.cell-desc {
+  margin-top: 0.75rem;
+  font-size: 10px;
+  color: rgba(245,236,215,0.35);
+  letter-spacing: 0.08em;
+  line-height: 1.6;
+}
+
+.cell-wide {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  padding: 0;
+}
+.day-block {
+  padding: 2rem 1.5rem;
+  border-right: 1px solid rgba(200,150,60,0.1);
+  transition: background 0.3s;
+}
+.day-block:last-child { border-right: none; }
+.day-block:hover { background: rgba(200,150,60,0.04); }
+.day-name {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: rgba(200,150,60,0.5);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.day-subject {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 0.4rem;
+}
+.day-time {
+  font-size: 9px;
+  color: rgba(245,236,215,0.3);
+  letter-spacing: 0.05em;
+}
+.day-room {
+  margin-top: 0.5rem;
+  display: inline-block;
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  padding: 3px 8px;
+  border: 1px solid rgba(200,150,60,0.25);
+  color: rgba(200,150,60,0.6);
+}
+
+/* ROOSTER PAGE */
+.rooster-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: rgba(200,150,60,0.08);
+}
+
+.rooster-card {
+  background: var(--ink);
+  padding: 2rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.4s;
+}
+.rooster-card:hover { background: rgba(200,150,60,0.04); }
+
+.rooster-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.rooster-card:hover::after { transform: scaleX(1); }
+
+.rc-day {
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+}
+.rc-time {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 900;
+  line-height: 1.1;
+  color: var(--cream);
+  margin-bottom: 0.5rem;
+}
+.rc-divider {
+  width: 20px; height: 1px;
+  background: rgba(200,150,60,0.3);
+  margin: 1rem 0;
+}
+.rc-room {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: rgba(245,236,215,0.35);
+  margin-bottom: 0.75rem;
+}
+.rc-vak {
+  font-size: 10px;
+  color: rgba(200,150,60,0.7);
+  letter-spacing: 0.08em;
+  line-height: 1.5;
+}
+
+/* LERAREN PAGE */
+.leraren-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5px;
+}
+
+.leraar-card {
+  border: 1px solid rgba(200,150,60,0.1);
+  padding: 2.5rem 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.4s, transform 0.4s;
+  cursor: none;
+}
+.leraar-card:hover {
+  border-color: rgba(200,150,60,0.35);
+  transform: translateY(-3px);
+}
+
+.leraar-initial {
+  font-family: 'Playfair Display', serif;
+  font-size: 5rem;
+  font-weight: 900;
+  font-style: italic;
+  color: rgba(200,150,60,0.12);
+  line-height: 1;
+  position: absolute;
+  top: 1rem; right: 1.5rem;
+  transition: color 0.4s;
+}
+.leraar-card:hover .leraar-initial { color: rgba(200,150,60,0.2); }
+
+.leraar-num {
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  color: rgba(200,150,60,0.4);
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+.leraar-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+.leraar-role {
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: rgba(245,236,215,0.35);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.leraar-divider {
+  width: 30px; height: 1px;
+  background: rgba(200,150,60,0.3);
+  margin-bottom: 1rem;
+}
+.leraar-vak-label {
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: rgba(200,150,60,0.5);
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+.leraar-vak {
+  font-size: 11px;
+  color: rgba(245,236,215,0.65);
+  letter-spacing: 0.05em;
+}
+
+/* TAKEN PAGE */
+.taken-header-row {
+  display: grid;
+  grid-template-columns: 50px 1fr 120px 120px;
+  gap: 1rem;
+  padding: 0 1.5rem 1rem;
+  border-bottom: 1px solid rgba(200,150,60,0.2);
+  margin-bottom: 1px;
+}
+.th-label {
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(200,150,60,0.4);
+}
+
+.taken-list { display: flex; flex-direction: column; gap: 1px; }
+
+.taak-row {
+  display: grid;
+  grid-template-columns: 50px 1fr 120px 120px;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid rgba(200,150,60,0.08);
+  transition: background 0.3s, border-color 0.3s;
+  cursor: none;
+}
+.taak-row:hover {
+  background: rgba(200,150,60,0.04);
+  border-color: rgba(200,150,60,0.2);
+}
+
+.taak-check {
+  width: 18px; height: 18px;
+  border: 1px solid rgba(200,150,60,0.4);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.taak-check.done { background: rgba(200,150,60,0.15); border-color: var(--gold); }
+
+.taak-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--cream);
+}
+.taak-name.done {
+  text-decoration: line-through;
+  color: rgba(245,236,215,0.3);
+}
+.taak-sub {
+  font-size: 9px;
+  color: rgba(245,236,215,0.3);
+  letter-spacing: 0.08em;
+  margin-top: 3px;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  padding: 4px 10px;
+  text-transform: uppercase;
+  border: 1px solid;
+}
+.tag-urgent { border-color: rgba(139,46,26,0.6); color: #C8603C; }
+.tag-soon { border-color: rgba(200,150,60,0.4); color: var(--gold); }
+.tag-later { border-color: rgba(245,236,215,0.15); color: rgba(245,236,215,0.35); }
+.tag-done { border-color: rgba(61,90,69,0.4); color: #6B9E75; }
+
+.deadline-text {
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  color: rgba(245,236,215,0.35);
+}
+
+/* PROFIEL PAGE */
+.profiel-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5px;
+  margin-bottom: 1.5px;
+}
+
+.profiel-main {
+  border: 1px solid rgba(200,150,60,0.12);
+  padding: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+.profiel-main::before {
+  content: 'A';
+  position: absolute;
+  font-family: 'Playfair Display', serif;
+  font-size: 18rem;
+  font-weight: 900;
+  font-style: italic;
+  color: rgba(200,150,60,0.04);
+  line-height: 1;
+  top: -2rem; right: -2rem;
+  pointer-events: none;
+}
+
+.profiel-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--cream);
+  margin-bottom: 0.75rem;
+}
+.profiel-name em { font-style: italic; color: var(--gold); }
+
+.profiel-tagline {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(200,150,60,0.5);
+  margin-bottom: 2rem;
+}
+.profiel-divider {
+  width: 40px; height: 1px;
+  background: rgba(200,150,60,0.3);
+  margin-bottom: 2rem;
+}
+.profiel-meta { display: flex; flex-direction: column; gap: 1rem; }
+.meta-row { display: flex; gap: 1.5rem; align-items: baseline; }
+.meta-key {
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: rgba(200,150,60,0.4);
+  text-transform: uppercase;
+  min-width: 80px;
+}
+.meta-val {
+  font-size: 12px;
+  color: var(--cream);
+  letter-spacing: 0.05em;
+}
+
+.profiel-side {
+  border: 1px solid rgba(200,150,60,0.12);
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.stat-block { }
+.stat-block .stat-label-p {
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: rgba(200,150,60,0.4);
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+.stat-block .stat-val-p {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--cream);
+  line-height: 1;
+}
+.stat-block .stat-desc-p {
+  font-size: 9px;
+  color: rgba(245,236,215,0.3);
+  margin-top: 0.3rem;
+}
+
+.profiel-bottom {
+  border: 1px solid rgba(200,150,60,0.12);
+  padding: 2rem 3rem;
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+}
+.skill-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.skill-name {
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(245,236,215,0.4);
+}
+.skill-bar {
+  width: 80px; height: 2px;
+  background: rgba(245,236,215,0.08);
+  position: relative;
+}
+.skill-fill {
+  height: 100%;
+  background: var(--gold);
+  position: absolute;
+  top: 0; left: 0;
+  transition: width 1s ease;
+}
+
+/* SETTINGS PAGE */
+.settings-list { display: flex; flex-direction: column; gap: 1px; }
+
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.75rem 2rem;
+  border: 1px solid rgba(200,150,60,0.08);
+  transition: background 0.3s, border-color 0.3s;
+}
+.setting-row:hover {
+  background: rgba(200,150,60,0.03);
+  border-color: rgba(200,150,60,0.18);
+}
+
+.setting-info { }
+.setting-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 0.25rem;
+}
+.setting-desc {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: rgba(245,236,215,0.3);
+}
+
+.toggle {
+  width: 40px; height: 20px;
+  border: 1px solid rgba(200,150,60,0.3);
+  border-radius: 10px;
+  position: relative;
+  cursor: none;
+  transition: background 0.3s, border-color 0.3s;
+}
+.toggle.on {
+  background: rgba(200,150,60,0.15);
+  border-color: var(--gold);
+}
+.toggle::after {
+  content: '';
+  width: 12px; height: 12px;
+  background: rgba(200,150,60,0.5);
+  border-radius: 50%;
+  position: absolute;
+  top: 3px; left: 3px;
+  transition: left 0.3s, background 0.3s;
+}
+.toggle.on::after {
+  left: 23px;
+  background: var(--gold);
+}
+
+.select-fake {
+  border: 1px solid rgba(200,150,60,0.25);
+  padding: 6px 16px 6px 12px;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: rgba(200,150,60,0.7);
+  background: transparent;
+  cursor: none;
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<div class="layout">
+  <nav class="sidebar">
+    <div class="sidebar-eye"></div>
+    <div class="sidebar-label">Navigatie — XSB1B</div>
+    <ul class="nav-list">
+      <li class="nav-item active" id="nav-home"><button onclick="showPage('home')">Home</button></li>
+      <li class="nav-item" id="nav-rooster"><button onclick="showPage('rooster')">Rooster</button></li>
+      <li class="nav-item" id="nav-taken"><button onclick="showPage('taken')">Taken</button></li>
+      <li class="nav-item" id="nav-leraren"><button onclick="showPage('leraren')">Leraren</button></li>
+      <li class="nav-item" id="nav-profiel"><button onclick="showPage('profiel')">Profiel</button></li>
+      <li class="nav-item" id="nav-settings"><button onclick="showPage('settings')">Instellingen</button></li>
+    </ul>
+    <div class="sidebar-bottom">
+      <p>André Babirian<br>ICT Software Developer<br>Jaar 1 — 2025/2026</p>
+    </div>
+  </nav>
+
+  <main class="main-content">
+
+    <!-- HOME -->
+    <div class="page active" id="page-home">
+      <div class="page-header">
+        <div class="page-number">01 — Home</div>
+        <h1 class="page-title">School<br><em>Rooster</em></h1>
+        <p class="page-subtitle">Week 19 · Maandag t/m Vrijdag</p>
+      </div>
+      <div class="home-grid">
+        <div class="home-cell" data-num="4">
+          <div class="cell-label">Open taken</div>
+          <div class="cell-value">4</div>
+          <div class="cell-desc">Waarvan 2 bijna<br>verlopen zijn</div>
+        </div>
+        <div class="home-cell" data-num="7.6">
+          <div class="cell-label">Gemiddeld cijfer</div>
+          <div class="cell-value">7.6</div>
+          <div class="cell-desc">Semester 2<br>2025–2026</div>
+        </div>
+        <div class="cell-wide home-cell" style="border:1px solid rgba(200,150,60,0.1);padding:0" data-num="">
+          <div class="day-block">
+            <div class="day-name">Maandag</div>
+            <div class="day-subject">Flex</div>
+            <div class="day-time">08:30 – 17:00</div>
+            <div style="margin-top:0.75rem"><span class="day-room">Groen 2.073</span></div>
+          </div>
+          <div class="day-block">
+            <div class="day-name">Dinsdag</div>
+            <div class="day-subject">Flex</div>
+            <div class="day-time">08:30 – 17:00</div>
+            <div style="margin-top:0.75rem"><span class="day-room">Groen 2.073</span></div>
+          </div>
+          <div class="day-block">
+            <div class="day-name">Woensdag</div>
+            <div class="day-subject">Flex & Rekenen</div>
+            <div class="day-time">08:30 – 17:00</div>
+            <div style="margin-top:0.75rem"><span class="day-room">Groen 2.073</span></div>
+          </div>
+          <div class="day-block">
+            <div class="day-name">Donderdag</div>
+            <div class="day-subject">Flex & NL</div>
+            <div class="day-time">08:30 – 17:00</div>
+            <div style="margin-top:0.75rem"><span class="day-room">Groen 2.073</span></div>
+          </div>
+          <div class="day-block">
+            <div class="day-name">Vrijdag</div>
+            <div class="day-subject">Flex</div>
+            <div class="day-time">08:30 – 13:30</div>
+            <div style="margin-top:0.75rem"><span class="day-room">Groen 2.073</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROOSTER -->
+    <div class="page" id="page-rooster">
+      <div class="page-header">
+        <div class="page-number">02 — Rooster</div>
+        <h1 class="page-title">Week<br><em>Overzicht</em></h1>
+        <p class="page-subtitle">Lokaal Groen 2.073 · Klas XSB1B</p>
+      </div>
+      <div class="rooster-grid">
+        <div class="rooster-card">
+          <div class="rc-day">Maandag</div>
+          <div class="rc-time">08:30<br>17:00</div>
+          <div class="rc-divider"></div>
+          <div class="rc-room">Groen 2.073</div>
+          <div class="rc-vak">Flex</div>
+        </div>
+        <div class="rooster-card">
+          <div class="rc-day">Dinsdag</div>
+          <div class="rc-time">08:30<br>17:00</div>
+          <div class="rc-divider"></div>
+          <div class="rc-room">Groen 2.073</div>
+          <div class="rc-vak">Flex</div>
+        </div>
+        <div class="rooster-card">
+          <div class="rc-day">Woensdag</div>
+          <div class="rc-time">08:30<br>17:00</div>
+          <div class="rc-divider"></div>
+          <div class="rc-room">Groen 2.073</div>
+          <div class="rc-vak">Flex &<br>Rekenen</div>
+        </div>
+        <div class="rooster-card">
+          <div class="rc-day">Donderdag</div>
+          <div class="rc-time">08:30<br>17:00</div>
+          <div class="rc-divider"></div>
+          <div class="rc-room">Groen 2.073</div>
+          <div class="rc-vak">Flex, Nederlands<br>& Burgerschap</div>
+        </div>
+        <div class="rooster-card">
+          <div class="rc-day">Vrijdag</div>
+          <div class="rc-time">08:30<br>13:30</div>
+          <div class="rc-divider"></div>
+          <div class="rc-room">Groen 2.073</div>
+          <div class="rc-vak">Flex</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAKEN -->
+    <div class="page" id="page-taken">
+      <div class="page-header">
+        <div class="page-number">03 — Taken</div>
+        <h1 class="page-title">Taken<br><em>Lijst</em></h1>
+        <p class="page-subtitle">4 open · 2 afgerond deze week</p>
+      </div>
+      <div class="taken-header-row">
+        <div class="th-label">Status</div>
+        <div class="th-label">Opdracht</div>
+        <div class="th-label">Prioriteit</div>
+        <div class="th-label">Deadline</div>
+      </div>
+      <div class="taken-list">
+        <div class="taak-row">
+          <div class="taak-check"></div>
+          <div>
+            <div class="taak-name">UML diagram afmaken</div>
+            <div class="taak-sub">Software Architecture · Sprint 4</div>
+          </div>
+          <span class="tag tag-urgent">Urgent</span>
+          <span class="deadline-text">Morgen 09:00</span>
+        </div>
+        <div class="taak-row">
+          <div class="taak-check"></div>
+          <div>
+            <div class="taak-name">Portfolio bijwerken</div>
+            <div class="taak-sub">Persoonlijke ontwikkeling</div>
+          </div>
+          <span class="tag tag-soon">Snel</span>
+          <span class="deadline-text">Do 23:59</span>
+        </div>
+        <div class="taak-row">
+          <div class="taak-check"></div>
+          <div>
+            <div class="taak-name">GitHub README schrijven</div>
+            <div class="taak-sub">Project · Flex opdracht</div>
+          </div>
+          <span class="tag tag-later">Later</span>
+          <span class="deadline-text">Vr 17:00</span>
+        </div>
+        <div class="taak-row">
+          <div class="taak-check"></div>
+          <div>
+            <div class="taak-name">API documentatie</div>
+            <div class="taak-sub">Web Development module</div>
+          </div>
+          <span class="tag tag-later">Later</span>
+          <span class="deadline-text">Volg. week</span>
+        </div>
+        <div class="taak-row" style="opacity:0.5">
+          <div class="taak-check done">✓</div>
+          <div>
+            <div class="taak-name done">Retrospective inleveren</div>
+            <div class="taak-sub">Agile · Sprint 3</div>
+          </div>
+          <span class="tag tag-done">Klaar</span>
+          <span class="deadline-text">Afgerond</span>
+        </div>
+        <div class="taak-row" style="opacity:0.5">
+          <div class="taak-check done">✓</div>
+          <div>
+            <div class="taak-name done">Database schema ontwerp</div>
+            <div class="taak-sub">Databases module</div>
+          </div>
+          <span class="tag tag-done">Klaar</span>
+          <span class="deadline-text">Afgerond</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LERAREN -->
+    <div class="page" id="page-leraren">
+      <div class="page-header">
+        <div class="page-number">04 — Leraren</div>
+        <h1 class="page-title">Onze<br><em>Leraren</em></h1>
+        <p class="page-subtitle">Klas XSB1B · ICT Software Developer</p>
+      </div>
+      <div class="leraren-grid">
+        <div class="leraar-card">
+          <div class="leraar-initial">P</div>
+          <div class="leraar-num">01</div>
+          <div class="leraar-name">Peter</div>
+          <div class="leraar-role">Begeleider</div>
+          <div class="leraar-divider"></div>
+          <div class="leraar-vak-label">Vakken</div>
+          <div class="leraar-vak">Flex</div>
+        </div>
+        <div class="leraar-card">
+          <div class="leraar-initial">J</div>
+          <div class="leraar-num">02</div>
+          <div class="leraar-name">Jeroen</div>
+          <div class="leraar-role">Begeleider</div>
+          <div class="leraar-divider"></div>
+          <div class="leraar-vak-label">Vakken</div>
+          <div class="leraar-vak">Flex</div>
+        </div>
+        <div class="leraar-card">
+          <div class="leraar-initial">J</div>
+          <div class="leraar-num">03</div>
+          <div class="leraar-name">Jan</div>
+          <div class="leraar-role">Docent</div>
+          <div class="leraar-divider"></div>
+          <div class="leraar-vak-label">Vakken</div>
+          <div class="leraar-vak">Flex</div>
+        </div>
+        <div class="leraar-card">
+          <div class="leraar-initial">A</div>
+          <div class="leraar-num">04</div>
+          <div class="leraar-name">Alex</div>
+          <div class="leraar-role">Docent</div>
+          <div class="leraar-divider"></div>
+          <div class="leraar-vak-label">Vakken</div>
+          <div class="leraar-vak">Rekenen</div>
+        </div>
+        <div class="leraar-card">
+          <div class="leraar-initial">?</div>
+          <div class="leraar-num">05</div>
+          <div class="leraar-name">Onbekend</div>
+          <div class="leraar-role">Docent</div>
+          <div class="leraar-divider"></div>
+          <div class="leraar-vak-label">Vakken</div>
+          <div class="leraar-vak">Nederlands</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROFIEL -->
+    <div class="page" id="page-profiel">
+      <div class="page-header">
+        <div class="page-number">05 — Profiel</div>
+        <h1 class="page-title">Mijn<br><em>Profiel</em></h1>
+      </div>
+      <div class="profiel-split">
+        <div class="profiel-main">
+          <div class="profiel-name">André<br><em>Babirian</em></div>
+          <div class="profiel-tagline">ICT Software Developer · Jaar 1</div>
+          <div class="profiel-divider"></div>
+          <div class="profiel-meta">
+            <div class="meta-row"><span class="meta-key">Klas</span><span class="meta-val">XSB1B</span></div>
+            <div class="meta-row"><span class="meta-key">School</span><span class="meta-val">Windesheim</span></div>
+            <div class="meta-row"><span class="meta-key">Jaar</span><span class="meta-val">2025 / 2026</span></div>
+          </div>
+        </div>
+        <div class="profiel-side">
+          <div class="stat-block">
+            <div class="stat-label-p">Gemiddeld cijfer</div>
+            <div class="stat-val-p">7.6</div>
+            <div class="stat-desc-p">Semester 2 · 2026</div>
+          </div>
+          <div style="width:100%;height:1px;background:rgba(200,150,60,0.12)"></div>
+          <div class="stat-block">
+            <div class="stat-label-p">Afgeronde vakken</div>
+            <div class="stat-val-p">4/5</div>
+            <div class="stat-desc-p">Dit semester</div>
+          </div>
+          <div style="width:100%;height:1px;background:rgba(200,150,60,0.12)"></div>
+          <div class="stat-block">
+            <div class="stat-label-p">Ingeleverde opdrachten</div>
+            <div class="stat-val-p">6/10</div>
+            <div class="stat-desc-p">Dit blok</div>
+          </div>
+        </div>
+      </div>
+      <div class="profiel-bottom">
+        <div class="skill-item">
+          <div class="skill-name">React</div>
+          <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">TypeScript</div>
+          <div class="skill-bar"><div class="skill-fill" style="width:55%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">CSS</div>
+          <div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">Git</div>
+          <div class="skill-bar"><div class="skill-fill" style="width:60%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">SQL</div>
+          <div class="skill-bar"><div class="skill-fill" style="width:45%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="page" id="page-settings">
+      <div class="page-header">
+        <div class="page-number">06 — Instellingen</div>
+        <h1 class="page-title">Instellingen</h1>
+      </div>
+      <div class="settings-list">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-name">Dark mode</div>
+            <div class="setting-desc">Schakel tussen licht en donker thema</div>
+          </div>
+          <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+        </div>
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-name">Meldingen</div>
+            <div class="setting-desc">Ontvang reminders voor deadlines</div>
+          </div>
+          <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+        </div>
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-name">Taal</div>
+            <div class="setting-desc">Kies de weergavetaal van het dashboard</div>
+          </div>
+          <div class="select-fake">Nederlands</div>
+        </div>
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-name">Geluid</div>
+            <div class="setting-desc">Geluidssignalen bij acties</div>
+          </div>
+          <div class="toggle" onclick="this.classList.toggle('on')"></div>
+        </div>
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-name">Compacte weergave</div>
+            <div class="setting-desc">Minder witruimte, meer inhoud zichtbaar</div>
+          </div>
+          <div class="toggle" onclick="this.classList.toggle('on')"></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+const cursor = document.getElementById('cursor');
+const dot = document.getElementById('cursorDot');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+  dot.style.left = e.clientX + 'px';
+  dot.style.top = e.clientY + 'px';
+});
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.getElementById('nav-' + id).classList.add('active');
+}
+</script>
+</body>
+</html>
