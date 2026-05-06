@@ -1,0 +1,2080 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OLYMPUS — André Babirian</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@400;700;900&family=IM+Fell+English:ital@0;1&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+/* ═══════════════════════════════════════════════════════
+   OLYMPIAN TOKENS — gold, obsidian, crystal, divine light
+═══════════════════════════════════════════════════════ */
+:root {
+  --void:      #04050A;
+  --abyss:     #080C14;
+  --deep:      #0C1220;
+  --midnight:  #111827;
+  --gold:      #C8963C;
+  --gold2:     #E8BC6A;
+  --gold3:     #F5D98A;
+  --goldglow:  rgba(200,150,60,0.15);
+  --crystal:   #A8D8F0;
+  --crystal2:  #C8EAFF;
+  --ichor:     #7B9EC8;
+  --divine:    rgba(200,180,120,0.06);
+  --marble:    #E8E0D0;
+  --marble2:   #C8BEA8;
+  --blood:     #8B1A1A;
+  --ember:     #C84820;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { height: 100%; }
+body {
+  background: var(--void);
+  color: var(--marble);
+  font-family: 'Rajdhani', sans-serif;
+  height: 100vh;
+  overflow: hidden;
+  cursor: none;
+}
+
+/* ═══════════════════════════════════════════════════════
+   CURSOR — divine spark
+═══════════════════════════════════════════════════════ */
+#olymp-cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%,-50%);
+  width: 24px; height: 24px;
+  mix-blend-mode: screen;
+}
+#olymp-cursor svg { width: 100%; height: 100%; }
+
+/* ═══════════════════════════════════════════════════════
+   ANIMATED CODE MATRIX BACKGROUND — like the Spartan image
+   falling binary/code rain behind everything
+═══════════════════════════════════════════════════════ */
+#matrix-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  opacity: 0.18;
+}
+.matrix-col {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  animation: matrix-fall linear infinite;
+  font-family: 'Rajdhani', monospace;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: var(--crystal);
+  opacity: 0;
+  text-shadow: 0 0 8px var(--crystal);
+  user-select: none;
+}
+@keyframes matrix-fall {
+  0%   { transform: translateY(-100%); opacity: 0; }
+  5%   { opacity: 1; }
+  90%  { opacity: 0.7; }
+  100% { transform: translateY(110vh); opacity: 0; }
+}
+
+/* ═══════════════════════════════════════════════════════
+   GRAIN OVERLAY
+═══════════════════════════════════════════════════════ */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E");
+  opacity: 0.5;
+}
+
+/* ═══════════════════════════════════════════════════════
+   DIVINE RADIAL GLOW — top center, like the sun in ICARUS
+═══════════════════════════════════════════════════════ */
+.divine-light {
+  position: fixed;
+  top: -30%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(200,180,100,0.12) 0%,
+    rgba(200,150,60,0.07)  30%,
+    rgba(200,150,60,0.03)  60%,
+    transparent 75%
+  );
+  pointer-events: none;
+  z-index: 1;
+  animation: divine-pulse 8s ease-in-out infinite;
+}
+@keyframes divine-pulse {
+  0%,100% { opacity: 0.8; transform: translateX(-50%) scale(1); }
+  50%      { opacity: 1; transform: translateX(-50%) scale(1.08); }
+}
+
+/* ═══════════════════════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════════════════════ */
+.olympus {
+  position: relative;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  height: 100vh;
+}
+
+/* ═══════════════════════════════════════════════════════
+   SIDEBAR — temple pillar column
+═══════════════════════════════════════════════════════ */
+.sidebar {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg,
+    rgba(8,12,20,0.97) 0%,
+    rgba(4,5,10,0.99)  100%
+  );
+  border-right: 1px solid rgba(200,150,60,0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+/* double inner border — temple column feel */
+.sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg,
+    transparent 0%, rgba(200,150,60,0.5) 20%,
+    rgba(200,150,60,0.8) 50%, rgba(200,150,60,0.5) 80%, transparent 100%
+  );
+  left: 5px;
+}
+.sidebar::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg,
+    transparent 0%, rgba(200,150,60,0.3) 30%,
+    rgba(200,150,60,0.6) 50%, rgba(200,150,60,0.3) 70%, transparent 100%
+  );
+}
+
+/* CREST AREA */
+.sb-crest {
+  padding: 2rem 1.75rem 1.5rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(200,150,60,0.15);
+  position: relative;
+}
+
+/* SVG laurel wreath crest */
+.sb-crest-icon {
+  display: block;
+  margin: 0 auto 1rem;
+  width: 56px; height: 56px;
+}
+
+.sb-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: var(--gold2);
+  text-transform: uppercase;
+  text-shadow: 0 0 20px rgba(200,150,60,0.4);
+  display: block;
+}
+.sb-subtitle {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: rgba(200,150,60,0.4);
+  margin-top: 4px;
+  display: block;
+}
+
+/* Gold divider ornament */
+.sb-orn {
+  text-align: center;
+  color: var(--gold);
+  font-size: 10px;
+  letter-spacing: 0.5em;
+  opacity: 0.5;
+  padding: 0.4rem 0;
+  display: block;
+}
+
+/* NAV */
+.sb-nav { flex: 1; padding: 0.75rem 0; overflow-y: auto; }
+.sb-nav-label {
+  font-family: 'Cinzel', serif;
+  font-size: 7px;
+  letter-spacing: 0.4em;
+  color: rgba(200,150,60,0.3);
+  text-transform: uppercase;
+  padding: 0.5rem 1.75rem 0.25rem;
+}
+
+.nav-list { list-style: none; }
+.nav-item button {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 9px 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: none;
+  text-align: left;
+  position: relative;
+  transition: background 0.3s;
+}
+.nav-item button:hover { background: rgba(200,150,60,0.05); }
+.nav-item.active button { background: rgba(200,150,60,0.08); }
+
+/* vertical gold glow on active */
+.nav-item.active button::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 10%; bottom: 10%;
+  width: 2px;
+  background: linear-gradient(180deg, transparent, var(--gold2), transparent);
+  box-shadow: 0 0 8px var(--gold);
+}
+
+.nav-roman {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  color: rgba(200,150,60,0.3);
+  min-width: 20px;
+  transition: color 0.3s;
+}
+.nav-label {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: rgba(232,224,208,0.45);
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+
+.nav-item button:hover .nav-roman,
+.nav-item.active button .nav-roman { color: var(--gold2); }
+.nav-item button:hover .nav-label,
+.nav-item.active button .nav-label { color: var(--marble); text-shadow: 0 0 12px rgba(200,150,60,0.3); }
+
+/* SIDEBAR BOTTOM — user / motto */
+.sb-bottom {
+  padding: 1.25rem 1.75rem;
+  border-top: 1px solid rgba(200,150,60,0.12);
+}
+.sb-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0.75rem;
+}
+.sb-avatar {
+  width: 34px; height: 34px;
+  border: 1.5px solid var(--gold);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 10px;
+  color: var(--gold2);
+  background: rgba(200,150,60,0.08);
+  box-shadow: 0 0 12px rgba(200,150,60,0.2), inset 0 0 8px rgba(200,150,60,0.05);
+  flex-shrink: 0;
+}
+.sb-uname {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  color: rgba(232,224,208,0.6);
+  line-height: 1.6;
+}
+.sb-uname strong { display: block; color: var(--marble); font-size: 9px; }
+
+.sb-motto {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 9px;
+  color: rgba(200,150,60,0.3);
+  text-align: center;
+  letter-spacing: 0.1em;
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════════════════
+   MAIN PANEL
+═══════════════════════════════════════════════════════ */
+.main-panel {
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(200,150,60,0.3) transparent;
+  background: linear-gradient(135deg,
+    rgba(8,12,20,0.95) 0%,
+    rgba(4,5,10,0.98)  100%
+  );
+}
+
+/* ═══════════════════════════════════════════════════════
+   PAGES
+═══════════════════════════════════════════════════════ */
+.page { display: none; }
+.page.active {
+  display: block;
+  animation: olymp-in 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+@keyframes olymp-in {
+  from { opacity: 0; transform: translateY(18px) scale(0.99); filter: blur(4px); }
+  to   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+/* ═══════════════════════════════════════════════════════
+   TOP BAR — magazine header style (like ICARUS)
+═══════════════════════════════════════════════════════ */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2.5rem;
+  border-bottom: 1px solid rgba(200,150,60,0.18);
+  background: rgba(4,5,10,0.8);
+  backdrop-filter: blur(8px);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.tb-left { display: flex; align-items: baseline; gap: 1rem; }
+.tb-chapter {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 0.4em;
+  color: rgba(200,150,60,0.45);
+  text-transform: uppercase;
+}
+.tb-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--gold2);
+  text-shadow: 0 0 20px rgba(200,150,60,0.4);
+}
+.tb-right { display: flex; gap: 8px; align-items: center; }
+.tb-pill {
+  font-family: 'Cinzel', serif;
+  font-size: 7px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border: 1px solid rgba(200,150,60,0.3);
+  color: rgba(200,150,60,0.6);
+}
+.tb-pill.live {
+  border-color: var(--gold);
+  color: var(--gold2);
+  background: rgba(200,150,60,0.08);
+  box-shadow: 0 0 8px rgba(200,150,60,0.15);
+  animation: tb-pulse 2s ease-in-out infinite;
+}
+@keyframes tb-pulse {
+  0%,100% { box-shadow: 0 0 8px rgba(200,150,60,0.15); }
+  50%      { box-shadow: 0 0 16px rgba(200,150,60,0.35); }
+}
+
+/* ═══════════════════════════════════════════════════════
+   SHARED — SECTION DIVIDER
+═══════════════════════════════════════════════════════ */
+.sec-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  margin: 0.5rem 0;
+}
+.sec-divider::before, .sec-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(200,150,60,0.4), transparent);
+}
+.sec-divider-text {
+  font-family: 'Cinzel', serif;
+  font-size: 7px;
+  letter-spacing: 0.4em;
+  color: rgba(200,150,60,0.4);
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════════════════════
+   GOLD CARD — base component
+═══════════════════════════════════════════════════════ */
+.gc {
+  background: linear-gradient(135deg,
+    rgba(200,150,60,0.04) 0%,
+    rgba(8,12,20,0.6) 50%,
+    rgba(200,150,60,0.02) 100%
+  );
+  border: 1px solid rgba(200,150,60,0.18);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.4s, box-shadow 0.4s, transform 0.4s;
+}
+.gc::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(200,150,60,0.06) 0%, transparent 40%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.gc:hover {
+  border-color: rgba(200,150,60,0.45);
+  box-shadow: 0 0 30px rgba(200,150,60,0.1), inset 0 0 20px rgba(200,150,60,0.03);
+  transform: translateY(-3px);
+}
+.gc:hover::before { opacity: 1; }
+
+/* corner ornament on cards */
+.gc-corner {
+  position: absolute;
+  width: 14px; height: 14px;
+  opacity: 0.4;
+}
+.gc-corner::before, .gc-corner::after {
+  content: '';
+  position: absolute;
+  background: var(--gold);
+}
+.gc-corner::before { width: 100%; height: 1px; top: 0; }
+.gc-corner::after  { width: 1px; height: 100%; left: 0; }
+.gc-corner.tl { top: 4px; left: 4px; }
+.gc-corner.tr { top: 4px; right: 4px; transform: scaleX(-1); }
+.gc-corner.bl { bottom: 4px; left: 4px; transform: scaleY(-1); }
+.gc-corner.br { bottom: 4px; right: 4px; transform: scale(-1,-1); }
+
+/* ═══════════════════════════════════════════════════════
+   HOME PAGE
+═══════════════════════════════════════════════════════ */
+.home-herald {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(200,150,60,0.08);
+  border-bottom: 1px solid rgba(200,150,60,0.1);
+}
+
+.herald-stone {
+  background: linear-gradient(160deg, rgba(8,12,20,0.95) 0%, rgba(4,5,10,0.98) 100%);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  cursor: none;
+  transition: background 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+.herald-stone:hover {
+  background: linear-gradient(160deg, rgba(200,150,60,0.06) 0%, rgba(8,12,20,0.95) 100%);
+}
+/* radial glow per stone */
+.herald-stone::after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,150,60,0.1), transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.herald-stone:hover::after { opacity: 1; }
+
+.hs-glyph {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+  background: linear-gradient(180deg, var(--gold3) 0%, var(--gold) 60%, rgba(200,150,60,0.6) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 8px rgba(200,150,60,0.3));
+}
+.hs-label {
+  font-family: 'Cinzel', serif;
+  font-size: 7px;
+  letter-spacing: 0.28em;
+  color: rgba(200,150,60,0.45);
+  text-transform: uppercase;
+}
+.hs-sub {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 9px;
+  color: rgba(232,224,208,0.2);
+  margin-top: 3px;
+}
+
+/* HOME — week as pillars */
+.home-pillars {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: rgba(200,150,60,0.06);
+  border-bottom: 1px solid rgba(200,150,60,0.1);
+}
+
+.pillar-day {
+  background: var(--void);
+  cursor: none;
+  overflow: hidden;
+  transition: background 0.4s;
+  position: relative;
+}
+.pillar-day:hover { background: rgba(200,150,60,0.04); }
+/* gold top cap like a column capital */
+.pillar-capital {
+  background: linear-gradient(180deg, rgba(200,150,60,0.15) 0%, transparent 100%);
+  padding: 0.7rem 1rem 0.5rem;
+  border-bottom: 1px solid rgba(200,150,60,0.2);
+  text-align: center;
+}
+.pc-name {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+.pillar-shaft { padding: 1.2rem 1rem; }
+.ps-subject {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 12px;
+  color: var(--marble);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+.ps-time {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: rgba(200,150,60,0.5);
+}
+.ps-room {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 9px;
+  color: rgba(232,224,208,0.2);
+  margin-top: 3px;
+  letter-spacing: 0.08em;
+}
+/* pillar base */
+.pillar-base {
+  height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(200,150,60,0.3), transparent);
+  margin-top: 0.5rem;
+}
+
+/* HOME — two column notices */
+.home-notices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(200,150,60,0.06);
+}
+
+.notice-temple {
+  background: var(--void);
+  padding: 1.75rem 2rem;
+}
+.nt-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  text-shadow: 0 0 12px rgba(200,150,60,0.3);
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(200,150,60,0.15);
+  text-align: center;
+}
+
+.nt-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid rgba(200,150,60,0.06);
+  cursor: none;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 12px;
+  color: rgba(232,224,208,0.55);
+  letter-spacing: 0.04em;
+  transition: color 0.3s;
+}
+.nt-row:last-child { border-bottom: none; }
+.nt-row:hover { color: var(--marble); }
+.nt-gem {
+  width: 5px; height: 5px;
+  flex-shrink: 0;
+  transform: rotate(45deg);
+}
+.gem-gold   { background: var(--gold); box-shadow: 0 0 6px var(--gold); }
+.gem-amber  { background: #C87030; box-shadow: 0 0 6px #C87030; }
+.gem-silver { background: var(--ichor); box-shadow: 0 0 6px var(--ichor); }
+.gem-divine { background: var(--crystal); box-shadow: 0 0 6px var(--crystal); }
+.gem-done   { background: var(--marble2); }
+
+.nt-badge {
+  margin-left: auto;
+  font-family: 'Cinzel', serif;
+  font-size: 6px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border: 1px solid;
+  flex-shrink: 0;
+}
+.nb-urgent { border-color: rgba(200,80,60,0.5); color: #D87060; }
+.nb-soon   { border-color: rgba(200,150,60,0.4); color: var(--gold); }
+.nb-later  { border-color: rgba(168,216,240,0.3); color: var(--ichor); }
+.nb-done   { border-color: rgba(232,224,208,0.15); color: var(--marble2); }
+
+/* ═══════════════════════════════════════════════════════
+   ROOSTER PAGE — temple calendar
+═══════════════════════════════════════════════════════ */
+.rooster-temple {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: rgba(200,150,60,0.06);
+}
+
+.rt-column {
+  background: var(--void);
+  overflow: hidden;
+  cursor: none;
+  transition: background 0.4s;
+  position: relative;
+}
+.rt-column:hover { background: rgba(200,150,60,0.04); }
+
+/* painted sky miniature per day — ICARUS inspired */
+.rt-fresco {
+  height: 110px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(200,150,60,0.15);
+}
+.rf-0 { background: linear-gradient(160deg, #04050A 0%, #1A1008 50%, #3A2010 80%, #C4763A 100%); }
+.rf-1 { background: linear-gradient(155deg, #04050A 0%, #0A1020 40%, #142030 70%, #203848 100%); }
+.rf-2 { background: linear-gradient(160deg, #0A0818 0%, #201028 50%, #381828 80%, #8B2236 100%); }
+.rf-3 { background: linear-gradient(150deg, #04050A 0%, #081018 40%, #102030 70%, #203040 100%); }
+.rf-4 { background: linear-gradient(160deg, #100808 0%, #200A08 40%, #3A1808 70%, #C84820 100%); }
+
+/* gold orb / divine light per day */
+.rt-orb {
+  position: absolute;
+  border-radius: 50%;
+  animation: orb-breathe 5s ease-in-out infinite;
+}
+@keyframes orb-breathe {
+  0%,100% { opacity: 0.8; transform: scale(1); }
+  50%      { opacity: 1; transform: scale(1.1); }
+}
+.rf-0 .rt-orb { width:35px;height:35px; top:15px;right:20%; background: radial-gradient(#E8BC6A,#C8963C); box-shadow:0 0 20px rgba(200,150,60,0.6); }
+.rf-1 .rt-orb { width:28px;height:28px; top:20px;right:30%; background: radial-gradient(#C8EAFF,#A8D8F0); box-shadow:0 0 16px rgba(168,216,240,0.5); }
+.rf-2 .rt-orb { width:32px;height:32px; top:12px;left:30%;  background: radial-gradient(#E8C0C0,#C87080); box-shadow:0 0 18px rgba(200,100,100,0.4); }
+.rf-3 .rt-orb { width:24px;height:24px; top:25px;right:25%; background: radial-gradient(#A8D8F0,#7B9EC8); box-shadow:0 0 14px rgba(123,158,200,0.4); }
+.rf-4 .rt-orb { width:40px;height:40px; top:10px;left:20%;  background: radial-gradient(#F5D98A,#E8621A); box-shadow:0 0 24px rgba(232,98,26,0.6); }
+
+/* flying figure silhouette (Icarus-inspired) per day */
+.rt-figure {
+  position: absolute;
+  bottom: 5px;
+  font-size: 9px;
+  opacity: 0.15;
+  letter-spacing: 0.05em;
+  color: var(--gold3);
+  font-family: 'Rajdhani', sans-serif;
+}
+
+.rt-cap {
+  background: linear-gradient(180deg, rgba(200,150,60,0.1) 0%, transparent 100%);
+  padding: 0.6rem 1.2rem;
+  border-bottom: 1px solid rgba(200,150,60,0.15);
+}
+.rtc-name {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+.rt-body { padding: 1.2rem 1.2rem; }
+.rtb-time {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.35rem;
+  color: var(--marble);
+  line-height: 1;
+  filter: drop-shadow(0 0 6px rgba(200,150,60,0.2));
+}
+.rtb-sep {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 9px;
+  color: rgba(200,150,60,0.3);
+  display: block;
+  margin: 4px 0;
+  letter-spacing: 0.15em;
+}
+.rtb-end {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1rem;
+  color: rgba(232,224,208,0.4);
+  margin-bottom: 0.7rem;
+}
+.rtb-ruler {
+  width: 24px; height: 1px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  margin: 0.6rem 0;
+  opacity: 0.4;
+}
+.rtb-room {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  color: rgba(232,224,208,0.2);
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+.rtb-vak {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: rgba(200,150,60,0.65);
+}
+
+/* ═══════════════════════════════════════════════════════
+   TAKEN PAGE — inscriptions in stone
+═══════════════════════════════════════════════════════ */
+.inscription-header {
+  display: grid;
+  grid-template-columns: 52px 1fr 110px 130px 80px;
+  gap: 0;
+  padding: 0.8rem 2rem;
+  background: rgba(200,150,60,0.06);
+  border-bottom: 1px solid rgba(200,150,60,0.2);
+  align-items: center;
+}
+.ih-col {
+  font-family: 'Cinzel', serif;
+  font-size: 7px;
+  letter-spacing: 0.28em;
+  color: rgba(200,150,60,0.35);
+  text-transform: uppercase;
+}
+
+.inscription-row {
+  display: grid;
+  grid-template-columns: 52px 1fr 110px 130px 80px;
+  gap: 0;
+  padding: 1.2rem 2rem;
+  border-bottom: 1px solid rgba(200,150,60,0.07);
+  align-items: center;
+  cursor: none;
+  position: relative;
+  transition: background 0.3s;
+}
+.inscription-row::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 0;
+  background: rgba(200,150,60,0.04);
+  transition: width 0.5s ease;
+}
+.inscription-row:hover::before { width: 100%; }
+.inscription-row:hover .ir-name { color: var(--gold2); text-shadow: 0 0 12px rgba(200,150,60,0.2); }
+.inscription-row:last-child { border-bottom: none; }
+.inscription-row.done-row { opacity: 0.35; }
+
+.ir-num {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: rgba(200,150,60,0.15);
+  line-height: 1;
+}
+.ir-num.xout { text-decoration: line-through; }
+.ir-name {
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--marble);
+  transition: color 0.3s, text-shadow 0.3s;
+  margin-bottom: 2px;
+}
+.ir-name.xout { text-decoration: line-through; opacity: 0.4; }
+.ir-sub {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 10px;
+  color: rgba(232,224,208,0.22);
+}
+
+.rune-badge {
+  display: inline-block;
+  font-family: 'Cinzel', serif;
+  font-size: 7px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border: 1px solid;
+}
+.rb-critical { border-color: rgba(200,70,50,0.5);  color: #D88070; }
+.rb-soon     { border-color: rgba(200,150,60,0.4); color: var(--gold); }
+.rb-later    { border-color: rgba(123,158,200,0.3); color: var(--ichor); }
+.rb-done     { border-color: rgba(232,224,208,0.1); color: rgba(232,224,208,0.25); }
+
+.ir-deadline {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 11px;
+  color: rgba(232,224,208,0.22);
+  letter-spacing: 0.05em;
+}
+.ir-vak {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  color: rgba(200,150,60,0.3);
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════════════════════
+   LERAREN PAGE — hall of gods
+═══════════════════════════════════════════════════════ */
+.pantheon {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(200,150,60,0.06);
+}
+
+.deity-card {
+  background: var(--void);
+  overflow: hidden;
+  cursor: none;
+  transition: background 0.4s;
+  position: relative;
+}
+.deity-card:hover { background: rgba(200,150,60,0.04); }
+.deity-card:hover .dc-name { color: var(--gold2); text-shadow: 0 0 16px rgba(200,150,60,0.4); }
+
+/* unique "painted" panel per deity */
+.dc-painting {
+  height: 150px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(200,150,60,0.15);
+}
+.dp-0 { background: linear-gradient(160deg,#08080C,#1A1008,#C4763A90); }
+.dp-1 { background: linear-gradient(155deg,#040810,#0A1828,#1A3850A0); }
+.dp-2 { background: linear-gradient(165deg,#100408,#2A0808,#8B1A1A80); }
+.dp-3 { background: linear-gradient(150deg,#040810,#080820,#0A205090); }
+.dp-4 { background: linear-gradient(160deg,#0A0808,#201008,#C84820A0); }
+
+/* big roman numeral ghost */
+.dc-ghost {
+  position: absolute;
+  bottom: -15px; left: -5px;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 9rem;
+  font-weight: 900;
+  color: rgba(200,150,60,0.06);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  transition: color 0.4s;
+}
+.deity-card:hover .dc-ghost { color: rgba(200,150,60,0.1); }
+
+/* crystal prismatic effect */
+.dc-prism {
+  position: absolute;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.deity-card:hover .dc-prism { transform: scale(1.1) rotate(5deg) !important; }
+
+.dc-body { padding: 1.3rem 1.5rem; }
+.dc-num {
+  font-family: 'Cinzel', serif;
+  font-size: 7px;
+  letter-spacing: 0.35em;
+  color: rgba(200,150,60,0.3);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+.dc-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--marble);
+  margin-bottom: 3px;
+  line-height: 1;
+  transition: color 0.3s, text-shadow 0.3s;
+  letter-spacing: 0.05em;
+}
+.dc-role {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: rgba(232,224,208,0.25);
+  margin-bottom: 0.75rem;
+}
+.dc-ruler {
+  width: 22px; height: 1px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  opacity: 0.35;
+  margin-bottom: 0.6rem;
+}
+.dc-vak-lbl {
+  font-family: 'Cinzel', serif;
+  font-size: 7px;
+  letter-spacing: 0.22em;
+  color: rgba(200,150,60,0.28);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.dc-vak {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: rgba(200,150,60,0.6);
+}
+
+/* ═══════════════════════════════════════════════════════
+   PROFIEL PAGE — the hero's dossier
+═══════════════════════════════════════════════════════ */
+.hero-scroll {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  border-bottom: 1px solid rgba(200,150,60,0.1);
+}
+
+.hero-main {
+  padding: 2.5rem;
+  border-right: 1px solid rgba(200,150,60,0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+/* giant background roman numeral / letter */
+.hm-bg {
+  position: absolute;
+  top: -30px; right: -15px;
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 900;
+  font-size: 20rem;
+  color: rgba(200,150,60,0.025);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hm-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 7px;
+  letter-spacing: 0.4em;
+  color: rgba(200,150,60,0.45);
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+.hm-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 900;
+  line-height: 0.9;
+  background: linear-gradient(160deg, var(--gold3) 0%, var(--gold2) 40%, var(--gold) 70%, rgba(200,150,60,0.6) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 12px rgba(200,150,60,0.2));
+  margin-bottom: 0.4rem;
+  position: relative;
+}
+.hm-title {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  color: rgba(200,150,60,0.4);
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+.hm-divider {
+  width: 50px; height: 1px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  opacity: 0.4;
+  margin-bottom: 2rem;
+}
+.hm-details { display: flex; flex-direction: column; gap: 0.65rem; }
+.hm-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(200,150,60,0.06);
+}
+.hm-key {
+  font-family: 'Cinzel', serif;
+  font-size: 7px;
+  letter-spacing: 0.22em;
+  color: rgba(200,150,60,0.32);
+  text-transform: uppercase;
+  min-width: 90px;
+  flex-shrink: 0;
+}
+.hm-val {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: rgba(232,224,208,0.6);
+}
+
+/* stats column */
+.hero-stats {
+  display: flex;
+  flex-direction: column;
+}
+.stat-tablet {
+  flex: 1;
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(200,150,60,0.1);
+  text-align: center;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  cursor: none;
+  transition: background 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+.stat-tablet:last-child { border-bottom: none; }
+.stat-tablet:hover { background: rgba(200,150,60,0.04); }
+.stat-tablet:hover .st-value { text-shadow: 0 0 20px rgba(200,150,60,0.5); }
+
+.st-value {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  background: linear-gradient(180deg, var(--gold3) 0%, var(--gold) 60%, rgba(200,150,60,0.5) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+  transition: filter 0.4s;
+}
+.st-label {
+  font-family: 'Cinzel', serif;
+  font-size: 7px;
+  letter-spacing: 0.2em;
+  color: rgba(200,150,60,0.3);
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+
+/* skills as progress bars */
+.hero-skills {
+  padding: 2rem 2.5rem;
+  border-bottom: 1px solid rgba(200,150,60,0.1);
+}
+.hs-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  text-shadow: 0 0 12px rgba(200,150,60,0.3);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(200,150,60,0.12);
+  text-align: center;
+}
+
+.skill-tracks { display: flex; flex-direction: column; gap: 0.7rem; }
+.sk-row { display: flex; align-items: center; gap: 1rem; }
+.sk-name {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  color: rgba(200,150,60,0.45);
+  text-transform: uppercase;
+  width: 100px;
+  flex-shrink: 0;
+}
+.sk-track {
+  flex: 1;
+  height: 2px;
+  background: rgba(200,150,60,0.08);
+  position: relative;
+  overflow: hidden;
+}
+.sk-fill {
+  height: 100%;
+  position: absolute;
+  top: 0; left: 0;
+  background: linear-gradient(90deg, rgba(200,150,60,0.5), var(--gold2));
+  box-shadow: 0 0 6px rgba(200,150,60,0.3);
+}
+.sk-pct {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  color: rgba(200,150,60,0.35);
+  width: 30px;
+  text-align: right;
+}
+
+/* ═══════════════════════════════════════════════════════
+   CIJFERS PAGE — the oracle's judgement
+═══════════════════════════════════════════════════════ */
+.oracle-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(200,150,60,0.06);
+}
+
+.og-panel {
+  background: var(--void);
+  padding: 2rem;
+}
+.og-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  text-shadow: 0 0 10px rgba(200,150,60,0.3);
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(200,150,60,0.15);
+  text-align: center;
+}
+
+.grade-scroll {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.grade-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(200,150,60,0.07);
+  cursor: none;
+  transition: background 0.3s;
+}
+.grade-line:last-child { border-bottom: none; }
+.grade-line:hover .gl-score { text-shadow: 0 0 12px rgba(200,150,60,0.5); }
+.gl-vak {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: rgba(232,224,208,0.5);
+}
+.gl-score {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.4rem;
+  font-weight: 900;
+  transition: text-shadow 0.3s;
+}
+.gs-high { background: linear-gradient(180deg,var(--gold3),var(--gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.gs-mid  { color: var(--ichor); }
+.gs-none { color: rgba(232,224,208,0.18); font-size: 1rem; }
+
+/* big oracle number */
+.oracle-avg {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  border-bottom: 1px solid rgba(200,150,60,0.1);
+  position: relative;
+}
+.oa-num {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 6rem;
+  font-weight: 900;
+  line-height: 1;
+  background: linear-gradient(160deg, var(--gold3) 0%, var(--gold2) 40%, var(--gold) 70%, rgba(200,150,60,0.4) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 20px rgba(200,150,60,0.3));
+  position: relative;
+  display: inline-block;
+}
+/* divine line through number like ICARUS cover text */
+.oa-num::after {
+  content: '';
+  position: absolute;
+  left: -5%; right: -5%;
+  top: 52%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(200,150,60,0.6), transparent);
+  transform: rotate(-2deg);
+}
+.oa-label {
+  font-family: 'Cinzel', serif;
+  font-size: 7px;
+  letter-spacing: 0.35em;
+  color: rgba(200,150,60,0.35);
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+}
+
+.mini-oracle {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px;
+  background: rgba(200,150,60,0.06);
+}
+.mo-cell {
+  background: var(--void);
+  padding: 1.2rem 1rem;
+  text-align: center;
+  cursor: none;
+  transition: background 0.3s;
+}
+.mo-cell:hover { background: rgba(200,150,60,0.05); }
+.moc-val {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 4px;
+  filter: drop-shadow(0 0 6px rgba(200,150,60,0.2));
+}
+.moc-lbl {
+  font-family: 'Cinzel', serif;
+  font-size: 7px;
+  letter-spacing: 0.2em;
+  color: rgba(200,150,60,0.28);
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════════════════════
+   SETTINGS PAGE — the oracle's laws
+═══════════════════════════════════════════════════════ */
+.laws-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(200,150,60,0.06);
+}
+.law-panel {
+  background: var(--void);
+  padding: 2rem;
+}
+.law-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  text-shadow: 0 0 10px rgba(200,150,60,0.3);
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(200,150,60,0.15);
+  text-align: center;
+}
+
+.law-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid rgba(200,150,60,0.07);
+  cursor: none;
+  transition: background 0.3s;
+}
+.law-row:last-child { border-bottom: none; }
+.law-row:hover .lr-name { color: var(--gold2); }
+
+.lr-name {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--marble);
+  transition: color 0.3s;
+  margin-bottom: 2px;
+}
+.lr-desc {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 9px;
+  color: rgba(232,224,208,0.2);
+}
+
+/* Toggle — golden gem */
+.gold-toggle {
+  width: 46px; height: 22px;
+  border: 1px solid rgba(200,150,60,0.25);
+  border-radius: 11px;
+  position: relative;
+  cursor: none;
+  flex-shrink: 0;
+  background: rgba(4,5,10,0.8);
+  transition: background 0.4s, border-color 0.4s;
+}
+.gold-toggle::after {
+  content: '';
+  position: absolute;
+  top: 3px; left: 3px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, rgba(200,150,60,0.4), rgba(200,150,60,0.1));
+  border: 1px solid rgba(200,150,60,0.2);
+  transition: left 0.4s cubic-bezier(0.16,1,0.3,1), background 0.4s, box-shadow 0.4s;
+}
+.gold-toggle.on {
+  background: rgba(200,150,60,0.08);
+  border-color: rgba(200,150,60,0.5);
+  box-shadow: 0 0 12px rgba(200,150,60,0.15);
+}
+.gold-toggle.on::after {
+  left: 25px;
+  background: radial-gradient(circle at 40% 35%, var(--gold3), var(--gold));
+  box-shadow: 0 0 8px rgba(200,150,60,0.5);
+  border-color: var(--gold);
+}
+
+/* ═══════════════════════════════════════════════════════
+   STAGGER ANIMATIONS on page load
+═══════════════════════════════════════════════════════ */
+.herald-stone { animation: rise 0.5s ease both; }
+.herald-stone:nth-child(1) { animation-delay: 0.05s; }
+.herald-stone:nth-child(2) { animation-delay: 0.12s; }
+.herald-stone:nth-child(3) { animation-delay: 0.19s; }
+.herald-stone:nth-child(4) { animation-delay: 0.26s; }
+@keyframes rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ── CURSOR ── -->
+<div id="olymp-cursor">
+  <svg viewBox="0 0 24 24" fill="none">
+    <circle cx="12" cy="12" r="10" stroke="rgba(200,150,60,0.6)" stroke-width="1"/>
+    <circle cx="12" cy="12" r="3" fill="rgba(200,150,60,0.8)"/>
+    <circle cx="12" cy="12" r="1.2" fill="rgba(245,217,138,0.9)"/>
+    <line x1="12" y1="2" x2="12" y2="5" stroke="rgba(200,150,60,0.5)" stroke-width="0.8"/>
+    <line x1="12" y1="19" x2="12" y2="22" stroke="rgba(200,150,60,0.5)" stroke-width="0.8"/>
+    <line x1="2" y1="12" x2="5" y2="12" stroke="rgba(200,150,60,0.5)" stroke-width="0.8"/>
+    <line x1="19" y1="12" x2="22" y2="12" stroke="rgba(200,150,60,0.5)" stroke-width="0.8"/>
+  </svg>
+</div>
+
+<!-- ── DIVINE LIGHT ── -->
+<div class="divine-light"></div>
+
+<!-- ── MATRIX BACKGROUND CODE RAIN ── -->
+<div id="matrix-bg" aria-hidden="true"></div>
+
+<!-- ══════════════ INTERFACE ══════════════ -->
+<div class="olympus">
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <div class="sb-crest">
+      <!-- Laurel wreath SVG -->
+      <svg class="sb-crest-icon" viewBox="0 0 56 56" fill="none">
+        <!-- left laurel -->
+        <path d="M14 28 Q8 22 10 15 Q12 12 16 14 Q12 20 14 28Z" fill="rgba(200,150,60,0.5)" stroke="rgba(200,150,60,0.3)" stroke-width="0.5"/>
+        <path d="M14 28 Q6 26 6 18 Q8 15 12 18 Q8 23 14 28Z" fill="rgba(200,150,60,0.4)" stroke="rgba(200,150,60,0.3)" stroke-width="0.5"/>
+        <path d="M14 28 Q8 32 10 40 Q12 43 16 41 Q12 36 14 28Z" fill="rgba(200,150,60,0.45)" stroke="rgba(200,150,60,0.3)" stroke-width="0.5"/>
+        <path d="M14 28 Q6 30 6 38 Q8 41 12 38 Q8 33 14 28Z" fill="rgba(200,150,60,0.38)" stroke="rgba(200,150,60,0.3)" stroke-width="0.5"/>
+        <!-- right laurel -->
+        <path d="M42 28 Q48 22 46 15 Q44 12 40 14 Q44 20 42 28Z" fill="rgba(200,150,60,0.5)" stroke="rgba(200,150,60,0.3)" stroke-width="0.5"/>
+        <path d="M42 28 Q50 26 50 18 Q48 15 44 18 Q48 23 42 28Z" fill="rgba(200,150,60,0.4)" stroke="rgba(200,150,60,0.3)" stroke-width="0.5"/>
+        <path d="M42 28 Q48 32 46 40 Q44 43 40 41 Q44 36 42 28Z" fill="rgba(200,150,60,0.45)" stroke="rgba(200,150,60,0.3)" stroke-width="0.5"/>
+        <path d="M42 28 Q50 30 50 38 Q48 41 44 38 Q48 33 42 28Z" fill="rgba(200,150,60,0.38)" stroke="rgba(200,150,60,0.3)" stroke-width="0.5"/>
+        <!-- center stem -->
+        <line x1="28" y1="14" x2="28" y2="42" stroke="rgba(200,150,60,0.3)" stroke-width="0.8"/>
+        <!-- center gem -->
+        <polygon points="28,20 31,27 28,34 25,27" fill="none" stroke="rgba(200,150,60,0.5)" stroke-width="0.8"/>
+        <circle cx="28" cy="27" r="2.5" fill="rgba(200,150,60,0.5)"/>
+        <circle cx="28" cy="27" r="1" fill="rgba(245,217,138,0.8)"/>
+      </svg>
+      <span class="sb-title">OLYMPUS</span>
+      <span class="sb-subtitle">Academisch Portaal — Anno MMXXVI</span>
+    </div>
+    <span class="sb-orn">· ✦ ·</span>
+
+    <nav class="sb-nav">
+      <div class="sb-nav-label">Navigatie</div>
+      <ul class="nav-list">
+        <li class="nav-item active" id="nav-home">
+          <button onclick="go('home')">
+            <span class="nav-roman">I</span>
+            <span class="nav-label">Home</span>
+          </button>
+        </li>
+        <li class="nav-item" id="nav-rooster">
+          <button onclick="go('rooster')">
+            <span class="nav-roman">II</span>
+            <span class="nav-label">Rooster</span>
+          </button>
+        </li>
+        <li class="nav-item" id="nav-taken">
+          <button onclick="go('taken')">
+            <span class="nav-roman">III</span>
+            <span class="nav-label">Taken</span>
+          </button>
+        </li>
+        <li class="nav-item" id="nav-leraren">
+          <button onclick="go('leraren')">
+            <span class="nav-roman">IV</span>
+            <span class="nav-label">Leraren</span>
+          </button>
+        </li>
+        <li class="nav-item" id="nav-cijfers">
+          <button onclick="go('cijfers')">
+            <span class="nav-roman">V</span>
+            <span class="nav-label">Cijfers</span>
+          </button>
+        </li>
+        <li class="nav-item" id="nav-profiel">
+          <button onclick="go('profiel')">
+            <span class="nav-roman">VI</span>
+            <span class="nav-label">Profiel</span>
+          </button>
+        </li>
+        <li class="nav-item" id="nav-settings">
+          <button onclick="go('settings')">
+            <span class="nav-roman">VII</span>
+            <span class="nav-label">Instellingen</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="sb-bottom">
+      <div class="sb-user">
+        <div class="sb-avatar">AB</div>
+        <div class="sb-uname">
+          <strong>André Babirian</strong>
+          ICT Software Dev · Yr I
+        </div>
+      </div>
+      <div class="sb-motto">"Per aspera<br>ad olympum"</div>
+    </div>
+  </nav>
+
+  <!-- MAIN PANEL -->
+  <main class="main-panel">
+
+    <!-- ══ HOME ══ -->
+    <div class="page active" id="page-home">
+      <div class="topbar">
+        <div class="tb-left">
+          <span class="tb-chapter">I —</span>
+          <span class="tb-title">Home</span>
+        </div>
+        <div class="tb-right">
+          <span class="tb-pill">XSB1B</span>
+          <span class="tb-pill">Week XIX</span>
+          <span class="tb-pill live">Actief</span>
+        </div>
+      </div>
+
+      <div class="home-herald">
+        <div class="herald-stone">
+          <div class="hs-glyph">IV</div>
+          <div class="hs-label">Open Taken</div>
+          <div class="hs-sub">waarvan 2 urgent</div>
+        </div>
+        <div class="herald-stone">
+          <div class="hs-glyph">7.6</div>
+          <div class="hs-label">Gemiddeld Cijfer</div>
+          <div class="hs-sub">Semester II · 2026</div>
+        </div>
+        <div class="herald-stone">
+          <div class="hs-glyph">V</div>
+          <div class="hs-label">Vakken</div>
+          <div class="hs-sub">4 afgerond dit semester</div>
+        </div>
+        <div class="herald-stone">
+          <div class="hs-glyph">VI</div>
+          <div class="hs-label">Weken tot Examen</div>
+          <div class="hs-sub">op schema</div>
+        </div>
+      </div>
+
+      <div class="home-pillars">
+        <div class="pillar-day">
+          <div class="pillar-capital"><div class="pc-name">Maandag</div></div>
+          <div class="pillar-shaft">
+            <div class="ps-subject">Flex</div>
+            <div class="ps-time">08:30 — 17:00</div>
+            <div class="ps-room">Groen 2.073</div>
+            <div class="pillar-base"></div>
+          </div>
+        </div>
+        <div class="pillar-day">
+          <div class="pillar-capital"><div class="pc-name">Dinsdag</div></div>
+          <div class="pillar-shaft">
+            <div class="ps-subject">Flex</div>
+            <div class="ps-time">08:30 — 17:00</div>
+            <div class="ps-room">Groen 2.073</div>
+            <div class="pillar-base"></div>
+          </div>
+        </div>
+        <div class="pillar-day">
+          <div class="pillar-capital"><div class="pc-name">Woensdag</div></div>
+          <div class="pillar-shaft">
+            <div class="ps-subject">Flex & Rekenen</div>
+            <div class="ps-time">08:30 — 17:00</div>
+            <div class="ps-room">Groen 2.073</div>
+            <div class="pillar-base"></div>
+          </div>
+        </div>
+        <div class="pillar-day">
+          <div class="pillar-capital"><div class="pc-name">Donderdag</div></div>
+          <div class="pillar-shaft">
+            <div class="ps-subject">Flex & NL</div>
+            <div class="ps-time">08:30 — 17:00</div>
+            <div class="ps-room">Groen 2.073</div>
+            <div class="pillar-base"></div>
+          </div>
+        </div>
+        <div class="pillar-day">
+          <div class="pillar-capital"><div class="pc-name">Vrijdag</div></div>
+          <div class="pillar-shaft">
+            <div class="ps-subject">Flex</div>
+            <div class="ps-time">08:30 — 13:30</div>
+            <div class="ps-room">Groen 2.073</div>
+            <div class="pillar-base"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="home-notices">
+        <div class="notice-temple">
+          <div class="nt-title">✦ Openstaande Taken ✦</div>
+          <div class="nt-row">
+            <div class="nt-gem gem-gold"></div>
+            <span>UML Diagram afmaken</span>
+            <span class="nt-badge nb-urgent">Urgent</span>
+          </div>
+          <div class="nt-row">
+            <div class="nt-gem gem-amber"></div>
+            <span>Portfolio bijwerken</span>
+            <span class="nt-badge nb-soon">Spoedig</span>
+          </div>
+          <div class="nt-row">
+            <div class="nt-gem gem-silver"></div>
+            <span>GitHub README schrijven</span>
+            <span class="nt-badge nb-later">Later</span>
+          </div>
+          <div class="nt-row">
+            <div class="nt-gem gem-done"></div>
+            <span style="text-decoration:line-through;opacity:0.4">Retrospective inleveren</span>
+            <span class="nt-badge nb-done">Voltooid</span>
+          </div>
+        </div>
+        <div class="notice-temple">
+          <div class="nt-title">✦ Heden's Proclamaties ✦</div>
+          <div class="nt-row">
+            <div class="nt-gem gem-divine"></div>
+            <span>Volgende les: Maandag 08:30 — Flex · Lokaal 2.073</span>
+          </div>
+          <div class="nt-row">
+            <div class="nt-gem gem-gold"></div>
+            <span>Gemiddelde 7.6 — semester II loopt uitstekend</span>
+          </div>
+          <div class="nt-row">
+            <div class="nt-gem gem-silver"></div>
+            <span>4 van 5 vakken voltooid dit semester</span>
+          </div>
+          <div class="nt-row">
+            <div class="nt-gem gem-amber"></div>
+            <span>Examen over 6 weken — begin tijdig met herhalen</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ ROOSTER ══ -->
+    <div class="page" id="page-rooster">
+      <div class="topbar">
+        <div class="tb-left">
+          <span class="tb-chapter">II —</span>
+          <span class="tb-title">Rooster</span>
+        </div>
+        <div class="tb-right">
+          <span class="tb-pill">Groen 2.073</span>
+          <span class="tb-pill">XSB1B</span>
+        </div>
+      </div>
+      <div class="rooster-temple">
+        <div class="rt-column">
+          <div class="rt-fresco rf-0">
+            <div class="rt-orb"></div>
+            <div class="rt-figure" style="right:8px;bottom:8px">LIBERTAS</div>
+          </div>
+          <div class="rt-cap"><div class="rtc-name">Maandag</div></div>
+          <div class="rt-body">
+            <div class="rtb-time">08:30</div>
+            <div class="rtb-sep">— tot —</div>
+            <div class="rtb-end">17:00</div>
+            <div class="rtb-ruler"></div>
+            <div class="rtb-room">Groen 2.073</div>
+            <div class="rtb-vak">Flex</div>
+          </div>
+        </div>
+        <div class="rt-column">
+          <div class="rt-fresco rf-1">
+            <div class="rt-orb"></div>
+            <div class="rt-figure" style="left:8px;bottom:8px">SAPIENTIA</div>
+          </div>
+          <div class="rt-cap"><div class="rtc-name">Dinsdag</div></div>
+          <div class="rt-body">
+            <div class="rtb-time">08:30</div>
+            <div class="rtb-sep">— tot —</div>
+            <div class="rtb-end">17:00</div>
+            <div class="rtb-ruler"></div>
+            <div class="rtb-room">Groen 2.073</div>
+            <div class="rtb-vak">Flex</div>
+          </div>
+        </div>
+        <div class="rt-column">
+          <div class="rt-fresco rf-2">
+            <div class="rt-orb"></div>
+            <div class="rt-figure" style="right:8px;bottom:8px">FORTITUDO</div>
+          </div>
+          <div class="rt-cap"><div class="rtc-name">Woensdag</div></div>
+          <div class="rt-body">
+            <div class="rtb-time">08:30</div>
+            <div class="rtb-sep">— tot —</div>
+            <div class="rtb-end">17:00</div>
+            <div class="rtb-ruler"></div>
+            <div class="rtb-room">Groen 2.073</div>
+            <div class="rtb-vak">Flex & Rekenen</div>
+          </div>
+        </div>
+        <div class="rt-column">
+          <div class="rt-fresco rf-3">
+            <div class="rt-orb"></div>
+            <div class="rt-figure" style="left:8px;bottom:8px">VERITAS</div>
+          </div>
+          <div class="rt-cap"><div class="rtc-name">Donderdag</div></div>
+          <div class="rt-body">
+            <div class="rtb-time">08:30</div>
+            <div class="rtb-sep">— tot —</div>
+            <div class="rtb-end">17:00</div>
+            <div class="rtb-ruler"></div>
+            <div class="rtb-room">Groen 2.073</div>
+            <div class="rtb-vak">Flex / NL / Burg.</div>
+          </div>
+        </div>
+        <div class="rt-column">
+          <div class="rt-fresco rf-4">
+            <div class="rt-orb"></div>
+            <div class="rt-figure" style="right:8px;bottom:8px">GLORIA</div>
+          </div>
+          <div class="rt-cap"><div class="rtc-name">Vrijdag</div></div>
+          <div class="rt-body">
+            <div class="rtb-time">08:30</div>
+            <div class="rtb-sep">— tot —</div>
+            <div class="rtb-end">13:30</div>
+            <div class="rtb-ruler"></div>
+            <div class="rtb-room">Groen 2.073</div>
+            <div class="rtb-vak">Flex</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ TAKEN ══ -->
+    <div class="page" id="page-taken">
+      <div class="topbar">
+        <div class="tb-left">
+          <span class="tb-chapter">III —</span>
+          <span class="tb-title">Taken</span>
+        </div>
+        <div class="tb-right">
+          <span class="tb-pill">4 Open</span>
+          <span class="tb-pill live">2 Urgent</span>
+        </div>
+      </div>
+      <div class="inscription-header">
+        <div class="ih-col">Nr.</div>
+        <div class="ih-col">Opdracht</div>
+        <div class="ih-col">Prioriteit</div>
+        <div class="ih-col">Deadline</div>
+        <div class="ih-col">Module</div>
+      </div>
+      <div class="inscription-row">
+        <div class="ir-num">I</div>
+        <div><div class="ir-name">UML Diagram Afmaken</div><div class="ir-sub">Software Architecture · Sprint 4</div></div>
+        <span class="rune-badge rb-critical">Kritisch</span>
+        <span class="ir-deadline">Morgen 09:00</span>
+        <span class="ir-vak">Arch.</span>
+      </div>
+      <div class="inscription-row">
+        <div class="ir-num">II</div>
+        <div><div class="ir-name">Portfolio Bijwerken</div><div class="ir-sub">Persoonlijke Ontwikkeling</div></div>
+        <span class="rune-badge rb-soon">Spoedig</span>
+        <span class="ir-deadline">Do. 23:59</span>
+        <span class="ir-vak">PO</span>
+      </div>
+      <div class="inscription-row">
+        <div class="ir-num">III</div>
+        <div><div class="ir-name">GitHub README Schrijven</div><div class="ir-sub">Project · Flex Opdracht</div></div>
+        <span class="rune-badge rb-later">Later</span>
+        <span class="ir-deadline">Vr. 17:00</span>
+        <span class="ir-vak">Project</span>
+      </div>
+      <div class="inscription-row">
+        <div class="ir-num">IV</div>
+        <div><div class="ir-name">API Documentatie</div><div class="ir-sub">Web Development Module</div></div>
+        <span class="rune-badge rb-later">Later</span>
+        <span class="ir-deadline">Volg. week</span>
+        <span class="ir-vak">Web Dev</span>
+      </div>
+      <div class="inscription-row done-row">
+        <div class="ir-num xout">V</div>
+        <div><div class="ir-name xout">Retrospective Inleveren</div><div class="ir-sub">Agile · Sprint 3</div></div>
+        <span class="rune-badge rb-done">Voltooid</span>
+        <span class="ir-deadline" style="text-decoration:line-through">Afgerond</span>
+        <span class="ir-vak">Agile</span>
+      </div>
+      <div class="inscription-row done-row">
+        <div class="ir-num xout">VI</div>
+        <div><div class="ir-name xout">Database Schema Ontwerp</div><div class="ir-sub">Databases Module</div></div>
+        <span class="rune-badge rb-done">Voltooid</span>
+        <span class="ir-deadline" style="text-decoration:line-through">Afgerond</span>
+        <span class="ir-vak">DB</span>
+      </div>
+    </div>
+
+    <!-- ══ LERAREN ══ -->
+    <div class="page" id="page-leraren">
+      <div class="topbar">
+        <div class="tb-left">
+          <span class="tb-chapter">IV —</span>
+          <span class="tb-title">Leraren</span>
+        </div>
+        <div class="tb-right">
+          <span class="tb-pill">XSB1B</span>
+          <span class="tb-pill">5 Meesters</span>
+        </div>
+      </div>
+      <div class="pantheon">
+        <div class="deity-card">
+          <div class="dc-painting dp-0">
+            <div class="dc-prism" style="top:10px;left:15px;width:55px;height:55px;background:linear-gradient(135deg,rgba(200,150,60,0.25),rgba(232,188,106,0.1));transform:rotate(-8deg);border:1px solid rgba(200,150,60,0.3)"></div>
+            <div class="dc-prism" style="bottom:15px;right:10px;width:0;height:0;border-style:solid;border-width:0 35px 45px 0;border-color:transparent rgba(200,150,60,0.2) transparent transparent;transform:rotate(0)"></div>
+            <div class="dc-ghost">P</div>
+          </div>
+          <div class="dc-body">
+            <div class="dc-num">Meester I</div>
+            <div class="dc-name">Peter</div>
+            <div class="dc-role">Begeleider & Coach</div>
+            <div class="dc-ruler"></div>
+            <div class="dc-vak-lbl">Vakken</div>
+            <div class="dc-vak">Flex</div>
+          </div>
+        </div>
+        <div class="deity-card">
+          <div class="dc-painting dp-1">
+            <div class="dc-prism" style="top:5px;right:10px;width:40px;height:70px;background:linear-gradient(180deg,rgba(168,216,240,0.15),rgba(123,158,200,0.05));border:1px solid rgba(168,216,240,0.2)"></div>
+            <div class="dc-prism" style="bottom:10px;left:10px;width:30px;height:30px;border-radius:50%;border:1px solid rgba(168,216,240,0.2);background:rgba(168,216,240,0.06)"></div>
+            <div class="dc-ghost" style="color:rgba(168,216,240,0.05)">J</div>
+          </div>
+          <div class="dc-body">
+            <div class="dc-num">Meester II</div>
+            <div class="dc-name">Jeroen</div>
+            <div class="dc-role">Begeleider & Coach</div>
+            <div class="dc-ruler"></div>
+            <div class="dc-vak-lbl">Vakken</div>
+            <div class="dc-vak">Flex</div>
+          </div>
+        </div>
+        <div class="deity-card">
+          <div class="dc-painting dp-2">
+            <div class="dc-prism" style="top:20px;left:50%;transform:translateX(-50%);width:50px;height:50px;background:linear-gradient(135deg,rgba(139,26,26,0.3),rgba(200,100,80,0.1));clip-path:polygon(50% 0%,100% 100%,0% 100%);border:none"></div>
+            <div class="dc-ghost" style="color:rgba(200,80,60,0.06)">J</div>
+          </div>
+          <div class="dc-body">
+            <div class="dc-num">Meester III</div>
+            <div class="dc-name">Jan</div>
+            <div class="dc-role">Docent</div>
+            <div class="dc-ruler"></div>
+            <div class="dc-vak-lbl">Vakken</div>
+            <div class="dc-vak">Flex</div>
+          </div>
+        </div>
+        <div class="deity-card">
+          <div class="dc-painting dp-3">
+            <div class="dc-prism" style="top:5px;right:5px;width:50px;height:80px;background:linear-gradient(180deg,rgba(123,158,200,0.18),rgba(74,123,157,0.05));border:1px solid rgba(123,158,200,0.2)"></div>
+            <div class="dc-prism" style="bottom:8px;left:8px;width:35px;height:35px;background:rgba(123,158,200,0.08);border:1px solid rgba(123,158,200,0.15);transform:rotate(20deg)"></div>
+            <div class="dc-ghost" style="color:rgba(123,158,200,0.05)">A</div>
+          </div>
+          <div class="dc-body">
+            <div class="dc-num">Meester IV</div>
+            <div class="dc-name">Alex</div>
+            <div class="dc-role">Docent</div>
+            <div class="dc-ruler"></div>
+            <div class="dc-vak-lbl">Vakken</div>
+            <div class="dc-vak">Rekenen</div>
+          </div>
+        </div>
+        <div class="deity-card">
+          <div class="dc-painting" style="background:linear-gradient(160deg,#0A0810,#201008,#C8482060)">
+            <div class="dc-prism" style="top:15px;left:10px;width:60px;height:3px;background:rgba(200,72,32,0.4);transform:rotate(-20deg)"></div>
+            <div class="dc-prism" style="top:35px;left:10px;width:45px;height:3px;background:rgba(200,72,32,0.3);transform:rotate(-20deg)"></div>
+            <div class="dc-prism" style="top:55px;left:10px;width:30px;height:3px;background:rgba(200,72,32,0.2);transform:rotate(-20deg)"></div>
+            <div class="dc-ghost" style="color:rgba(200,72,32,0.05)">?</div>
+          </div>
+          <div class="dc-body">
+            <div class="dc-num">Meester V</div>
+            <div class="dc-name">Onbekend</div>
+            <div class="dc-role">Docent</div>
+            <div class="dc-ruler"></div>
+            <div class="dc-vak-lbl">Vakken</div>
+            <div class="dc-vak">Nederlands</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ CIJFERS ══ -->
+    <div class="page" id="page-cijfers">
+      <div class="topbar">
+        <div class="tb-left">
+          <span class="tb-chapter">V —</span>
+          <span class="tb-title">Cijfers</span>
+        </div>
+        <div class="tb-right">
+          <span class="tb-pill">Semester II</span>
+          <span class="tb-pill">2025–2026</span>
+        </div>
+      </div>
+      <div class="oracle-grid">
+        <div class="og-panel">
+          <div class="og-title">✦ De Beoordelingen ✦</div>
+          <div class="grade-scroll">
+            <div class="grade-line"><span class="gl-vak">Algorithms & Data Structures</span><span class="gl-score gs-high">8.2</span></div>
+            <div class="grade-line"><span class="gl-vak">Web Development</span><span class="gl-score gs-high">7.8</span></div>
+            <div class="grade-line"><span class="gl-vak">Software Architecture</span><span class="gl-score gs-mid">6.5</span></div>
+            <div class="grade-line"><span class="gl-vak">Databases</span><span class="gl-score gs-high">7.9</span></div>
+            <div class="grade-line"><span class="gl-vak">Project & Agile</span><span class="gl-score gs-none">—</span></div>
+          </div>
+        </div>
+        <div class="og-panel" style="padding:0">
+          <div class="oracle-avg">
+            <div class="oa-num">7.6</div>
+            <div class="oa-label">Semester Gemiddelde</div>
+          </div>
+          <div class="mini-oracle">
+            <div class="mo-cell"><div class="moc-val">4/5</div><div class="moc-lbl">Vakken Klaar</div></div>
+            <div class="mo-cell"><div class="moc-val">8.2</div><div class="moc-lbl">Hoogste</div></div>
+            <div class="mo-cell"><div class="moc-val">6.5</div><div class="moc-lbl">Laagste</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PROFIEL ══ -->
+    <div class="page" id="page-profiel">
+      <div class="topbar">
+        <div class="tb-left">
+          <span class="tb-chapter">VI —</span>
+          <span class="tb-title">Profiel</span>
+        </div>
+        <div class="tb-right">
+          <span class="tb-pill">Student</span>
+          <span class="tb-pill live">Actief</span>
+        </div>
+      </div>
+      <div class="hero-scroll">
+        <div class="hero-main">
+          <div class="hm-bg">A</div>
+          <div class="hm-eyebrow">Heros Academicus — Jaar I — XSB1B</div>
+          <div class="hm-name">André<br>Babirian</div>
+          <div class="hm-title">ICT Software Developer · Windesheim · Anno MMXXVI</div>
+          <div class="hm-divider"></div>
+          <div class="hm-details">
+            <div class="hm-row"><span class="hm-key">School</span><span class="hm-val">Windesheim, Zwolle</span></div>
+            <div class="hm-row"><span class="hm-key">Opleiding</span><span class="hm-val">ICT Software Developer</span></div>
+            <div class="hm-row"><span class="hm-key">Klas</span><span class="hm-val">XSB1B — Cohort 2025</span></div>
+            <div class="hm-row"><span class="hm-key">Studiejaar</span><span class="hm-val">2025 / 2026 · Semester II</span></div>
+            <div class="hm-row"><span class="hm-key">Status</span><span class="hm-val">Actief — op schema · VII vakken</span></div>
+          </div>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-tablet"><div class="st-value">7.6</div><div class="st-label">Gem.<br>Cijfer</div></div>
+          <div class="stat-tablet"><div class="st-value">4/5</div><div class="st-label">Vakken<br>Klaar</div></div>
+          <div class="stat-tablet"><div class="st-value">VI</div><div class="st-label">Weken tot<br>Examen</div></div>
+        </div>
+      </div>
+      <div class="hero-skills">
+        <div class="hs-title">✦ Bekwaamheden & Vaardigheden ✦</div>
+        <div class="skill-tracks">
+          <div class="sk-row"><span class="sk-name">React</span><div class="sk-track"><div class="sk-fill" style="width:70%"></div></div><span class="sk-pct">70%</span></div>
+          <div class="sk-row"><span class="sk-name">TypeScript</span><div class="sk-track"><div class="sk-fill" style="width:55%"></div></div><span class="sk-pct">55%</span></div>
+          <div class="sk-row"><span class="sk-name">CSS</span><div class="sk-track"><div class="sk-fill" style="width:65%"></div></div><span class="sk-pct">65%</span></div>
+          <div class="sk-row"><span class="sk-name">Git</span><div class="sk-track"><div class="sk-fill" style="width:60%"></div></div><span class="sk-pct">60%</span></div>
+          <div class="sk-row"><span class="sk-name">SQL</span><div class="sk-track"><div class="sk-fill" style="width:45%"></div></div><span class="sk-pct">45%</span></div>
+          <div class="sk-row"><span class="sk-name">Java</span><div class="sk-track"><div class="sk-fill" style="width:40%"></div></div><span class="sk-pct">40%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SETTINGS ══ -->
+    <div class="page" id="page-settings">
+      <div class="topbar">
+        <div class="tb-left">
+          <span class="tb-chapter">VII —</span>
+          <span class="tb-title">Instellingen</span>
+        </div>
+        <div class="tb-right">
+          <span class="tb-pill">Preferenties</span>
+        </div>
+      </div>
+      <div class="laws-grid">
+        <div class="law-panel">
+          <div class="law-title">✦ Interface ✦</div>
+          <div class="law-row">
+            <div><div class="lr-name">Dark Mode</div><div class="lr-desc">Schakel naar donker thema</div></div>
+            <div class="gold-toggle on" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="law-row">
+            <div><div class="lr-name">Compacte Weergave</div><div class="lr-desc">Minder witruimte in de layout</div></div>
+            <div class="gold-toggle" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="law-row">
+            <div><div class="lr-name">Animaties</div><div class="lr-desc">Pagina-overgangen en hover-effecten</div></div>
+            <div class="gold-toggle on" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="law-row">
+            <div><div class="lr-name">Grain Textuur</div><div class="lr-desc">Filmkorrelig overlay effect</div></div>
+            <div class="gold-toggle on" onclick="this.classList.toggle('on')"></div>
+          </div>
+        </div>
+        <div class="law-panel">
+          <div class="law-title">✦ Meldingen ✦</div>
+          <div class="law-row">
+            <div><div class="lr-name">Push Meldingen</div><div class="lr-desc">Ontvang browser-notificaties</div></div>
+            <div class="gold-toggle on" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="law-row">
+            <div><div class="lr-name">Deadline Reminders</div><div class="lr-desc">Herinnering 24 uur van tevoren</div></div>
+            <div class="gold-toggle on" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="law-row">
+            <div><div class="lr-name">Geluidssignalen</div><div class="lr-desc">Audio bij actie-bevestigingen</div></div>
+            <div class="gold-toggle" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="law-row">
+            <div><div class="lr-name">E-mail Samenvatting</div><div class="lr-desc">Wekelijkse digest per mail</div></div>
+            <div class="gold-toggle" onclick="this.classList.toggle('on')"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+/* ══ Cursor ══ */
+const cur = document.getElementById('olymp-cursor');
+document.addEventListener('mousemove', e => {
+  cur.style.left = e.clientX + 'px';
+  cur.style.top  = e.clientY + 'px';
+});
+
+/* ══ Navigation ══ */
+function go(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.getElementById('nav-' + id).classList.add('active');
+  document.querySelector('.main-panel').scrollTop = 0;
+}
+
+/* ══ Matrix code rain background ══ */
+(function buildMatrix() {
+  const container = document.getElementById('matrix-bg');
+  const chars = '01ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩαβγδεζηθικλμνξοπρστυφχψω∞∑∫∏√≈≠≤≥SPQR';
+  const colCount = Math.ceil(window.innerWidth / 18);
+
+  for (let i = 0; i < colCount; i++) {
+    const col = document.createElement('div');
+    col.className = 'matrix-col';
+    col.style.left = (i * 18) + 'px';
+
+    // random column height and characters
+    const len = Math.floor(Math.random() * 18) + 8;
+    for (let j = 0; j < len; j++) {
+      const span = document.createElement('div');
+      span.textContent = chars[Math.floor(Math.random() * chars.length)];
+      span.style.opacity = Math.max(0.2, 1 - j / len);
+      col.appendChild(span);
+    }
+
+    // stagger animation timing
+    const dur = (Math.random() * 12 + 6) + 's';
+    const delay = (Math.random() * 20) + 's';
+    col.style.animationDuration = dur;
+    col.style.animationDelay = '-' + delay;
+
+    container.appendChild(col);
+  }
+
+  // Randomly update characters for shimmer effect
+  setInterval(() => {
+    const allSpans = container.querySelectorAll('.matrix-col div');
+    const count = Math.floor(allSpans.length * 0.05);
+    for (let k = 0; k < count; k++) {
+      const idx = Math.floor(Math.random() * allSpans.length);
+      allSpans[idx].textContent = chars[Math.floor(Math.random() * chars.length)];
+    }
+  }, 120);
+})();
+</script>
+</body>
+</html>
