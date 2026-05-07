@@ -4,7 +4,8 @@
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     height: 100%;
 }
 
@@ -119,9 +120,9 @@ body {
     padding: 3rem;
     color: white;
     background: linear-gradient(to top,
-        rgb(0, 0, 0),
-        rgba(0, 0, 0, 0.6),
-        transparent);
+            rgb(0, 0, 0),
+            rgba(0, 0, 0, 0.6),
+            transparent);
 }
 
 .tags {
