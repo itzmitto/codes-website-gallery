@@ -73,11 +73,122 @@ body {
     transform: scale(2);
 }
 
-.section {
+.section2 {
+    width: 100%;
+    background: lightgrey;
+    border-radius: .5rem;
+    padding: .8rem;
+    min-height: 20rem;
+    flex-shrink: 0;
+}
+
+.section3 {
+    width: 100%;
+    background: lightgrey;
+    border-radius: .5rem;
+    padding: .8rem;
+    min-height: 30rem;
+    flex-shrink: 0;
+}
+
+
+
+
+
+
+
+
+
+
+.section1 {
+    width: 100%;
+    min-height: 60rem;
+    border-radius: .5rem;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+    background: #111;
+}
+
+/* afbeelding */
+.movie-img {
+    width: 100%;
+    height: 60rem;
+    object-fit: cover;
+    display: block;
+}
+
+/* donkere overlay onderaan */
+.movie-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 3rem;
+    color: white;
+    background: linear-gradient(
+        to top,
+        rgb(0, 0, 0),
+        rgba(0,0,0,0.6),
+        transparent
+    );
+}
+
+/* badges */
+.tags {
+    display: flex;
+    gap: .8rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.tags span {
+    background: rgba(255,255,255,0.12);
+    padding: .4rem .9rem;
+    border-radius: 2rem;
+    font-size: 1.2rem;
+}
+
+.tags .rating {
+    background: #16a34a;
+    color: white;
+}
+
+/* titel */
+.movie-info h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+/* beschrijving */
+.movie-info p {
+    max-width: 70rem;
+    line-height: 1.6;
+    font-size: 1.5rem;
+    color: #ddd;
+    margin-bottom: 2rem;
+}
+
+/* knop */
+.movie-info button {
+    border: none;
+    background: white;
+    color: black;
+    padding: 1rem 2rem;
+    border-radius: 3rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    cursor: pointer;
+}   
+
+
+
+/* .section1 {
     width: 100%;
     background: lightgrey;
     border-radius: .5rem;
     padding: .8rem;
     min-height: 60rem;
     flex-shrink: 0;
-}
+} */
