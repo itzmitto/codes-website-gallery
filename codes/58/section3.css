@@ -1,3 +1,297 @@
-.section3{
-    background-color: rgba(211, 211, 211, 0.74);
+/* section3.css */
+.section3 {
+    width: 100%;
+    background: #111;
+    border-radius: .5rem;
+    padding: 1rem;
+    display: flex;
+    gap: 1.5rem;
+    flex-shrink: 0;
+}
+
+/* LEFT */
+.s3-left {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.s3-tabs {
+    display: flex;
+    background: #1a1a1a;
+    border-radius: .4rem;
+    overflow: hidden;
+}
+
+.s3-tab {
+    flex: 1;
+    padding: .6rem 1rem;
+    text-align: center;
+    font-size: .85rem;
+    cursor: pointer;
+    color: #aaa;
+    border: none;
+    background: transparent;
+}
+
+.s3-tab.active {
+    background: white;
+    color: black;
+    font-weight: 600;
+    border-radius: .4rem;
+}
+
+.s3-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: .4rem;
+}
+
+.s3-card {
+    position: relative;
+    border-radius: .4rem;
+    overflow: hidden;
+    background: #222;
+    cursor: pointer;
+}
+
+.s3-card img {
+    width: 100%;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+    display: block;
+}
+
+.s3-card-rating {
+    position: absolute;
+    top: .2rem;
+    right: .2rem;
+    background: rgba(0,0,0,0.75);
+    color: #f5c518;
+    font-size: .6rem;
+    padding: .1rem .3rem;
+    border-radius: .2rem;
+    font-weight: 600;
+}
+
+.s3-card-info {
+    padding: .2rem .2rem;
+}
+
+.s3-card-meta {
+    font-size: .55rem;
+    color: #888;
+}
+
+.s3-card-title {
+    font-size: .6rem;
+    color: #ddd;
+    display: flex;
+    align-items: center;
+    gap: .2rem;
+    margin-top: .1rem;
+}
+
+.s3-card-dot {
+    width: 5px;
+    height: 5px;
+    background: #22c55e;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.s3-view-more {
+    padding: .7rem;
+    text-align: center;
+    background: #1a1a1a;
+    border-radius: .4rem;
+    color: white;
+    font-size: .9rem;
+    cursor: pointer;
+    border: none;
+    width: 100%;
+}
+
+/* RIGHT */
+.s3-right {
+    width: 280px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.s3-comments h3,
+.s3-schedule h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: .8rem;
+    color: white;
+}
+
+.s3-comment {
+    background: #1a1a1a;
+    border-radius: .4rem;
+    padding: .6rem .7rem;
+    margin-bottom: .5rem;
+}
+
+.s3-comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: .4rem;
+    gap: .4rem;
+}
+
+.s3-comment-title {
+    font-size: .7rem;
+    color: #ddd;
+    font-weight: 600;
+}
+
+.s3-comment-ep {
+    font-size: .65rem;
+    color: #888;
+}
+
+.s3-comment-actions {
+    display: flex;
+    gap: .5rem;
+    font-size: .65rem;
+    color: #888;
+    flex-shrink: 0;
+}
+
+.s3-comment-thumb {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: .2rem;
+    float: left;
+    margin-right: .5rem;
+    margin-bottom: .2rem;
+}
+
+.s3-comment-text {
+    font-size: .72rem;
+    color: #bbb;
+    line-height: 1.4;
+    clear: both;
+    margin-bottom: .4rem;
+}
+
+.s3-comment-user {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    margin-top: .4rem;
+    clear: both;
+}
+
+.s3-comment-avatar {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #555;
+}
+
+.s3-comment-username {
+    font-size: .65rem;
+    color: #888;
+}
+
+.s3-comment-time {
+    font-size: .6rem;
+    color: #555;
+    margin-left: auto;
+}
+
+/* SCHEDULE */
+.s3-schedule-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: .8rem;
+}
+
+.s3-schedule-header h3 {
+    margin-bottom: 0;
+}
+
+.s3-schedule-arrow {
+    color: #888;
+}
+
+.s3-days {
+    display: flex;
+    gap: .3rem;
+    margin-bottom: .8rem;
+}
+
+.s3-day {
+    flex: 1;
+    text-align: center;
+    padding: .4rem .2rem;
+    border-radius: .3rem;
+    color: #888;
+    cursor: pointer;
+    font-size: .65rem;
+}
+
+.s3-day.active {
+    background: white;
+    color: black;
+    font-weight: 700;
+}
+
+.s3-day-name {
+    font-weight: 600;
+}
+
+.s3-schedule-items {
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+}
+
+.s3-schedule-item {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.s3-sched-time {
+    color: #666;
+    width: 36px;
+    flex-shrink: 0;
+    font-size: .65rem;
+}
+
+.s3-sched-title {
+    flex: 1;
+    color: #ccc;
+    font-size: .7rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.s3-sched-ep {
+    background: #333;
+    color: #aaa;
+    padding: .15rem .4rem;
+    border-radius: .2rem;
+    font-size: .62rem;
+    flex-shrink: 0;
+}
+
+.s3-schedule-more {
+    text-align: center;
+    color: #888;
+    font-size: .75rem;
+    margin-top: .5rem;
+    cursor: pointer;
 }

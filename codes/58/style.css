@@ -1,4 +1,6 @@
-* {
+/* de style.css */
+
+* { 
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -19,7 +21,7 @@ body {
     padding: 20px;
 }
 
-.main {
+.main { 
     flex: 1;
     background: rgb(200, 200, 200);
     padding: 1rem;
