@@ -6,7 +6,85 @@
 <title>ANDRÉ BABIRIAN — DASHBOARD</title>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
 <style>
+/* DARK MODE */
+/* ─── DARK MODE TOKENS ─── */
+body.dark-mode {
+  --paper: #0F0E0C;   /* Wordt donker */
+  --paper2: #1A1814;  /* Iets lichter donker */
+  --ink: #F0EBE1;     /* Tekst wordt licht */
+  --off: #000000;     /* Sidebar nog donkerder */
+  --gray: #B5AFA6;
+  --lgray: #6B6560;
+}
 
+/* Zorg dat de sidebar ook mee kleurt als dat nodig is */
+body.dark-mode .sidebar {
+  border-right-color: var(--paper2);
+}
+
+/* De toggle knop styling in Settings (als je die nog niet had) */
+.toggle-box.on {
+  background: var(--red) !important;
+}
+body.dark {
+  --paper:    #1C1A17;
+  --paper2:   #2A2722;
+  --ink:      #F0EBE1;
+  --red:      #FF5252;
+  --orange:   #FF8A4D;
+  --magenta:  #FF4D9E;
+  --cyan:     #4DD9FF;
+  --mint:     #4DFFB5;
+  --off:      #F0EBE1;
+  --gray:     #A8A29E;
+  --lgray:    #6B6560;
+}
+
+body.dark .sidebar {
+  background: var(--ink);
+  border-right: 3px solid var(--paper);
+}
+
+body.dark .sidebar::after {
+  background: linear-gradient(180deg, var(--red), var(--magenta), var(--orange));
+}
+
+body.dark .main,
+body.dark .topbar,
+body.dark .hb-panel,
+body.dark .pr-main,
+body.dark .sg-panel,
+body.dark .cg-panel {
+  background: var(--paper);
+}
+
+body.dark .hero-cell,
+body.dark .week-col,
+body.dark .rg-card,
+body.dark .lw-card,
+body.dark .tl-row,
+body.dark .task-row {
+  border-color: var(--paper2);
+}
+
+/* Extra contrast fixes */
+body.dark .hc-value,
+body.dark .rg-time,
+body.dark .lw-name,
+body.dark .pr-name,
+body.dark .avg-num {
+  color: var(--ink);
+}
+
+body.dark .tb-tag {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+body.dark .tb-tag.red {
+  background: var(--red);
+  color: #000;
+}
 /* ════════════════════════════════════════════════
    ROOT TOKENS — editorial surrealism palette
    inspired by: divided faces, collage, bold typo
@@ -1896,8 +1974,7 @@ body::after {
               <div class="sr-name">Dark Mode</div>
               <div class="sr-desc">Schakel naar donker thema</div>
             </div>
-            <div class="toggle-box on" onclick="this.classList.toggle('on')"></div>
-          </div>
+<!-- Voorbeeld van hoe de rij eruit ziet in je Settings pagina --> <div class="setting-row" onclick="toggleDarkMode()"> <div class="sr-info"> <div class="sr-name">Dark Mode</div> <div class="sr-desc">Schakel naar donker thema</div> </div> <div id="dark-mode-toggle" class="toggle-box"></div> </div>          </div>
           <div class="setting-row">
             <div>
               <div class="sr-name">Compacte Weergave</div>
@@ -1977,6 +2054,28 @@ function go(id) {
   // update sidebar watermark number
   const nums = {home:'01',rooster:'02',taken:'03',leraren:'04',cijfers:'05',profiel:'06',settings:'07'};
   document.querySelector('.sidebar').style.setProperty('--sb-num', `"${nums[id]}"`);
+}
+function toggleDarkMode() {
+  const body = document.body;
+  const isDarkMode = body.classList.toggle('dark-mode');
+  
+  // Update de visuele status van de knop in de Settings pagina
+  const toggleBtn = document.getElementById('dark-mode-toggle');
+  if (toggleBtn) {
+    toggleBtn.classList.toggle('on', isDarkMode);
+  }
+
+  // Sla de voorkeur op voor de volgende keer
+  localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+}
+
+// Check bij het laden van de pagina of dark mode aan moet staan
+window.onload = () => {
+  if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-mode');
+    const toggleBtn = document.getElementById('dark-mode-toggle');
+    if (toggleBtn) toggleBtn.classList.add('on');
+  }
 }
 </script>
 </body>
