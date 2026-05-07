@@ -4,20 +4,18 @@
     box-sizing: border-box;
 }
 
-html,
-body {
+html, body {
     height: 100%;
 }
 
 body {
     height: 100vh;
     display: flex;
-}
-
-.sidebar {
-    height: 100%;
-    width: 16rem;
-    background: rgb(0, 150, 0);
+    background-color: rgb(15, 15, 15);
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+    gap: 20px;
+    padding: 20px;
 }
 
 .main {
@@ -29,6 +27,7 @@ body {
     gap: 1rem;
     overflow: auto;
     position: relative;
+    min-width: 0;
 }
 
 .header {
@@ -80,6 +79,10 @@ body {
     color: lightgrey;
 }
 
+.search-box input::placeholder {
+    color: #888;
+}
+
 .icon {
     font-size: 1.3rem;
     color: white;
@@ -91,19 +94,9 @@ body {
     transform: scale(2);
 }
 
-.section3 {
-    width: 100%;
-    background: lightgrey;
-    border-radius: .5rem;
-    padding: .8rem;
-    min-height: 80rem;
-    flex-shrink: 0;
-}
-
-
 .section1 {
     width: 100%;
-    min-height: 60rem; 
+    min-height: 60rem;
     border-radius: .5rem;
     overflow: hidden;
     position: relative;
@@ -126,9 +119,9 @@ body {
     padding: 3rem;
     color: white;
     background: linear-gradient(to top,
-            rgb(0, 0, 0),
-            rgba(0, 0, 0, 0.6),
-            transparent);
+        rgb(0, 0, 0),
+        rgba(0, 0, 0, 0.6),
+        transparent);
 }
 
 .tags {
@@ -174,4 +167,13 @@ body {
     font-size: 1.4rem;
     font-weight: 600;
     cursor: pointer;
+}
+
+.section3 {
+    width: 100%;
+    background: lightgrey;
+    border-radius: .5rem;
+    padding: .8rem;
+    min-height: 80rem;
+    flex-shrink: 0;
 }
