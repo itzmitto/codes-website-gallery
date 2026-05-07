@@ -28,12 +28,18 @@ body {
     flex-direction: column;
     gap: 1rem;
     overflow: auto;
+    position: relative; /* toegevoegd */
 }
 
 .header {
+    position: absolute; /* of sticky */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
     width: 100%;
     min-height: 6rem;
-    background: red;
+    background: transparent; /* was: red */
     flex-shrink: 0;
     display: flex;
     align-items: center;
@@ -98,8 +104,6 @@ body {
 
 
 
-
-
 .section1 {
     width: 100%;
     min-height: 60rem;
@@ -113,7 +117,7 @@ body {
 /* afbeelding */
 .movie-img {
     width: 100%;
-    height: 60rem;
+    height: 100%;
     object-fit: cover;
     display: block;
 }
@@ -143,7 +147,7 @@ body {
 }
 
 .tags span {
-    background: rgba(255,255,255,0.12);
+    background: grey;
     padding: .4rem .9rem;
     border-radius: 2rem;
     font-size: 1.2rem;
@@ -182,13 +186,3 @@ body {
     cursor: pointer;
 }   
 
-
-
-/* .section1 {
-    width: 100%;
-    background: lightgrey;
-    border-radius: .5rem;
-    padding: .8rem;
-    min-height: 60rem;
-    flex-shrink: 0;
-} */
