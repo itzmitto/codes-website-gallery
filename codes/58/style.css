@@ -91,32 +91,23 @@ body {
     transform: scale(2);
 }
 
-.section2 {
-    width: 100%;
-    background: lightgrey;
-    border-radius: .5rem;
-    padding: .8rem;
-    min-height: 20rem;
-    flex-shrink: 0;
-}
-
 .section3 {
     width: 100%;
     background: lightgrey;
     border-radius: .5rem;
     padding: .8rem;
-    min-height: 30rem;
+    min-height: 80rem;
     flex-shrink: 0;
 }
 
 
 .section1 {
     width: 100%;
-    min-height: 48rem; /* was 60rem */
+    min-height: 60rem; 
     border-radius: .5rem;
     overflow: hidden;
     position: relative;
-    flex-shrink: 0;
+    flex-shrink: 1;
     background: #111;
 }
 
