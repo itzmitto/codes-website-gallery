@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,28 +9,157 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
 <body>
-
     <main class="main">
 
+        <div class="start-menu" id="start-menu">
+            <div class="start-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Type here to search">
+            </div>
+            <div class="start-header">
+                <h3>Pinned</h3>
+                <button class="all-apps">
+                    All apps
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="pinned-apps">
+                <div class="pinned-app">
+                    <img src="assets/edge.png" alt="">
+                    <span>Skype</span>
+                </div>
+                <div class="pinned-app">
+                    <img src="assets/edge.png" alt="">
+                    <span>Minecraft</span>
+                </div>
+                <div class="pinned-app">
+                    <img src="assets/edge.png" alt="">
+                    <span>Microsoft Edge</span>
+                </div>
+                <div class="pinned-app">
+                    <img src="assets/edge.png" alt="">
+                    <span>Edge Beta</span>
+                </div>
+                <div class="pinned-app">
+                    <img src="assets/edge.png" alt="">
+                    <span>Edge Dev</span>
+                </div>
+                <div class="pinned-app">
+                    <img src="assets/edge.png" alt="">
+                    <span>Edge Canary</span>
+                </div>
+                <div class="pinned-app">
+                    <img src="assets/edge.png" alt="">
+                    <span>Word</span>
+                </div>
+                <div class="pinned-app">
+                    <img src="assets/edge.png" alt="">
+                    <span>Excel</span>
+                </div>
+                <div class="pinned-app">
+                    <img src="assets/edge.png" alt="">
+                    <span>PowerPoint</span>
+                </div>
+                <div class="pinned-app">
+                    <img src="assets/edge.png" alt="">
+                    <span>Explorer</span>
+                </div>
+                <div class="pinned-app">
+                    <img src="assets/edge.png" alt="">
+                    <span>Twitter</span>
+                </div>
+                <div class="pinned-app">
+                    <img src="assets/edge.png" alt="">
+                    <span>Mail</span>
+                </div>
+                <div class="pinned-app">
+                    <img src="assets/edge.png" alt="">
+                    <span>Calendar</span>
+                </div>
+                <div class="pinned-app">
+                    <img src="assets/edge.png" alt="">
+                    <span>Store</span>
+                </div>
+                <div class="pinned-app">
+                    <img src="assets/edge.png" alt="">
+                    <span>Photos</span>
+                </div>
+                <div class="pinned-app">
+                    <img src="assets/edge.png" alt="">
+                    <span>Settings</span>
+                </div>
+                <div class="pinned-app">
+                    <img src="assets/edge.png" alt="">
+                    <span>Office</span>
+                </div>
+                <div class="pinned-app">
+                    <img src="assets/edge.png" alt="">
+                    <span>Xbox</span>
+                </div>
+            </div>
+            <div class="recommended-header">
+                <h3>Recommended</h3>
+                <button class="more-btn">
+                    More
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="recommended-list">
+                <div class="recommended-item">
+                    <img src="assets/edge.png" alt="">
+                    <div>
+                        <h4>IBus Preferences</h4>
+                        <p>Recently added</p>
+                    </div>
+                </div>
+                <div class="recommended-item">
+                    <img src="assets/edge.png" alt="">
+                    <div>
+                        <h4>Advanced Network</h4>
+                        <p>Recently added</p>
+                    </div>
+                </div>
+                <div class="recommended-item">
+                    <img src="assets/edge.png" alt="">
+                    <div>
+                        <h4>Dell Power Manager</h4>
+                        <p>Recently added</p>
+                    </div>
+                </div>
+                <div class="recommended-item">
+                    <img src="assets/edge.png" alt="">
+                    <div>
+                        <h4>Bing Webmaster</h4>
+                        <p>Recently added</p>
+                    </div>
+                </div>
+            </div>
+            <div class="start-footer">
+                <div class="user-profile">
+                    <img src="assets/edge.png" alt="">
+                    <span>Andre</span>
+                </div>
+                <button class="power-btn">
+                    <i class="fa-solid fa-power-off"></i>
+                </button>
+            </div>
+        </div>
         <div class="taskbar">
-
-            <!-- Midden -->
             <div class="taskbar-center">
 
-                <div class="taskbar-icon active">
-                    <img src="assets/windows.png" alt=""> 
+                <div class="taskbar-icon active" id="windows-btn">
+                    <img src="assets/windows.png" alt="">
                 </div>
 
                 <div class="taskbar-icon">
                     <img src="assets/search.png" alt="">
                 </div>
 
-                <div class="taskbar-icon"> 
+                <div class="taskbar-icon">
                     <img src="assets/taskview.png" alt="">
                 </div>
 
@@ -52,27 +182,28 @@
                 <div class="taskbar-icon">
                     <img src="assets/mail.png" alt="">
                 </div>
-
             </div>
-
-            <!-- Rechts -->
             <div class="taskbar-right">
-
                 <i class="fa-solid fa-angle-up"></i>
                 <i class="fa-solid fa-wifi"></i>
                 <i class="fa-solid fa-volume-high"></i>
                 <i class="fa-solid fa-battery-full"></i>
-
                 <div class="time-date">
                     <span>12:39 PM</span>
                     <span>10/2/2021</span>
                 </div>
-
             </div>
-
         </div>
 
     </main>
 
+    <script>
+        const windowsBtn = document.getElementById("windows-btn");
+        const startMenu = document.getElementById("start-menu");
+        windowsBtn.addEventListener("click", () => {
+            startMenu.classList.toggle("show");
+        });
+    </script>
 </body>
+
 </html>
