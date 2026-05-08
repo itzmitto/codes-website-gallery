@@ -23,7 +23,7 @@
      bottom: 0;
      left: 0;
      width: 100%;
-     height: 48px;
+     height: 60px;
      background: rgba(255, 255, 255, 0.72);
      backdrop-filter: blur(30px);
      -webkit-backdrop-filter: blur(30px);
@@ -64,15 +64,14 @@
      position: absolute;
      left: 50%;
      transform: translateX(-50%);
-
      display: flex;
      align-items: center;
      gap: 4px;
  }
 
  .taskbar-icon {
-     width: 40px;
-     height: 40px;
+     width: 60px;
+     height: 60px;
      display: flex;
      align-items: center;
      justify-content: center;
@@ -85,7 +84,11 @@
  }
 
  .taskbar-icon:hover {
-     background: rgba(255, 255, 255, 0.55);
+     background: rgba(255, 255, 255, 0.65);
+
+     box-shadow:
+         inset 0 1px 1px rgba(255, 255, 255, 0.7),
+         0 2px 8px rgba(255, 255, 255, 0.3);
  }
 
  .taskbar-icon:active {
