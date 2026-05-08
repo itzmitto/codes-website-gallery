@@ -59,3 +59,65 @@
     font-size: 11px;
     margin: 0 4px;
 }
+
+
+.taskbar-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* ICON BUTTONS */
+
+.taskbar-icon {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    transition:
+        background 0.18s ease,
+        transform 0.15s ease;
+
+    cursor: pointer;
+
+    position: relative;
+}
+
+.taskbar-icon:hover {
+    background: rgba(255, 255, 255, 0.55);
+}
+
+.taskbar-icon:active {
+    transform: scale(0.92);
+}
+
+.taskbar-icon img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+/* blauwe lijn onder actieve app */
+
+.taskbar-icon.active::after {
+    content: "";
+
+    position: absolute;
+    bottom: 4px;
+
+    width: 16px;
+    height: 3px;
+
+    border-radius: 50px;
+
+    background: #0078d4;
+}
