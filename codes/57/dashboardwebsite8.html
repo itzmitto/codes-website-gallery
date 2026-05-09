@@ -1,0 +1,2040 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE ACADEMIC CHRONICLE — André Babirian</title>
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Playfair+Display+SC:wght@400;700;900&family=IM+Fell+English+SC&family=IM+Fell+English:ital@0;1&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+
+/* ════════════════════════════════════════════════════════════════
+   VICTORIAN DESIGN TOKENS
+   Inspired by: GODS poster (red+black+stone), Pearson broadside
+   (ornate engraving), OMA NARE (gold statue+type layering),
+   I WON'T KEEP WAITING (black+amber+stone sculpture)
+════════════════════════════════════════════════════════════════ */
+:root {
+  --parchment:  #F0E8D4;
+  --parchment2: #E4D8BC;
+  --parchment3: #D4C49C;
+  --ink:        #1A1208;
+  --ink2:       #120C04;
+  --crimson:    #9B1818;
+  --crimson2:   #C02020;
+  --amber:      #C87828;
+  --amber2:     #E8A840;
+  --amber3:     #F5CC70;
+  --stone:      #8A7C6C;
+  --stone2:     #B8A88C;
+  --charcoal:   #2C2418;
+  --rust:       #7A2C14;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; }
+
+body {
+  background: var(--ink2);
+  color: var(--ink);
+  font-family: 'Crimson Text', serif;
+  cursor: none;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ── PAPER TEXTURE ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E"),
+    repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(26,18,8,0.04) 27px, rgba(26,18,8,0.04) 28px);
+  pointer-events: none;
+  z-index: 9000;
+  opacity: 0.7;
+}
+
+/* ── CURSOR — quill pen nib ── */
+#vic-cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-4px, -4px);
+  width: 20px; height: 20px;
+  filter: drop-shadow(0 0 3px rgba(155,24,24,0.4));
+}
+
+/* ════════════════════════════════════════════════════════════════
+   LAYOUT
+════════════════════════════════════════════════════════════════ */
+.chronicle {
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  height: 100vh;
+  position: relative;
+  z-index: 10;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   SIDEBAR — Victorian newspaper column
+════════════════════════════════════════════════════════════════ */
+.sidebar {
+  height: 100vh;
+  background: var(--ink2);
+  display: flex;
+  flex-direction: column;
+  border-right: 4px double rgba(155,24,24,0.6);
+  position: relative;
+  overflow: hidden;
+}
+
+/* aged paper stain on sidebar */
+.sidebar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 30% 20%, rgba(200,120,40,0.06) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 80%, rgba(155,24,24,0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* inner double rule */
+.sidebar::after {
+  content: '';
+  position: absolute;
+  top: 0; right: -8px; bottom: 0;
+  width: 1px;
+  background: rgba(155,24,24,0.25);
+  pointer-events: none;
+}
+
+/* ── MASTHEAD ── */
+.sb-masthead {
+  padding: 1.5rem 1.4rem 1rem;
+  border-bottom: 1px solid rgba(155,24,24,0.3);
+  text-align: center;
+  position: relative;
+}
+
+/* ornamental top rule */
+.sb-toprule {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 0.75rem;
+}
+.sb-toprule::before, .sb-toprule::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(155,24,24,0.5);
+}
+.sb-toprule-center {
+  font-size: 10px;
+  color: rgba(155,24,24,0.6);
+  letter-spacing: 0.3em;
+}
+
+/* FRAKTUR title */
+.sb-fraktur {
+  font-family: 'UnifrakturMaguntia', cursive;
+  font-size: 1.5rem;
+  color: var(--parchment);
+  line-height: 1.1;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5), 0 0 20px rgba(155,24,24,0.2);
+  letter-spacing: 0.03em;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.sb-established {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 9px;
+  color: rgba(240,232,212,0.3);
+  letter-spacing: 0.2em;
+  display: block;
+}
+
+/* ── ENGRAVED CREST SVG ── */
+.sb-crest {
+  display: block;
+  margin: 0.6rem auto;
+  width: 60px; height: 60px;
+  opacity: 0.75;
+}
+
+/* ── NAVIGATION ── */
+.sb-nav-label {
+  font-family: 'Playfair Display SC', serif;
+  font-size: 7px;
+  letter-spacing: 0.45em;
+  color: rgba(155,24,24,0.5);
+  text-transform: uppercase;
+  padding: 0.6rem 1.4rem 0.3rem;
+  border-top: 1px solid rgba(155,24,24,0.15);
+  display: block;
+}
+
+.nav-list { list-style: none; padding: 0 0.5rem; flex: 1; }
+.nav-item { margin-bottom: 1px; }
+
+.nav-item button {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: none;
+  text-align: left;
+  position: relative;
+  transition: background 0.3s;
+  border-radius: 0;
+}
+.nav-item button:hover { background: rgba(155,24,24,0.08); }
+.nav-item.active button { background: rgba(155,24,24,0.12); }
+
+.nav-item.active button::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 20%; bottom: 20%;
+  width: 3px;
+  background: linear-gradient(180deg, transparent, var(--crimson), transparent);
+}
+
+.nav-roman {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 10px;
+  color: rgba(155,24,24,0.35);
+  min-width: 20px;
+  transition: color 0.3s;
+}
+.nav-lbl {
+  font-family: 'Playfair Display SC', serif;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  color: rgba(240,232,212,0.4);
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+.nav-item button:hover .nav-roman,
+.nav-item.active button .nav-roman { color: var(--crimson); }
+.nav-item button:hover .nav-lbl,
+.nav-item.active button .nav-lbl { color: var(--parchment); }
+
+/* ── SIDEBAR FOOTER ── */
+.sb-footer {
+  padding: 1rem 1.4rem;
+  border-top: 1px solid rgba(155,24,24,0.2);
+  text-align: center;
+}
+.sb-footer-rule {
+  display: flex; align-items: center; gap: 6px; margin-bottom: 0.7rem;
+}
+.sb-footer-rule::before, .sb-footer-rule::after {
+  content: ''; flex: 1; height: 1px; background: rgba(155,24,24,0.3);
+}
+.sb-footer-rule span { font-size: 10px; color: rgba(155,24,24,0.4); }
+
+.sb-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(240,232,212,0.6);
+  letter-spacing: 0.08em;
+  display: block;
+  margin-bottom: 2px;
+}
+.sb-class {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 9px;
+  color: rgba(240,232,212,0.25);
+  letter-spacing: 0.1em;
+}
+.sb-motto {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 8px;
+  color: rgba(155,24,24,0.35);
+  margin-top: 6px;
+  letter-spacing: 0.08em;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   MAIN BROADSIDE
+════════════════════════════════════════════════════════════════ */
+.broadside {
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--parchment);
+  background-image:
+    radial-gradient(ellipse at 20% 10%, rgba(200,120,40,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 90%, rgba(155,24,24,0.06) 0%, transparent 40%);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(155,24,24,0.4) var(--parchment2);
+}
+
+/* ── PAGES ── */
+.page { display: none; }
+.page.active {
+  display: block;
+  animation: unfurl 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+@keyframes unfurl {
+  from { opacity: 0; transform: translateY(12px) rotate(-0.2deg); }
+  to   { opacity: 1; transform: translateY(0) rotate(0deg); }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   PAGE HEADER — newspaper masthead style
+════════════════════════════════════════════════════════════════ */
+.pg-header {
+  background: var(--ink);
+  padding: 1.2rem 2.5rem;
+  border-bottom: 3px double var(--crimson);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.ph-left { display: flex; align-items: baseline; gap: 12px; }
+
+.ph-chapter {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: rgba(155,24,24,0.7);
+}
+.ph-title {
+  font-family: 'UnifrakturMaguntia', cursive;
+  font-size: 1.6rem;
+  color: var(--parchment);
+  line-height: 1;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  letter-spacing: 0.05em;
+}
+
+.ph-right { display: flex; gap: 8px; align-items: center; }
+.ph-tag {
+  font-family: 'Playfair Display SC', serif;
+  font-size: 6px;
+  letter-spacing: 0.3em;
+  color: rgba(240,232,212,0.4);
+  border: 1px solid rgba(155,24,24,0.35);
+  padding: 3px 10px;
+}
+.ph-tag.live {
+  color: var(--crimson);
+  border-color: var(--crimson);
+  background: rgba(155,24,24,0.08);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   ORNAMENT HELPERS
+════════════════════════════════════════════════════════════════ */
+.orn-rule {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+.orn-rule::before, .orn-rule::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(26,18,8,0.2);
+}
+.orn-glyph {
+  font-size: 12px;
+  color: rgba(155,24,24,0.5);
+  letter-spacing: 4px;
+}
+
+/* double rule border helper */
+.dbl-top    { border-top:    3px double rgba(26,18,8,0.25); }
+.dbl-bottom { border-bottom: 3px double rgba(26,18,8,0.25); }
+.dbl-left   { border-left:   3px double rgba(26,18,8,0.25); }
+.dbl-right  { border-right:  3px double rgba(26,18,8,0.25); }
+
+/* section title — Playfair Display with ornamental rules */
+.sec-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+  text-align: center;
+  padding: 0.6rem 1.5rem;
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  position: relative;
+}
+.sec-title::before {
+  content: '';
+  position: absolute;
+  top: 3px; left: 3px; right: 3px; bottom: 3px;
+  border-top: 1px solid rgba(26,18,8,0.18);
+  border-bottom: 1px solid rgba(26,18,8,0.18);
+  pointer-events: none;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   HOME PAGE
+════════════════════════════════════════════════════════════════ */
+
+/* 4-column stat boxes — like a Victorian newspaper classified section */
+.home-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-bottom: 2px solid var(--ink);
+}
+
+.stat-box {
+  padding: 1.75rem 1.25rem;
+  border-right: 1px solid rgba(26,18,8,0.2);
+  text-align: center;
+  position: relative;
+  cursor: none;
+  transition: background 0.3s;
+  overflow: hidden;
+}
+.stat-box:last-child { border-right: none; }
+.stat-box:hover { background: rgba(26,18,8,0.04); }
+
+/* corner ornament brackets */
+.stat-box::before {
+  content: '';
+  position: absolute;
+  top: 6px; left: 6px;
+  width: 12px; height: 12px;
+  border-top: 2px solid rgba(155,24,24,0.35);
+  border-left: 2px solid rgba(155,24,24,0.35);
+}
+.stat-box::after {
+  content: '';
+  position: absolute;
+  bottom: 6px; right: 6px;
+  width: 12px; height: 12px;
+  border-bottom: 2px solid rgba(155,24,24,0.35);
+  border-right: 2px solid rgba(155,24,24,0.35);
+}
+
+.sb-roman {
+  font-family: 'UnifrakturMaguntia', cursive;
+  font-size: 2.8rem;
+  line-height: 1;
+  color: var(--ink);
+  margin-bottom: 4px;
+  text-shadow: 2px 2px 0 rgba(155,24,24,0.15);
+}
+.sb-label {
+  font-family: 'Playfair Display SC', serif;
+  font-size: 7px;
+  letter-spacing: 0.3em;
+  color: var(--stone);
+  margin-bottom: 2px;
+}
+.sb-sub {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 9px;
+  color: var(--stone2);
+}
+
+/* Week schedule — newspaper column layout */
+.home-columns {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border-bottom: 2px solid var(--ink);
+}
+
+.day-column {
+  border-right: 1px solid rgba(26,18,8,0.18);
+  cursor: none;
+  transition: background 0.3s;
+  overflow: hidden;
+}
+.day-column:last-child { border-right: none; }
+.day-column:hover { background: rgba(26,18,8,0.03); }
+.day-column:hover .dc-head { background: var(--ink); color: var(--parchment); }
+
+.dc-head {
+  background: var(--parchment2);
+  padding: 7px 1rem;
+  border-bottom: 2px solid rgba(26,18,8,0.2);
+  font-family: 'Playfair Display SC', serif;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: var(--charcoal);
+  transition: background 0.3s, color 0.3s;
+}
+.dc-body { padding: 1rem; }
+.dc-subject {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--ink);
+  line-height: 1.2;
+  margin-bottom: 5px;
+}
+.dc-time {
+  font-family: 'Crimson Text', serif;
+  font-size: 10px;
+  color: var(--stone);
+  letter-spacing: 0.08em;
+}
+.dc-room {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 9px;
+  color: var(--stone2);
+  margin-top: 3px;
+}
+.dc-bar {
+  height: 2px;
+  background: rgba(155,24,24,0.2);
+  margin-top: 8px;
+}
+
+/* Two-column broadside notices */
+.home-broadside {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 2px solid var(--ink);
+}
+.bs-col {
+  padding: 1.5rem 2rem;
+  border-right: 1px solid rgba(26,18,8,0.2);
+}
+.bs-col:last-child { border-right: none; }
+
+.bs-heading {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+  margin-bottom: 1rem;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.bsh-count {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--crimson);
+}
+
+.broadside-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 6px 0;
+  border-bottom: 1px dotted rgba(26,18,8,0.2);
+  cursor: none;
+  font-family: 'Crimson Text', serif;
+  font-size: 12px;
+  color: var(--charcoal);
+  line-height: 1.4;
+  transition: color 0.2s;
+}
+.broadside-item:last-child { border-bottom: none; }
+.broadside-item:hover { color: var(--ink); }
+
+.bi-ornament {
+  font-family: 'IM Fell English', serif;
+  font-size: 14px;
+  color: rgba(155,24,24,0.6);
+  flex-shrink: 0;
+  margin-top: -1px;
+  line-height: 1.3;
+}
+
+.heraldic-badge {
+  margin-left: auto;
+  font-family: 'Playfair Display SC', serif;
+  font-size: 6px;
+  letter-spacing: 0.18em;
+  padding: 2px 7px;
+  border: 1px solid;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.hb-urgent { border-color: rgba(155,24,24,0.6); color: var(--crimson); }
+.hb-soon   { border-color: rgba(200,120,40,0.5); color: var(--amber); }
+.hb-later  { border-color: rgba(138,124,108,0.4); color: var(--stone); }
+.hb-done   { border-color: rgba(26,18,8,0.2); color: var(--stone2); }
+
+/* ════════════════════════════════════════════════════════════════
+   ROOSTER PAGE
+════════════════════════════════════════════════════════════════ */
+.rooster-broadside {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border-bottom: 2px solid var(--ink);
+}
+
+.rc-col {
+  border-right: 1px solid rgba(26,18,8,0.18);
+  overflow: hidden;
+  cursor: none;
+  transition: background 0.3s;
+}
+.rc-col:last-child { border-right: none; }
+.rc-col:hover { background: rgba(26,18,8,0.03); }
+.rc-col:hover .rc-head { background: var(--crimson); color: var(--parchment); }
+
+/* engraving-style illustration area per day */
+.rc-illustration {
+  height: 120px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 2px solid rgba(26,18,8,0.2);
+  background: var(--parchment2);
+}
+/* halftone dot pattern */
+.rc-illustration::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(26,18,8,0.15) 1px, transparent 1px);
+  background-size: 6px 6px;
+  pointer-events: none;
+}
+/* diagonal hatch lines */
+.rc-illustration::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent, transparent 4px,
+    rgba(26,18,8,0.04) 4px, rgba(26,18,8,0.04) 5px
+  );
+  pointer-events: none;
+}
+
+/* per-day colour accent */
+.ri-0 { background: linear-gradient(160deg, var(--parchment2) 0%, #E8C8A0 100%); }
+.ri-1 { background: linear-gradient(160deg, var(--parchment2) 0%, #D8D0C0 100%); }
+.ri-2 { background: linear-gradient(160deg, var(--parchment2) 0%, #E0C8C8 100%); }
+.ri-3 { background: linear-gradient(160deg, var(--parchment2) 0%, #D8E0C8 100%); }
+.ri-4 { background: linear-gradient(160deg, var(--parchment2) 0%, #E8D0A8 100%); }
+
+/* Roman numeral ghost in illustration */
+.rc-ghost {
+  position: absolute;
+  bottom: -10px; right: -5px;
+  font-family: 'UnifrakturMaguntia', cursive;
+  font-size: 7rem;
+  color: rgba(26,18,8,0.07);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* small decorative SVG element per day */
+.rc-deco {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.25;
+}
+
+.rc-head {
+  font-family: 'Playfair Display SC', serif;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  padding: 7px 1rem;
+  background: var(--parchment2);
+  border-bottom: 1px solid rgba(26,18,8,0.2);
+  transition: background 0.3s, color 0.3s;
+  color: var(--charcoal);
+}
+.rc-body { padding: 1.2rem 1rem; }
+.rc-time {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+.rc-sep {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 9px;
+  color: var(--stone2);
+  display: block;
+  margin: 4px 0;
+  letter-spacing: 0.15em;
+}
+.rc-end {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: rgba(26,18,8,0.4);
+  margin-bottom: 8px;
+}
+.rc-rule { height: 1px; background: rgba(26,18,8,0.15); margin: 8px 0; }
+.rc-room {
+  font-family: 'Playfair Display SC', serif;
+  font-size: 7px;
+  letter-spacing: 0.18em;
+  color: var(--stone2);
+  margin-bottom: 3px;
+}
+.rc-vak {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 11px;
+  color: var(--crimson);
+  letter-spacing: 0.05em;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   TAKEN PAGE — the gazette classifieds
+════════════════════════════════════════════════════════════════ */
+.gazette-header {
+  display: grid;
+  grid-template-columns: 52px 1fr 100px 130px 80px;
+  padding: 0.75rem 2rem;
+  background: var(--ink);
+  border-bottom: 2px solid var(--crimson);
+  gap: 1rem;
+  align-items: center;
+}
+.gh-col {
+  font-family: 'Playfair Display SC', serif;
+  font-size: 7px;
+  letter-spacing: 0.28em;
+  color: rgba(240,232,212,0.35);
+}
+
+.gazette-row {
+  display: grid;
+  grid-template-columns: 52px 1fr 100px 130px 80px;
+  padding: 1.1rem 2rem;
+  border-bottom: 1px solid rgba(26,18,8,0.1);
+  align-items: center;
+  gap: 1rem;
+  cursor: none;
+  position: relative;
+  transition: background 0.25s;
+  background: var(--parchment);
+}
+.gazette-row::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 0;
+  background: rgba(155,24,24,0.04);
+  transition: width 0.5s ease;
+}
+.gazette-row:hover::before { width: 100%; }
+.gazette-row:hover .gr-name { color: var(--crimson); }
+.gazette-row:last-child { border-bottom: none; }
+.gazette-row.crossed { opacity: 0.38; }
+
+.gr-num {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: rgba(26,18,8,0.1);
+  line-height: 1;
+}
+.gr-num.x { text-decoration: line-through; }
+
+.gr-name {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--ink);
+  margin-bottom: 2px;
+  transition: color 0.3s;
+  letter-spacing: 0.02em;
+}
+.gr-name.x { text-decoration: line-through; opacity: 0.5; }
+.gr-sub {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 10px;
+  color: var(--stone);
+}
+
+.wax-seal {
+  display: inline-block;
+  font-family: 'Playfair Display SC', serif;
+  font-size: 6px;
+  letter-spacing: 0.15em;
+  padding: 3px 9px;
+  border: 1px solid;
+}
+.ws-urgent { border-color: rgba(155,24,24,0.5); color: var(--crimson); }
+.ws-soon   { border-color: rgba(200,120,40,0.5); color: var(--amber); }
+.ws-later  { border-color: rgba(138,124,108,0.4); color: var(--stone); }
+.ws-done   { border-color: rgba(26,18,8,0.15); color: var(--stone2); }
+
+.gr-dead {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 11px;
+  color: var(--stone);
+  letter-spacing: 0.05em;
+}
+.gr-vak {
+  font-family: 'Playfair Display SC', serif;
+  font-size: 7px;
+  letter-spacing: 0.18em;
+  color: var(--stone2);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   LERAREN PAGE — portrait gallery broadside
+════════════════════════════════════════════════════════════════ */
+.portrait-hall {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-bottom: 2px solid var(--ink);
+}
+
+.portrait-card {
+  border-right: 1px solid rgba(26,18,8,0.18);
+  border-bottom: 1px solid rgba(26,18,8,0.18);
+  overflow: hidden;
+  cursor: none;
+  transition: background 0.3s;
+}
+.portrait-card:nth-child(3n) { border-right: none; }
+.portrait-card:hover { background: rgba(26,18,8,0.02); }
+.portrait-card:hover .pcard-name { color: var(--crimson); }
+
+/* engraving portrait box */
+.pcard-portrait {
+  height: 160px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 2px solid rgba(26,18,8,0.2);
+}
+
+/* per-card unique engraving color wash */
+.pp-0 { background: linear-gradient(160deg, #EAE0CC, #D4C8A8); }
+.pp-1 { background: linear-gradient(155deg, #E0D8CC, #C8C0A8); }
+.pp-2 { background: linear-gradient(165deg, #E8D4C0, #C8A080 80%); }
+.pp-3 { background: linear-gradient(150deg, #DDE4D4, #B8C4A0); }
+.pp-4 { background: linear-gradient(160deg, #E4DACA, #C8B48C); }
+
+/* crosshatch engraving texture */
+.pcard-portrait::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(-45deg, transparent, transparent 3px, rgba(26,18,8,0.05) 3px, rgba(26,18,8,0.05) 4px),
+              repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(26,18,8,0.03) 3px, rgba(26,18,8,0.03) 4px);
+  pointer-events: none;
+  z-index: 1;
+}
+/* vignette border on portrait */
+.pcard-portrait::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 30px rgba(26,18,8,0.25);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* large letter in portrait */
+.pcard-initial {
+  position: absolute;
+  bottom: -15px; left: -5px;
+  font-family: 'UnifrakturMaguntia', cursive;
+  font-size: 10rem;
+  color: rgba(26,18,8,0.08);
+  line-height: 1;
+  z-index: 0;
+  user-select: none;
+  pointer-events: none;
+}
+.pcard-num-badge {
+  position: absolute;
+  top: 10px; right: 10px;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(26,18,8,0.25);
+  z-index: 3;
+}
+
+.pcard-body { padding: 1.2rem 1.5rem; }
+.pcard-roman {
+  font-family: 'Playfair Display SC', serif;
+  font-size: 7px;
+  letter-spacing: 0.35em;
+  color: var(--stone2);
+  margin-bottom: 3px;
+}
+.pcard-name {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 2px;
+  transition: color 0.3s;
+  letter-spacing: 0.02em;
+}
+.pcard-role {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--stone);
+  margin-bottom: 8px;
+}
+.pcard-rule { height: 1px; background: rgba(26,18,8,0.12); margin-bottom: 8px; }
+.pcard-vak-lbl {
+  font-family: 'Playfair Display SC', serif;
+  font-size: 7px;
+  letter-spacing: 0.22em;
+  color: var(--stone2);
+  margin-bottom: 2px;
+}
+.pcard-vak {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 11px;
+  color: var(--crimson);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   CIJFERS PAGE — the examination register
+════════════════════════════════════════════════════════════════ */
+.exam-register {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 2px solid var(--ink);
+}
+.er-panel {
+  padding: 2rem;
+  border-right: 1px solid rgba(26,18,8,0.18);
+}
+.er-panel:last-child { border-right: none; padding: 0; }
+
+.er-heading {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+  margin-bottom: 1.25rem;
+  padding-bottom: 7px;
+  border-bottom: 2px solid var(--ink);
+  text-align: center;
+  position: relative;
+}
+.er-heading::before {
+  content: '';
+  position: absolute;
+  bottom: 3px; left: 0; right: 0;
+  height: 1px;
+  background: rgba(26,18,8,0.15);
+}
+
+.grade-entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 0;
+  border-bottom: 1px dotted rgba(26,18,8,0.2);
+  cursor: none;
+  transition: background 0.2s;
+}
+.grade-entry:last-child { border-bottom: none; }
+.grade-entry:hover .ge-score { color: var(--crimson); }
+.ge-vak {
+  font-family: 'Crimson Text', serif;
+  font-size: 13px;
+  color: var(--charcoal);
+}
+.ge-dots {
+  flex: 1;
+  border-bottom: 1px dotted rgba(26,18,8,0.2);
+  margin: 0 1rem;
+  height: 1px;
+  position: relative;
+  top: -3px;
+}
+.ge-score {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 1.3rem;
+  transition: color 0.2s;
+}
+.gs-high { color: var(--amber); }
+.gs-mid  { color: var(--stone); }
+.gs-none { color: var(--stone2); font-size: 1rem; }
+
+/* big average stamp */
+.avg-stamp {
+  text-align: center;
+  padding: 2rem 1rem 1.5rem;
+  border-bottom: 2px solid var(--ink);
+  position: relative;
+  background: var(--parchment2);
+}
+.as-label {
+  font-family: 'Playfair Display SC', serif;
+  font-size: 7px;
+  letter-spacing: 0.4em;
+  color: var(--stone);
+  margin-bottom: 0.4rem;
+}
+.as-num {
+  font-family: 'UnifrakturMaguntia', cursive;
+  font-size: 6.5rem;
+  line-height: 1;
+  color: var(--ink);
+  text-shadow: 3px 3px 0 rgba(155,24,24,0.2), 5px 5px 0 rgba(26,18,8,0.05);
+  position: relative;
+  display: inline-block;
+}
+/* stamp circle around number */
+.as-num::before {
+  content: '';
+  position: absolute;
+  inset: -10px;
+  border: 3px double rgba(155,24,24,0.4);
+  border-radius: 50%;
+}
+.as-sub {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 9px;
+  color: var(--stone2);
+  margin-top: 6px;
+  letter-spacing: 0.15em;
+}
+
+.mini-register {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-top: 2px solid var(--ink);
+}
+.mr-cell {
+  padding: 1.2rem 1rem;
+  text-align: center;
+  border-right: 1px solid rgba(26,18,8,0.18);
+  cursor: none;
+  transition: background 0.25s;
+}
+.mr-cell:last-child { border-right: none; }
+.mr-cell:hover { background: rgba(26,18,8,0.04); }
+.mrc-val {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 1.6rem;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 3px;
+}
+.mrc-lbl {
+  font-family: 'Playfair Display SC', serif;
+  font-size: 6px;
+  letter-spacing: 0.22em;
+  color: var(--stone2);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   PROFIEL PAGE — the biographical dossier
+════════════════════════════════════════════════════════════════ */
+.bio-sheet {
+  display: grid;
+  grid-template-columns: 1fr 240px;
+  border-bottom: 2px solid var(--ink);
+}
+.bio-main {
+  padding: 2.5rem;
+  border-right: 1px solid rgba(26,18,8,0.18);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ornate drop cap A */
+.bio-dropcap {
+  float: left;
+  font-family: 'UnifrakturMaguntia', cursive;
+  font-size: 6.5rem;
+  line-height: 0.75;
+  color: var(--crimson);
+  margin-right: 6px;
+  margin-top: 4px;
+  opacity: 0.7;
+  text-shadow: 2px 2px 0 rgba(155,24,24,0.2);
+}
+
+.bio-eyebrow {
+  font-family: 'Playfair Display SC', serif;
+  font-size: 7px;
+  letter-spacing: 0.4em;
+  color: var(--crimson);
+  margin-bottom: 6px;
+  display: block;
+  clear: none;
+}
+.bio-name {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 0.92;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+  margin-bottom: 4px;
+}
+.bio-title {
+  font-family: 'Playfair Display SC', serif;
+  font-size: 8px;
+  letter-spacing: 0.28em;
+  color: var(--stone);
+  margin-bottom: 2rem;
+  clear: both;
+}
+.bio-rule { height: 2px; width: 60px; background: var(--crimson); opacity: 0.5; margin-bottom: 2rem; }
+
+.bio-entries { display: flex; flex-direction: column; gap: 0.6rem; }
+.bio-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px dotted rgba(26,18,8,0.18);
+  font-size: 12px;
+}
+.bio-key {
+  font-family: 'Playfair Display SC', serif;
+  font-size: 7px;
+  letter-spacing: 0.22em;
+  color: var(--stone2);
+  min-width: 90px;
+  flex-shrink: 0;
+}
+.bio-val {
+  font-family: 'Crimson Text', serif;
+  color: var(--charcoal);
+  font-size: 13px;
+}
+
+/* stats column — wax tablet style */
+.bio-tablets {
+  display: flex;
+  flex-direction: column;
+  background: var(--parchment2);
+}
+.bio-tablet {
+  flex: 1;
+  padding: 1.5rem 1.2rem;
+  border-bottom: 1px solid rgba(26,18,8,0.15);
+  text-align: center;
+  cursor: none;
+  transition: background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.bio-tablet:last-child { border-bottom: none; }
+.bio-tablet:hover { background: rgba(26,18,8,0.04); }
+.bt-val {
+  font-family: 'UnifrakturMaguntia', cursive;
+  font-size: 2.2rem;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 4px;
+  text-shadow: 1px 1px 0 rgba(155,24,24,0.15);
+}
+.bt-lbl {
+  font-family: 'Playfair Display SC', serif;
+  font-size: 6px;
+  letter-spacing: 0.22em;
+  color: var(--stone2);
+  line-height: 1.5;
+}
+
+/* skills section */
+.bio-skills {
+  padding: 2rem 2.5rem;
+  border-bottom: 2px solid var(--ink);
+  background: var(--parchment);
+}
+.bsk-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+  margin-bottom: 1.25rem;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--ink);
+  text-align: center;
+  position: relative;
+}
+.bsk-title::before {
+  content: '';
+  position: absolute;
+  bottom: 3px; left: 0; right: 0;
+  height: 1px;
+  background: rgba(26,18,8,0.15);
+}
+
+.skill-entries { display: flex; flex-direction: column; gap: 0.6rem; }
+.se-row { display: flex; align-items: center; gap: 1rem; }
+.se-name {
+  font-family: 'Playfair Display SC', serif;
+  font-size: 7px;
+  letter-spacing: 0.18em;
+  color: var(--stone);
+  width: 100px;
+  flex-shrink: 0;
+}
+.se-track {
+  flex: 1;
+  height: 3px;
+  background: rgba(26,18,8,0.08);
+  border: 1px solid rgba(26,18,8,0.12);
+  position: relative;
+  overflow: hidden;
+}
+.se-fill {
+  height: 100%;
+  position: absolute;
+  top: 0; left: 0;
+  background: linear-gradient(90deg, var(--crimson), var(--amber));
+}
+.se-pct {
+  font-family: 'Playfair Display', serif;
+  font-size: 9px;
+  font-style: italic;
+  color: var(--stone2);
+  width: 32px;
+  text-align: right;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   SETTINGS PAGE — laws & proclamations
+════════════════════════════════════════════════════════════════ */
+.laws-broadside {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 2px solid var(--ink);
+}
+.law-section {
+  padding: 2rem;
+  border-right: 1px solid rgba(26,18,8,0.18);
+  background: var(--parchment);
+}
+.law-section:last-child { border-right: none; }
+
+.law-heading {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+  margin-bottom: 1.25rem;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--ink);
+  text-align: center;
+  position: relative;
+}
+.law-heading::before {
+  content: '';
+  position: absolute;
+  bottom: 3px; left: 0; right: 0;
+  height: 1px;
+  background: rgba(26,18,8,0.15);
+}
+
+.law-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  border-bottom: 1px dotted rgba(26,18,8,0.18);
+  cursor: none;
+  transition: background 0.25s;
+}
+.law-item:last-child { border-bottom: none; }
+.law-item:hover .li-name { color: var(--crimson); }
+
+.li-name {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--ink);
+  transition: color 0.25s;
+  margin-bottom: 2px;
+}
+.li-desc {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 9px;
+  color: var(--stone2);
+  letter-spacing: 0.05em;
+}
+
+/* Victorian wax-seal toggle */
+.wax-toggle {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  position: relative;
+  cursor: none;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 9px;
+  font-style: italic;
+  transition: background 0.35s, box-shadow 0.35s, color 0.35s;
+  border: 2px solid rgba(26,18,8,0.2);
+  color: var(--stone2);
+  background: var(--parchment2);
+  box-shadow: 2px 3px 6px rgba(0,0,0,0.15);
+}
+.wax-toggle.on {
+  background: radial-gradient(circle at 40% 35%, var(--crimson2), var(--crimson) 60%, #4A0808);
+  border-color: rgba(155,24,24,0.6);
+  color: var(--parchment);
+  box-shadow: 2px 3px 10px rgba(155,24,24,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+.wax-toggle::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.08);
+  pointer-events: none;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   ANIMATIONS — staggered reveal
+════════════════════════════════════════════════════════════════ */
+.stat-box { animation: rise-in 0.4s ease both; }
+.stat-box:nth-child(1) { animation-delay: 0.04s; }
+.stat-box:nth-child(2) { animation-delay: 0.10s; }
+.stat-box:nth-child(3) { animation-delay: 0.16s; }
+.stat-box:nth-child(4) { animation-delay: 0.22s; }
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ── CURSOR quill ── -->
+<div id="vic-cursor">
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+    <path d="M3 17 L8 9 Q12 2 17 3 Q14 8 10 10 L15 11 Q8 14 3 17Z" fill="rgba(155,24,24,0.8)" stroke="rgba(26,18,8,0.6)" stroke-width="0.5"/>
+    <line x1="3" y1="17" x2="6" y2="14" stroke="rgba(26,18,8,0.5)" stroke-width="0.8"/>
+  </svg>
+</div>
+
+<div class="chronicle">
+
+  <!-- ══════════════ SIDEBAR ══════════════ -->
+  <nav class="sidebar">
+    <div class="sb-masthead">
+      <div class="sb-toprule">
+        <div class="sb-toprule-center">❧ ✦ ❧</div>
+      </div>
+
+      <!-- Engraved crest SVG -->
+      <svg class="sb-crest" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- shield -->
+        <path d="M8 8 L52 8 L52 42 Q30 58 8 42 Z" fill="rgba(155,24,24,0.06)" stroke="rgba(155,24,24,0.4)" stroke-width="1.2"/>
+        <path d="M11 11 L49 11 L49 41 Q30 55 11 41 Z" fill="none" stroke="rgba(155,24,24,0.2)" stroke-width="0.6"/>
+        <!-- crown top -->
+        <path d="M15 8 L15 3 L20 6 L25 2 L30 6 L35 2 L40 6 L45 3 L45 8" fill="none" stroke="rgba(155,24,24,0.5)" stroke-width="1.2" stroke-linejoin="round"/>
+        <!-- inner cross -->
+        <line x1="30" y1="14" x2="30" y2="44" stroke="rgba(155,24,24,0.25)" stroke-width="0.7"/>
+        <line x1="16" y1="28" x2="44" y2="28" stroke="rgba(155,24,24,0.25)" stroke-width="0.7"/>
+        <!-- diamond gems -->
+        <polygon points="30,17 34,24 30,31 26,24" fill="none" stroke="rgba(155,24,24,0.4)" stroke-width="0.8"/>
+        <circle cx="30" cy="24" r="2.5" fill="rgba(155,24,24,0.35)"/>
+        <!-- side ornaments -->
+        <circle cx="4" cy="8" r="2.5" fill="none" stroke="rgba(155,24,24,0.35)" stroke-width="0.8"/>
+        <circle cx="56" cy="8" r="2.5" fill="none" stroke="rgba(155,24,24,0.35)" stroke-width="0.8"/>
+        <circle cx="4" cy="52" r="2.5" fill="none" stroke="rgba(155,24,24,0.35)" stroke-width="0.8"/>
+        <circle cx="56" cy="52" r="2.5" fill="none" stroke="rgba(155,24,24,0.35)" stroke-width="0.8"/>
+        <line x1="4" y1="8" x2="8" y2="8" stroke="rgba(155,24,24,0.3)" stroke-width="0.7"/>
+        <line x1="56" y1="8" x2="52" y2="8" stroke="rgba(155,24,24,0.3)" stroke-width="0.7"/>
+      </svg>
+
+      <span class="sb-fraktur">The Academic<br>Chronicle</span>
+      <span class="sb-established">Est. Anno Domini MMXXV</span>
+    </div>
+
+    <span class="sb-nav-label">Navigatio</span>
+    <nav style="flex:1;overflow-y:auto">
+      <ul class="nav-list">
+        <li class="nav-item active" id="nav-home">
+          <button onclick="go('home')">
+            <span class="nav-roman">I.</span>
+            <span class="nav-lbl">Home</span>
+          </button>
+        </li>
+        <li class="nav-item" id="nav-rooster">
+          <button onclick="go('rooster')">
+            <span class="nav-roman">II.</span>
+            <span class="nav-lbl">Rooster</span>
+          </button>
+        </li>
+        <li class="nav-item" id="nav-taken">
+          <button onclick="go('taken')">
+            <span class="nav-roman">III.</span>
+            <span class="nav-lbl">Taken</span>
+          </button>
+        </li>
+        <li class="nav-item" id="nav-leraren">
+          <button onclick="go('leraren')">
+            <span class="nav-roman">IV.</span>
+            <span class="nav-lbl">Leraren</span>
+          </button>
+        </li>
+        <li class="nav-item" id="nav-cijfers">
+          <button onclick="go('cijfers')">
+            <span class="nav-roman">V.</span>
+            <span class="nav-lbl">Cijfers</span>
+          </button>
+        </li>
+        <li class="nav-item" id="nav-profiel">
+          <button onclick="go('profiel')">
+            <span class="nav-roman">VI.</span>
+            <span class="nav-lbl">Profiel</span>
+          </button>
+        </li>
+        <li class="nav-item" id="nav-settings">
+          <button onclick="go('settings')">
+            <span class="nav-roman">VII.</span>
+            <span class="nav-lbl">Instellingen</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="sb-footer">
+      <div class="sb-footer-rule"><span>❧</span></div>
+      <span class="sb-name">André Babirian</span>
+      <span class="sb-class">ICT Software Developer · Jaar I · XSB1B</span>
+      <div class="sb-motto">Per Aspera ad Astra</div>
+    </div>
+  </nav>
+
+  <!-- ══════════════ BROADSIDE ══════════════ -->
+  <main class="broadside">
+
+    <!-- ══ HOME ══ -->
+    <div class="page active" id="page-home">
+      <div class="pg-header">
+        <div class="ph-left">
+          <span class="ph-chapter">Hoofdstuk I —</span>
+          <span class="ph-title">Home</span>
+        </div>
+        <div class="ph-right">
+          <span class="ph-tag">XSB1B</span>
+          <span class="ph-tag">Week XIX</span>
+          <span class="ph-tag live">Actief</span>
+        </div>
+      </div>
+
+      <div class="home-stats">
+        <div class="stat-box">
+          <div class="sb-roman">IV</div>
+          <div class="sb-label">Open Taken</div>
+          <div class="sb-sub">waarvan twee urgent</div>
+        </div>
+        <div class="stat-box">
+          <div class="sb-roman">7.6</div>
+          <div class="sb-label">Gemiddeld Cijfer</div>
+          <div class="sb-sub">Semester II · 2026</div>
+        </div>
+        <div class="stat-box">
+          <div class="sb-roman">V</div>
+          <div class="sb-label">Vakken</div>
+          <div class="sb-sub">4 afgerond dit semester</div>
+        </div>
+        <div class="stat-box">
+          <div class="sb-roman">VI</div>
+          <div class="sb-label">Weken tot Examen</div>
+          <div class="sb-sub">op schema</div>
+        </div>
+      </div>
+
+      <div class="sec-title">Weekschema — Academisch Jaar 2025–2026</div>
+
+      <div class="home-columns">
+        <div class="day-column">
+          <div class="dc-head">Maandag</div>
+          <div class="dc-body">
+            <div class="dc-subject">Flex</div>
+            <div class="dc-time">08:30 — 17:00</div>
+            <div class="dc-room">Groen 2.073</div>
+            <div class="dc-bar"></div>
+          </div>
+        </div>
+        <div class="day-column">
+          <div class="dc-head">Dinsdag</div>
+          <div class="dc-body">
+            <div class="dc-subject">Flex</div>
+            <div class="dc-time">08:30 — 17:00</div>
+            <div class="dc-room">Groen 2.073</div>
+            <div class="dc-bar"></div>
+          </div>
+        </div>
+        <div class="day-column">
+          <div class="dc-head">Woensdag</div>
+          <div class="dc-body">
+            <div class="dc-subject">Flex &amp; Rekenen</div>
+            <div class="dc-time">08:30 — 17:00</div>
+            <div class="dc-room">Groen 2.073</div>
+            <div class="dc-bar"></div>
+          </div>
+        </div>
+        <div class="day-column">
+          <div class="dc-head">Donderdag</div>
+          <div class="dc-body">
+            <div class="dc-subject">Flex &amp; NL</div>
+            <div class="dc-time">08:30 — 17:00</div>
+            <div class="dc-room">Groen 2.073</div>
+            <div class="dc-bar"></div>
+          </div>
+        </div>
+        <div class="day-column">
+          <div class="dc-head">Vrijdag</div>
+          <div class="dc-body">
+            <div class="dc-subject">Flex</div>
+            <div class="dc-time">08:30 — 13:30</div>
+            <div class="dc-room">Groen 2.073</div>
+            <div class="dc-bar"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="home-broadside">
+        <div class="bs-col">
+          <div class="bs-heading">
+            Openstaande Taken
+            <span class="bsh-count">4</span>
+          </div>
+          <div class="broadside-item">
+            <span class="bi-ornament">❧</span>
+            <span>UML Diagram afmaken</span>
+            <span class="heraldic-badge hb-urgent">Urgent</span>
+          </div>
+          <div class="broadside-item">
+            <span class="bi-ornament">❧</span>
+            <span>Portfolio bijwerken</span>
+            <span class="heraldic-badge hb-soon">Spoedig</span>
+          </div>
+          <div class="broadside-item">
+            <span class="bi-ornament">❧</span>
+            <span>GitHub README schrijven</span>
+            <span class="heraldic-badge hb-later">Later</span>
+          </div>
+          <div class="broadside-item">
+            <span class="bi-ornament">❧</span>
+            <span style="text-decoration:line-through;opacity:0.45">Retrospective inleveren</span>
+            <span class="heraldic-badge hb-done">Voltooid</span>
+          </div>
+        </div>
+        <div class="bs-col">
+          <div class="bs-heading">Heden's Proclamaties</div>
+          <div class="broadside-item">
+            <span class="bi-ornament">⁂</span>
+            <span>Volgende les: Maandag 08:30 — Flex in lokaal 2.073</span>
+          </div>
+          <div class="broadside-item">
+            <span class="bi-ornament">⁂</span>
+            <span>Gemiddeld cijfer 7.6 — semester II verloopt uitstekend</span>
+          </div>
+          <div class="broadside-item">
+            <span class="bi-ornament">⁂</span>
+            <span>4 van 5 vakken voltooid dit semester — voortreffelijk</span>
+          </div>
+          <div class="broadside-item">
+            <span class="bi-ornament">⁂</span>
+            <span>Examen over 6 weken — aanvang herhaling is geboden</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ ROOSTER ══ -->
+    <div class="page" id="page-rooster">
+      <div class="pg-header">
+        <div class="ph-left">
+          <span class="ph-chapter">Hoofdstuk II —</span>
+          <span class="ph-title">Rooster</span>
+        </div>
+        <div class="ph-right">
+          <span class="ph-tag">Groen 2.073</span>
+          <span class="ph-tag">XSB1B</span>
+        </div>
+      </div>
+      <div class="sec-title">Weekrooster — Academisch Jaar MMXXV–MMXXVI</div>
+      <div class="rooster-broadside">
+        <div class="rc-col">
+          <div class="rc-illustration ri-0">
+            <div class="rc-ghost">I</div>
+            <svg class="rc-deco" width="50" height="60" viewBox="0 0 50 60" fill="none">
+              <ellipse cx="25" cy="20" rx="20" ry="20" stroke="rgba(26,18,8,0.2)" stroke-width="1.5" fill="none"/>
+              <line x1="25" y1="0" x2="25" y2="40" stroke="rgba(26,18,8,0.15)" stroke-width="0.8"/>
+              <line x1="5" y1="20" x2="45" y2="20" stroke="rgba(26,18,8,0.15)" stroke-width="0.8"/>
+              <circle cx="25" cy="20" r="4" fill="rgba(155,24,24,0.2)" stroke="rgba(155,24,24,0.3)" stroke-width="0.8"/>
+              <path d="M25 44 L22 56 L25 52 L28 56 Z" fill="rgba(26,18,8,0.15)"/>
+            </svg>
+          </div>
+          <div class="rc-head">Maandag</div>
+          <div class="rc-body">
+            <div class="rc-time">08:30</div>
+            <div class="rc-sep">— tot en met —</div>
+            <div class="rc-end">17:00</div>
+            <div class="rc-rule"></div>
+            <div class="rc-room">Groen 2.073</div>
+            <div class="rc-vak">Flex</div>
+          </div>
+        </div>
+        <div class="rc-col">
+          <div class="rc-illustration ri-1">
+            <div class="rc-ghost">II</div>
+            <svg class="rc-deco" width="50" height="60" viewBox="0 0 50 60" fill="none">
+              <rect x="10" y="5" width="30" height="40" stroke="rgba(26,18,8,0.2)" stroke-width="1.5" fill="none"/>
+              <rect x="14" y="9" width="22" height="32" stroke="rgba(26,18,8,0.12)" stroke-width="0.7" fill="none"/>
+              <line x1="10" y1="25" x2="40" y2="25" stroke="rgba(26,18,8,0.15)" stroke-width="0.8"/>
+              <circle cx="25" cy="25" r="5" fill="rgba(155,24,24,0.15)" stroke="rgba(155,24,24,0.25)" stroke-width="0.8"/>
+            </svg>
+          </div>
+          <div class="rc-head">Dinsdag</div>
+          <div class="rc-body">
+            <div class="rc-time">08:30</div>
+            <div class="rc-sep">— tot en met —</div>
+            <div class="rc-end">17:00</div>
+            <div class="rc-rule"></div>
+            <div class="rc-room">Groen 2.073</div>
+            <div class="rc-vak">Flex</div>
+          </div>
+        </div>
+        <div class="rc-col">
+          <div class="rc-illustration ri-2">
+            <div class="rc-ghost">III</div>
+            <svg class="rc-deco" width="50" height="60" viewBox="0 0 50 60" fill="none">
+              <polygon points="25,5 45,35 5,35" stroke="rgba(26,18,8,0.2)" stroke-width="1.5" fill="none"/>
+              <polygon points="25,12 40,32 10,32" stroke="rgba(26,18,8,0.1)" stroke-width="0.7" fill="none"/>
+              <circle cx="25" cy="25" r="4" fill="rgba(155,24,24,0.2)" stroke="rgba(155,24,24,0.3)" stroke-width="0.8"/>
+            </svg>
+          </div>
+          <div class="rc-head">Woensdag</div>
+          <div class="rc-body">
+            <div class="rc-time">08:30</div>
+            <div class="rc-sep">— tot en met —</div>
+            <div class="rc-end">17:00</div>
+            <div class="rc-rule"></div>
+            <div class="rc-room">Groen 2.073</div>
+            <div class="rc-vak">Flex &amp; Rekenen</div>
+          </div>
+        </div>
+        <div class="rc-col">
+          <div class="rc-illustration ri-3">
+            <div class="rc-ghost">IV</div>
+            <svg class="rc-deco" width="50" height="60" viewBox="0 0 50 60" fill="none">
+              <path d="M5 40 Q5 5 25 5 Q45 5 45 40" stroke="rgba(26,18,8,0.2)" stroke-width="1.5" fill="none"/>
+              <path d="M10 40 Q10 10 25 10 Q40 10 40 40" stroke="rgba(26,18,8,0.1)" stroke-width="0.7" fill="none"/>
+              <circle cx="25" cy="28" r="5" fill="rgba(155,24,24,0.15)" stroke="rgba(155,24,24,0.25)" stroke-width="0.8"/>
+            </svg>
+          </div>
+          <div class="rc-head">Donderdag</div>
+          <div class="rc-body">
+            <div class="rc-time">08:30</div>
+            <div class="rc-sep">— tot en met —</div>
+            <div class="rc-end">17:00</div>
+            <div class="rc-rule"></div>
+            <div class="rc-room">Groen 2.073</div>
+            <div class="rc-vak">Flex / NL / Burg.</div>
+          </div>
+        </div>
+        <div class="rc-col">
+          <div class="rc-illustration ri-4">
+            <div class="rc-ghost">V</div>
+            <svg class="rc-deco" width="50" height="60" viewBox="0 0 50 60" fill="none">
+              <path d="M8 35 Q8 8 25 5 Q42 8 42 35 L42 48 Q35 55 25 55 Q15 55 8 48 Z" stroke="rgba(26,18,8,0.2)" stroke-width="1.5" fill="none"/>
+              <circle cx="25" cy="25" r="8" fill="none" stroke="rgba(155,24,24,0.2)" stroke-width="1"/>
+              <circle cx="25" cy="25" r="3" fill="rgba(155,24,24,0.25)"/>
+            </svg>
+          </div>
+          <div class="rc-head">Vrijdag</div>
+          <div class="rc-body">
+            <div class="rc-time">08:30</div>
+            <div class="rc-sep">— tot en met —</div>
+            <div class="rc-end">13:30</div>
+            <div class="rc-rule"></div>
+            <div class="rc-room">Groen 2.073</div>
+            <div class="rc-vak">Flex</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ TAKEN ══ -->
+    <div class="page" id="page-taken">
+      <div class="pg-header">
+        <div class="ph-left">
+          <span class="ph-chapter">Hoofdstuk III —</span>
+          <span class="ph-title">Taken</span>
+        </div>
+        <div class="ph-right">
+          <span class="ph-tag">4 Open</span>
+          <span class="ph-tag live">2 Urgent</span>
+        </div>
+      </div>
+      <div class="sec-title">Het Gazette-Register der Academische Verplichtingen</div>
+      <div class="gazette-header">
+        <div class="gh-col">Nr.</div>
+        <div class="gh-col">Opdracht</div>
+        <div class="gh-col">Prioriteit</div>
+        <div class="gh-col">Deadline</div>
+        <div class="gh-col">Module</div>
+      </div>
+      <div class="gazette-row">
+        <div class="gr-num">I</div>
+        <div><div class="gr-name">UML Diagram Afmaken</div><div class="gr-sub">Software Architecture · Sprint IV</div></div>
+        <span class="wax-seal ws-urgent">Critisch</span>
+        <span class="gr-dead">Morgen 09:00</span>
+        <span class="gr-vak">Arch.</span>
+      </div>
+      <div class="gazette-row">
+        <div class="gr-num">II</div>
+        <div><div class="gr-name">Portfolio Bijwerken</div><div class="gr-sub">Persoonlijke Ontwikkeling</div></div>
+        <span class="wax-seal ws-soon">Spoedig</span>
+        <span class="gr-dead">Do. 23:59</span>
+        <span class="gr-vak">PO</span>
+      </div>
+      <div class="gazette-row">
+        <div class="gr-num">III</div>
+        <div><div class="gr-name">GitHub README Schrijven</div><div class="gr-sub">Project · Flex Opdracht</div></div>
+        <span class="wax-seal ws-later">Later</span>
+        <span class="gr-dead">Vr. 17:00</span>
+        <span class="gr-vak">Project</span>
+      </div>
+      <div class="gazette-row">
+        <div class="gr-num">IV</div>
+        <div><div class="gr-name">API Documentatie</div><div class="gr-sub">Web Development Module</div></div>
+        <span class="wax-seal ws-later">Later</span>
+        <span class="gr-dead">Volg. week</span>
+        <span class="gr-vak">Web Dev</span>
+      </div>
+      <div class="gazette-row crossed">
+        <div class="gr-num x">V</div>
+        <div><div class="gr-name x">Retrospective Inleveren</div><div class="gr-sub">Agile · Sprint III</div></div>
+        <span class="wax-seal" style="border-color:rgba(26,18,8,0.15);color:var(--stone2)">Voltooid</span>
+        <span class="gr-dead" style="text-decoration:line-through">Afgerond</span>
+        <span class="gr-vak">Agile</span>
+      </div>
+      <div class="gazette-row crossed">
+        <div class="gr-num x">VI</div>
+        <div><div class="gr-name x">Database Schema Ontwerp</div><div class="gr-sub">Databases Module</div></div>
+        <span class="wax-seal" style="border-color:rgba(26,18,8,0.15);color:var(--stone2)">Voltooid</span>
+        <span class="gr-dead" style="text-decoration:line-through">Afgerond</span>
+        <span class="gr-vak">DB</span>
+      </div>
+    </div>
+
+    <!-- ══ LERAREN ══ -->
+    <div class="page" id="page-leraren">
+      <div class="pg-header">
+        <div class="ph-left">
+          <span class="ph-chapter">Hoofdstuk IV —</span>
+          <span class="ph-title">Leraren</span>
+        </div>
+        <div class="ph-right">
+          <span class="ph-tag">XSB1B</span>
+          <span class="ph-tag">5 Docenten</span>
+        </div>
+      </div>
+      <div class="sec-title">De Illustere Geleerden — Klas XSB1B · ICT Software Developer</div>
+      <div class="portrait-hall">
+        <div class="portrait-card">
+          <div class="pcard-portrait pp-0">
+            <div class="pcard-initial">P</div>
+            <div class="pcard-num-badge">No. 01</div>
+          </div>
+          <div class="pcard-body">
+            <div class="pcard-roman">Meester I</div>
+            <div class="pcard-name">Peter</div>
+            <div class="pcard-role">Begeleider & Coach</div>
+            <div class="pcard-rule"></div>
+            <div class="pcard-vak-lbl">Vakken</div>
+            <div class="pcard-vak">Flex</div>
+          </div>
+        </div>
+        <div class="portrait-card">
+          <div class="pcard-portrait pp-1">
+            <div class="pcard-initial">J</div>
+            <div class="pcard-num-badge">No. 02</div>
+          </div>
+          <div class="pcard-body">
+            <div class="pcard-roman">Meester II</div>
+            <div class="pcard-name">Jeroen</div>
+            <div class="pcard-role">Begeleider & Coach</div>
+            <div class="pcard-rule"></div>
+            <div class="pcard-vak-lbl">Vakken</div>
+            <div class="pcard-vak">Flex</div>
+          </div>
+        </div>
+        <div class="portrait-card">
+          <div class="pcard-portrait pp-2">
+            <div class="pcard-initial">J</div>
+            <div class="pcard-num-badge">No. 03</div>
+          </div>
+          <div class="pcard-body">
+            <div class="pcard-roman">Meester III</div>
+            <div class="pcard-name">Jan</div>
+            <div class="pcard-role">Docent</div>
+            <div class="pcard-rule"></div>
+            <div class="pcard-vak-lbl">Vakken</div>
+            <div class="pcard-vak">Flex</div>
+          </div>
+        </div>
+        <div class="portrait-card">
+          <div class="pcard-portrait pp-3">
+            <div class="pcard-initial">A</div>
+            <div class="pcard-num-badge">No. 04</div>
+          </div>
+          <div class="pcard-body">
+            <div class="pcard-roman">Meester IV</div>
+            <div class="pcard-name">Alex</div>
+            <div class="pcard-role">Docent</div>
+            <div class="pcard-rule"></div>
+            <div class="pcard-vak-lbl">Vakken</div>
+            <div class="pcard-vak">Rekenen</div>
+          </div>
+        </div>
+        <div class="portrait-card">
+          <div class="pcard-portrait pp-4">
+            <div class="pcard-initial">?</div>
+            <div class="pcard-num-badge">No. 05</div>
+          </div>
+          <div class="pcard-body">
+            <div class="pcard-roman">Meester V</div>
+            <div class="pcard-name">Onbekend</div>
+            <div class="pcard-role">Docent</div>
+            <div class="pcard-rule"></div>
+            <div class="pcard-vak-lbl">Vakken</div>
+            <div class="pcard-vak">Nederlands</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ CIJFERS ══ -->
+    <div class="page" id="page-cijfers">
+      <div class="pg-header">
+        <div class="ph-left">
+          <span class="ph-chapter">Hoofdstuk V —</span>
+          <span class="ph-title">Cijfers</span>
+        </div>
+        <div class="ph-right">
+          <span class="ph-tag">Semester II</span>
+          <span class="ph-tag">2025–2026</span>
+        </div>
+      </div>
+      <div class="sec-title">Het Examinatieregister — Academisch Jaar MMXXV–MMXXVI</div>
+      <div class="exam-register">
+        <div class="er-panel">
+          <div class="er-heading">Behaalde Beoordelingen</div>
+          <div class="grade-entry">
+            <span class="ge-vak">Algorithms &amp; Data Structures</span>
+            <span class="ge-dots"></span>
+            <span class="ge-score gs-high">8.2</span>
+          </div>
+          <div class="grade-entry">
+            <span class="ge-vak">Web Development</span>
+            <span class="ge-dots"></span>
+            <span class="ge-score gs-high">7.8</span>
+          </div>
+          <div class="grade-entry">
+            <span class="ge-vak">Software Architecture</span>
+            <span class="ge-dots"></span>
+            <span class="ge-score gs-mid">6.5</span>
+          </div>
+          <div class="grade-entry">
+            <span class="ge-vak">Databases</span>
+            <span class="ge-dots"></span>
+            <span class="ge-score gs-high">7.9</span>
+          </div>
+          <div class="grade-entry">
+            <span class="ge-vak">Project &amp; Agile</span>
+            <span class="ge-dots"></span>
+            <span class="ge-score gs-none">—</span>
+          </div>
+        </div>
+        <div class="er-panel" style="padding:0">
+          <div class="avg-stamp">
+            <div class="as-label">Semester Gemiddelde</div>
+            <div class="as-num">7.6</div>
+            <div class="as-sub">Anno Domini MMXXVI · Semester II</div>
+          </div>
+          <div class="mini-register">
+            <div class="mr-cell"><div class="mrc-val">4/5</div><div class="mrc-lbl">Vakken Klaar</div></div>
+            <div class="mr-cell"><div class="mrc-val">8.2</div><div class="mrc-lbl">Hoogste</div></div>
+            <div class="mr-cell"><div class="mrc-val">6.5</div><div class="mrc-lbl">Laagste</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PROFIEL ══ -->
+    <div class="page" id="page-profiel">
+      <div class="pg-header">
+        <div class="ph-left">
+          <span class="ph-chapter">Hoofdstuk VI —</span>
+          <span class="ph-title">Profiel</span>
+        </div>
+        <div class="ph-right">
+          <span class="ph-tag">Student</span>
+          <span class="ph-tag live">Actief</span>
+        </div>
+      </div>
+      <div class="sec-title">Biografisch Dossier — André Babirian · ICT Software Developer</div>
+      <div class="bio-sheet">
+        <div class="bio-main">
+          <span class="bio-dropcap">A</span>
+          <span class="bio-eyebrow">Heros Academicus — Jaar I — XSB1B</span>
+          <div class="bio-name">ndré<br>Babirian</div>
+          <div class="bio-title">ICT Software Developer · Windesheim · Anno MMXXVI</div>
+          <div class="bio-rule"></div>
+          <div class="bio-entries">
+            <div class="bio-row"><span class="bio-key">School</span><span class="bio-val">Windesheim, Zwolle</span></div>
+            <div class="bio-row"><span class="bio-key">Opleiding</span><span class="bio-val">ICT Software Developer</span></div>
+            <div class="bio-row"><span class="bio-key">Klas</span><span class="bio-val">XSB1B — Cohort 2025</span></div>
+            <div class="bio-row"><span class="bio-key">Studiejaar</span><span class="bio-val">2025 / 2026 · Semester II</span></div>
+            <div class="bio-row"><span class="bio-key">Status</span><span class="bio-val">Actief — op schema · voortreffelijk</span></div>
+          </div>
+        </div>
+        <div class="bio-tablets">
+          <div class="bio-tablet"><div class="bt-val">7.6</div><div class="bt-lbl">Gemiddeld Cijfer</div></div>
+          <div class="bio-tablet"><div class="bt-val">4/5</div><div class="bt-lbl">Vakken Voltooid</div></div>
+          <div class="bio-tablet"><div class="bt-val">VI</div><div class="bt-lbl">Weken tot Examen</div></div>
+        </div>
+      </div>
+      <div class="bio-skills">
+        <div class="bsk-title">Bekwaamheden &amp; Vaardigheden — Academisch Jaar MMXXV–MMXXVI</div>
+        <div class="skill-entries">
+          <div class="se-row"><span class="se-name">React</span><div class="se-track"><div class="se-fill" style="width:70%"></div></div><span class="se-pct">70%</span></div>
+          <div class="se-row"><span class="se-name">TypeScript</span><div class="se-track"><div class="se-fill" style="width:55%"></div></div><span class="se-pct">55%</span></div>
+          <div class="se-row"><span class="se-name">CSS</span><div class="se-track"><div class="se-fill" style="width:65%"></div></div><span class="se-pct">65%</span></div>
+          <div class="se-row"><span class="se-name">Git</span><div class="se-track"><div class="se-fill" style="width:60%"></div></div><span class="se-pct">60%</span></div>
+          <div class="se-row"><span class="se-name">SQL</span><div class="se-track"><div class="se-fill" style="width:45%"></div></div><span class="se-pct">45%</span></div>
+          <div class="se-row"><span class="se-name">Java</span><div class="se-track"><div class="se-fill" style="width:40%"></div></div><span class="se-pct">40%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SETTINGS ══ -->
+    <div class="page" id="page-settings">
+      <div class="pg-header">
+        <div class="ph-left">
+          <span class="ph-chapter">Hoofdstuk VII —</span>
+          <span class="ph-title">Instellingen</span>
+        </div>
+        <div class="ph-right"><span class="ph-tag">Preferenties</span></div>
+      </div>
+      <div class="sec-title">Proclamaties &amp; Wetten — Persoonlijke Voorkeurstellingen</div>
+      <div class="laws-broadside">
+        <div class="law-section">
+          <div class="law-heading">Interface &amp; Weergave</div>
+          <div class="law-item">
+            <div><div class="li-name">Dark Mode</div><div class="li-desc">Schakel tusschen licht en duisternis</div></div>
+            <div class="wax-toggle on" onclick="this.classList.toggle('on')">✓</div>
+          </div>
+          <div class="law-item">
+            <div><div class="li-name">Compacte Weergave</div><div class="li-desc">Minder witruimte in de layout</div></div>
+            <div class="wax-toggle" onclick="this.classList.toggle('on')">✗</div>
+          </div>
+          <div class="law-item">
+            <div><div class="li-name">Animaties</div><div class="li-desc">Pagina-overgangen en effecten</div></div>
+            <div class="wax-toggle on" onclick="this.classList.toggle('on')">✓</div>
+          </div>
+          <div class="law-item">
+            <div><div class="li-name">Grain Textuur</div><div class="li-desc">Papier-achtige filmkorrelig overlay</div></div>
+            <div class="wax-toggle on" onclick="this.classList.toggle('on')">✓</div>
+          </div>
+        </div>
+        <div class="law-section">
+          <div class="law-heading">Meldingen &amp; Berichten</div>
+          <div class="law-item">
+            <div><div class="li-name">Push Meldingen</div><div class="li-desc">Ontvang browser-notificaties</div></div>
+            <div class="wax-toggle on" onclick="this.classList.toggle('on')">✓</div>
+          </div>
+          <div class="law-item">
+            <div><div class="li-name">Deadline Reminders</div><div class="li-desc">Herinnering 24 uur van tevoren</div></div>
+            <div class="wax-toggle on" onclick="this.classList.toggle('on')">✓</div>
+          </div>
+          <div class="law-item">
+            <div><div class="li-name">Geluidssignalen</div><div class="li-desc">Audio bij actie-bevestigingen</div></div>
+            <div class="wax-toggle" onclick="this.classList.toggle('on')">✗</div>
+          </div>
+          <div class="law-item">
+            <div><div class="li-name">E-mail Digest</div><div class="li-desc">Wekelijkse samenvatting per mail</div></div>
+            <div class="wax-toggle" onclick="this.classList.toggle('on')">✗</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+/* ── cursor ── */
+const cur = document.getElementById('vic-cursor');
+document.addEventListener('mousemove', e => {
+  cur.style.position = 'fixed';
+  cur.style.left = e.clientX + 'px';
+  cur.style.top  = e.clientY + 'px';
+  cur.style.pointerEvents = 'none';
+  cur.style.zIndex = '99999';
+});
+
+/* ── navigation ── */
+function go(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.getElementById('nav-' + id).classList.add('active');
+  document.querySelector('.broadside').scrollTop = 0;
+}
+
+/* ── wax toggle label update ── */
+document.querySelectorAll('.wax-toggle').forEach(t => {
+  t.addEventListener('click', () => {
+    t.textContent = t.classList.contains('on') ? '✓' : '✗';
+  });
+});
+</script>
+</body>
+</html>

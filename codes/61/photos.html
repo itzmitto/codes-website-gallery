@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Photos venster</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        body {
+            background: #1a1a1a;
+            height: 100vh;
+            overflow: hidden;
+            color: white;
+        }
+
+        .app {
+            display: flex;
+            height: 100vh;
+            background: linear-gradient(to bottom right, #171717, #1e1e1e);
+        }
+
+        .sidebar {
+            width: 310px;
+            background: rgba(20, 20, 20, 0.95);
+            border-right: 1px solid #2d2d2d;
+            display: flex;
+            flex-direction: column;
+            padding: 14px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 18px 20px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .logo-icon {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+        }
+
+        .nav {
+            margin-top: 12px;
+            padding: 0 10px;
+        }
+
+        .nav-item {
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 0 14px;
+            color: #d8d8d8;
+            margin-bottom: 6px;
+            font-size: 15px;
+        }
+
+        .nav-item img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
+
+        .nav-item.active {
+            background: rgba(255, 255, 255, 0.08);
+            border-left: 3px solid #3ea6ff;
+        }
+
+        .section-title {
+            color: #888;
+            font-size: 13px;
+            padding: 22px 20px 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .storage {
+            margin-top: auto;
+            padding: 18px;
+            border-top: 1px solid #2a2a2a;
+        }
+
+        .storage-box {
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 14px;
+            padding: 16px;
+        }
+
+        .bar {
+            height: 6px;
+            border-radius: 999px;
+            background: #2f2f2f;
+            margin: 12px 0;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            width: 3%;
+            height: 100%;
+            background: #63b3ff;
+        }
+
+        .storage button {
+            width: 100%;
+            border: none;
+            border-radius: 10px;
+            padding: 12px;
+            background: #3ea6ff;
+            color: white;
+            margin-top: 14px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .topbar {
+            height: 70px;
+            border-bottom: 1px solid #2a2a2a;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 26px;
+        }
+
+        .search {
+            width: 700px;
+            max-width: 60%;
+            height: 42px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #2c2c2c;
+            border-radius: 12px;
+            padding: 0 18px;
+            color: #aaa;
+            display: flex;
+            align-items: center;
+        }
+
+        .top-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .import-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid #303030;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .window-controls {
+            display: flex;
+            margin-left: 10px;
+        }
+
+        .window-btn {
+            width: 46px;
+            height: 32px;
+            border: none;
+            background: transparent;
+            color: #dcdcdc;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .window-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .window-btn.close:hover {
+            background: #e81123;
+            color: white;
+        }
+
+        .content {
+            flex: 1;
+            position: relative;
+            padding: 32px;
+        }
+
+        .gallery-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .gallery-title h1 {
+            font-size: 40px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .gallery-title p {
+            color: #999;
+            font-size: 15px;
+        }
+
+        .empty-state {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #dcdcdc;
+        }
+
+        .empty-state h2 {
+            font-size: 54px;
+            font-weight: 300;
+            margin-bottom: 14px;
+        }
+
+        .empty-state p {
+            color: #b5b5b5;
+            font-size: 22px;
+        }
+
+        .muted {
+            color: #9b9b9b;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app">
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="assets/photos.png" class="logo-icon" alt="logo">
+                <span>Foto's</span>
+            </div>
+            <div class="nav">
+                <div class="nav-item active">
+                    <img src="assets/photos.png" alt="">
+                    Galerie
+                </div>
+                <div class="nav-item">
+                    <img src="assets/heart.png" alt="">
+                    Favorieten
+                </div>
+            </div>
+            <div class="section-title">Deze pc</div>
+            <div class="nav">
+                <div class="nav-item">
+                    <img src="assets/cloud.png" alt="">
+                    Afbeeldingen
+                </div>
+            </div>
+            <div class="storage">
+                <div class="storage-box">
+                    <div style="font-size:14px; margin-bottom:4px;">
+                        andre - Persoonlijk
+                    </div>
+                    <div class="bar">
+                        <div class="bar-fill"></div>
+                    </div>
+                    <div class="muted" style="font-size:13px; color:#3ea6ff;">
+                        0,1 GB van 5 GB gebruikt (1%)
+                    </div>
+                    <button>Meer opslag verkrijgen</button>
+                </div>
+            </div>
+        </aside>
+        <main class="main">
+            <div class="topbar">
+
+                <div class="search">
+                    Zoeken in galerie
+                </div>
+
+                <div class="top-actions">
+
+                    <button class="import-btn">
+                        Importeren
+                    </button>
+                    <div class="window-controls">
+                        <button class="window-btn">−</button>
+                        <button class="window-btn">□</button>
+                        <button class="window-btn close">✕</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="content">
+
+                <div class="gallery-header">
+
+                    <div class="gallery-title">
+                        <h1>Galerie</h1>
+                        <p>0 items</p>
+                    </div>
+
+                </div>
+
+                <div class="empty-state">
+                    <h2>Aan de slag met Foto's</h2>
+                    <p>
+                        Zodra u foto's hebt toegevoegd,
+                        kunt u ze hier allemaal bekijken.
+                    </p>
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+</body>
+
+</html>

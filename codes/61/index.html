@@ -35,10 +35,11 @@
                     <span>Calculator</span>
                 </div>
 
-                <div class="pinned-app">
-                    <img src="assets/edge.png" alt="">
-                    <span>Minecraft</span>
+                <div class="pinned-app" id="photos-app">
+                    <img src="assets/photos.png" alt="">
+                    <span>Photos</span>
                 </div>
+
                 <div class="pinned-app">
                     <img src="assets/edge.png" alt="">
                     <span>Microsoft Edge</span>
@@ -197,6 +198,9 @@
                 </div>
             </div>
         </div>
+
+
+
         <div class="window" id="calculator-window">
             <div class="window-titlebar">
                 <span>Rekenmachine</span>
@@ -208,6 +212,22 @@
             </div>
             <iframe src="rekenmachine.html" frameborder="0"></iframe>
         </div>
+        <div class="window" id="photos-window">
+            <div class="window-titlebar">
+                <span>Photos</span>
+                <div class="window-controls">
+                    <button class="win-btn minimize" id="photos-minimize">-</button>
+                    <button class="win-btn maximize">□</button>
+                    <button class="win-btn close" id="photos-close">x</button>
+                </div>
+            </div>
+            <iframe src="photos.html" frameborder="0"></iframe>
+        </div>
+
+
+
+
+
     </main>
 
     <script>
@@ -244,9 +264,48 @@
             }
         });
         document.addEventListener("mouseup", () => { isDragging = false; });
+
+        const photosApp = document.getElementById("photos-app");
+        const photosWindow = document.getElementById("photos-window");
+        const photosClose = document.getElementById("photos-close");
+        const photosMinimize = document.getElementById("photos-minimize");
+
+        photosApp.addEventListener("click", () => {
+            photosWindow.classList.add("show");
+            startMenu.classList.remove("show");
+        });
+
+        photosClose.addEventListener("click", () => {
+            photosWindow.classList.remove("show");
+        });
+
+        photosMinimize.addEventListener("click", () => {
+            photosWindow.classList.remove("show");
+        });
+        const photosTitlebar = photosWindow.querySelector(".window-titlebar");
+
+        let isDraggingPhotos = false;
+        let photosOffsetX, photosOffsetY;
+
+        photosTitlebar.addEventListener("mousedown", (e) => {
+            isDraggingPhotos = true;
+
+            photosOffsetX = e.clientX - photosWindow.offsetLeft;
+            photosOffsetY = e.clientY - photosWindow.offsetTop;
+        });
+
+        document.addEventListener("mousemove", (e) => {
+            if (isDraggingPhotos) {
+                photosWindow.style.left = (e.clientX - photosOffsetX) + "px";
+                photosWindow.style.top = (e.clientY - photosOffsetY) + "px";
+            }
+        });
+
+        document.addEventListener("mouseup", () => {
+            isDraggingPhotos = false;
+        });
     </script>
 
 </body>
-<script src="rekenmachine.js"></script>
 
 </html>

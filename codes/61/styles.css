@@ -332,7 +332,7 @@ main {
     height: 500px;
     background: #1c1c1c;
     border-radius: 8px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     z-index: 999;
     overflow: hidden;
     resize: both;
@@ -371,11 +371,36 @@ main {
     font-size: 12px;
 }
 
-.win-btn:hover { background: lightgrey; }
-.win-btn.close:hover { background: red; }
+.win-btn:hover {
+    background: lightgrey;
+}
+
+.win-btn.close:hover {
+    background: red;
+}
 
 .window iframe {
     width: 100%;
     flex: 1;
     border: none;
+}
+
+#photos-window {
+    width: 1300px;
+    height: 800px;
+
+    position: absolute;
+    top: 80px;
+    left: 200px;
+
+    display: none;
+}
+
+#photos-window.show {
+    display: block;
+}
+
+#photos-window iframe {
+    width: 100%;
+    height: calc(100% - 40px);
 }

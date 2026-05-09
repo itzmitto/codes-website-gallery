@@ -5,12 +5,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>simpele Calculator</title>
-    <link rel="stylesheet" href="rekenmachine.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .calculator {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 15px;
+            width: 300px;
+        }
+
+        #display {
+            width: 100%;
+            height: 64px;
+            font-size: 28px;
+            padding: 0 14px;
+            margin-bottom: 14px;
+            border: none;
+            border-radius: 10px;
+            text-align: right;
+            background: #0f172a;
+            color: #f1f5f9;
+            outline: none;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        button {
+            height: 58px;
+            font-size: 18px;
+            font-weight: 500;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            background: #334155;
+            color: #f1f5f9;
+            transition: background 0.15s, transform 0.1s;
+        }
+
+        button:active {
+            transform: scale(0.90);
+        }
+
+        .btn-clear {
+            background: red;
+        }
+
+        .btn-action {
+            background: blue;
+        }
+
+        .btn-operator {
+            background: orange;
+        }
+
+        .btn-equals {
+            background: green;
+            grid-column: span 4;
+        }
+    </style>
 </head>
 
 <body>
     <div class="calculator">
         <input type="text" id="display" disabled placeholder="0">
+
         <div class="grid">
             <button class="btn-clear" onclick="clearDisplay()">C</button>
             <button class="btn-action" onclick="toggleSign()">+/−</button>
@@ -40,7 +115,49 @@
         </div>
     </div>
 
+    <script>
+        const display = document.getElementById('display');
+
+        const getVal = () => display.value;
+        const setVal = (v) => display.value = v;
+
+        function append(value) {
+            setVal(getVal() + value);
+        }
+
+        function clearDisplay() {
+            setVal('');
+        }
+
+        function deleteLast() {
+            setVal(getVal().slice(0, -1));
+        }
+
+        function toggleSign() {
+            const v = getVal();
+            if (!v) return;
+            setVal(v.startsWith('-') ? v.slice(1) : '-' + v);
+        }
+        function calculate() {
+            try {
+                setVal(parseFloat(eval(getVal()).toPrecision(10)).toString());
+            } catch {
+                setVal('Fout');
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (!isNaN(e.key) || '+-*/.%'.includes(e.key)) {
+                append(e.key);
+            } else if (e.key === 'Enter') {
+                calculate();
+            } else if (e.key === 'Backspace') {
+                deleteLast();
+            } else if (e.key === 'Escape') {
+                clearDisplay();
+            }
+        });
+    </script>
 </body>
-<script src="rekenmachine.js" defer></script>
 
 </html>
