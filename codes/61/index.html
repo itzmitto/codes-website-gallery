@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="index" href="rekenmachine.html">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
@@ -27,11 +28,13 @@
                     <i class="fa-solid fa-chevron-right"></i>
                 </button>
             </div>
+
             <div class="pinned-apps">
                 <div class="pinned-app">
-                    <img src="assets/edge.png" alt="">
-                    <span>Skype</span>
+                    <img src="assets/calculator.png" alt="">
+                    <span>Calculator</span>
                 </div>
+
                 <div class="pinned-app">
                     <img src="assets/edge.png" alt="">
                     <span>Minecraft</span>
@@ -194,7 +197,17 @@
                 </div>
             </div>
         </div>
-
+        <div class="window" id="calculator-window">
+            <div class="window-titlebar">
+                <span>Rekenmachine</span>
+                <div class="window-controls">
+                    <button class="win-btn minimize" id="calc-minimize">-</button>
+                    <button class="win-btn maximize">□</button>
+                    <button class="win-btn close" id="calc-close">x</button>
+                </div>
+            </div>
+            <iframe src="rekenmachine.html" frameborder="0"></iframe>
+        </div>
     </main>
 
     <script>
@@ -203,7 +216,37 @@
         windowsBtn.addEventListener("click", () => {
             startMenu.classList.toggle("show");
         });
+        const calcApp = document.querySelector(".pinned-app");
+        const calcWindow = document.getElementById("calculator-window");
+        const calcClose = document.getElementById("calc-close");
+        const calcMinimize = document.getElementById("calc-minimize");
+        calcApp.addEventListener("click", () => {
+            calcWindow.classList.add("show");
+            startMenu.classList.remove("show");
+        });
+        calcClose.addEventListener("click", () => {
+            calcWindow.classList.remove("show");
+        });
+        calcMinimize.addEventListener("click", () => {
+            calcWindow.classList.remove("show");
+        });
+        const titlebar = document.querySelector(".window-titlebar");
+        let isDragging = false, offsetX, offsetY;
+        titlebar.addEventListener("mousedown", (e) => {
+            isDragging = true;
+            offsetX = e.clientX - calcWindow.offsetLeft;
+            offsetY = e.clientY - calcWindow.offsetTop;
+        });
+        document.addEventListener("mousemove", (e) => {
+            if (isDragging) {
+                calcWindow.style.left = (e.clientX - offsetX) + "px";
+                calcWindow.style.top = (e.clientY - offsetY) + "px";
+            }
+        });
+        document.addEventListener("mouseup", () => { isDragging = false; });
     </script>
+
 </body>
+<script src="rekenmachine.js"></script>
 
 </html>

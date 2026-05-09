@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>simpele Calculator</title>
+    <link rel="stylesheet" href="rekenmachine.css">
+</head>
+
+<body>
+    <div class="calculator">
+        <input type="text" id="display" disabled placeholder="0">
+        <div class="grid">
+            <button class="btn-clear" onclick="clearDisplay()">C</button>
+            <button class="btn-action" onclick="toggleSign()">+/−</button>
+            <button class="btn-operator" onclick="append('%')">%</button>
+            <button class="btn-operator" onclick="append('/')">÷</button>
+
+            <button onclick="append('7')">7</button>
+            <button onclick="append('8')">8</button>
+            <button onclick="append('9')">9</button>
+            <button class="btn-operator" onclick="append('*')">×</button>
+
+            <button onclick="append('4')">4</button>
+            <button onclick="append('5')">5</button>
+            <button onclick="append('6')">6</button>
+            <button class="btn-operator" onclick="append('-')">−</button>
+
+            <button onclick="append('1')">1</button>
+            <button onclick="append('2')">2</button>
+            <button onclick="append('3')">3</button>
+            <button class="btn-operator" onclick="append('+')">+</button>
+
+            <button onclick="append('0')" style="grid-column: span 2">0</button>
+            <button onclick="append('.')">.</button>
+            <button class="btn-action" onclick="deleteLast()">⌫</button>
+
+            <button class="btn-equals" onclick="calculate()">=</button>
+        </div>
+    </div>
+
+</body>
+<script src="rekenmachine.js" defer></script>
+
+</html>
