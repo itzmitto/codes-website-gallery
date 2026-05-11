@@ -1,0 +1,28 @@
+.search {
+    width: 50px;
+    height: 50px;
+    background: white;
+    border-radius: 40px;
+    transition: width 0.5s;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+}
+
+body {
+    background: grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.search:hover {
+    width: 250px;
+}
+.search input {
+    border: none;
+    outline: none;
+    width: 100%;
+}
