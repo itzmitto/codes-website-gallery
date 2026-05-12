@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Andre · Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <div class="background-grid"></div>
+    <div class="bg-glow g1"></div>
+    <div class="bg-glow g2"></div>
+
+    <header>
+        <h1><a href="/" id="logo-link">PORTFOLIO</a></h1>
+
+        <button class="mobile-menu-btn" id="menuBtn" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+
+        <nav id="mainNav">
+            <a href="/" data-path="/">
+                <span>01.</span>Home
+            </a>
+            <a href="/aboutme" data-path="/aboutme">
+                <span>02.</span>AboutMe
+            </a>
+            <a href="/projects" data-path="/projects">
+                <span>03.</span>Projects
+            </a>
+            <a href="/skills" data-path="/skills">
+                <span>04.</span>Skills
+            </a>
+            <a href="/contact" data-path="/contact">
+                <span>05.</span>Contact
+            </a>
+        </nav>
+
+        <span class="status-wrapper">
+            <span class="sdot"></span>
+            <h3>Available for work</h3>
+        </span>
+    </header>
+
+    <!-- ===== HOME ===== -->
+    <div class="page" id="page-home">
+        <div class="Home-container">
+            <div class="home-inner">
+                <div class="content-wrapper">
+                    <h1 class="eyebrow">· Developer · Artist · Gamer</h1>
+
+                    <div class="hero-text">
+                        <div class="ht-line">HEY, I'M</div>
+                        <div class="ht-name">ANDRE<span class="ht-dot">■</span></div>
+                        <div class="ht-sub">I BUILD THINGS FOR THE WEB.</div>
+                    </div>
+
+                    <p>
+                        21 years old developer from the Netherlands. I create with code
+                        and art — blending digital creativity with clean, purposeful engineering.
+                    </p>
+
+                    <div class="button-group">
+                        <button class="btn-primary" data-navigate data-path="/projects">View Projects</button>
+                        <button class="btn-secondary" data-navigate data-path="/contact">Contact Me</button>
+                    </div>
+
+                    <div class="tech-pills">
+                        <span class="pill-tag">React</span>
+                        <span class="pill-tag">TypeScript</span>
+                        <span class="pill-tag">CSS</span>
+                        <span class="pill-tag">Laravel</span>
+                        <span class="pill-tag">HTML</span>
+                    </div>
+                </div>
+
+                <div class="hvisual">
+                    <div class="avframe">
+                        <div class="avinner">
+                            <span class="avini">A<span>.</span></span>
+                        </div>
+                        <div class="avring r1"></div>
+                        <div class="avring r2"></div>
+                        <div class="avring r3"></div>
+                        <div class="fbadge fb1"><span>GAME</span><span>Gamer</span></div>
+                        <div class="fbadge fb2"><span>ART</span><span>Artist</span></div>
+                        <div class="fbadge fb3"><span>DEV</span><span>Dev</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="footer">
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <span class="stat-value">21</span>
+                        <span class="stat-label">YEARS OLD</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">NL</span>
+                        <span class="stat-label">Netherlands</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">♦</span>
+                        <span class="stat-label">Gaming</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">♦</span>
+                        <span class="stat-label">Art</span>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- ===== ABOUT ===== -->
+    <div class="page" id="page-aboutme">
+        <div class="aboutMe">
+            <div class="wrapper">
+                <div class="section-head">
+                    <h1 class="section-title">── About Me</h1>
+                    <p class="section-sub">The human behind the code.</p>
+                </div>
+
+                <div class="about-grid">
+                    <div class="about-left">
+                        <div class="card about">
+                            <div class="card-accent"></div>
+                            <h3>Andre</h3>
+                            <h2>Developer · Artist · Gamer</h2>
+                            <p>I'm Andre, a 21-year-old from the Netherlands with a passion for coding, digital art, and gaming. I love building cool things on the web and exploring creative ways to combine tech and art. When I'm not pushing code, I'm probably grinding a game or sketching something in my sketchbook.</p>
+                        </div>
+                        <div class="card education">
+                            <div class="edu-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                            <div>
+                                <h4>Education</h4>
+                                <h3>Deltion College Zwolle</h3>
+                                <p>Software Developer student</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-right">
+                        <div class="small-grid">
+                            <div class="card small"><span><i class="fa-solid fa-map-pin"></i> Location</span><p>Nederland</p></div>
+                            <div class="card small"><span><i class="fa-solid fa-cake-candles"></i> Age</span><p>21</p></div>
+                            <div class="card small"><span><i class="fa-solid fa-bolt"></i> Status</span><p>Building stuff</p></div>
+                            <div class="card small"><span><i class="fa-solid fa-school"></i> School</span><p>Deltion</p></div>
+                        </div>
+
+                        <div class="card interests">
+                            <h4>Interests</h4>
+                            <div class="interest-tags">
+                                <span>Coding</span>
+                                <span>Digital Art</span>
+                                <span>Gaming</span>
+                                <span>Traditional Art</span>
+                                <span>Soulslike games</span>
+                                <span>Home decor</span>
+                            </div>
+                        </div>
+
+                        <div class="card games">
+                            <h4>Currently Playing</h4>
+                            <ul>
+                                <li>Rainbow Six Siege</li>
+                                <li>Elden Ring</li>
+                                <li>Dark Souls</li>
+                                <li>Enshrouded</li>
+                                <li>Minecraft</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SKILLS ===== -->
+    <div class="page" id="page-skills">
+        <div class="skills">
+            <div class="wrapper">
+                <div class="section-head centered">
+                    <h1 class="section-title">── Skills</h1>
+                    <p class="section-sub">What I create &amp; master.</p>
+                </div>
+
+                <div class="skills-layout">
+                    <div class="card skill-card main-skill">
+                        <div class="skill-header">
+                            <i class="fas fa-bolt"></i>
+                            <h3>Web &amp; Code</h3>
+                        </div>
+                        <p>Altijd op zoek naar gave projecten om beter te worden en toffe dingen te laten zien.</p>
+                        <div class="progress-list">
+                            <div class="progressBox"><span>React</span><div class="progressBar"><div class="progressFill" style="width:80%"></div></div><span class="percent">80%</span></div>
+                            <div class="progressBox"><span>TypeScript</span><div class="progressBar"><div class="progressFill" style="width:75%"></div></div><span class="percent">75%</span></div>
+                            <div class="progressBox"><span>HTML / CSS</span><div class="progressBar"><div class="progressFill" style="width:90%"></div></div><span class="percent">90%</span></div>
+                            <div class="progressBox"><span>Laravel</span><div class="progressBar"><div class="progressFill" style="width:85%"></div></div><span class="percent">85%</span></div>
+                        </div>
+                    </div>
+
+                    <div class="skills-row">
+                        <div class="card skill-card creative-skill">
+                            <div class="skill-header">
+                                <i class="fas fa-palette"></i>
+                                <h3>Creatief &amp; Kunst</h3>
+                            </div>
+                            <p>Ik maak kunst voor m'n huis, maar ook gewoon omdat het leuk is.</p>
+                            <div class="progress-list">
+                                <div class="progressBox"><span>Digital painting</span><div class="progressBar"><div class="progressFill" style="width:90%"></div></div><span class="percent">90%</span></div>
+                                <div class="progressBox"><span>Character design</span><div class="progressBar"><div class="progressFill" style="width:95%"></div></div><span class="percent">95%</span></div>
+                                <div class="progressBox"><span>Acrylic / oil</span><div class="progressBar"><div class="progressFill" style="width:85%"></div></div><span class="percent">85%</span></div>
+                                <div class="progressBox"><span>Concept art</span><div class="progressBar"><div class="progressFill" style="width:90%"></div></div><span class="percent">90%</span></div>
+                            </div>
+                        </div>
+
+                        <div class="card skill-card gaming-skill">
+                            <div class="skill-header">
+                                <i class="fa-solid fa-gamepad"></i>
+                                <h3>Gaming</h3>
+                            </div>
+                            <p>Van soulslikes tot cozy games — ik speel en bouw er graag dingen in.</p>
+                            <div class="progress-list">
+                                <div class="progressBox"><span>Level design</span><div class="progressBar"><div class="progressFill" style="width:85%"></div></div><span class="percent">85%</span></div>
+                                <div class="progressBox"><span>Mods and maps</span><div class="progressBar"><div class="progressFill" style="width:90%"></div></div><span class="percent">90%</span></div>
+                                <div class="progressBox"><span>Game optimization</span><div class="progressBar"><div class="progressFill" style="width:95%"></div></div><span class="percent">95%</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== PROJECTS ===== -->
+    <div class="page" id="page-projects">
+        <div class="projects">
+            <div class="wrapper">
+                <div class="section-head">
+                    <h1 class="section-title">── My work</h1>
+                    <h2 class="section-big">Things I've built.</h2>
+                    <p class="section-sub">A mix of web projects, creative experiments, and things I'm currently building. Always working on something new.</p>
+                </div>
+
+                <div class="projects-grid">
+                    <div class="card proj-card proj-main">
+                        <span class="cardNumber">01</span>
+                        <div class="proj-body">
+                            <h2>Portfolio website</h2>
+                            <span class="proj-type">Webapp</span>
+                            <p>This portfolio you're looking at right now — built with React and TypeScript to showcase my work and skills.</p>
+                        </div>
+                        <div class="proj-pills">
+                            <span class="proj-pill">React</span>
+                            <span class="proj-pill">TypeScript</span>
+                            <span class="proj-pill">CSS</span>
+                        </div>
+                    </div>
+
+                    <div class="card proj-card proj-second">
+                        <span class="cardNumber">02</span>
+                        <div class="proj-body">
+                            <h2>Coming soon</h2>
+                            <span class="proj-type">Project</span>
+                            <p>Building something new. Check back soon for more projects as I keep creating and coding cool things.</p>
+                        </div>
+                        <div class="proj-pills">
+                            <span class="proj-pill">React</span>
+                            <span class="proj-pill">Laravel</span>
+                        </div>
+                    </div>
+
+                    <div class="card proj-card proj-third">
+                        <span class="cardNumber">03</span>
+                        <div class="proj-body">
+                            <h2>Digital Arts Series</h2>
+                            <span class="proj-type">Creative</span>
+                            <p>A collection of digital paintings, character designs, concept art, and experiments mixing realism with cartoon aesthetics.</p>
+                        </div>
+                        <div class="proj-pills">
+                            <span class="proj-pill">Potloden</span>
+                            <span class="proj-pill">Gum</span>
+                            <span class="proj-pill">Papier</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== CONTACT ===== -->
+    <div class="page" id="page-contact">
+        <div class="contact">
+            <div class="wrapper">
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h1 class="section-title">── Get in touch</h1>
+                        <h2 class="section-big">Let's work together.</h2>
+                        <p class="section-sub">Want to collaborate on a project, have a question, or just want to say hi? Feel free to reach out. I'm always open to interesting conversations.</p>
+
+                        <div class="info-cards">
+                            <div class="info-card">
+                                <i class="fa-solid fa-map-pin"></i>
+                                <div>
+                                    <h3>Location</h3>
+                                    <p>Zwolle, Netherlands</p>
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <i class="fa-solid fa-school"></i>
+                                <div>
+                                    <h3>School</h3>
+                                    <p>Deltion College</p>
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <i class="fa-solid fa-circle-check"></i>
+                                <div>
+                                    <h3>Status</h3>
+                                    <p>Open to projects</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-wrap">
+                        <div id="form-box">
+                            <h3 class="form-title">Send a message</h3>
+                            <div class="form-group">
+                                <label for="contact-name">Naam</label>
+                                <input id="contact-name" type="text" placeholder="Jouw naam" />
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-email">Email</label>
+                                <input id="contact-email" type="email" placeholder="jouw@email.com" />
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-message">Bericht</label>
+                                <textarea id="contact-message" placeholder="Wat wil je zeggen?"></textarea>
+                            </div>
+                            <button id="send-btn" disabled>→ Send message</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        const menuBtn = document.getElementById('menuBtn');
+        const nav = document.getElementById('mainNav');
+        if (menuBtn) {
+            menuBtn.addEventListener('click', () => {
+                nav.classList.toggle('open');
+                menuBtn.classList.toggle('active');
+            });
+        }
+        nav && nav.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => {
+                nav.classList.remove('open');
+                menuBtn && menuBtn.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
