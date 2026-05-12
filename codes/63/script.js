@@ -4,7 +4,7 @@ const routes = {
     '/skills': 'page-skills',
     '/projects': 'page-projects',
     '/contact': 'page-contact',
-};
+}; 
 
 function navigate(path) {
     const key = path.toLowerCase();
