@@ -1,3 +1,106 @@
 body {
-    background-color:limegreen;
+    background-color:lightgrey;
+}
+.hvisual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeUp 0.6s 0.4s ease both;
+}
+.avframe {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+.avinner {
+  position: absolute;
+  inset: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--surface), var(--bg2));
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.avini {
+  font-family: var(--font-display);
+  font-size: 5rem;
+  color: var(--text);
+  line-height: 1;
+}
+.avini span {
+  color: var(--neon);
+}
+.avring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid;
+  animation: spin linear infinite;
+}
+.r1 {
+  inset: 20px;
+  border-color: rgba(0, 245, 160, 0.2);
+  animation-duration: 12s;
+}
+.r2 {
+  inset: 6px;
+  border-color: rgb(123, 97, 255);
+  animation-duration: 20s;
+  animation-direction: reverse;
+}
+.r3 {
+  inset: -6px;
+  border-color: rgba(0, 245, 160, 0.08);
+  animation-duration: 30s;
+}
+.fbadge {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  padding: 8px 14px;
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  color: var(--text);
+  white-space: nowrap;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  animation: float ease-in-out infinite;
+}
+.fb1 {
+  top: 10px;
+  right: -20px;
+  animation-duration: 3.2s;
+}
+.fb2 {
+  bottom: 40px;
+  left: -30px;
+  animation-duration: 4s;
+  animation-delay: 0.8s;
+}
+.fb3 {
+  top: 50%;
+  right: -40px;
+  animation-duration: 3.6s;
+  animation-delay: 1.4s;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }
