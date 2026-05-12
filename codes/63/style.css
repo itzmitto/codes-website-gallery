@@ -164,7 +164,6 @@ header nav a span {
     flex: 1;
 }
 
-/* Home inner: side-by-side layout */
 .home-inner {
     display: flex;
     align-items: center;
@@ -331,8 +330,6 @@ header nav a span {
     letter-spacing: 2px;
 }
 
-/* ── hvisual ─────────────────────────────────────────── */
-
 .hvisual {
     display: flex;
     justify-content: center;
@@ -454,8 +451,6 @@ header nav a span {
         transform: translateY(-8px);
     }
 }
-
-/* ── end hvisual ─────────────────────────────────────── */
 
 .aboutMe {
     margin-top: 1rem;
