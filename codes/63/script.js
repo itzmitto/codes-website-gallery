@@ -62,7 +62,7 @@ sendBtn.addEventListener('click', () => {
 
     const subject = encodeURIComponent(`Portfolio Contact van ${name}`);
     const body = encodeURIComponent(`Naam: ${name}\nEmail: ${email}\n\nBericht:\n${message}`);
-    window.open(`mailto:andre.babirian@gmail.com?subject=${subject}&body=${body}`);
+    window.open(`mailto:97095807@st.deltion.nl?subject=${subject}&body=${body}`);
 
     nameInput.value = '';
     emailInput.value = '';
