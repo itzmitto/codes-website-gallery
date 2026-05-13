@@ -1,51 +1,80 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="nl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Password Generator</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Password Generator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Password Generator</h1>
 
-  <div class="container">
-    <h1>Password Generator</h1>
+      <div class="card">
+        <div class="output" id="output">CLICK GENERATE</div>
 
-    <div class="card">
-      <div class="output" id="output">
-        CLICK GENERATE
+        <div class="label">LENGTH: <span id="lengthVal">16</span></div>
+
+        <input
+          type="range"
+          min="4"
+          max="32"
+          value="16"
+          id="slider"
+          title="Password length"
+        />
+
+        <div class="option">
+          <span>Uppercase (A-Z)</span>
+          <div class="toggle-border">
+            <input
+              id="upper"
+              type="checkbox"
+              checked
+              title="Include uppercase letters"
+            />
+            <label for="upper"><div class="handle"></div></label>
+          </div>
+        </div>
+
+        <div class="option">
+          <span>Lowercase (a-z)</span>
+          <div class="toggle-border">
+            <input
+              id="lower"
+              type="checkbox"
+              checked
+              title="Include lowercase letters"
+            />
+            <label for="lower"><div class="handle"></div></label>
+          </div>
+        </div>
+
+        <div class="option">
+          <span>Numbers (0-9)</span>
+          <div class="toggle-border">
+            <input
+              id="numbers"
+              type="checkbox"
+              checked
+              title="Include numbers"
+            />
+            <label for="numbers"><div class="handle"></div></label>
+          </div>
+        </div>
+
+        <div class="option">
+          <span>Symbols (!@#$...)</span>
+          <div class="toggle-border">
+            <input id="symbols" type="checkbox" title="Include symbols" />
+            <label for="symbols"><div class="handle"></div></label>
+          </div>
+        </div>
+
+        <button onclick="generatePassword()">GENERATE PASSWORD</button>
       </div>
-
-      <div class="label">
-        LENGTH: <span id="lengthVal">16</span>
-      </div>
-
-      <input type="range" min="4" max="32" value="16" id="slider">
-
-      <div class="option">
-        <label for="upper">Uppercase (A-Z)</label>
-        <input type="checkbox" id="upper" checked>
-      </div>
-
-      <div class="option">
-        <label for="lower">Lowercase (a-z)</label>
-        <input type="checkbox" id="lower" checked>
-      </div>
-
-      <div class="option">
-        <label for="numbers">Numbers (0-9)</label>
-        <input type="checkbox" id="numbers" checked>
-      </div>
-
-      <div class="option">
-        <label for="symbols">Symbols (!@#$...)</label>
-        <input type="checkbox" id="symbols">
-      </div>
-
-      <button onclick="generatePassword()">GENERATE PASSWORD</button>
     </div>
-  </div>
 
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
