@@ -1,3 +1,76 @@
 body {
-    background-color: aquamarine;
+  margin: 0;
+  min-height: 100vh;
+  background: #77eff1;
+  display: grid;
+  place-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+  text-align: center;
+}
+
+h1 {
+  color: black;
+  margin-bottom: 1rem;
+}
+
+.card {
+  width: 320px;
+  background: #1e1e3a;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.output {
+  background: #15152e;
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  margin: 15px 0;
+  word-break: break-all;
+}
+
+.label {
+  color: #aaa;
+  font-size: 12px;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.label span {
+  color: white;
+}
+
+input[type="range"] {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.option {
+  background: #15152e;
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  margin-top: 15px;
+  background: #5b8cff;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+.output {
+    color:lightgreen;
 }

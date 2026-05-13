@@ -1,13 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-         <link rel="stylesheet" href="style.css">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Password Generator</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    
+
+  <div class="container">
+    <h1>Password Generator</h1>
+
+    <div class="card">
+      <div class="output" id="output">
+        CLICK GENERATE
+      </div>
+
+      <div class="label">
+        LENGTH: <span id="lengthVal">16</span>
+      </div>
+
+      <input type="range" min="4" max="32" value="16" id="slider">
+
+      <div class="option">
+        <label for="upper">Uppercase (A-Z)</label>
+        <input type="checkbox" id="upper" checked>
+      </div>
+
+      <div class="option">
+        <label for="lower">Lowercase (a-z)</label>
+        <input type="checkbox" id="lower" checked>
+      </div>
+
+      <div class="option">
+        <label for="numbers">Numbers (0-9)</label>
+        <input type="checkbox" id="numbers" checked>
+      </div>
+
+      <div class="option">
+        <label for="symbols">Symbols (!@#$...)</label>
+        <input type="checkbox" id="symbols">
+      </div>
+
+      <button onclick="generatePassword()">GENERATE PASSWORD</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
