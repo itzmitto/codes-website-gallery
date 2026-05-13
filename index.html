@@ -1,22 +1,22 @@
-<!doctype html> 
+<!doctype html>
 <html lang="nl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Codes - 1 tot 20</title> 
+    <title>My Codes - 1 tot 20</title>
     <style>
-      * { 
-        margin: 0; 
+      * {
+        margin: 0;
         padding: 0;
-        box-sizing: border-box;   
-      } 
+        box-sizing: border-box;
+      }
 
-      body { 
-        font-family: "Inter", sans-serif; 
+      body {
+        font-family: "Inter", sans-serif;
         background: #0f0f0f;
-        color: #fff; 
-        height: 100vh; 
-        display: grid; 
+        color: #fff;
+        height: 100vh;
+        display: grid;
         grid-template-rows: 70px 1fr;
       }
 
@@ -150,23 +150,16 @@
       <button class="back-btn" onclick="goHome()">
         ← Terug naar overzicht
       </button>
-      <div class="header-info">
-        Leerprojecten 1 - 20
-      </div>
+      <div class="header-info">Leerprojecten 1 - 20</div>
     </header>
 
     <div class="container">
-      <!-- Sidebar met alle projecten -->
       <nav>
         <h1>Projecten</h1>
         <div class="projects" id="projectList"></div>
       </nav>
-
-      <!-- Hier komt het gekozen project te staan -->
       <main>
         <iframe id="projectFrame" src="" frameborder="0"></iframe>
-
-        <!-- Welkomstbericht als er nog niks is gekozen -->
         <div id="emptyMessage" class="empty-state">
           <h2>👋 Welkom bij je codeswebsite!</h2>
           <p>
@@ -177,7 +170,6 @@
     </div>
 
     <script>
-      // Maak automatisch de 20 knoppen dit zijn de projecten die je hebt gemaakt aantal dus
       function createProjectButtons() {
         const list = document.getElementById("projectList");
 
@@ -189,32 +181,19 @@
           list.appendChild(btn);
         }
       }
-
-      // Laad het project in de iframe
       function loadProject(num) {
         const frame = document.getElementById("projectFrame");
         const empty = document.getElementById("emptyMessage");
-
-        // Aangepast pad: nu zit codeswebsite één niveau dieper
-        // Dus we moeten twee mappen omhoog: ../../codes/
         frame.src = `./codes/${num}/index.html`;
-
-        // Verberg welkomstbericht
         empty.style.display = "none";
       }
-
-      // Terug naar overzicht (leeg iframe)
       function goHome() {
         const frame = document.getElementById("projectFrame");
         const empty = document.getElementById("emptyMessage");
-
         frame.src = "";
         empty.style.display = "block";
       }
-
-      // Start alles
       window.onload = createProjectButtons;
     </script>
   </body>
 </html>
- 
