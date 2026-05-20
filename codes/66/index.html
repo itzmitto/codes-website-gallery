@@ -1,14 +1,252 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spotify - Inloggen</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-<head> 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: linear-gradient(180deg, #121212 0%, #0A0A0A 100%);
+      color: white;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 380px;
+      background: #121212;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .header {
+      text-align: center;
+      padding: 40px 20px 20px;
+    }
+
+    .spotify-logo {
+      font-size: 42px;
+      font-weight: 900;
+      letter-spacing: -2px;
+      color: #1DB954;
+      margin-bottom: 8px;
+    }
+
+    .title {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 16px 0 8px;
+    }
+
+    .subtitle {
+      color: #B3B3B3;
+      font-size: 15px;
+    }
+
+    .form {
+      padding: 0 24px 40px;
+    }
+
+    .input-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #E0E0E0;
+      margin-bottom: 6px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px 16px;
+      background: #282828;
+      border: 1px solid #3F3F3F;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      transition: all 0.2s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #1DB954;
+      box-shadow: 0 0 0 2px rgba(29, 185, 84, 0.2);
+    }
+
+    .options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 12px 0 24px;
+      font-size: 14px;
+    }
+
+    .remember {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #B3B3B3;
+      cursor: pointer;
+    }
+
+    .remember input[type="checkbox"] {
+      accent-color: #1DB954;
+      width: 18px;
+      height: 18px;
+    }
+
+    .forgot {
+      color: #1DB954;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 14px;
+      background: #1DB954;
+      color: black;
+      font-weight: 700;
+      font-size: 16px;
+      border: none;
+      border-radius: 9999px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      transition: all 0.2s;
+    }
+
+    .login-btn:hover {
+      background: #1ed760;
+      transform: scale(1.02);
+    }
+
+    .divider {
+      text-align: center;
+      color: #666;
+      font-size: 14px;
+      margin: 24px 0;
+      position: relative;
+    }
+
+    .divider::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: #333;
+    }
+
+    .divider span {
+      background: #121212;
+      padding: 0 12px;
+    }
+
+    .other-login {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .other-btn {
+      width: 100%;
+      padding: 13px;
+      background: transparent;
+      border: 1px solid #535353;
+      color: white;
+      font-weight: 600;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .other-btn:hover {
+      border-color: #B3B3B3;
+    }
+
+    .signup {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 15px;
+    }
+
+    .signup a {
+      color: #1DB954;
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
 </head>
-
 <body>
-</body>
+  <div class="container">
+    <div class="header">
+      <div class="spotify-logo">Spotify</div>
+      <h1 class="title">Log in</h1>
+      <p class="subtitle">Welkom terug</p>
+    </div>
 
+    <div class="form">
+      <div class="input-group">
+        <label>Email of gebruikersnaam</label>
+        <input type="text" placeholder="naam@email.com" required>
+      </div>
+
+      <div class="input-group">
+        <label>Wachtwoord</label>
+        <input type="password" placeholder="••••••••" required>
+      </div>
+
+      <div class="options">
+        <label class="remember">
+          <input type="checkbox" checked>
+          <span>Onthoud mij</span>
+        </label>
+        <a href="#" class="forgot">Wachtwoord vergeten?</a>
+      </div>
+
+      <button class="login-btn">Inloggen</button>
+
+      <div class="divider"><span>of</span></div>
+
+      <div class="other-login">
+        <button class="other-btn">
+          <span>Continue with Google</span>
+        </button>
+        <button class="other-btn">
+          <span>Continue with Apple</span>
+        </button>
+        <button class="other-btn">
+          <span>Continue with Facebook</span>
+        </button>
+      </div>
+
+      <div class="signup">
+        Heb je geen account? <a href="#">Meld je aan</a>
+      </div>
+    </div>
+  </div>
+</body>
 </html>
