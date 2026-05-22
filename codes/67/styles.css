@@ -59,6 +59,12 @@ body {
 .rg-card:nth-child(5) {
     animation-delay: 0.25s;
 }
+.rg-card:nth-child(6) {
+    animation-delay: 0.25s;
+}
+.rg-card:nth-child(7) {
+    animation-delay: 0.25s;
+}
 
 .rg-card:hover {
     transform: translateY(-6px);
