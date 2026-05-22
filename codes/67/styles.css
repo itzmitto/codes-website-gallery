@@ -74,6 +74,9 @@ body {
 .rg-card:nth-child(7) {
     animation-delay: 0.25s;
 }
+.rg-card:nth-child(8) {
+    animation-delay: 0.25s;
+}
 
 .rg-card:hover {
     transform: translateY(-6px);
@@ -86,6 +89,9 @@ body {
 
 .rg-card:hover .rg-shape:nth-child(2) {
     transform: translateX(8px);
+}
+.rg-card:hover .rg-shape:nth-child(3) {
+    transform: translateY(18px);
 }
 
 /* paintings */
