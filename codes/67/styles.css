@@ -229,7 +229,308 @@ body {
     height: 3px;
     background: var(--ink);
 }
+/* --- f --- */
+.rg-shape--f-1 {
+    top: 12px;
+    left: 15px;
+    width: 70px;
+    height: 70px;
+    background: var(--cyan);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    transform: rotate(10deg);
+}
 
+.rg-shape--f-2 {
+    bottom: 15px;
+    right: 10px;
+    width: 45px;
+    height: 20px;
+    background: var(--ink);
+    border-radius: 20px;
+    transform: rotate(-15deg);
+}
+
+.rg-shape--f-3 {
+    top: 25px;
+    right: 20px;
+    width: 25px;
+    height: 25px;
+    border: 3px solid var(--magenta);
+    border-radius: 50%;
+}
+
+/* --- g --- */
+.rg-shape--g-1 {
+    top: 10px;
+    right: 15px;
+    width: 60px;
+    height: 60px;
+    background: var(--orange);
+    border-radius: 0 50% 50% 50%;
+    transform: rotate(25deg);
+}
+
+.rg-shape--g-2 {
+    bottom: 0;
+    left: 0;
+    width: 90px;
+    height: 35px;
+    background: var(--ink);
+    transform: skewX(20deg);
+}
+
+.rg-shape--g-3 {
+    top: 45px;
+    left: 50px;
+    width: 35px;
+    height: 35px;
+    background: transparent;
+    border: 4px solid var(--mint);
+    transform: rotate(45deg);
+}
+/* --- h --- */
+.rg-shape--h-1 {
+    top: 10px;
+    left: 10px;
+    width: 80px;
+    height: 25px;
+    background: var(--red);
+    transform: rotate(-8deg);
+}
+
+.rg-shape--h-2 {
+    top: 45px;
+    left: 50px;
+    width: 60px;
+    height: 60px;
+    background: var(--cyan);
+    border-radius: 50%;
+}
+
+.rg-shape--h-3 {
+    bottom: 10px;
+    left: 15px;
+    width: 30px;
+    height: 30px;
+    border: 3px solid var(--ink);
+}
+
+/* --- i --- */
+.rg-shape--i-1 {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: var(--mint);
+}
+
+.rg-shape--i-2 {
+    bottom: 0;
+    right: 0;
+    width: 60px;
+    height: 60px;
+    background: var(--orange);
+    transform: rotate(20deg);
+}
+
+.rg-shape--i-3 {
+    top: 35px;
+    left: 35px;
+    width: 35px;
+    height: 35px;
+    background: var(--paper);
+    border-radius: 50%;
+}
+
+/* --- j --- */
+.rg-shape--j-1 {
+    top: 15px;
+    left: 15px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 40px 70px 40px;
+    border-color: transparent transparent var(--magenta) transparent;
+}
+
+.rg-shape--j-2 {
+    bottom: 10px;
+    right: 10px;
+    width: 45px;
+    height: 45px;
+    background: var(--ink);
+}
+
+.rg-shape--j-3 {
+    top: 20px;
+    right: 20px;
+    width: 20px;
+    height: 70px;
+    background: var(--cyan);
+}
+
+/* --- k --- */
+.rg-shape--k-1 {
+    top: 15px;
+    left: 15px;
+    width: 90px;
+    height: 20px;
+    background: var(--orange);
+}
+
+.rg-shape--k-2 {
+    top: 45px;
+    left: 30px;
+    width: 40px;
+    height: 40px;
+    background: var(--mint);
+    transform: rotate(45deg);
+}
+
+.rg-shape--k-3 {
+    bottom: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--ink);
+}
+
+/* --- l --- */
+.rg-shape--l-1 {
+    top: 0;
+    right: 0;
+    width: 70px;
+    height: 100%;
+    background: var(--cyan);
+}
+
+.rg-shape--l-2 {
+    bottom: 10px;
+    left: 10px;
+    width: 60px;
+    height: 60px;
+    background: var(--red);
+    border-radius: 50%;
+}
+
+.rg-shape--l-3 {
+    top: 25px;
+    left: 20px;
+    width: 50px;
+    height: 4px;
+    background: var(--ink);
+    transform: rotate(30deg);
+}
+
+/* --- m --- */
+.rg-shape--m-1 {
+    top: 10px;
+    left: 10px;
+    width: 50px;
+    height: 90px;
+    background: var(--magenta);
+    transform: skewY(-10deg);
+}
+
+.rg-shape--m-2 {
+    top: 20px;
+    right: 15px;
+    width: 45px;
+    height: 45px;
+    background: var(--orange);
+    border-radius: 50%;
+}
+
+.rg-shape--m-3 {
+    bottom: 10px;
+    right: 25px;
+    width: 35px;
+    height: 35px;
+    border: 3px solid var(--ink);
+    transform: rotate(45deg);
+}
+
+/* --- n --- */
+.rg-shape--n-1 {
+    top: 10px;
+    left: 20px;
+    width: 100px;
+    height: 30px;
+    background: var(--mint);
+    border-radius: 20px;
+}
+
+.rg-shape--n-2 {
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 60px;
+    background: var(--ink);
+}
+
+.rg-shape--n-3 {
+    top: 40px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    background: var(--red);
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+}
+
+/* --- o --- */
+.rg-shape--o-1 {
+    top: 15px;
+    left: 15px;
+    width: 80px;
+    height: 80px;
+    border: 6px solid var(--orange);
+    border-radius: 50%;
+}
+
+.rg-shape--o-2 {
+    top: 35px;
+    left: 35px;
+    width: 40px;
+    height: 40px;
+    background: var(--cyan);
+    border-radius: 50%;
+}
+
+.rg-shape--o-3 {
+    bottom: 10px;
+    right: 10px;
+    width: 25px;
+    height: 25px;
+    background: var(--ink);
+}
+
+/* --- p --- */
+.rg-shape--p-1 {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--paper);
+}
+
+.rg-shape--p-2 {
+    top: 20px;
+    left: 20px;
+    width: 90px;
+    height: 50px;
+    background: var(--magenta);
+    transform: rotate(-12deg);
+}
+
+.rg-shape--p-3 {
+    bottom: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    background: var(--mint);
+    border-radius: 50%;
+}
 @keyframes fadup {
     from {
         opacity: 0;
