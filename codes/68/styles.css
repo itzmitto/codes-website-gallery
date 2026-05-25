@@ -1,0 +1,43 @@
+body {
+    margin: 0;
+    display: flex;
+    height: 100vh;
+    font-family: sans-serif;
+}
+
+.sidebar {
+    width: 180px;
+    background: #222;
+    color: #eee;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+}
+
+.sidebar a {
+    color: #ccc;
+    text-decoration: none;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    transition: background .3s,color .3s;
+}
+
+.sidebar a:hover {
+    background: #444;
+    color: #fff;
+}
+
+.sidebar a .bi {
+    margin-right: 12px;
+    font-size: 1.3rem;
+}
+
+main {
+    flex:1; 
+    padding:40px;
+    background: #f0f0f0;
+}
+h1,p {
+    color:#444;
+}
