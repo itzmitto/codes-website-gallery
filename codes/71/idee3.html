@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inkomen Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+  :root {
+    --bg: #0f172a;
+    --bg2: #111827;
+    --card: #1e293b;
+    --hover: #334155;
+    --border: rgba(148,163,184,0.12);
+    --border2: rgba(148,163,184,0.22);
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+    --faint: #475569;
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+    --r: 12px;
+    --r2: 20px;
+  }
+
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:15px;line-height:1.6;min-height:100vh;overflow-x:hidden}
+
+  .page{display:none;min-height:100vh;padding:0 0 4rem}
+  .page.active{display:block}
+
+  /* SUBTLE GRID BG */
+  body::before{
+    content:'';position:fixed;inset:0;
+    background-image:linear-gradient(rgba(148,163,184,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,0.03) 1px,transparent 1px);
+    background-size:48px 48px;pointer-events:none;z-index:0
+  }
+
+  /* NAV */
+  nav{
+    position:sticky;top:0;z-index:100;
+    background:rgba(15,23,42,0.85);
+    backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--border);
+    padding:0 2.5rem;
+    display:flex;align-items:center;gap:2rem;height:60px
+  }
+  .nav-logo{
+    font-family:var(--font-display);font-weight:800;font-size:18px;
+    color:var(--text);cursor:pointer;letter-spacing:-0.5px;
+    display:flex;align-items:center;gap:8px
+  }
+  .nav-logo span{
+    width:28px;height:28px;border-radius:8px;
+    background:linear-gradient(135deg,#6C9EFF,#a78bfa);
+    display:flex;align-items:center;justify-content:center;
+    font-size:13px;font-weight:800;color:#fff
+  }
+  .nav-links{display:flex;gap:4px;margin-left:auto}
+  .nav-link{
+    padding:6px 14px;border-radius:8px;font-size:13px;font-weight:500;
+    color:var(--muted);cursor:pointer;transition:all .15s;border:none;background:none
+  }
+  .nav-link:hover{color:var(--text);background:var(--hover)}
+  .nav-link.active{color:var(--text);background:var(--card)}
+
+  /* HERO */
+  .hero{
+    padding:5rem 2.5rem 3rem;
+    max-width:1100px;margin:0 auto;position:relative;z-index:1
+  }
+  .hero-tag{
+    display:inline-flex;align-items:center;gap:6px;
+    background:rgba(108,158,255,0.1);border:1px solid rgba(108,158,255,0.25);
+    color:#93b4ff;font-size:12px;font-weight:500;font-family:var(--font-mono);
+    padding:4px 12px;border-radius:100px;margin-bottom:1.5rem;letter-spacing:0.5px
+  }
+  .hero h1{
+    font-family:var(--font-display);font-size:clamp(2.4rem,5vw,4rem);
+    font-weight:800;line-height:1.1;letter-spacing:-2px;color:var(--text);
+    margin-bottom:1rem
+  }
+  .hero h1 em{
+    font-style:normal;
+    background:linear-gradient(135deg,#6C9EFF 0%,#a78bfa 50%,#f472b6 100%);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text
+  }
+  .hero p{font-size:17px;color:var(--muted);max-width:500px;line-height:1.7;margin-bottom:2.5rem}
+  .hero-stats{display:flex;gap:2rem;flex-wrap:wrap}
+  .hero-stat{display:flex;flex-direction:column;gap:2px}
+  .hero-stat-val{font-family:var(--font-display);font-size:1.8rem;font-weight:700;color:var(--text)}
+  .hero-stat-lbl{font-size:12px;color:var(--faint);font-family:var(--font-mono);letter-spacing:0.5px}
+
+  /* GRID */
+  .container{max-width:1100px;margin:0 auto;padding:0 2.5rem;position:relative;z-index:1}
+  .section-title{
+    font-family:var(--font-display);font-size:11px;font-weight:600;
+    color:var(--faint);letter-spacing:2px;text-transform:uppercase;
+    margin-bottom:1.25rem
+  }
+
+  /* PEOPLE CARDS */
+  .people-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-bottom:3rem}
+  .person-card{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--r2);
+    padding:1.5rem;cursor:pointer;transition:all .2s;position:relative;overflow:hidden
+  }
+  .person-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:3px;
+    background:var(--accent);opacity:0.7;transition:opacity .2s
+  }
+  .person-card:hover{border-color:var(--border2);transform:translateY(-3px);background:var(--hover)}
+  .person-card:hover::before{opacity:1}
+  .person-avatar{
+    width:48px;height:48px;border-radius:14px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--font-display);font-size:16px;font-weight:800;
+    color:#fff;margin-bottom:1rem;
+    background:var(--accent)
+  }
+  .person-name{font-family:var(--font-display);font-size:17px;font-weight:700;color:var(--text);margin-bottom:2px}
+  .person-role{font-size:12px;color:var(--muted);margin-bottom:1rem}
+  .person-income{
+    font-family:var(--font-mono);font-size:22px;font-weight:500;color:var(--text);
+    margin-bottom:.25rem
+  }
+  .person-income-lbl{font-size:11px;color:var(--faint);font-family:var(--font-mono)}
+  .person-tags{display:flex;gap:6px;margin-top:1rem;flex-wrap:wrap}
+  .tag{
+    padding:3px 10px;border-radius:6px;font-size:11px;font-weight:500;
+    background:rgba(148,163,184,0.08);color:var(--muted);border:1px solid var(--border)
+  }
+  .person-arrow{
+    position:absolute;top:1.25rem;right:1.25rem;
+    color:var(--faint);font-size:18px;transition:transform .2s,color .2s
+  }
+  .person-card:hover .person-arrow{transform:translate(3px,-3px);color:var(--muted)}
+
+  /* OVERVIEW CHARTS ROW */
+  .charts-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:3rem}
+  @media(max-width:700px){.charts-row{grid-template-columns:1fr}}
+  .chart-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:1.5rem}
+  .chart-title{font-family:var(--font-display);font-size:14px;font-weight:600;color:var(--text);margin-bottom:.25rem}
+  .chart-sub{font-size:12px;color:var(--faint);margin-bottom:1.25rem;font-family:var(--font-mono)}
+
+  /* LEADERBOARD */
+  .leaderboard{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:1.5rem;margin-bottom:3rem}
+  .lb-row{
+    display:flex;align-items:center;gap:1rem;padding:.75rem 0;
+    border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;
+    border-radius:8px;padding-left:.5rem;padding-right:.5rem
+  }
+  .lb-row:last-child{border-bottom:none}
+  .lb-row:hover{background:var(--hover)}
+  .lb-rank{font-family:var(--font-mono);font-size:12px;color:var(--faint);width:24px}
+  .lb-avatar{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
+  .lb-info{flex:1}
+  .lb-name{font-size:14px;font-weight:500;color:var(--text)}
+  .lb-city{font-size:11px;color:var(--faint)}
+  .lb-amount{font-family:var(--font-mono);font-size:14px;font-weight:500;color:var(--text)}
+  .lb-bar-wrap{width:80px;height:4px;background:rgba(148,163,184,0.1);border-radius:2px;overflow:hidden}
+  .lb-bar{height:100%;border-radius:2px;transition:width .6s ease}
+
+  /* PROFILE PAGE */
+  .profile-back{
+    display:inline-flex;align-items:center;gap:6px;
+    color:var(--muted);font-size:13px;cursor:pointer;padding:.75rem 0;
+    transition:color .15s;border:none;background:none;margin-bottom:1.5rem
+  }
+  .profile-back:hover{color:var(--text)}
+  .profile-header{
+    display:flex;align-items:flex-start;gap:1.5rem;
+    background:var(--card);border:1px solid var(--border);border-radius:var(--r2);
+    padding:2rem;margin-bottom:1.5rem;position:relative;overflow:hidden
+  }
+  .profile-header::after{
+    content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;
+    border-radius:50%;opacity:0.04;background:var(--accent)
+  }
+  .profile-big-avatar{
+    width:72px;height:72px;border-radius:20px;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--font-display);font-size:24px;font-weight:800;color:#fff;
+    background:var(--accent)
+  }
+  .profile-meta{flex:1}
+  .profile-name{font-family:var(--font-display);font-size:2rem;font-weight:800;letter-spacing:-1px;color:var(--text);margin-bottom:4px}
+  .profile-sub{font-size:14px;color:var(--muted);display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+  .profile-sub-dot{width:4px;height:4px;border-radius:50%;background:var(--faint)}
+  .profile-login{font-family:var(--font-mono);font-size:11px;color:var(--faint);margin-top:.75rem}
+  .profile-big-income{text-align:right;flex-shrink:0}
+  .profile-income-num{font-family:var(--font-display);font-size:2.2rem;font-weight:800;color:var(--text);line-height:1}
+  .profile-income-lbl{font-size:11px;color:var(--faint);font-family:var(--font-mono);margin-top:4px}
+
+  /* STATS ROW */
+  .stats-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:1.5rem}
+  .stat-card{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+    padding:1.1rem 1.25rem
+  }
+  .stat-val{font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:var(--text)}
+  .stat-lbl{font-size:11px;color:var(--faint);font-family:var(--font-mono);margin-top:2px}
+  .stat-change{font-size:11px;color:#4ade80;margin-top:4px}
+
+  /* INCOME BREAKDOWN */
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:1.5rem}
+  @media(max-width:680px){.two-col{grid-template-columns:1fr}}
+  .breakdown-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:1.5rem}
+  .breakdown-item{display:flex;align-items:center;gap:12px;padding:.6rem 0;border-bottom:1px solid var(--border)}
+  .breakdown-item:last-child{border-bottom:none}
+  .breakdown-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .breakdown-label{flex:1;font-size:13px;color:var(--muted)}
+  .breakdown-amount{font-family:var(--font-mono);font-size:13px;color:var(--text)}
+  .breakdown-pct{font-family:var(--font-mono);font-size:11px;color:var(--faint);min-width:36px;text-align:right}
+
+  /* BALANCE */
+  .balance-highlight{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--r2);
+    padding:1.5rem;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem
+  }
+  .balance-left h3{font-family:var(--font-display);font-size:1rem;font-weight:600;color:var(--text);margin-bottom:4px}
+  .balance-left p{font-size:13px;color:var(--muted)}
+  .balance-num{font-family:var(--font-display);font-size:2.5rem;font-weight:800;color:#4ade80}
+
+  /* BARS */
+  .bar-list{display:flex;flex-direction:column;gap:10px}
+  .bar-item{}
+  .bar-header{display:flex;justify-content:space-between;margin-bottom:5px}
+  .bar-label{font-size:12px;color:var(--muted)}
+  .bar-val{font-family:var(--font-mono);font-size:12px;color:var(--text)}
+  .bar-track{height:6px;background:rgba(148,163,184,0.1);border-radius:3px;overflow:hidden}
+  .bar-fill{height:100%;border-radius:3px;transition:width .8s cubic-bezier(.4,0,.2,1)}
+
+  /* SAVINGS */
+  .savings-card{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--r2);
+    padding:1.5rem;margin-bottom:1.5rem
+  }
+  .savings-big{font-family:var(--font-display);font-size:3rem;font-weight:800;color:var(--text);margin:.5rem 0}
+  .savings-months{font-size:13px;color:var(--muted)}
+
+  /* UTILITY */
+  .flex-between{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+  .pill{
+    display:inline-flex;align-items:center;gap:4px;
+    padding:3px 10px;border-radius:100px;font-size:11px;font-weight:500;
+    background:rgba(74,222,128,0.1);color:#4ade80;border:1px solid rgba(74,222,128,0.2)
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">
+    <span>₿</span> FinFlow
+  </div>
+  <div class="nav-links">
+    <button class="nav-link active" id="nav-home" onclick="showPage('home')">Overzicht</button>
+    <button class="nav-link" id="nav-p1" onclick="showPage('profile',1)">Armin</button>
+    <button class="nav-link" id="nav-p2" onclick="showPage('profile',2)">Mark</button>
+    <button class="nav-link" id="nav-p3" onclick="showPage('profile',3)">Zeke</button>
+    <button class="nav-link" id="nav-p4" onclick="showPage('profile',4)">Alex</button>
+  </div>
+</nav>
+
+<!-- HOME PAGE -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-tag">↗ Live · Mei 2026</div>
+    <h1>Financieel<br><em>Dashboard</em></h1>
+    <p>Inkomen, uitgaven en spaargeld van 4 personen inzichtelijk op één plek.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-val">€16.800</span>
+        <span class="hero-stat-lbl">TOTAAL MAANDINKOMEN</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-val">€88.200</span>
+        <span class="hero-stat-lbl">GEZAMENLIJK SPAARGELD</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-val">4</span>
+        <span class="hero-stat-lbl">ACTIEVE PROFIELEN</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <p class="section-title">Profielen</p>
+    <div class="people-grid" id="people-grid"></div>
+
+    <p class="section-title">Inkomen vs Kosten</p>
+    <div class="charts-row">
+      <div class="chart-card">
+        <div class="chart-title">Maandinkomen vergelijking</div>
+        <div class="chart-sub">Salaris · Freelance · Investeringen</div>
+        <div style="position:relative;height:220px">
+          <canvas id="chartIncome" role="img" aria-label="Gestapelde bar chart van maandinkomen per persoon"></canvas>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Kosten verdeling</div>
+        <div class="chart-sub">Gemiddeld per categorie</div>
+        <div style="position:relative;height:220px">
+          <canvas id="chartKosten" role="img" aria-label="Donut chart van gemiddelde kostenposten"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <p class="section-title">Ranglijst — spaargeld</p>
+    <div class="leaderboard" id="leaderboard"></div>
+  </div>
+</div>
+
+<!-- PROFILE PAGES (generated) -->
+<div class="page" id="page-profile-1"></div>
+<div class="page" id="page-profile-2"></div>
+<div class="page" id="page-profile-3"></div>
+<div class="page" id="page-profile-4"></div>
+
+<script>
+const data = [
+  {id:1,naam:"Armin Arlert",leeftijd:31,beroep:"Frontend Developer",stad:"Zwolle",maandelijks_inkomen:3850,valuta:"EUR",inkomen_bronnen:{salaris:3200,freelance:450,investeringen:200},maandelijkse_kosten:{huur:1100,boodschappen:320,transport:140,abonnementen:55,overig:480},spaargeld:12450,laatste_login:"2026-05-28",avatar_kleur:"#6C9EFF"},
+  {id:2,naam:"Mark Reiss",leeftijd:28,beroep:"UX Designer",stad:"Amsterdam",maandelijks_inkomen:4200,valuta:"EUR",inkomen_bronnen:{salaris:3600,freelance:400,investeringen:200},maandelijkse_kosten:{huur:1350,boodschappen:290,transport:95,abonnementen:75,overig:510},spaargeld:18900,laatste_login:"2026-05-27",avatar_kleur:"#FF8FAB"},
+  {id:3,naam:"Zeke Jeager",leeftijd:34,beroep:"Data Analyst",stad:"Utrecht",maandelijks_inkomen:3650,valuta:"EUR",inkomen_bronnen:{salaris:3100,freelance:300,investeringen:250},maandelijkse_kosten:{huur:980,boodschappen:340,transport:180,abonnementen:45,overig:395},spaargeld:22100,laatste_login:"2026-05-26",avatar_kleur:"#5ECFA0"},
+  {id:4,naam:"Alex Braun",leeftijd:37,beroep:"Marketing Manager",stad:"Rotterdam",maandelijks_inkomen:5100,valuta:"EUR",inkomen_bronnen:{salaris:4500,freelance:350,investeringen:250},maandelijkse_kosten:{huur:1600,boodschappen:380,transport:210,abonnementen:90,overig:620},spaargeld:34750,laatste_login:"2026-05-28",avatar_kleur:"#FFB347"}
+];
+
+const eur = v => '€' + v.toLocaleString('nl-NL');
+const initials = n => n.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+const totalKosten = p => Object.values(p.maandelijkse_kosten).reduce((a,b)=>a+b,0);
+const balance = p => p.maandelijks_inkomen - totalKosten(p);
+
+/* CHARTS */
+Chart.defaults.color = '#64748b';
+Chart.defaults.font.family = "'DM Mono', monospace";
+Chart.defaults.font.size = 11;
+
+function buildHomeCharts(){
+  const names = data.map(p=>p.naam.split(' ')[0]);
+  new Chart(document.getElementById('chartIncome'),{
+    type:'bar',
+    data:{
+      labels:names,
+      datasets:[
+        {label:'Salaris',data:data.map(p=>p.inkomen_bronnen.salaris),backgroundColor:'rgba(108,158,255,0.7)',borderRadius:4},
+        {label:'Freelance',data:data.map(p=>p.inkomen_bronnen.freelance),backgroundColor:'rgba(167,139,250,0.7)',borderRadius:4},
+        {label:'Investeringen',data:data.map(p=>p.inkomen_bronnen.investeringen),backgroundColor:'rgba(94,207,160,0.7)',borderRadius:4}
+      ]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{
+        x:{stacked:true,grid:{color:'rgba(148,163,184,0.05)'},ticks:{color:'#64748b'}},
+        y:{stacked:true,grid:{color:'rgba(148,163,184,0.05)'},ticks:{color:'#64748b',callback:v=>'€'+v.toLocaleString('nl-NL')}}
+      }
+    }
+  });
+
+  const cats = ['Huur','Boodschappen','Transport','Abonnementen','Overig'];
+  const totals = ['huur','boodschappen','transport','abonnementen','overig'].map(k=>
+    data.reduce((a,p)=>a+p.maandelijkse_kosten[k],0)/data.length
+  );
+  new Chart(document.getElementById('chartKosten'),{
+    type:'doughnut',
+    data:{
+      labels:cats,
+      datasets:[{data:totals,backgroundColor:['rgba(108,158,255,0.8)','rgba(94,207,160,0.8)','rgba(255,179,71,0.8)','rgba(167,139,250,0.8)','rgba(255,143,171,0.8)'],borderWidth:0,hoverOffset:6}]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      cutout:'68%'
+    }
+  });
+}
+
+/* PEOPLE GRID */
+function buildPeopleGrid(){
+  const g = document.getElementById('people-grid');
+  g.innerHTML = data.map(p=>`
+    <div class="person-card" style="--accent:${p.avatar_kleur}" onclick="showPage('profile',${p.id})">
+      <div class="person-arrow">↗</div>
+      <div class="person-avatar" style="background:${p.avatar_kleur}">${initials(p.naam)}</div>
+      <div class="person-name">${p.naam}</div>
+      <div class="person-role">${p.beroep} · ${p.stad}</div>
+      <div class="person-income">${eur(p.maandelijks_inkomen)}</div>
+      <div class="person-income-lbl">/ maand bruto</div>
+      <div class="person-tags">
+        <span class="tag">${p.leeftijd} jaar</span>
+        <span class="tag">${eur(p.spaargeld)} gespaard</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* LEADERBOARD */
+function buildLeaderboard(){
+  const sorted = [...data].sort((a,b)=>b.spaargeld-a.spaargeld);
+  const max = sorted[0].spaargeld;
+  document.getElementById('leaderboard').innerHTML = sorted.map((p,i)=>`
+    <div class="lb-row" onclick="showPage('profile',${p.id})">
+      <span class="lb-rank">${i+1}</span>
+      <div class="lb-avatar" style="background:${p.avatar_kleur}">${initials(p.naam)}</div>
+      <div class="lb-info">
+        <div class="lb-name">${p.naam}</div>
+        <div class="lb-city">${p.stad} · ${p.beroep}</div>
+      </div>
+      <div class="lb-bar-wrap"><div class="lb-bar" style="width:${Math.round(p.spaargeld/max*100)}%;background:${p.avatar_kleur}"></div></div>
+      <div class="lb-amount">${eur(p.spaargeld)}</div>
+    </div>
+  `).join('');
+}
+
+/* PROFILE BUILDER */
+const kostKleuren = {huur:'#6C9EFF',boodschappen:'#5ECFA0',transport:'#FFB347',abonnementen:'#a78bfa',overig:'#FF8FAB'};
+const kostLabels = {huur:'Huur',boodschappen:'Boodschappen',transport:'Transport',abonnementen:'Abonnementen',overig:'Overig'};
+
+function buildProfile(p){
+  const tk = totalKosten(p);
+  const bal = balance(p);
+  const savMonths = Math.round(p.spaargeld / bal);
+
+  const incBreak = Object.entries(p.inkomen_bronnen).map(([k,v])=>`
+    <div class="breakdown-item">
+      <div class="breakdown-dot" style="background:${k==='salaris'?'#6C9EFF':k==='freelance'?'#a78bfa':'#5ECFA0'}"></div>
+      <div class="breakdown-label">${k.charAt(0).toUpperCase()+k.slice(1)}</div>
+      <div class="breakdown-amount">${eur(v)}</div>
+      <div class="breakdown-pct">${Math.round(v/p.maandelijks_inkomen*100)}%</div>
+    </div>
+  `).join('');
+
+  const maxKost = Math.max(...Object.values(p.maandelijkse_kosten));
+  const kostBreak = Object.entries(p.maandelijkse_kosten).map(([k,v])=>`
+    <div class="bar-item">
+      <div class="bar-header"><span class="bar-label">${kostLabels[k]}</span><span class="bar-val">${eur(v)}</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:${Math.round(v/maxKost*100)}%;background:${kostKleuren[k]}"></div></div>
+    </div>
+  `).join('');
+
+  return `
+    <div style="max-width:1100px;margin:0 auto;padding:1.5rem 2.5rem 4rem;position:relative;z-index:1">
+      <button class="profile-back" onclick="showPage('home')">← Terug naar overzicht</button>
+
+      <div class="profile-header">
+        <div class="profile-big-avatar" style="background:${p.avatar_kleur}">${initials(p.naam)}</div>
+        <div class="profile-meta">
+          <div class="profile-name">${p.naam}</div>
+          <div class="profile-sub">
+            <span>${p.beroep}</span>
+            <span class="profile-sub-dot"></span>
+            <span>${p.stad}</span>
+            <span class="profile-sub-dot"></span>
+            <span>${p.leeftijd} jaar</span>
+          </div>
+          <div class="profile-login">Laatste login: ${p.laatste_login}</div>
+        </div>
+        <div class="profile-big-income">
+          <div class="profile-income-num">${eur(p.maandelijks_inkomen)}</div>
+          <div class="profile-income-lbl">MAANDINKOMEN</div>
+        </div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-val">${eur(p.maandelijks_inkomen)}</div>
+          <div class="stat-lbl">BRUTO INKOMEN</div>
+          <div class="stat-change">↑ maandelijks</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val">${eur(tk)}</div>
+          <div class="stat-lbl">TOTALE KOSTEN</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val" style="color:#4ade80">${eur(bal)}</div>
+          <div class="stat-lbl">MAANDBALANS</div>
+          <div class="stat-change">↑ ${Math.round(bal/p.maandelijks_inkomen*100)}% spaarquote</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val">${eur(p.spaargeld)}</div>
+          <div class="stat-lbl">SPAARGELD</div>
+        </div>
+      </div>
+
+      <div class="balance-highlight">
+        <div class="balance-left">
+          <h3>Maandelijkse netto overschot</h3>
+          <p>${eur(p.maandelijks_inkomen)} inkomen − ${eur(tk)} kosten</p>
+        </div>
+        <div class="balance-num">${eur(bal)}</div>
+      </div>
+
+      <div class="two-col">
+        <div class="breakdown-card">
+          <div class="flex-between">
+            <div>
+              <div class="chart-title">Inkomen bronnen</div>
+              <div class="chart-sub">Maandelijks totaal</div>
+            </div>
+            <div class="pill">+ ${eur(p.maandelijks_inkomen)}</div>
+          </div>
+          ${incBreak}
+        </div>
+        <div class="breakdown-card">
+          <div class="chart-title">Uitgavenposten</div>
+          <div class="chart-sub" style="margin-bottom:1.5rem">Per categorie per maand</div>
+          <div class="bar-list">${kostBreak}</div>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="breakdown-card">
+          <div class="chart-title" style="margin-bottom:.25rem">Inkomen vs Uitgaven</div>
+          <div class="chart-sub">Visuele vergelijking</div>
+          <div style="position:relative;height:200px">
+            <canvas id="profileChart${p.id}" role="img" aria-label="Bar chart inkomen vs uitgaven voor ${p.naam}"></canvas>
+          </div>
+        </div>
+        <div class="savings-card">
+          <div class="chart-title">Spaargeld</div>
+          <div class="savings-big">${eur(p.spaargeld)}</div>
+          <div class="savings-months">${savMonths} maanden aan levenskosten in reserve</div>
+          <div style="margin-top:1.5rem">
+            <div class="bar-header" style="margin-bottom:6px"><span class="bar-label">Spaardoel voortgang (richtlijn 6 mnd)</span><span class="bar-val">${Math.min(100,Math.round(p.spaargeld/(tk*6)*100))}%</span></div>
+            <div class="bar-track" style="height:8px"><div class="bar-fill" style="width:${Math.min(100,Math.round(p.spaargeld/(tk*6)*100))}%;background:${p.avatar_kleur}"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+const profileCharts = {};
+function buildProfileChart(p){
+  if(profileCharts[p.id]) return;
+  const ctx = document.getElementById('profileChart'+p.id);
+  if(!ctx) return;
+  const tk = totalKosten(p);
+  profileCharts[p.id] = new Chart(ctx,{
+    type:'bar',
+    data:{
+      labels:['Inkomen','Kosten','Balans'],
+      datasets:[{
+        data:[p.maandelijks_inkomen, tk, p.maandelijks_inkomen-tk],
+        backgroundColor:['rgba(108,158,255,0.7)','rgba(255,143,171,0.7)','rgba(74,222,128,0.7)'],
+        borderRadius:6,borderWidth:0
+      }]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{
+        x:{grid:{display:false},ticks:{color:'#64748b'}},
+        y:{grid:{color:'rgba(148,163,184,0.05)'},ticks:{color:'#64748b',callback:v=>'€'+v.toLocaleString('nl-NL')}}
+      }
+    }
+  });
+}
+
+/* ROUTING */
+function showPage(type, id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(b=>b.classList.remove('active'));
+
+  if(type==='home'){
+    document.getElementById('page-home').classList.add('active');
+    document.getElementById('nav-home').classList.add('active');
+  } else {
+    const page = document.getElementById('page-profile-'+id);
+    if(!page.innerHTML){
+      const p = data.find(x=>x.id===id);
+      page.innerHTML = buildProfile(p);
+    }
+    page.classList.add('active');
+    document.getElementById('nav-p'+id).classList.add('active');
+    setTimeout(()=>buildProfileChart(data.find(x=>x.id===id)),50);
+  }
+  window.scrollTo(0,0);
+}
+
+/* INIT */
+buildPeopleGrid();
+buildLeaderboard();
+setTimeout(buildHomeCharts,100);
+</script>
+</body>
+</html>
