@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FinFlow Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #1f2937;
+  --bg2: #111827;
+  --bg3: #374151;
+  --lime: #a3e635;
+  --lime-dim: rgba(163,230,53,0.12);
+  --lime-glow: rgba(163,230,53,0.25);
+  --light: #f3f4f6;
+  --muted: #9ca3af;
+  --border: rgba(255,255,255,0.07);
+  --card: #283447;
+  --card2: #2d3b52;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg2);
+  color: var(--light);
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: 240px;
+  min-width: 240px;
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+}
+
+.sidebar-logo {
+  padding: 26px 24px 22px;
+  border-bottom: 1px solid var(--border);
+}
+.logo-mark {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 20px; font-weight: 900; letter-spacing: -0.5px;
+}
+.logo-icon {
+  width: 36px; height: 36px; background: var(--lime);
+  border-radius: 10px; display: grid; place-items: center;
+  font-size: 18px; color: var(--bg2);
+}
+.logo-sub { font-size: 11px; color: var(--muted); margin-top: 3px; letter-spacing: 0.5px; font-weight: 400; }
+
+.sidebar-section {
+  padding: 20px 16px 8px;
+  font-size: 10px; font-weight: 700; letter-spacing: 1.8px;
+  text-transform: uppercase; color: var(--muted);
+}
+
+.nav-btn {
+  display: flex; align-items: center; gap: 12px;
+  margin: 2px 10px;
+  padding: 11px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px; font-weight: 500;
+  color: var(--muted);
+  border: 1px solid transparent;
+  position: relative;
+  user-select: none;
+}
+.nav-btn:hover { background: var(--bg3); color: var(--light); }
+.nav-btn.active {
+  background: var(--lime-dim);
+  color: var(--lime);
+  border-color: rgba(163,230,53,0.2);
+}
+.nav-btn.active .nav-avatar { box-shadow: 0 0 0 2px var(--lime); }
+
+.nav-avatar {
+  width: 32px; height: 32px; border-radius: 9px;
+  display: grid; place-items: center;
+  font-size: 12px; font-weight: 800;
+  flex-shrink: 0;
+  color: #111;
+}
+.nav-label-wrap { flex: 1; }
+.nav-name { font-size: 13px; font-weight: 600; line-height: 1; margin-bottom: 2px; }
+.nav-role { font-size: 10px; color: var(--muted); font-weight: 400; }
+.nav-btn.active .nav-role { color: rgba(163,230,53,0.6); }
+
+.active-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--lime);
+  flex-shrink: 0;
+}
+
+.sidebar-spacer { flex: 1; }
+.sidebar-footer {
+  padding: 16px;
+  border-top: 1px solid var(--border);
+  font-size: 11px; color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ── MAIN CONTENT ── */
+.main {
+  flex: 1;
+  overflow-y: auto;
+  background: var(--bg);
+  position: relative;
+}
+.main::-webkit-scrollbar { width: 4px; }
+.main::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 99px; }
+
+/* ── TOP BAR ── */
+.topbar {
+  padding: 22px 32px 0;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 50;
+  background: var(--bg);
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.topbar-left { display: flex; align-items: center; gap: 14px; }
+.topbar-avatar {
+  width: 46px; height: 46px; border-radius: 14px;
+  display: grid; place-items: center;
+  font-size: 17px; font-weight: 900; color: #111;
+  flex-shrink: 0;
+}
+.topbar-name { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; line-height: 1; }
+.topbar-meta { font-size: 12px; color: var(--muted); margin-top: 3px; display: flex; gap: 8px; }
+.topbar-chip {
+  background: var(--bg3); border-radius: 999px;
+  padding: 4px 12px; font-size: 12px; color: var(--muted);
+  display: flex; align-items: center; gap: 6px;
+}
+.chip-lime { background: var(--lime-dim); color: var(--lime); border: 1px solid rgba(163,230,53,0.2); }
+.chip-dot { width: 6px; height: 6px; background: var(--lime); border-radius: 50%; animation: blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+/* ── PAGE WRAPPER ── */
+.page { padding: 28px 32px 40px; display: none; }
+.page.active { display: block; animation: fadeUp .35s ease both; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
+
+/* ── STAT CARDS ── */
+.stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 22px; }
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px 20px;
+  position: relative; overflow: hidden;
+  transition: transform .2s, border-color .2s;
+}
+.stat-card:hover { transform: translateY(-2px); border-color: rgba(163,230,53,0.2); }
+.stat-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  border-radius: 0 0 16px 16px;
+}
+.stat-card.lime::after { background: var(--lime); }
+.stat-card.gray::after { background: var(--muted); }
+.stat-card.red::after { background: #f87171; }
+.stat-card.blue::after { background: #60a5fa; }
+
+.stat-icon-bg {
+  width: 38px; height: 38px; border-radius: 10px;
+  display: grid; place-items: center; font-size: 18px;
+  margin-bottom: 12px;
+}
+.stat-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 6px; }
+.stat-val { font-size: 26px; font-weight: 800; font-family: 'JetBrains Mono', monospace; letter-spacing: -1px; }
+.stat-val.lime { color: var(--lime); }
+.stat-sub { font-size: 11px; color: var(--muted); margin-top: 4px; font-family: 'JetBrains Mono', monospace; }
+
+/* ── GRID ── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.grid-13 { display: grid; grid-template-columns: 1.6fr 1fr; gap: 16px; margin-bottom: 16px; }
+
+/* ── PANEL ── */
+.panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px 22px;
+}
+.panel-hd {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 18px;
+}
+.panel-title { font-size: 15px; font-weight: 700; }
+.panel-tag {
+  font-size: 11px; font-family: 'JetBrains Mono', monospace;
+  color: var(--muted); background: var(--bg3);
+  padding: 3px 10px; border-radius: 999px;
+}
+.panel-tag.lime { background: var(--lime-dim); color: var(--lime); }
+
+/* ── BAR CHART (SVG) ── */
+.chart-wrap { position: relative; }
+.chart-canvas { width: 100%; }
+
+/* ── DONUT ── */
+.donut-row { display: flex; align-items: center; gap: 20px; }
+.legend-grid { flex: 1; display: flex; flex-direction: column; gap: 7px; }
+.leg { display: flex; align-items: center; gap: 8px; font-size: 12px; }
+.leg-dot { width: 8px; height: 8px; border-radius: 3px; flex-shrink: 0; }
+.leg-name { flex: 1; color: var(--muted); }
+.leg-pct { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--lime); }
+
+/* ── INCOME SOURCES ── */
+.src-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.src-label { font-size: 13px; min-width: 110px; color: var(--muted); }
+.src-track { flex: 1; height: 7px; background: var(--bg3); border-radius: 999px; overflow: hidden; }
+.src-fill { height: 100%; border-radius: 999px; transition: width .8s cubic-bezier(.34,1.56,.64,1); }
+.src-val { font-family: 'JetBrains Mono', monospace; font-size: 12px; min-width: 70px; text-align: right; }
+
+/* ── COST LIST ── */
+.cost-row { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--border); }
+.cost-row:last-child { border: none; }
+.cost-ic { width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center; font-size: 15px; flex-shrink: 0; }
+.cost-name { flex: 1; font-size: 13px; font-weight: 600; }
+.cost-bar-wrap { width: 80px; height: 5px; background: var(--bg3); border-radius: 999px; overflow: hidden; }
+.cost-bar { height: 100%; background: var(--lime); border-radius: 999px; opacity: .7; }
+.cost-amt { font-family: 'JetBrains Mono', monospace; font-size: 12px; min-width: 62px; text-align: right; }
+
+/* ── SAVING GOAL ── */
+.goal-card {
+  background: linear-gradient(135deg, var(--lime-dim) 0%, rgba(96,165,250,0.06) 100%);
+  border: 1px solid rgba(163,230,53,0.18);
+  border-radius: 16px;
+  padding: 20px 22px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.goal-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+.goal-val { font-size: 38px; font-weight: 900; font-family: 'JetBrains Mono', monospace; color: var(--lime); letter-spacing: -2px; }
+.goal-sub { font-size: 12px; color: var(--muted); }
+
+/* ── OVERVIEW PAGE ── */
+.overview-hero {
+  background: linear-gradient(120deg, var(--bg2) 0%, var(--bg3) 100%);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 28px 32px;
+  margin-bottom: 22px;
+  display: flex; align-items: center; justify-content: space-between;
+  overflow: hidden; position: relative;
+}
+.overview-hero::before {
+  content: '';
+  position: absolute; top: -40px; right: -40px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, var(--lime-glow) 0%, transparent 70%);
+  pointer-events: none;
+}
+.oh-title { font-size: 30px; font-weight: 900; letter-spacing: -1px; margin-bottom: 6px; }
+.oh-sub { font-size: 14px; color: var(--muted); }
+.oh-stat { text-align: right; }
+.oh-stat-val { font-size: 42px; font-weight: 900; font-family: 'JetBrains Mono', monospace; color: var(--lime); letter-spacing: -2px; }
+.oh-stat-label { font-size: 13px; color: var(--muted); }
+
+/* ── PERSON ROW TABLE ── */
+.ptable { width: 100%; border-collapse: separate; border-spacing: 0 6px; }
+.ptable th { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); font-weight: 600; padding: 6px 14px; text-align: left; }
+.ptable td { padding: 12px 14px; font-size: 13px; }
+.ptable tr.tbody td { background: var(--card2); }
+.ptable tr.tbody td:first-child { border-radius: 12px 0 0 12px; }
+.ptable tr.tbody td:last-child { border-radius: 0 12px 12px 0; }
+.ptable .mono { font-family: 'JetBrains Mono', monospace; }
+.ptable .lime { color: var(--lime); }
+.td-name { display: flex; align-items: center; gap: 10px; }
+.td-av { width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; font-size: 11px; font-weight: 800; color: #111; }
+
+/* ── COMPARE CHART ── */
+.compare-wrap { margin-top: 8px; }
+.cmp-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.cmp-name { font-size: 12px; min-width: 90px; color: var(--muted); }
+.cmp-track { flex: 1; height: 24px; background: var(--bg3); border-radius: 8px; overflow: hidden; position: relative; }
+.cmp-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; padding-left: 10px; font-size: 11px; font-family: 'JetBrains Mono', monospace; color: #111; font-weight: 700; transition: width .8s cubic-bezier(.34,1.56,.64,1); }
+
+/* ── LINE CHART FAKE ── */
+.sparkline-area { position: relative; height: 80px; margin-top: 8px; }
+
+/* ── BADGES ── */
+.badge { display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: 11px; font-weight: 600; }
+.badge-lime { background: var(--lime-dim); color: var(--lime); }
+.badge-gray { background: var(--bg3); color: var(--muted); }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-mark">
+      <div class="logo-icon">₣</div>
+      FinFlow
+    </div>
+    <div class="logo-sub">Inkomen Dashboard · 2026</div>
+  </div>
+
+  <div class="sidebar-section">Overzicht</div>
+  <div class="nav-btn active" onclick="goPage('overview')" id="nav-overview">
+    <div class="nav-avatar" style="background:var(--lime);font-size:16px;">⊞</div>
+    <div class="nav-label-wrap">
+      <div class="nav-name">Dashboard</div>
+      <div class="nav-role">Alle personen</div>
+    </div>
+    <div class="active-dot" id="dot-overview"></div>
+  </div>
+
+  <div class="sidebar-section">Personen</div>
+
+  <div class="nav-btn" onclick="goPage('p1')" id="nav-p1">
+    <div class="nav-avatar" style="background:#7c6af7">AA</div>
+    <div class="nav-label-wrap">
+      <div class="nav-name">Armin Arlert</div>
+      <div class="nav-role">Frontend Dev · Zwolle</div>
+    </div>
+    <div class="active-dot" id="dot-p1" style="display:none"></div>
+  </div>
+
+  <div class="nav-btn" onclick="goPage('p2')" id="nav-p2">
+    <div class="nav-avatar" style="background:#f472b6">MR</div>
+    <div class="nav-label-wrap">
+      <div class="nav-name">Mark Reiss</div>
+      <div class="nav-role">UX Designer · Amsterdam</div>
+    </div>
+    <div class="active-dot" id="dot-p2" style="display:none"></div>
+  </div>
+
+  <div class="nav-btn" onclick="goPage('p3')" id="nav-p3">
+    <div class="nav-avatar" style="background:#34d399">ZJ</div>
+    <div class="nav-label-wrap">
+      <div class="nav-name">Zeke Jeager</div>
+      <div class="nav-role">Data Analyst · Utrecht</div>
+    </div>
+    <div class="active-dot" id="dot-p3" style="display:none"></div>
+  </div>
+
+  <div class="nav-btn" onclick="goPage('p4')" id="nav-p4">
+    <div class="nav-avatar" style="background:#fb923c">AB</div>
+    <div class="nav-label-wrap">
+      <div class="nav-name">Alex Braun</div>
+      <div class="nav-role">Marketing Mgr · Rotterdam</div>
+    </div>
+    <div class="active-dot" id="dot-p4" style="display:none"></div>
+  </div>
+
+  <div class="sidebar-spacer"></div>
+  <div class="sidebar-footer">mei 2026 · 4 gebruikers</div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- TOP BAR -->
+  <div class="topbar" id="topbar">
+    <div class="topbar-left">
+      <div class="topbar-avatar" id="tb-avatar" style="background:var(--lime);color:#111;font-size:22px;">⊞</div>
+      <div>
+        <div class="topbar-name" id="tb-name">Dashboard Overzicht</div>
+        <div class="topbar-meta" id="tb-meta">
+          <span>4 personen</span>
+          <span>·</span>
+          <span>Mei 2026</span>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <div class="topbar-chip chip-lime"><span class="chip-dot"></span> Live</div>
+      <div class="topbar-chip">🇳🇱 EUR</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════
+       PAGE: OVERVIEW
+  ═══════════════════════════════ -->
+  <div class="page active" id="page-overview">
+    <div class="overview-hero">
+      <div>
+        <div class="oh-title">Welkom terug 👋</div>
+        <div class="oh-sub">Gecombineerd financieel overzicht van alle 4 personen</div>
+      </div>
+      <div class="oh-stat">
+        <div class="oh-stat-val">€16,800</div>
+        <div class="oh-stat-label">Totaal maandinkomen</div>
+      </div>
+    </div>
+
+    <!-- STAT ROW -->
+    <div class="stat-row">
+      <div class="stat-card lime">
+        <div class="stat-icon-bg" style="background:var(--lime-dim)">💰</div>
+        <div class="stat-label">Totaal Inkomen</div>
+        <div class="stat-val lime">€16,800</div>
+        <div class="stat-sub">4 personen / maand</div>
+      </div>
+      <div class="stat-card red">
+        <div class="stat-icon-bg" style="background:rgba(248,113,113,0.12)">📤</div>
+        <div class="stat-label">Totale Kosten</div>
+        <div class="stat-val" style="color:#f87171">€10,594</div>
+        <div class="stat-sub">gem. €2,649 / p</div>
+      </div>
+      <div class="stat-card blue">
+        <div class="stat-icon-bg" style="background:rgba(96,165,250,0.12)">💎</div>
+        <div class="stat-label">Netto Gespaard</div>
+        <div class="stat-val" style="color:#60a5fa">€6,206</div>
+        <div class="stat-sub">37% spaarrate</div>
+      </div>
+      <div class="stat-card lime">
+        <div class="stat-icon-bg" style="background:var(--lime-dim)">🏦</div>
+        <div class="stat-label">Totaal Spaargeld</div>
+        <div class="stat-val lime">€88,200</div>
+        <div class="stat-sub">gecombineerd</div>
+      </div>
+    </div>
+
+    <!-- COMPARE INCOME BARS + TABLE -->
+    <div class="grid-2">
+      <div class="panel">
+        <div class="panel-hd">
+          <span class="panel-title">Inkomen Vergelijking</span>
+          <span class="panel-tag lime">/ maand</span>
+        </div>
+        <div class="compare-wrap" id="compareIncome"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-hd">
+          <span class="panel-title">Spaargeld Vergelijking</span>
+          <span class="panel-tag">totaal</span>
+        </div>
+        <div class="compare-wrap" id="compareSavings"></div>
+      </div>
+    </div>
+
+    <!-- TABLE -->
+    <div class="panel" style="margin-bottom:16px;">
+      <div class="panel-hd">
+        <span class="panel-title">Personen Overzicht</span>
+        <span class="panel-tag">alle 4</span>
+      </div>
+      <table class="ptable">
+        <thead>
+          <tr>
+            <th>Naam</th>
+            <th>Beroep</th>
+            <th>Stad</th>
+            <th>Inkomen</th>
+            <th>Kosten</th>
+            <th>Netto</th>
+            <th>Spaargeld</th>
+          </tr>
+        </thead>
+        <tbody id="overviewTable"></tbody>
+      </table>
+    </div>
+
+    <!-- DONUT TOTAL COSTS -->
+    <div class="grid-2">
+      <div class="panel">
+        <div class="panel-hd">
+          <span class="panel-title">Totale Kostenverdeling</span>
+        </div>
+        <div class="donut-row" id="overviewDonut"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-hd">
+          <span class="panel-title">Inkomen Bronnen Totaal</span>
+        </div>
+        <div id="overviewSources"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════
+       PERSON PAGES (generated by JS)
+  ═══════════════════════════════ -->
+  <div class="page" id="page-p1"></div>
+  <div class="page" id="page-p2"></div>
+  <div class="page" id="page-p3"></div>
+  <div class="page" id="page-p4"></div>
+
+</main>
+
+<script>
+// ── DATA ──
+const people = [
+  { id:'p1', naam:'Armin Arlert', leeftijd:31, beroep:'Frontend Developer', stad:'Zwolle',
+    inkomen:3850, bronnen:{salaris:3200,freelance:450,investeringen:200},
+    kosten:{huur:1100,boodschappen:320,transport:140,abonnementen:55,overig:480},
+    spaargeld:12450, kleur:'#7c6af7', initials:'AA' },
+  { id:'p2', naam:'Mark Reiss', leeftijd:28, beroep:'UX Designer', stad:'Amsterdam',
+    inkomen:4200, bronnen:{salaris:3600,freelance:400,investeringen:200},
+    kosten:{huur:1350,boodschappen:290,transport:95,abonnementen:75,overig:510},
+    spaargeld:18900, kleur:'#f472b6', initials:'MR' },
+  { id:'p3', naam:'Zeke Jeager', leeftijd:34, beroep:'Data Analyst', stad:'Utrecht',
+    inkomen:3650, bronnen:{salaris:3100,freelance:300,investeringen:250},
+    kosten:{huur:980,boodschappen:340,transport:180,abonnementen:45,overig:395},
+    spaargeld:22100, kleur:'#34d399', initials:'ZJ' },
+  { id:'p4', naam:'Alex Braun', leeftijd:37, beroep:'Marketing Manager', stad:'Rotterdam',
+    inkomen:5100, bronnen:{salaris:4500,freelance:350,investeringen:250},
+    kosten:{huur:1600,boodschappen:380,transport:210,abonnementen:90,overig:620},
+    spaargeld:34750, kleur:'#fb923c', initials:'AB' },
+];
+
+const COST_META = {
+  huur:{icon:'🏠',color:'#7c6af7'},
+  boodschappen:{icon:'🛒',color:'#34d399'},
+  transport:{icon:'🚌',color:'#60a5fa'},
+  abonnementen:{icon:'📱',color:'#f472b6'},
+  overig:{icon:'💳',color:'#fb923c'}
+};
+
+const fmt = v => '€' + v.toLocaleString('nl-NL');
+
+// ── NAVIGATION ──
+let currentPage = 'overview';
+
+function goPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('nav-' + id).classList.add('active');
+
+  document.querySelectorAll('[id^="dot-"]').forEach(d => d.style.display = 'none');
+  document.getElementById('dot-' + id).style.display = 'block';
+
+  currentPage = id;
+  updateTopbar(id);
+}
+
+function updateTopbar(id) {
+  const av = document.getElementById('tb-avatar');
+  const name = document.getElementById('tb-name');
+  const meta = document.getElementById('tb-meta');
+
+  if (id === 'overview') {
+    av.style.background = 'var(--lime)'; av.style.color = '#111'; av.textContent = '⊞';
+    name.textContent = 'Dashboard Overzicht';
+    meta.innerHTML = '<span>4 personen</span><span>·</span><span>Mei 2026</span>';
+  } else {
+    const p = people.find(x => x.id === id);
+    av.style.background = p.kleur; av.style.color = '#111'; av.textContent = p.initials;
+    name.textContent = p.naam;
+    meta.innerHTML = `<span>${p.beroep}</span><span>·</span><span>${p.stad}</span><span>·</span><span>${p.leeftijd} jaar</span>`;
+  }
+}
+
+// ── SVG BAR CHART ──
+function makeSVGBarChart(containerId, person) {
+  const el = document.getElementById(containerId);
+  const cats = ['Jan','Feb','Mrt','Apr','Mei','Jun'];
+  // Simulate 6 months with slight variation around current income & costs
+  const totalKosten = Object.values(person.kosten).reduce((a,b)=>a+b,0);
+  const rand = (base, pct) => Math.round(base * (1 + (Math.random()-0.5)*pct));
+  const inData = cats.map(() => rand(person.inkomen, 0.12));
+  const koData = cats.map(() => rand(totalKosten, 0.1));
+  inData[4] = person.inkomen; koData[4] = totalKosten; // current month exact
+
+  const W = 420, H = 160, PL = 10, PR = 10, PT = 10, PB = 30;
+  const innerW = W - PL - PR;
+  const innerH = H - PT - PB;
+  const maxV = Math.max(...inData, ...koData) * 1.1;
+  const groupW = innerW / cats.length;
+  const bW = groupW * 0.28;
+  const gap = groupW * 0.07;
+
+  let bars = '', labels = '', axisY = '';
+  const steps = 4;
+  for (let i = 0; i <= steps; i++) {
+    const v = Math.round(maxV * i / steps);
+    const y = PT + innerH - (v / maxV) * innerH;
+    axisY += `<line x1="${PL}" y1="${y}" x2="${W - PR}" y2="${y}" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>`;
+    axisY += `<text x="${PL}" y="${y - 3}" fill="#6b7280" font-size="9" font-family="JetBrains Mono">${fmt(v)}</text>`;
+  }
+
+  cats.forEach((cat, i) => {
+    const cx = PL + i * groupW + groupW / 2;
+    const hI = (inData[i] / maxV) * innerH;
+    const hK = (koData[i] / maxV) * innerH;
+    const xI = cx - bW - gap / 2;
+    const xK = cx + gap / 2;
+    const highlight = i === 4;
+    bars += `<rect x="${xI}" y="${PT + innerH - hI}" width="${bW}" height="${hI}" rx="4" fill="${highlight ? '#a3e635' : 'rgba(163,230,53,0.4)'}"/>`;
+    bars += `<rect x="${xK}" y="${PT + innerH - hK}" width="${bW}" height="${hK}" rx="4" fill="${highlight ? '#f87171' : 'rgba(248,113,113,0.35)'}"/>`;
+    labels += `<text x="${cx}" y="${H - 8}" fill="#6b7280" font-size="9" font-family="JetBrains Mono" text-anchor="middle">${cat}</text>`;
+  });
+
+  el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" class="chart-canvas">${axisY}${bars}${labels}</svg>
+  <div style="display:flex;gap:16px;margin-top:10px;">
+    <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);">
+      <div style="width:10px;height:10px;border-radius:3px;background:var(--lime)"></div> Inkomen
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);">
+      <div style="width:10px;height:10px;border-radius:3px;background:#f87171"></div> Kosten
+    </div>
+    <span style="font-size:11px;color:var(--muted);margin-left:auto;">Laatste 6 maanden</span>
+  </div>`;
+}
+
+// ── DONUT SVG ──
+function makeDonut(containerId, kosten, size=110) {
+  const el = document.getElementById(containerId);
+  const keys = Object.keys(kosten);
+  const vals = Object.values(kosten);
+  const total = vals.reduce((a,b)=>a+b,0);
+  const colors = keys.map(k => COST_META[k].color);
+  const R = size/2 - 8, CX = size/2, CY = size/2;
+  let angle = -Math.PI/2, paths = '';
+  vals.forEach((v, i) => {
+    const a = (v/total) * Math.PI * 2;
+    const x1 = CX + R * Math.cos(angle), y1 = CY + R * Math.sin(angle);
+    const x2 = CX + R * Math.cos(angle+a), y2 = CY + R * Math.sin(angle+a);
+    paths += `<path d="M${CX},${CY} L${x1.toFixed(2)},${y1.toFixed(2)} A${R},${R} 0 ${a>Math.PI?1:0},1 ${x2.toFixed(2)},${y2.toFixed(2)} Z" fill="${colors[i]}" opacity="0.88"/>`;
+    angle += a;
+  });
+  const svg = `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" style="flex-shrink:0">
+    <circle cx="${CX}" cy="${CY}" r="${R}" fill="var(--bg3)"/>
+    ${paths}
+    <circle cx="${CX}" cy="${CY}" r="${R*0.52}" fill="var(--card)"/>
+    <text x="${CX}" y="${CY-6}" text-anchor="middle" fill="var(--muted)" font-size="8" font-family="JetBrains Mono">totaal</text>
+    <text x="${CX}" y="${CY+8}" text-anchor="middle" fill="var(--light)" font-size="11" font-family="JetBrains Mono" font-weight="700">${fmt(total)}</text>
+  </svg>`;
+  const legend = `<div class="legend-grid">${keys.map((k,i)=>`
+    <div class="leg">
+      <div class="leg-dot" style="background:${colors[i]}"></div>
+      <span class="leg-name">${k.charAt(0).toUpperCase()+k.slice(1)}</span>
+      <span class="leg-pct">${Math.round(vals[i]/total*100)}%</span>
+    </div>`).join('')}</div>`;
+  el.innerHTML = svg + legend;
+}
+
+// ── BUILD PERSON PAGE ──
+function buildPersonPage(p) {
+  const totalKosten = Object.values(p.kosten).reduce((a,b)=>a+b,0);
+  const netto = p.inkomen - totalKosten;
+  const spaarRate = Math.round(netto/p.inkomen*100);
+  const maxBron = Math.max(...Object.values(p.bronnen));
+  const maxKost = Math.max(...Object.values(p.kosten));
+
+  const pg = document.getElementById('page-' + p.id);
+  pg.innerHTML = `
+    <!-- STAT ROW -->
+    <div class="stat-row">
+      <div class="stat-card lime">
+        <div class="stat-icon-bg" style="background:var(--lime-dim)">💰</div>
+        <div class="stat-label">Maandinkomen</div>
+        <div class="stat-val lime">${fmt(p.inkomen)}</div>
+        <div class="stat-sub">${p.beroep}</div>
+      </div>
+      <div class="stat-card red">
+        <div class="stat-icon-bg" style="background:rgba(248,113,113,0.12)">📤</div>
+        <div class="stat-label">Maandkosten</div>
+        <div class="stat-val" style="color:#f87171">${fmt(totalKosten)}</div>
+        <div class="stat-sub">${Math.round(totalKosten/p.inkomen*100)}% van inkomen</div>
+      </div>
+      <div class="stat-card blue">
+        <div class="stat-icon-bg" style="background:rgba(96,165,250,0.12)">🎯</div>
+        <div class="stat-label">Netto / maand</div>
+        <div class="stat-val" style="color:#60a5fa">${fmt(netto)}</div>
+        <div class="stat-sub">${spaarRate}% spaarrate</div>
+      </div>
+      <div class="stat-card lime">
+        <div class="stat-icon-bg" style="background:var(--lime-dim)">🏦</div>
+        <div class="stat-label">Spaargeld</div>
+        <div class="stat-val lime">${fmt(p.spaargeld)}</div>
+        <div class="stat-sub">opgebouwd</div>
+      </div>
+    </div>
+
+    <!-- BAR CHART + GOAL -->
+    <div class="grid-13" style="margin-bottom:16px;">
+      <div class="panel">
+        <div class="panel-hd">
+          <span class="panel-title">Inkomen vs Kosten</span>
+          <span class="panel-tag lime">6 maanden</span>
+        </div>
+        <div id="chart-${p.id}"></div>
+      </div>
+      <div class="goal-card">
+        <div class="goal-label">Spaargeld</div>
+        <div class="goal-val">${fmt(p.spaargeld)}</div>
+        <div class="goal-sub">Netto per maand</div>
+        <div style="font-size:26px;font-weight:900;font-family:'JetBrains Mono',monospace;color:#60a5fa">${fmt(netto)}</div>
+        <div style="height:6px;background:var(--bg3);border-radius:999px;overflow:hidden;margin-top:8px;">
+          <div style="height:100%;width:${spaarRate}%;background:var(--lime);border-radius:999px;"></div>
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px;">${spaarRate}% spaarrate</div>
+      </div>
+    </div>
+
+    <!-- SOURCES + COSTS + DONUT -->
+    <div class="grid-3">
+      <div class="panel">
+        <div class="panel-hd">
+          <span class="panel-title">Inkomen Bronnen</span>
+        </div>
+        <div>
+          ${Object.entries(p.bronnen).map(([k,v]) => `
+            <div class="src-row">
+              <div class="src-label">${k.charAt(0).toUpperCase()+k.slice(1)}</div>
+              <div class="src-track"><div class="src-fill" style="width:${Math.round(v/maxBron*100)}%;background:var(--lime)"></div></div>
+              <div class="src-val">${fmt(v)}</div>
+            </div>`).join('')}
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-hd">
+          <span class="panel-title">Kostenposten</span>
+        </div>
+        <div>
+          ${Object.entries(p.kosten).map(([k,v]) => `
+            <div class="cost-row">
+              <div class="cost-ic" style="background:${COST_META[k].color}22">${COST_META[k].icon}</div>
+              <div class="cost-name">${k.charAt(0).toUpperCase()+k.slice(1)}</div>
+              <div class="cost-bar-wrap"><div class="cost-bar" style="width:${Math.round(v/maxKost*100)}%;background:${COST_META[k].color}"></div></div>
+              <div class="cost-amt">${fmt(v)}</div>
+            </div>`).join('')}
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-hd">
+          <span class="panel-title">Kostenverdeling</span>
+        </div>
+        <div class="donut-row" id="donut-${p.id}"></div>
+      </div>
+    </div>
+  `;
+}
+
+// ── OVERVIEW CHARTS ──
+function buildOverview() {
+  const maxInc = Math.max(...people.map(p=>p.inkomen));
+  const maxSav = Math.max(...people.map(p=>p.spaargeld));
+
+  // Compare income bars
+  document.getElementById('compareIncome').innerHTML = people.map(p => `
+    <div class="cmp-row">
+      <div class="cmp-name" style="color:${p.kleur}">${p.naam.split(' ')[0]}</div>
+      <div class="cmp-track">
+        <div class="cmp-fill" style="width:${Math.round(p.inkomen/maxInc*100)}%;background:${p.kleur}">${fmt(p.inkomen)}</div>
+      </div>
+    </div>`).join('');
+
+  // Compare savings bars
+  document.getElementById('compareSavings').innerHTML = people.map(p => `
+    <div class="cmp-row">
+      <div class="cmp-name" style="color:${p.kleur}">${p.naam.split(' ')[0]}</div>
+      <div class="cmp-track">
+        <div class="cmp-fill" style="width:${Math.round(p.spaargeld/maxSav*100)}%;background:${p.kleur}">${fmt(p.spaargeld)}</div>
+      </div>
+    </div>`).join('');
+
+  // Table
+  const tbody = document.getElementById('overviewTable');
+  tbody.innerHTML = people.map(p => {
+    const totKost = Object.values(p.kosten).reduce((a,b)=>a+b,0);
+    const netto = p.inkomen - totKost;
+    return `<tr class="tbody">
+      <td><div class="td-name"><div class="td-av" style="background:${p.kleur}">${p.initials}</div>${p.naam}</div></td>
+      <td style="color:var(--muted)">${p.beroep}</td>
+      <td style="color:var(--muted)">${p.stad}</td>
+      <td class="mono lime">${fmt(p.inkomen)}</td>
+      <td class="mono" style="color:#f87171">${fmt(totKost)}</td>
+      <td class="mono" style="color:#60a5fa">${fmt(netto)}</td>
+      <td class="mono">${fmt(p.spaargeld)}</td>
+    </tr>`;
+  }).join('');
+
+  // Combined donut
+  const combined = { huur:0, boodschappen:0, transport:0, abonnementen:0, overig:0 };
+  people.forEach(p => Object.keys(combined).forEach(k => combined[k] += p.kosten[k]));
+  makeDonut('overviewDonut', combined, 120);
+
+  // Sources
+  const bronnen = { salaris:0, freelance:0, investeringen:0 };
+  people.forEach(p => Object.keys(bronnen).forEach(k => bronnen[k] += p.bronnen[k]));
+  const maxB = Math.max(...Object.values(bronnen));
+  const bColors = { salaris:'var(--lime)', freelance:'#60a5fa', investeringen:'#fb923c' };
+  document.getElementById('overviewSources').innerHTML = Object.entries(bronnen).map(([k,v]) => `
+    <div class="src-row">
+      <div class="src-label">${k.charAt(0).toUpperCase()+k.slice(1)}</div>
+      <div class="src-track"><div class="src-fill" style="width:${Math.round(v/maxB*100)}%;background:${bColors[k]}"></div></div>
+      <div class="src-val">${fmt(v)}</div>
+    </div>`).join('');
+}
+
+// ── INIT ──
+people.forEach(p => {
+  buildPersonPage(p);
+});
+buildOverview();
+
+// Render charts after DOM is ready (they need elements to exist)
+setTimeout(() => {
+  people.forEach(p => {
+    makeSVGBarChart('chart-' + p.id, p);
+    makeDonut('donut-' + p.id, p.kosten, 120);
+  });
+}, 50);
+</script>
+</body>
+</html>

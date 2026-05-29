@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FinFlow — Inkomen Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0c0c10;
+      --surface: #141418;
+      --surface2: #1c1c22;
+      --border: rgba(255,255,255,0.07);
+      --text: #f0f0f5;
+      --muted: #7070a0;
+      --accent1: #7c6af7;
+      --accent2: #00e5b3;
+      --accent3: #ff6b8a;
+      --accent4: #ffa940;
+      --glow1: rgba(124,106,247,0.15);
+      --glow2: rgba(0,229,179,0.12);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Syne', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      overflow-x: hidden;
+    }
+
+    /* === SIDEBAR === */
+    .sidebar {
+      width: 220px;
+      min-height: 100vh;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding: 28px 16px;
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 36px;
+      padding: 0 8px;
+    }
+    .logo-icon {
+      width: 32px; height: 32px;
+      background: var(--accent1);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+
+    .nav-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      color: var(--muted);
+      text-transform: uppercase;
+      padding: 0 8px;
+      margin-bottom: 8px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-bottom: 2px;
+      text-decoration: none;
+    }
+    .nav-item:hover { color: var(--text); background: var(--surface2); }
+    .nav-item.active { color: var(--text); background: rgba(124,106,247,0.15); }
+    .nav-item .nav-icon { font-size: 16px; width: 20px; text-align: center; }
+
+    .sidebar-spacer { flex: 1; }
+
+    .sidebar-footer {
+      padding: 12px;
+      background: var(--surface2);
+      border-radius: 12px;
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    /* === MAIN === */
+    .main {
+      margin-left: 220px;
+      flex: 1;
+      padding: 32px;
+      max-width: calc(100vw - 220px);
+    }
+
+    /* === TOPBAR === */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+    .topbar-left h1 {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .topbar-left p {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 2px;
+    font-family: 'Anton', sans-serif;
+    }
+    .topbar-right { display: flex; align-items: center; gap: 12px; }
+    .badge-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .badge-pill .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent2);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* === STAT CARDS === */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .stat-card:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.14); }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      border-radius: 16px 16px 0 0;
+    }
+    .stat-card.c1::before { background: var(--accent1); }
+    .stat-card.c2::before { background: var(--accent2); }
+    .stat-card.c3::before { background: var(--accent3); }
+    .stat-card.c4::before { background: var(--accent4); }
+
+    .stat-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .stat-value {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    font-family: 'Anton', sans-serif;
+      margin-bottom: 6px;
+    }
+    .stat-sub {
+      font-size: 12px;
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+    }
+    .stat-sub span { color: var(--accent2); }
+    .stat-icon {
+      position: absolute;
+      top: 18px; right: 18px;
+      font-size: 22px;
+      opacity: 0.35;
+    }
+
+    /* === GRID LAYOUT === */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    /* === PANEL === */
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+    }
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+    .panel-title {
+      font-size: 15px;
+      font-weight: 700;
+    }
+    .panel-tag {
+      font-size: 11px;
+    font-family: 'Anton', sans-serif;
+      color: var(--muted);
+      background: var(--surface2);
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+
+    /* === PERSON CARDS === */
+    .person-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .person-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      cursor: pointer;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .person-card:hover, .person-card.selected {
+      border-color: var(--accent1);
+      background: var(--surface2);
+    }
+    .person-card.selected::after {
+      content: '✓';
+      position: absolute;
+      top: 12px; right: 12px;
+      width: 20px; height: 20px;
+      background: var(--accent1);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px;
+      display: grid; place-items: center;
+    }
+    .avatar {
+      width: 42px; height: 42px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: #000;
+    }
+    .person-name { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+    .person-role { font-size: 11px; color: var(--muted); margin-bottom: 10px; }
+    .person-income {
+      font-size: 18px;
+      font-weight: 800;
+    font-family: 'Anton', sans-serif;
+    }
+    .person-income-label { font-size: 10px; color: var(--muted); }
+
+    /* === BAR CHART === */
+    .bar-chart { display: flex; align-items: flex-end; gap: 10px; height: 160px; }
+    .bar-group { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; }
+    .bar-wrap {
+      width: 100%; display: flex; align-items: flex-end; gap: 3px; height: 140px;
+    }
+    .bar {
+      flex: 1;
+      border-radius: 6px 6px 0 0;
+      transition: height 0.5s cubic-bezier(.34,1.56,.64,1);
+      min-height: 4px;
+      position: relative;
+    }
+    .bar:hover::after {
+      content: attr(data-val);
+      position: absolute;
+      top: -26px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2px 7px;
+      font-size: 11px;
+    font-family: 'Anton', sans-serif;
+      white-space: nowrap;
+      z-index: 10;
+    }
+    .bar-label { font-size: 11px; color: var(--muted);     font-family: 'Anton', sans-serif;
+}
+
+    /* === DONUT CHART === */
+    .donut-wrap { display: flex; align-items: center; gap: 20px; }
+    .donut-svg { flex-shrink: 0; }
+    .donut-legend { flex: 1; }
+    .legend-item {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 8px; font-size: 13px;
+    }
+    .legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .legend-val { margin-left: auto;     font-family: 'Anton', sans-serif;
+font-size: 12px; color: var(--muted); }
+
+    /* === SAVINGS BAR === */
+    .savings-item {
+      margin-bottom: 14px;
+    }
+    .savings-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+    .savings-name { font-size: 13px; font-weight: 600; }
+    .savings-amount { font-size: 12px;     font-family: 'Anton', sans-serif;
+ color: var(--muted); }
+    .savings-track { height: 6px; background: var(--surface2); border-radius: 999px; overflow: hidden; }
+    .savings-fill { height: 100%; border-radius: 999px; transition: width 0.8s cubic-bezier(.34,1.56,.64,1); }
+
+    /* === COST BREAKDOWN === */
+    .cost-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .cost-row:last-child { border-bottom: none; }
+    .cost-icon { width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; font-size: 14px; }
+    .cost-name { font-size: 13px; font-weight: 600; flex: 1; }
+    .cost-amount {     font-family: 'Anton', sans-serif;
+ font-size: 13px; }
+    .cost-pct { font-size: 11px; color: var(--muted); width: 36px; text-align: right; }
+
+    /* === INCOME SOURCES === */
+    .source-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .source-label { font-size: 13px; flex: 1; color: var(--muted); }
+    .source-bar-wrap { width: 120px; height: 6px; background: var(--surface2); border-radius: 999px; overflow: hidden; }
+    .source-bar { height: 100%; border-radius: 999px; }
+    .source-val {     font-family: 'Anton', sans-serif;
+ font-size: 12px; width: 60px; text-align: right; }
+
+    /* === ANIM === */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fadein { animation: fadeUp 0.5s ease both; }
+    .fadein:nth-child(1) { animation-delay: 0.05s; }
+    .fadein:nth-child(2) { animation-delay: 0.1s; }
+    .fadein:nth-child(3) { animation-delay: 0.15s; }
+    .fadein:nth-child(4) { animation-delay: 0.2s; }
+
+    /* === NET BALANCE CARD === */
+    .net-card {
+      background: linear-gradient(135deg, rgba(124,106,247,0.18) 0%, rgba(0,229,179,0.08) 100%);
+      border: 1px solid rgba(124,106,247,0.25);
+      border-radius: 16px;
+      padding: 22px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .net-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+    .net-value { font-size: 32px; font-weight: 800;     font-family: 'Anton', sans-serif;
+color: var(--accent2); }
+
+    /* === SCROLLBAR === */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 99px; }
+  </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="logo">
+    <div class="logo-icon">💸</div>
+    FinFlow
+  </div>
+
+  <div class="nav-label">Menu</div>
+  <a class="nav-item active"><span class="nav-icon">⊞</span> Dashboard</a>
+  <a class="nav-item"><span class="nav-icon">◈</span> Overzicht</a>
+  <a class="nav-item"><span class="nav-icon">⬡</span> Analytics</a>
+  <a class="nav-item"><span class="nav-icon">☰</span> Personen</a>
+  <a class="nav-item"><span class="nav-icon">◎</span> Rapporten</a>
+
+  <div class="sidebar-spacer"></div>
+
+  <div class="nav-label" style="margin-top:20px;">Overig</div>
+  <a class="nav-item"><span class="nav-icon">⚙</span> Instellingen</a>
+
+  <div class="sidebar-footer" style="margin-top:16px;">
+    <span style="font-size:11px;">mei 2026 · 4 personen</span>
+  </div>
+</aside>
+
+<!-- MAIN --> 
+<main class="main">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <h1>Inkomen Dashboard</h1>
+      <p>Financieel overzicht · Mei 2026</p>
+    </div>
+    <div class="topbar-right">
+      <div class="badge-pill"><span class="dot"></span> Live data</div>
+      <div class="badge-pill">🇳🇱 EUR</div>
+    </div>
+  </div>
+
+  <!-- PERSON SELECTOR -->
+  <div class="person-cards" id="personCards"></div>
+
+  <!-- STAT CARDS -->
+  <div class="stat-grid" id="statGrid"></div>
+
+  <!-- ROW 1: Bar chart + Income Sources -->
+  <div class="grid-2" style="margin-bottom:20px;">
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">Inkomen vs Kosten</span>
+        <span class="panel-tag" id="chartLabel">alle personen</span>
+      </div>
+      <div class="bar-chart" id="barChart"></div>
+      <div style="display:flex;gap:16px;margin-top:14px;">
+        <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);">
+          <div style="width:10px;height:10px;border-radius:3px;background:var(--accent1)"></div> Inkomen
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);">
+          <div style="width:10px;height:10px;border-radius:3px;background:var(--accent3)"></div> Kosten
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">Inkomen Bronnen</span>
+        <span class="panel-tag" id="sourcesLabel">totaal</span>
+      </div>
+      <div id="incomeSources"></div>
+    </div>
+  </div>
+
+  <!-- ROW 2: Cost breakdown + Savings + Donut -->
+  <div class="grid-3">
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">Kosten Breakdown</span>
+      </div>
+      <div id="costBreakdown"></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">Spaargeld</span>
+        <span class="panel-tag" id="savingsLabel">totaal</span>
+      </div>
+      <div id="savingsBars"></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">Kosten Verdeling</span>
+      </div>
+      <div class="donut-wrap" id="donutWrap"></div>
+    </div>
+  </div>
+
+  <!-- NET BALANCE -->
+  <div class="net-card" id="netCard">
+    <div>
+      <div class="net-label">Netto Besparing / maand</div>
+      <div class="net-value" id="netValue">—</div>
+    </div>
+    <div style="text-align:right;">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Totaal spaargeld</div>
+      <div style="font-size:22px;font-weight:800;font-family:'DM Mono',monospace;" id="totalSavings">—</div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+const data = [
+  {
+    id: 1, naam: "Armin Arlert", leeftijd: 31, beroep: "Frontend Dev", stad: "Zwolle",
+    maandelijks_inkomen: 3850, valuta: "EUR",
+    inkomen_bronnen: { salaris: 3200, freelance: 450, investeringen: 200 },
+    maandelijkse_kosten: { huur: 1100, boodschappen: 320, transport: 140, abonnementen: 55, overig: 480 },
+    spaargeld: 12450, avatar_kleur: "#7c6af7"
+  },
+  {
+    id: 2, naam: "Mark Reiss", leeftijd: 28, beroep: "UX Designer", stad: "Amsterdam",
+    maandelijks_inkomen: 4200, valuta: "EUR",
+    inkomen_bronnen: { salaris: 3600, freelance: 400, investeringen: 200 },
+    maandelijkse_kosten: { huur: 1350, boodschappen: 290, transport: 95, abonnementen: 75, overig: 510 },
+    spaargeld: 18900, avatar_kleur: "#ff6b8a"
+  },
+  {
+    id: 3, naam: "Zeke Jeager", leeftijd: 34, beroep: "Data Analyst", stad: "Utrecht",
+    maandelijks_inkomen: 3650, valuta: "EUR",
+    inkomen_bronnen: { salaris: 3100, freelance: 300, investeringen: 250 },
+    maandelijkse_kosten: { huur: 980, boodschappen: 340, transport: 180, abonnementen: 45, overig: 395 },
+    spaargeld: 22100, avatar_kleur: "#00e5b3"
+  },
+  {
+    id: 4, naam: "Alex Braun", leeftijd: 37, beroep: "Marketing Mgr", stad: "Rotterdam",
+    maandelijks_inkomen: 5100, valuta: "EUR",
+    inkomen_bronnen: { salaris: 4500, freelance: 350, investeringen: 250 },
+    maandelijkse_kosten: { huur: 1600, boodschappen: 380, transport: 210, abonnementen: 90, overig: 620 },
+    spaargeld: 34750, avatar_kleur: "#ffa940"
+  }
+];
+
+const COST_ICONS = { huur: ['🏠','rgba(124,106,247,0.15)'], boodschappen: ['🛒','rgba(0,229,179,0.12)'], transport: ['🚌','rgba(255,107,138,0.12)'], abonnementen: ['📱','rgba(255,169,64,0.12)'], overig: ['💳','rgba(150,150,200,0.1)'] };
+const fmt = v => '€' + v.toLocaleString('nl-NL');
+
+let selectedId = null; // null = all
+
+function initPersonCards() {
+  const el = document.getElementById('personCards');
+  el.innerHTML = data.map(p => `
+    <div class="person-card fadein ${selectedId === p.id ? 'selected' : ''}" onclick="selectPerson(${p.id})">
+      <div class="avatar" style="background:${p.avatar_kleur}">${p.naam.split(' ').map(n=>n[0]).join('')}</div>
+      <div class="person-name">${p.naam}</div>
+      <div class="person-role">${p.beroep} · ${p.stad}</div>
+      <div class="person-income">${fmt(p.maandelijks_inkomen)}</div>
+      <div class="person-income-label">/ maand</div>
+    </div>
+  `).join('');
+}
+
+function getActive() {
+  return selectedId ? data.filter(p => p.id === selectedId) : data;
+}
+
+function sumKosten(persons) {
+  const keys = ['huur','boodschappen','transport','abonnementen','overig'];
+  const result = {};
+  keys.forEach(k => result[k] = persons.reduce((s,p) => s + p.maandelijkse_kosten[k], 0));
+  return result;
+}
+
+function sumBronnen(persons) {
+  return {
+    salaris: persons.reduce((s,p) => s + p.inkomen_bronnen.salaris, 0),
+    freelance: persons.reduce((s,p) => s + p.inkomen_bronnen.freelance, 0),
+    investeringen: persons.reduce((s,p) => s + p.inkomen_bronnen.investeringen, 0),
+  };
+}
+
+function renderStats() {
+  const active = getActive();
+  const totalIncome = active.reduce((s,p) => s + p.maandelijks_inkomen, 0);
+  const kosten = sumKosten(active);
+  const totalKosten = Object.values(kosten).reduce((a,b) => a+b, 0);
+  const totalSavings = active.reduce((s,p) => s + p.spaargeld, 0);
+  const netto = totalIncome - totalKosten;
+
+  const cards = [
+    { label: 'Totaal Inkomen', val: fmt(totalIncome), sub: `${active.length} persoon${active.length>1?'en':''}`, cls: 'c1', icon: '💰' },
+    { label: 'Totale Kosten', val: fmt(totalKosten), sub: `gem. ${fmt(Math.round(totalKosten/active.length))}/p`, cls: 'c3', icon: '📤' },
+    { label: 'Netto Bespaard', val: fmt(netto), sub: `${Math.round(netto/totalIncome*100)}% spaarrate`, cls: 'c2', icon: '🎯' },
+    { label: 'Spaargeld', val: fmt(totalSavings), sub: active.length>1?`${active.length} personen`:`1 persoon`, cls: 'c4', icon: '🏦' },
+  ];
+
+  document.getElementById('statGrid').innerHTML = cards.map(c => `
+    <div class="stat-card ${c.cls} fadein">
+      <span class="stat-icon">${c.icon}</span>
+      <div class="stat-label">${c.label}</div>
+      <div class="stat-value">${c.val}</div>
+      <div class="stat-sub"><span>${c.sub}</span></div>
+    </div>
+  `).join('');
+
+  document.getElementById('netValue').textContent = fmt(netto);
+  document.getElementById('totalSavings').textContent = fmt(totalSavings);
+}
+
+function renderBarChart() {
+  const active = getActive();
+  document.getElementById('chartLabel').textContent = selectedId ? data.find(p=>p.id===selectedId).naam : 'alle personen';
+
+  const maxVal = Math.max(...active.map(p => p.maandelijks_inkomen));
+  const maxH = 130;
+
+  const bars = active.map(p => {
+    const totalKosten = Object.values(p.maandelijkse_kosten).reduce((a,b)=>a+b,0);
+    const hI = Math.round((p.maandelijks_inkomen / maxVal) * maxH);
+    const hK = Math.round((totalKosten / maxVal) * maxH);
+    return `
+      <div class="bar-group">
+        <div class="bar-wrap">
+          <div class="bar" style="background:var(--accent1);height:${hI}px" data-val="${fmt(p.maandelijks_inkomen)}"></div>
+          <div class="bar" style="background:var(--accent3);height:${hK}px;opacity:0.8" data-val="${fmt(totalKosten)}"></div>
+        </div>
+        <div class="bar-label">${p.naam.split(' ')[0]}</div>
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('barChart').innerHTML = bars;
+}
+
+function renderIncomeSources() {
+  const active = getActive();
+  const bronnen = sumBronnen(active);
+  const total = Object.values(bronnen).reduce((a,b)=>a+b,0);
+  const colors = { salaris: 'var(--accent1)', freelance: 'var(--accent2)', investeringen: 'var(--accent4)' };
+  const labels = { salaris: 'Salaris', freelance: 'Freelance', investeringen: 'Investeringen' };
+
+  document.getElementById('sourcesLabel').textContent = selectedId ? data.find(p=>p.id===selectedId).naam : 'totaal';
+
+  document.getElementById('incomeSources').innerHTML = Object.entries(bronnen).map(([k, v]) => `
+    <div class="source-row">
+      <div class="source-label">${labels[k]}</div>
+      <div class="source-bar-wrap">
+        <div class="source-bar" style="width:${Math.round(v/total*100)}%;background:${colors[k]}"></div>
+      </div>
+      <div class="source-val">${fmt(v)}</div>
+    </div>
+  `).join('');
+}
+
+function renderCostBreakdown() {
+  const active = getActive();
+  const kosten = sumKosten(active);
+  const total = Object.values(kosten).reduce((a,b)=>a+b,0);
+
+  document.getElementById('costBreakdown').innerHTML = Object.entries(kosten).map(([k, v]) => {
+    const [icon, bg] = COST_ICONS[k];
+    const pct = Math.round(v/total*100);
+    return `
+      <div class="cost-row">
+        <div class="cost-icon" style="background:${bg}">${icon}</div>
+        <div class="cost-name">${k.charAt(0).toUpperCase()+k.slice(1)}</div>
+        <div class="cost-amount">${fmt(v)}</div>
+        <div class="cost-pct" style="color:var(--muted)">${pct}%</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderSavings() {
+  const active = getActive();
+  const maxS = Math.max(...data.map(p=>p.spaargeld));
+  document.getElementById('savingsLabel').textContent = selectedId ? data.find(p=>p.id===selectedId).naam : 'iedereen';
+
+  document.getElementById('savingsBars').innerHTML = active.map(p => `
+    <div class="savings-item">
+      <div class="savings-header">
+        <span class="savings-name">${p.naam.split(' ')[0]}</span>
+        <span class="savings-amount">${fmt(p.spaargeld)}</span>
+      </div>
+      <div class="savings-track">
+        <div class="savings-fill" style="width:${Math.round(p.spaargeld/maxS*100)}%;background:${p.avatar_kleur}"></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderDonut() {
+  const active = getActive();
+  const kosten = sumKosten(active);
+  const total = Object.values(kosten).reduce((a,b)=>a+b,0);
+  const colors = Object.values(COST_ICONS).map(([,, c], i) => [
+    'var(--accent1)', 'var(--accent2)', 'var(--accent3)', 'var(--accent4)', 'var(--muted)'
+  ][i]);
+  const catColors = ['#7c6af7','#00e5b3','#ff6b8a','#ffa940','#7070a0'];
+  const keys = Object.keys(kosten);
+  const vals = Object.values(kosten);
+
+  const R = 60, CX = 70, CY = 70;
+  let startAngle = -Math.PI / 2;
+  let paths = '';
+
+  vals.forEach((v, i) => {
+    const angle = (v / total) * Math.PI * 2;
+    const endAngle = startAngle + angle;
+    const x1 = CX + R * Math.cos(startAngle);
+    const y1 = CY + R * Math.sin(startAngle);
+    const x2 = CX + R * Math.cos(endAngle);
+    const y2 = CY + R * Math.sin(endAngle);
+    const large = angle > Math.PI ? 1 : 0;
+    paths += `<path d="M${CX},${CY} L${x1},${y1} A${R},${R} 0 ${large},1 ${x2},${y2} Z" fill="${catColors[i]}" opacity="0.85"/>`;
+    startAngle = endAngle;
+  });
+
+  const svg = `<svg class="donut-svg" width="140" height="140" viewBox="0 0 140 140">
+    <circle cx="70" cy="70" r="60" fill="var(--surface2)"/>
+    ${paths}
+    <circle cx="70" cy="70" r="38" fill="var(--surface)"/>
+    <text x="70" y="67" text-anchor="middle" fill="var(--muted)" font-size="10" font-family="DM Mono">totaal</text>
+    <text x="70" y="82" text-anchor="middle" fill="var(--text)" font-size="13" font-family="DM Mono" font-weight="bold">${fmt(total)}</text>
+  </svg>`;
+
+  const legend = keys.map((k, i) => `
+    <div class="legend-item">
+      <div class="legend-dot" style="background:${catColors[i]}"></div>
+      <span style="font-size:12px;color:var(--muted)">${k.charAt(0).toUpperCase()+k.slice(1)}</span>
+      <span class="legend-val">${Math.round(vals[i]/total*100)}%</span>
+    </div>
+  `).join('');
+
+  document.getElementById('donutWrap').innerHTML = svg + `<div class="donut-legend">${legend}</div>`;
+}
+
+function render() {
+  initPersonCards();
+  renderStats();
+  renderBarChart();
+  renderIncomeSources();
+  renderCostBreakdown();
+  renderSavings();
+  renderDonut();
+}
+
+function selectPerson(id) {
+  selectedId = selectedId === id ? null : id;
+  render();
+}
+
+render();
+</script>
+</body>
+</html>
