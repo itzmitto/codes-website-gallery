@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FinDash &ndash; Nina Brink</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>FinDash &ndash; Sara Assen</title>
+  <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -35,7 +35,7 @@
       <span class="person-dot" style="background:#22C55E"></span>
       Lars Kuiper
     </a>
-    <a href="sara.html" class="nav-item">
+    <a href="sara.html" class="nav-item active">
       <span class="person-dot" style="background:#38BDF8"></span>
       Sara Assen
     </a>
@@ -43,7 +43,7 @@
       <span class="person-dot" style="background:#F59E0B"></span>
       Max Velden
     </a>
-    <a href="nina.html" class="nav-item active">
+    <a href="nina.html" class="nav-item">
       <span class="person-dot" style="background:#F472B6"></span>
       Nina Brink
     </a>
@@ -59,8 +59,8 @@
 
   <div class="topbar">
     <div>
-      <h1 class="page-title">Nina Brink</h1>
-      <p class="page-subtitle">Data Analyst &mdash; Mei 2026</p>
+      <h1 class="page-title">Sara Assen</h1>
+      <p class="page-subtitle">UX Designer &mdash; Mei 2026</p>
     </div>
     <a href="index.html" style="text-decoration:none;">
       <span class="topbar-badge">
@@ -71,14 +71,14 @@
 
   <!-- Hero -->
   <div class="person-hero">
-    <div class="hero-avatar av4">NB</div>
+    <div class="hero-avatar av2">SA</div>
     <div class="hero-info">
-      <div class="hero-name">Nina Brink</div>
-      <div class="hero-role">Data Analyst</div>
+      <div class="hero-name">Sara Assen</div>
+      <div class="hero-role">UX Designer</div>
     </div>
     <div class="hero-badge">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-      Spaarquote 37.3%
+      Spaarquote 28.1%
     </div>
   </div>
 
@@ -89,7 +89,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
       </div>
       <span class="kpi-label">Salaris</span>
-      <span class="kpi-value">&euro; 3,200</span>
+      <span class="kpi-value">&euro; 3,600</span>
       <span class="kpi-sub">bruto maand</span>
     </div>
     <div class="kpi-card">
@@ -97,23 +97,23 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/></svg>
       </div>
       <span class="kpi-label">Totaal uitgaven</span>
-      <span class="kpi-value">&euro; 2,005</span>
-      <span class="kpi-sub down">62.7% van salaris</span>
+      <span class="kpi-value">&euro; 2,590</span>
+      <span class="kpi-sub down">71.9% van salaris</span>
     </div>
     <div class="kpi-card">
       <div class="kpi-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
       </div>
       <span class="kpi-label">Netto over</span>
-      <span class="kpi-value">&euro; 1,195</span>
-      <span class="kpi-sub up">+37.3% gespaard</span>
+      <span class="kpi-value">&euro; 1,010</span>
+      <span class="kpi-sub up">+28.1% gespaard</span>
     </div>
     <div class="kpi-card">
       <div class="kpi-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
       </div>
       <span class="kpi-label">Grootste post</span>
-      <span class="kpi-value">&euro; 800</span>
+      <span class="kpi-value">&euro; 950</span>
       <span class="kpi-sub">Huur</span>
     </div>
   </section>
@@ -128,7 +128,7 @@
         </div>
       </div>
       <div style="position:relative;height:200px;">
-        <canvas id="chartTrend" role="img" aria-label="Netto trend Nina Brink"></canvas>
+        <canvas id="chartTrend" role="img" aria-label="Netto trend Sara Assen"></canvas>
       </div>
     </div>
 
@@ -138,7 +138,7 @@
       </div>
       <div class="legend-col" id="donutLegend"></div>
       <div style="position:relative;height:150px;">
-        <canvas id="chartDonut" role="img" aria-label="Verdeling uitgaven Nina Brink"></canvas>
+        <canvas id="chartDonut" role="img" aria-label="Verdeling uitgaven Sara Assen"></canvas>
       </div>
     </div>
   </div>
@@ -163,11 +163,11 @@
             <td><span class="cat-badge cat-huur">Huur</span></td>
             <td>
               <div class="pct-bar">
-                <div class="pct-bar-inner"><div class="pct-bar-fill" style="width:40%;background:#0F172A"></div></div>
-                <span class="pct-val">40%</span>
+                <div class="pct-bar-inner"><div class="pct-bar-fill" style="width:37%;background:#0F172A"></div></div>
+                <span class="pct-val">37%</span>
               </div>
             </td>
-            <td>&euro; 800</td>
+            <td>&euro; 950</td>
           </tr>
           <tr>
             <td><span class="cat-badge cat-eten">Eten</span></td>
@@ -177,7 +177,7 @@
                 <span class="pct-val">15%</span>
               </div>
             </td>
-            <td>&euro; 310</td>
+            <td>&euro; 380</td>
           </tr>
           <tr>
             <td><span class="cat-badge cat-abo">Abonnementen</span></td>
@@ -187,32 +187,32 @@
                 <span class="pct-val">4%</span>
               </div>
             </td>
-            <td>&euro; 75</td>
+            <td>&euro; 110</td>
           </tr>
           <tr>
             <td><span class="cat-badge cat-trans">Transport</span></td>
             <td>
               <div class="pct-bar">
-                <div class="pct-bar-inner"><div class="pct-bar-fill" style="width:24%;background:#F59E0B"></div></div>
-                <span class="pct-val">24%</span>
+                <div class="pct-bar-inner"><div class="pct-bar-fill" style="width:28%;background:#F59E0B"></div></div>
+                <span class="pct-val">28%</span>
               </div>
             </td>
-            <td>&euro; 490</td>
+            <td>&euro; 720</td>
           </tr>
           <tr>
             <td><span class="cat-badge cat-overig">Overig</span></td>
             <td>
               <div class="pct-bar">
-                <div class="pct-bar-inner"><div class="pct-bar-fill" style="width:16%;background:#94A3B8"></div></div>
-                <span class="pct-val">16%</span>
+                <div class="pct-bar-inner"><div class="pct-bar-fill" style="width:17%;background:#94A3B8"></div></div>
+                <span class="pct-val">17%</span>
               </div>
             </td>
-            <td>&euro; 330</td>
+            <td>&euro; 430</td>
           </tr>
         <tr style="border-top:2px solid var(--border);">
           <td style="font-weight:700;color:var(--text-primary);">Totaal</td>
           <td></td>
-          <td style="font-weight:800;font-size:14px;">&euro; 2,005</td>
+          <td style="font-weight:800;font-size:14px;">&euro; 2,590</td>
         </tr>
       </tbody>
     </table>
@@ -223,8 +223,8 @@
 <script>
   const CATS = ['Huur', 'Eten', 'Abonnementen', 'Transport', 'Overig'];
   const CAT_COLS = ['#0F172A', '#A3E635', '#38BDF8', '#F59E0B', '#94A3B8'];
-  const expData = [800, 310, 75, 490, 330];
-  const trendData = [980, 1050, 1090, 1020, 1150, 1195];
+  const expData = [950, 380, 110, 720, 430];
+  const trendData = [890, 920, 980, 950, 1020, 1010];
   const MUTED = '#94A3B8';
   const GRID = 'rgba(15,23,42,0.06)';
 
