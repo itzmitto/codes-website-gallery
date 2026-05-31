@@ -2,12 +2,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;         
+    height: 100vh;
+}
+
+:root {
+    --shadow: grey;
+    --bg: black;
 }
 
 .card {
     background-color: lightblue;
-    height: 100px;
-    width: 100px;
+    height: 400px;
+    width: 800px;
     padding: 100px;
+    box-shadow: 0 1px 4px var(--shadow);
+    border: 1px solid var(--shadow);
+    border-radius:4px;
 }
