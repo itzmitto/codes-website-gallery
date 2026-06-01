@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FinDash - Overzicht</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#1a2e05" stroke-width="2.5"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 5-5"/></svg>
+    </div>
+    <span class="logo-text">Fin<span>Dash</span></span>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-label">Menu</div>
+    <a href="index.html" class="nav-item active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Dashboard
+    </a>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-label">Personen</div>
+    <a href="lars.html" class="nav-item">
+      <span class="person-dot" style="background:#22C55E"></span>
+      Lars Kuiper
+    </a>
+    <a href="sara.html" class="nav-item">
+      <span class="person-dot" style="background:#38BDF8"></span>
+      Sara Assen
+    </a>
+    <a href="max.html" class="nav-item">
+      <span class="person-dot" style="background:#F59E0B"></span>
+      Max Velden
+    </a>
+    <a href="nina.html" class="nav-item">
+      <span class="person-dot" style="background:#F472B6"></span>
+      Nina Brink
+    </a>
+  </div>
+
+  <div class="sidebar-footer">
+    <strong>Mei 2026</strong>
+    4 personen actief
+  </div>
+</aside>
+
+<main class="main">
+
+  <div class="topbar">
+    <div>
+      <h1 class="page-title">Financieel Overzicht</h1>
+      <p class="page-subtitle">Alle 4 personen &mdash; Mei 2026</p>
+    </div>
+    <span class="topbar-badge">Mei 2026</span>
+  </div>
+
+  <!-- KPI strip -->
+  <section class="kpi-strip">
+    <div class="kpi-card highlight">
+      <div class="kpi-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+      </div>
+      <span class="kpi-label">Totaal salaris</span>
+      <span class="kpi-value">&euro; 14.800</span>
+      <span class="kpi-sub">4 personen gecombineerd</span>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>
+      </div>
+      <span class="kpi-label">Totaal uitgaven</span>
+      <span class="kpi-value">&euro; 9.640</span>
+      <span class="kpi-sub down">65.1% van salaris</span>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+      </div>
+      <span class="kpi-label">Netto over</span>
+      <span class="kpi-value">&euro; 5.160</span>
+      <span class="kpi-sub up">34.9% spaarquote</span>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <span class="kpi-label">Gem. per persoon</span>
+      <span class="kpi-value">&euro; 1.290</span>
+      <span class="kpi-sub">netto beschikbaar</span>
+    </div>
+  </section>
+
+  <!-- Persons overview -->
+  <div class="section-header">
+    <h2>Personen</h2>
+    <span class="section-tag">Klik voor detail</span>
+  </div>
+
+  <section class="persons-grid">
+
+    <a href="lars.html" class="person-overview-card">
+      <div class="poc-header">
+        <div class="avatar av1">LK</div>
+        <div>
+          <div class="poc-name">Lars Kuiper</div>
+          <div class="poc-role">Software Developer</div>
+        </div>
+      </div>
+      <div class="poc-salary">
+        <span class="poc-salary-label">Salaris</span>
+        <span class="poc-salary-value">&euro; 4.200</span>
+      </div>
+      <div class="spend-bar-wrap">
+        <div class="spend-bar" style="width:63%"></div>
+      </div>
+      <div class="poc-stats">
+        <div class="poc-stat">
+          <div class="poc-stat-label">Uitgaven</div>
+          <div class="poc-stat-value">&euro; 2.655</div>
+        </div>
+        <div class="poc-stat">
+          <div class="poc-stat-label">Netto</div>
+          <div class="poc-stat-value green">+&euro; 1.545</div>
+        </div>
+        <div class="poc-stat">
+          <div class="poc-stat-label">Spaar %</div>
+          <div class="poc-stat-value">36.8%</div>
+        </div>
+      </div>
+    </a>
+
+    <a href="sara.html" class="person-overview-card">
+      <div class="poc-header">
+        <div class="avatar av2">SA</div>
+        <div>
+          <div class="poc-name">Sara Assen</div>
+          <div class="poc-role">UX Designer</div>
+        </div>
+      </div>
+      <div class="poc-salary">
+        <span class="poc-salary-label">Salaris</span>
+        <span class="poc-salary-value">&euro; 3.600</span>
+      </div>
+      <div class="spend-bar-wrap">
+        <div class="spend-bar" style="width:72%"></div>
+      </div>
+      <div class="poc-stats">
+        <div class="poc-stat">
+          <div class="poc-stat-label">Uitgaven</div>
+          <div class="poc-stat-value">&euro; 2.590</div>
+        </div>
+        <div class="poc-stat">
+          <div class="poc-stat-label">Netto</div>
+          <div class="poc-stat-value green">+&euro; 1.010</div>
+        </div>
+        <div class="poc-stat">
+          <div class="poc-stat-label">Spaar %</div>
+          <div class="poc-stat-value">28.1%</div>
+        </div>
+      </div>
+    </a>
+
+    <a href="max.html" class="person-overview-card">
+      <div class="poc-header">
+        <div class="avatar av3">MV</div>
+        <div>
+          <div class="poc-name">Max Velden</div>
+          <div class="poc-role">Product Manager</div>
+        </div>
+      </div>
+      <div class="poc-salary">
+        <span class="poc-salary-label">Salaris</span>
+        <span class="poc-salary-value">&euro; 3.800</span>
+      </div>
+      <div class="spend-bar-wrap">
+        <div class="spend-bar" style="width:63%"></div>
+      </div>
+      <div class="poc-stats">
+        <div class="poc-stat">
+          <div class="poc-stat-label">Uitgaven</div>
+          <div class="poc-stat-value">&euro; 2.390</div>
+        </div>
+        <div class="poc-stat">
+          <div class="poc-stat-label">Netto</div>
+          <div class="poc-stat-value green">+&euro; 1.410</div>
+        </div>
+        <div class="poc-stat">
+          <div class="poc-stat-label">Spaar %</div>
+          <div class="poc-stat-value">37.1%</div>
+        </div>
+      </div>
+    </a>
+
+    <a href="nina.html" class="person-overview-card">
+      <div class="poc-header">
+        <div class="avatar av4">NB</div>
+        <div>
+          <div class="poc-name">Nina Brink</div>
+          <div class="poc-role">Data Analyst</div>
+        </div>
+      </div>
+      <div class="poc-salary">
+        <span class="poc-salary-label">Salaris</span>
+        <span class="poc-salary-value">&euro; 3.200</span>
+      </div>
+      <div class="spend-bar-wrap">
+        <div class="spend-bar" style="width:63%"></div>
+      </div>
+      <div class="poc-stats">
+        <div class="poc-stat">
+          <div class="poc-stat-label">Uitgaven</div>
+          <div class="poc-stat-value">&euro; 2.005</div>
+        </div>
+        <div class="poc-stat">
+          <div class="poc-stat-label">Netto</div>
+          <div class="poc-stat-value green">+&euro; 1.195</div>
+        </div>
+        <div class="poc-stat">
+          <div class="poc-stat-label">Spaar %</div>
+          <div class="poc-stat-value">37.3%</div>
+        </div>
+      </div>
+    </a>
+
+  </section>
+
+  <!-- Charts -->
+  <div class="section-header">
+    <h2>Analyse</h2>
+    <span class="section-tag">Vergelijking</span>
+  </div>
+
+  <section class="charts-row">
+    <div class="chart-card">
+      <div class="chart-card-header">
+        <span class="chart-title">Salaris vs Uitgaven per persoon</span>
+        <div class="legend-row">
+          <span class="leg-item"><span class="leg-dot" style="background:#A3E635"></span>Salaris</span>
+          <span class="leg-item"><span class="leg-dot" style="background:#0F172A"></span>Uitgaven</span>
+          <span class="leg-item"><span class="leg-dot" style="background:#22C55E"></span>Netto</span>
+        </div>
+      </div>
+      <div style="position:relative;height:260px;">
+        <canvas id="chartMain" role="img" aria-label="Salaris vs uitgaven per persoon"></canvas>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-card-header">
+        <span class="chart-title">Uitgaven totaal</span>
+      </div>
+      <div class="legend-col" id="donutLegend"></div>
+      <div style="position:relative;height:180px;">
+        <canvas id="chartDonut" role="img" aria-label="Totale uitgaven per categorie"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trend -->
+  <div class="section-header" style="margin-top:2rem;">
+    <h2>Netto trend</h2>
+    <span class="section-tag">6 maanden</span>
+  </div>
+
+  <div class="trend-card">
+    <div class="chart-card-header">
+      <span class="chart-title">Gecombineerd netto overschot per maand</span>
+      <div class="legend-row">
+        <span class="leg-item"><span class="leg-dot" style="background:#A3E635"></span>Netto</span>
+      </div>
+    </div>
+    <div style="position:relative;height:160px;">
+      <canvas id="chartTrend" role="img" aria-label="Netto trend 6 maanden"></canvas>
+    </div>
+  </div>
+
+</main>
+
+<script>
+  const COLS = { green:'#A3E635', dark:'#0F172A', success:'#22C55E', blue:'#38BDF8', amber:'#F59E0B', pink:'#F472B6', muted:'#94A3B8', grid:'rgba(15,23,42,0.06)' };
+  const CATS = ['Huur','Eten','Abonnementen','Transport','Overig'];
+  const CAT_COLS = ['#0F172A','#A3E635','#38BDF8','#F59E0B','#94A3B8'];
+
+  new Chart(document.getElementById('chartMain'), {
+    type:'bar',
+    data:{
+      labels:['Lars','Sara','Max','Nina'],
+      datasets:[
+        { label:'Salaris', data:[4200,3600,3800,3200], backgroundColor: COLS.green, borderRadius:5, borderSkipped:false },
+        { label:'Uitgaven', data:[2655,2590,2390,2005], backgroundColor: COLS.dark, borderRadius:5, borderSkipped:false },
+        { label:'Netto', data:[1545,1010,1410,1195], backgroundColor: COLS.success, borderRadius:5, borderSkipped:false }
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ display:false } },
+      scales:{
+        x:{ ticks:{ color:COLS.muted, font:{ family:'Plus Jakarta Sans', size:12, weight:'600' } }, grid:{ color:COLS.grid }, border:{ color:'transparent' } },
+        y:{ ticks:{ color:COLS.muted, font:{ family:'Plus Jakarta Sans', size:11 }, callback: v=>'€'+v.toLocaleString('nl-NL') }, grid:{ color:COLS.grid }, border:{ color:'transparent' } }
+      }
+    }
+  });
+
+  const totals = [
+    [1050,950,900,800],
+    [420,380,350,310],
+    [85,110,95,75],
+    [640,720,580,490],
+    [460,430,465,330]
+  ].map(arr=>arr.reduce((a,b)=>a+b,0));
+
+  const dl = document.getElementById('donutLegend');
+  CATS.forEach((l,i)=>{
+    const s=document.createElement('span'); s.className='leg-item';
+    s.innerHTML=`<span class="leg-dot" style="background:${CAT_COLS[i]}"></span>${l}<strong>€${totals[i].toLocaleString('nl-NL')}</strong>`;
+    dl.appendChild(s);
+  });
+
+  new Chart(document.getElementById('chartDonut'),{
+    type:'doughnut',
+    data:{ labels:CATS, datasets:[{ data:totals, backgroundColor:CAT_COLS, borderWidth:2, borderColor:'#fff', hoverOffset:5 }] },
+    options:{ responsive:true, maintainAspectRatio:false, cutout:'62%', plugins:{ legend:{ display:false }, tooltip:{ callbacks:{ label: ctx=>` ${ctx.label}: €${ctx.parsed.toLocaleString('nl-NL')}` } } } }
+  });
+
+  new Chart(document.getElementById('chartTrend'),{
+    type:'line',
+    data:{
+      labels:['Dec','Jan','Feb','Mrt','Apr','Mei'],
+      datasets:[{ label:'Netto', data:[4800,4950,5020,4780,5100,5160], borderColor:COLS.green, backgroundColor:'rgba(163,230,53,0.1)', fill:true, tension:0.4, pointBackgroundColor:COLS.green, pointRadius:4, pointHoverRadius:6, borderWidth:2.5 }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ display:false }, tooltip:{ callbacks:{ label: ctx=>` €${ctx.parsed.y.toLocaleString('nl-NL')}` } } },
+      scales:{
+        x:{ ticks:{ color:COLS.muted, font:{ family:'Plus Jakarta Sans', size:12 } }, grid:{ color:COLS.grid }, border:{ color:'transparent' } },
+        y:{ min:4500, ticks:{ color:COLS.muted, font:{ family:'Plus Jakarta Sans', size:11 }, callback: v=>'€'+v.toLocaleString('nl-NL') }, grid:{ color:COLS.grid }, border:{ color:'transparent' } }
+      }
+    }
+  });
+</script>
+
+</body>
+</html>

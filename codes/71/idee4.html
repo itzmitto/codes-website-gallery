@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Financieel Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span class="logo-mark">FD</span>
+      <span class="logo-text">FinDash</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        Overzicht
+      </a>
+      <a href="#" class="nav-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        Salarissen
+      </a>
+      <a href="#" class="nav-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+        Uitgaven
+      </a>
+      <a href="#" class="nav-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+        Rapporten
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <span class="month-label">Mei 2026</span>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <header class="topbar">
+      <div class="topbar-title">
+        <h1>Financieel Overzicht</h1>
+        <p>4 personen &mdash; Mei 2026</p>
+      </div>
+      <div class="topbar-actions">
+        <button class="btn-outline" id="btnMonth">Maandelijks</button>
+        <button class="btn-outline" id="btnYear">Jaarlijks</button>
+      </div>
+    </header>
+
+    <!-- KPI strip -->
+    <section class="kpi-strip">
+      <div class="kpi-card">
+        <span class="kpi-label">Totaal salaris</span>
+        <span class="kpi-value" id="kpiSalary">&#8364; 14.800</span>
+        <span class="kpi-sub positive">+3.2% t.o.v. vorige maand</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Totaal uitgaven</span>
+        <span class="kpi-value" id="kpiExpenses">&#8364; 9.640</span>
+        <span class="kpi-sub negative">+1.8% t.o.v. vorige maand</span>
+      </div>
+      <div class="kpi-card accent">
+        <span class="kpi-label">Netto over</span>
+        <span class="kpi-value" id="kpiNet">&#8364; 5.160</span>
+        <span class="kpi-sub positive">34.9% spaarquote</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Gem. per persoon</span>
+        <span class="kpi-value">&#8364; 1.290</span>
+        <span class="kpi-sub">netto beschikbaar</span>
+      </div>
+    </section>
+
+    <!-- Persons row -->
+    <section class="section-title-row">
+      <h2>Personen</h2>
+      <span class="section-tag">4 profielen</span>
+    </section>
+
+    <section class="persons-grid">
+
+      <!-- Person 1 -->
+      <div class="person-card" data-person="0">
+        <div class="person-header">
+          <div class="avatar av1">LK</div>
+          <div class="person-meta">
+            <strong>Lars Kuiper</strong>
+            <span>Software Developer</span>
+          </div>
+          <div class="person-balance positive">+&#8364; 1.545</div>
+        </div>
+        <div class="person-bar-wrap">
+          <div class="person-bar" style="--pct: 67%"></div>
+        </div>
+        <div class="person-stats">
+          <div class="ps-item">
+            <span class="ps-lbl">Salaris</span>
+            <span class="ps-val">&#8364; 4.200</span>
+          </div>
+          <div class="ps-item">
+            <span class="ps-lbl">Uitgaven</span>
+            <span class="ps-val">&#8364; 2.655</span>
+          </div>
+        </div>
+        <div class="expense-list">
+          <div class="exp-row"><span>Huur</span><span>&#8364; 1.050</span></div>
+          <div class="exp-row"><span>Eten</span><span>&#8364; 420</span></div>
+          <div class="exp-row"><span>Abonnementen</span><span>&#8364; 85</span></div>
+          <div class="exp-row"><span>Transport</span><span>&#8364; 640</span></div>
+          <div class="exp-row"><span>Overig</span><span>&#8364; 460</span></div>
+        </div>
+        <div class="mini-chart-wrap">
+          <canvas id="chart0" role="img" aria-label="Uitgaven verdeling Lars Kuiper"></canvas>
+        </div>
+      </div>
+
+      <!-- Person 2 -->
+      <div class="person-card" data-person="1">
+        <div class="person-header">
+          <div class="avatar av2">SA</div>
+          <div class="person-meta">
+            <strong>Sara Assen</strong>
+            <span>UX Designer</span>
+          </div>
+          <div class="person-balance positive">+&#8364; 1.010</div>
+        </div>
+        <div class="person-bar-wrap">
+          <div class="person-bar" style="--pct: 72%"></div>
+        </div>
+        <div class="person-stats">
+          <div class="ps-item">
+            <span class="ps-lbl">Salaris</span>
+            <span class="ps-val">&#8364; 3.600</span>
+          </div>
+          <div class="ps-item">
+            <span class="ps-lbl">Uitgaven</span>
+            <span class="ps-val">&#8364; 2.590</span>
+          </div>
+        </div>
+        <div class="expense-list">
+          <div class="exp-row"><span>Huur</span><span>&#8364; 950</span></div>
+          <div class="exp-row"><span>Eten</span><span>&#8364; 380</span></div>
+          <div class="exp-row"><span>Abonnementen</span><span>&#8364; 110</span></div>
+          <div class="exp-row"><span>Transport</span><span>&#8364; 720</span></div>
+          <div class="exp-row"><span>Overig</span><span>&#8364; 430</span></div>
+        </div>
+        <div class="mini-chart-wrap">
+          <canvas id="chart1" role="img" aria-label="Uitgaven verdeling Sara Assen"></canvas>
+        </div>
+      </div>
+
+      <!-- Person 3 -->
+      <div class="person-card" data-person="2">
+        <div class="person-header">
+          <div class="avatar av3">MV</div>
+          <div class="person-meta">
+            <strong>Max Velden</strong>
+            <span>Product Manager</span>
+          </div>
+          <div class="person-balance positive">+&#8364; 1.410</div>
+        </div>
+        <div class="person-bar-wrap">
+          <div class="person-bar" style="--pct: 63%"></div>
+        </div>
+        <div class="person-stats">
+          <div class="ps-item">
+            <span class="ps-lbl">Salaris</span>
+            <span class="ps-val">&#8364; 3.800</span>
+          </div>
+          <div class="ps-item">
+            <span class="ps-lbl">Uitgaven</span>
+            <span class="ps-val">&#8364; 2.390</span>
+          </div>
+        </div>
+        <div class="expense-list">
+          <div class="exp-row"><span>Huur</span><span>&#8364; 900</span></div>
+          <div class="exp-row"><span>Eten</span><span>&#8364; 350</span></div>
+          <div class="exp-row"><span>Abonnementen</span><span>&#8364; 95</span></div>
+          <div class="exp-row"><span>Transport</span><span>&#8364; 580</span></div>
+          <div class="exp-row"><span>Overig</span><span>&#8364; 465</span></div>
+        </div>
+        <div class="mini-chart-wrap">
+          <canvas id="chart2" role="img" aria-label="Uitgaven verdeling Max Velden"></canvas>
+        </div>
+      </div>
+
+      <!-- Person 4 -->
+      <div class="person-card" data-person="3">
+        <div class="person-header">
+          <div class="avatar av4">NB</div>
+          <div class="person-meta">
+            <strong>Nina Brink</strong>
+            <span>Data Analyst</span>
+          </div>
+          <div class="person-balance positive">+&#8364; 1.195</div>
+        </div>
+        <div class="person-bar-wrap">
+          <div class="person-bar" style="--pct: 62%"></div>
+        </div>
+        <div class="person-stats">
+          <div class="ps-item">
+            <span class="ps-lbl">Salaris</span>
+            <span class="ps-val">&#8364; 3.200</span>
+          </div>
+          <div class="ps-item">
+            <span class="ps-lbl">Uitgaven</span>
+            <span class="ps-val">&#8364; 2.005</span>
+          </div>
+        </div>
+        <div class="expense-list">
+          <div class="exp-row"><span>Huur</span><span>&#8364; 800</span></div>
+          <div class="exp-row"><span>Eten</span><span>&#8364; 310</span></div>
+          <div class="exp-row"><span>Abonnementen</span><span>&#8364; 75</span></div>
+          <div class="exp-row"><span>Transport</span><span>&#8364; 490</span></div>
+          <div class="exp-row"><span>Overig</span><span>&#8364; 330</span></div>
+        </div>
+        <div class="mini-chart-wrap">
+          <canvas id="chart3" role="img" aria-label="Uitgaven verdeling Nina Brink"></canvas>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Bottom charts row -->
+    <section class="section-title-row">
+      <h2>Analyse</h2>
+      <span class="section-tag">Vergelijking</span>
+    </section>
+
+    <section class="charts-row">
+
+      <div class="chart-card wide">
+        <div class="chart-card-header">
+          <span class="chart-title">Salaris vs Uitgaven per persoon</span>
+          <div class="legend-row">
+            <span class="leg-item"><span class="leg-dot" style="background:#B62A2D"></span>Salaris</span>
+            <span class="leg-item"><span class="leg-dot" style="background:#E6A8A8"></span>Uitgaven</span>
+            <span class="leg-item"><span class="leg-dot" style="background:#D5575E"></span>Netto</span>
+          </div>
+        </div>
+        <div style="position:relative; height:260px;">
+          <canvas id="chartMain" role="img" aria-label="Staafdiagram salaris vs uitgaven voor 4 personen"></canvas>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <span class="chart-title">Uitgavencategorieën (totaal)</span>
+        </div>
+        <div class="legend-donut" id="donutLegend"></div>
+        <div style="position:relative; height:200px;">
+          <canvas id="chartDonut" role="img" aria-label="Donut chart uitgavencategorieën totaal"></canvas>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Monthly trend -->
+    <section class="section-title-row">
+      <h2>Trend</h2>
+      <span class="section-tag">6 maanden</span>
+    </section>
+
+    <section class="trend-section">
+      <div class="chart-card full">
+        <div class="chart-card-header">
+          <span class="chart-title">Netto overschot per maand</span>
+          <div class="legend-row">
+            <span class="leg-item"><span class="leg-dot" style="background:#B62A2D"></span>Totaal netto</span>
+          </div>
+        </div>
+        <div style="position:relative; height:180px;">
+          <canvas id="chartTrend" role="img" aria-label="Lijndiagram netto overschot per maand"></canvas>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    const ACCENT      = '#B62A2D';
+    const ACCENT_SOFT = '#E6A8A8';
+    const ACCENT_MID  = '#D5575E';
+    const BG_CARD     = '#2a2a2b';
+    const TEXT_DIM    = 'rgba(230,168,168,0.5)';
+    const GRID_COLOR  = 'rgba(255,255,255,0.05)';
+
+    const persons = ['Lars', 'Sara', 'Max', 'Nina'];
+    const miniColors = [
+      ['#B62A2D','#D5575E','#E6A8A8','#7a1a1d','#f0c4c5'],
+      ['#B62A2D','#D5575E','#E6A8A8','#7a1a1d','#f0c4c5'],
+      ['#B62A2D','#D5575E','#E6A8A8','#7a1a1d','#f0c4c5'],
+      ['#B62A2D','#D5575E','#E6A8A8','#7a1a1d','#f0c4c5'],
+    ];
+    const miniData = [
+      [1050,420,85,640,460],
+      [950,380,110,720,430],
+      [900,350,95,580,465],
+      [800,310,75,490,330],
+    ];
+    const miniLabels = ['Huur','Eten','Abonnementen','Transport','Overig'];
+
+    for (let i = 0; i < 4; i++) {
+      new Chart(document.getElementById('chart' + i), {
+        type: 'doughnut',
+        data: {
+          labels: miniLabels,
+          datasets: [{
+            data: miniData[i],
+            backgroundColor: miniColors[i],
+            borderWidth: 0,
+            hoverOffset: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: '68%',
+          plugins: { legend: { display: false }, tooltip: {
+            callbacks: {
+              label: ctx => ` ${ctx.label}: €${ctx.parsed}`
+            }
+          }}
+        }
+      });
+    }
+
+    new Chart(document.getElementById('chartMain'), {
+      type: 'bar',
+      data: {
+        labels: persons,
+        datasets: [
+          {
+            label: 'Salaris',
+            data: [4200,3600,3800,3200],
+            backgroundColor: ACCENT,
+            borderRadius: 4,
+            borderSkipped: false,
+          },
+          {
+            label: 'Uitgaven',
+            data: [2655,2590,2390,2005],
+            backgroundColor: ACCENT_SOFT,
+            borderRadius: 4,
+            borderSkipped: false,
+          },
+          {
+            label: 'Netto',
+            data: [1545,1010,1410,1195],
+            backgroundColor: ACCENT_MID,
+            borderRadius: 4,
+            borderSkipped: false,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: {
+            ticks: { color: ACCENT_SOFT, font: { family: 'DM Mono', size: 12 } },
+            grid: { color: GRID_COLOR },
+            border: { color: 'transparent' }
+          },
+          y: {
+            ticks: { color: ACCENT_SOFT, font: { family: 'DM Mono', size: 11 }, callback: v => '€' + v.toLocaleString('nl-NL') },
+            grid: { color: GRID_COLOR },
+            border: { color: 'transparent' }
+          }
+        }
+      }
+    });
+
+    const donutTotals = miniLabels.map((_,ci) => miniData.reduce((s,p)=>s+p[ci],0));
+    const donutColors = ['#B62A2D','#D5575E','#E6A8A8','#7a1a1d','#f0c4c5'];
+    const dl = document.getElementById('donutLegend');
+    miniLabels.forEach((l,i) => {
+      const span = document.createElement('span');
+      span.className = 'leg-item';
+      span.innerHTML = `<span class="leg-dot" style="background:${donutColors[i]}"></span>${l} <strong>€${donutTotals[i].toLocaleString('nl-NL')}</strong>`;
+      dl.appendChild(span);
+    });
+    new Chart(document.getElementById('chartDonut'), {
+      type: 'doughnut',
+      data: {
+        labels: miniLabels,
+        datasets: [{
+          data: donutTotals,
+          backgroundColor: donutColors,
+          borderWidth: 0,
+          hoverOffset: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '60%',
+        plugins: { legend: { display: false }, tooltip: {
+          callbacks: { label: ctx => ` ${ctx.label}: €${ctx.parsed.toLocaleString('nl-NL')}` }
+        }}
+      }
+    });
+
+    new Chart(document.getElementById('chartTrend'), {
+      type: 'line',
+      data: {
+        labels: ['Dec','Jan','Feb','Mrt','Apr','Mei'],
+        datasets: [{
+          label: 'Netto',
+          data: [4800,4950,5020,4780,5100,5160],
+          borderColor: ACCENT,
+          backgroundColor: 'rgba(182,42,45,0.12)',
+          fill: true,
+          tension: 0.4,
+          pointBackgroundColor: ACCENT,
+          pointRadius: 4,
+          pointHoverRadius: 6,
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: {
+          callbacks: { label: ctx => ` €${ctx.parsed.y.toLocaleString('nl-NL')}` }
+        }},
+        scales: {
+          x: {
+            ticks: { color: ACCENT_SOFT, font: { family: 'DM Mono', size: 12 } },
+            grid: { color: GRID_COLOR },
+            border: { color: 'transparent' }
+          },
+          y: {
+            min: 4500,
+            ticks: { color: ACCENT_SOFT, font: { family: 'DM Mono', size: 11 }, callback: v => '€' + v.toLocaleString('nl-NL') },
+            grid: { color: GRID_COLOR },
+            border: { color: 'transparent' }
+          }
+        }
+      }
+    });
+
+    document.querySelectorAll('.btn-outline').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.btn-outline').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,150 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --shadow: #d0d0d0;
+    --salaris: #c6f135;
+    --uitgaven: #1a1a2e;
+    --netto: #2ecc71;
+    --grid: #e8e8e8;
+    --text-muted: #999;
+}
+
+body {
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.card {
+    background-color: #ffffff;
+    width: 660px;
+    padding: 28px 28px 20px 28px;
+    box-shadow: 0 2px 8px var(--shadow);
+    border: 1px solid var(--shadow);
+    border-radius: 12px;
+}
+
+.chart-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 10px;
+}
+
+.legend {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 18px;
+    justify-content: flex-end;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: #333;
+}
+
+.dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+}
+
+.dot.salaris {
+    background-color: var(--salaris);
+}
+
+.dot.uitgaven {
+    background-color: var(--uitgaven);
+}
+
+.dot.netto {
+    background-color: var(--netto);
+}
+
+.chart-area {
+    display: flex;
+    gap: 8px;
+}
+
+.y-axis {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 28px;
+    min-width: 48px;
+}
+
+.y-axis p {
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1;
+}
+
+.plot {
+    position: relative;
+    flex: 1;
+    height: 300px;
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    padding-bottom: 28px;
+}
+
+.grid-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: var(--grid);
+}
+
+.group {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 100%;
+}
+
+.x-label {
+    position: absolute;
+    bottom: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: #444;
+    white-space: nowrap;
+}
+
+.bar {
+    flex: 1;
+    border-radius: 3px 3px 0 0;
+}
+
+.salaris-bar {
+    background-color: var(--salaris);
+}
+
+.uitgaven-bar {
+    background-color: var(--uitgaven);
+}
+
+.netto-bar {
+    background-color: var(--netto);
+}
