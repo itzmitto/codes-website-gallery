@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --shadow: var(--color-border-tertiary);
+  --salaris: #c6f135;
+  --uitgaven: #1a1a2e;
+  --netto: #2ecc71;
+  --grid: var(--color-border-tertiary);
+  --text-muted: var(--color-text-secondary);
+}
+body { background: transparent; font-family: Arial, sans-serif; }
+.card {
+  background: var(--color-background-primary);
+  width: 100%;
+  padding: 28px 28px 20px 28px;
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-lg);
+}
+.chart-title { font-size: 15px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 10px; }
+.legend { display: flex; gap: 18px; margin-bottom: 18px; justify-content: flex-end; }
+.legend-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--color-text-secondary); }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 2px; }
+.dot.salaris  { background: var(--salaris); }
+.dot.uitgaven { background: var(--uitgaven); }
+.dot.netto    { background: var(--netto); }
+.chart-area { display: flex; gap: 8px; }
+.y-axis { display: flex; flex-direction: column; justify-content: space-between; align-items: flex-end; padding-bottom: 28px; min-width: 48px; }
+.y-axis p { font-size: 11px; color: var(--color-text-secondary); line-height: 1; }
+.plot { position: relative; flex: 1; height: 300px; display: flex; align-items: flex-end; gap: 12px; padding-bottom: 28px; }
+.grid-line { position: absolute; left: 0; right: 0; height: 1px; background: var(--color-border-tertiary); }
+.group { position: relative; flex: 1; display: flex; align-items: flex-end; gap: 4px; height: 100%; }
+.x-label { position: absolute; bottom: -22px; left: 50%; transform: translateX(-50%); font-size: 12px; color: var(--color-text-secondary); white-space: nowrap; }
+.bar { flex: 1; border-radius: 3px 3px 0 0; cursor: default; position: relative; overflow: visible; }
+.salaris-bar  { background: var(--salaris); }
+.uitgaven-bar { background: var(--uitgaven); }
+.netto-bar    { background: var(--netto); }
+
+.bar::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a1a2e;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: Arial, sans-serif;
+  white-space: nowrap;
+  padding: 10px 16px;
+  border-radius: 8px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  z-index: 10;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.28);
+  letter-spacing: 0.01em;
+}
+.bar::after {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid #1a1a2e;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  z-index: 10;
+}
+.bar:hover::before, .bar:hover::after { opacity: 1; }
+</style>
+
+<div class="card">
+  <h2 class="chart-title">Salaris vs Uitgaven per persoon</h2>
+  <div class="legend">
+    <span class="legend-item"><span class="dot salaris"></span> Salaris</span>
+    <span class="legend-item"><span class="dot uitgaven"></span> Uitgaven</span>
+    <span class="legend-item"><span class="dot netto"></span> Netto</span>
+  </div>
+  <div class="chart-area">
+    <div class="y-axis">
+      <p>€4.500</p><p>€4.000</p><p>€3.500</p><p>€3.000</p>
+      <p>€2.500</p><p>€2.000</p><p>€1.500</p><p>€1.000</p>
+      <p>€500</p><p>€0</p>
+    </div>
+    <div class="plot">
+      <div class="grid-line" style="bottom:100%"></div>
+      <div class="grid-line" style="bottom:88.9%"></div>
+      <div class="grid-line" style="bottom:77.8%"></div>
+      <div class="grid-line" style="bottom:66.7%"></div>
+      <div class="grid-line" style="bottom:55.6%"></div>
+      <div class="grid-line" style="bottom:44.4%"></div>
+      <div class="grid-line" style="bottom:33.3%"></div>
+      <div class="grid-line" style="bottom:22.2%"></div>
+      <div class="grid-line" style="bottom:11.1%"></div>
+      <div class="grid-line" style="bottom:0%"></div>
+
+      <div class="group">
+        <div class="bar salaris-bar"  style="height:90.9%" data-tooltip="Lars — Salaris: €4.200"></div>
+        <div class="bar uitgaven-bar" style="height:57.8%" data-tooltip="Lars — Uitgaven: €2.600"></div>
+        <div class="bar netto-bar"    style="height:33.3%" data-tooltip="Lars — Netto: €1.500"></div>
+        <p class="x-label">Lars</p>
+      </div>
+      <div class="group">
+        <div class="bar salaris-bar"  style="height:77.8%" data-tooltip="Sara — Salaris: €3.500"></div>
+        <div class="bar uitgaven-bar" style="height:55.6%" data-tooltip="Sara — Uitgaven: €2.500"></div>
+        <div class="bar netto-bar"    style="height:22.2%" data-tooltip="Sara — Netto: €1.000"></div>
+        <p class="x-label">Sara</p>
+      </div>
+      <div class="group">
+        <div class="bar salaris-bar"  style="height:82.2%" data-tooltip="Max — Salaris: €3.700"></div>
+        <div class="bar uitgaven-bar" style="height:53.3%" data-tooltip="Max — Uitgaven: €2.400"></div>
+        <div class="bar netto-bar"    style="height:31.1%" data-tooltip="Max — Netto: €1.400"></div>
+        <p class="x-label">Max</p>
+      </div>
+      <div class="group">
+        <div class="bar salaris-bar"  style="height:68.9%" data-tooltip="Nina — Salaris: €3.100"></div>
+        <div class="bar uitgaven-bar" style="height:42.2%" data-tooltip="Nina — Uitgaven: €1.900"></div>
+        <div class="bar netto-bar"    style="height:26.7%" data-tooltip="Nina — Netto: €1.200"></div>
+        <p class="x-label">Nina</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
