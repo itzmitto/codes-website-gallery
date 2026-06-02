@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D Cylinder Carousel</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="scene-wrapper">
+    <div class="ambient-glow"></div>
+
+    <header class="site-header">
+      <span class="logo">GALLERY</span>
+      <span class="subtitle">cylindrical edition</span>
+    </header>
+
+    <div class="scene">
+      <div class="carousel" id="carousel">
+        <div class="carousel__item" style="--i:0">
+          <img src="images/image1.jpg" alt="Image 1" />
+          <div class="item-overlay"><span>01</span></div>
+        </div>
+        <div class="carousel__item" style="--i:1">
+          <img src="images/image2.jpg" alt="Image 2" />
+          <div class="item-overlay"><span>02</span></div>
+        </div>
+        <div class="carousel__item" style="--i:2">
+          <img src="images/image3.jpg" alt="Image 3" />
+          <div class="item-overlay"><span>03</span></div>
+        </div>
+        <div class="carousel__item" style="--i:3">
+          <img src="images/image4.jpg" alt="Image 4" />
+          <div class="item-overlay"><span>04</span></div>
+        </div>
+        <div class="carousel__item" style="--i:4">
+          <img src="images/image5.jpg" alt="Image 5" />
+          <div class="item-overlay"><span>05</span></div>
+        </div>
+        <div class="carousel__item" style="--i:5">
+          <img src="images/image6.jpg" alt="Image 6" />
+          <div class="item-overlay"><span>06</span></div>
+        </div>
+        <div class="carousel__item" style="--i:6">
+          <img src="images/image7.jpg" alt="Image 7" />
+          <div class="item-overlay"><span>07</span></div>
+        </div>
+        <div class="carousel__item" style="--i:7">
+          <img src="images/image8.jpg" alt="Image 8" />
+          <div class="item-overlay"><span>08</span></div>
+        </div>
+        <div class="carousel__item" style="--i:8">
+          <img src="images/image9.jpg" alt="Image 9" />
+          <div class="item-overlay"><span>09</span></div>
+        </div>
+        <div class="carousel__item" style="--i:9">
+          <img src="images/image10.jpg" alt="Image 10" />
+          <div class="item-overlay"><span>10</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="btn btn--prev" id="prevBtn" aria-label="Vorige">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      <div class="dot-track">
+        <div class="dot-indicator" id="dotIndicator"></div>
+      </div>
+      <button class="btn btn--next" id="nextBtn" aria-label="Volgende">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <div class="drag-hint" id="dragHint">
+      <span>drag to rotate</span>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

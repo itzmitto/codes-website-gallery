@@ -1,0 +1,259 @@
+:root {
+  --bg:           #080a0e;
+  --surface:      #0d1117;
+  --card-w:       260px;
+  --card-h:       360px;
+  --radius:       460px;        
+  --items:        10;
+  --accent:       #c8a96e;     
+  --accent2:      #5b8dee;       
+  --text:         #e8e2d6;
+  --muted:        #4a4a55;
+  --transition:   0.9s cubic-bezier(0.23, 1, 0.32, 1);
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'DM Sans', 'Helvetica Neue', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400&display=swap');
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+.scene-wrapper {
+  position: relative;
+  width: 100%; height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.ambient-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 60%, rgba(91, 141, 238, 0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 30% 80%, rgba(200, 169, 110, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.scene-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.022;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.site-header {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  margin-bottom: 40px;
+  user-select: none;
+}
+.logo {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 300;
+  letter-spacing: 0.38em;
+  color: var(--text);
+  line-height: 1;
+}
+.subtitle {
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: 6px;
+  font-weight: 300;
+}
+
+.scene {
+  position: relative;
+  z-index: 5;
+  width: var(--card-w);
+  height: var(--card-h);
+  perspective: 1200px;
+  perspective-origin: 50% 45%;
+}
+
+.carousel {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(-6deg) rotateY(0deg);
+  transition: transform var(--transition);
+  cursor: grab;
+}
+.carousel.is-grabbing { cursor: grabbing; }
+.carousel__item {
+  position: absolute;
+  width: var(--card-w);
+  height: var(--card-h);
+  top: 0; left: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  transform: rotateY(calc(var(--i) * (360deg / var(--items))))
+             translateZ(var(--radius));
+  backface-visibility: hidden;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.04),
+    0 30px 80px rgba(0,0,0,0.7),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+  transition: transform var(--transition), filter var(--transition), opacity var(--transition);
+}
+
+.carousel__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+.carousel__item:hover img {
+  transform: scale(1.04);
+}
+
+.item-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(5, 7, 12, 0.82) 0%,
+    rgba(5, 7, 12, 0.15) 45%,
+    transparent 70%
+  );
+  display: flex;
+  align-items: flex-end;
+  padding: 20px 22px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.carousel__item:hover .item-overlay {
+  opacity: 1;
+}
+.item-overlay span {
+  font-family: var(--font-display);
+  font-size: 3.2rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.18);
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.carousel__item.is-active {
+  box-shadow:
+    0 0 0 1.5px var(--accent),
+    0 30px 80px rgba(0,0,0,0.8),
+    0 0 60px rgba(200, 169, 110, 0.15);
+}
+
+.scene::after {
+  content: '';
+  position: absolute;
+  bottom: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120%;
+  height: 80px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.04), transparent);
+  filter: blur(6px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.controls {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 52px;
+}
+
+.btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.25s, border-color 0.25s, transform 0.2s;
+}
+.btn svg { width: 18px; height: 18px; }
+.btn:hover {
+  background: rgba(200,169,110,0.12);
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: scale(1.08);
+}
+.btn:active { transform: scale(0.95); }
+
+.dot-track {
+  position: relative;
+  width: 120px;
+  height: 2px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.dot-indicator {
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%;
+  width: 12%;        
+  background: var(--accent);
+  border-radius: 2px;
+  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+  transform: translateX(0%);
+}
+
+.drag-hint {
+  position: absolute;
+  bottom: 28px;
+  z-index: 10;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 1;
+  transition: opacity 1.2s ease;
+  animation: fadeHint 3s ease 1.5s forwards;
+}
+.drag-hint.hidden { opacity: 0; pointer-events: none; }
+
+@keyframes fadeHint {
+  0%   { opacity: 1; }
+  70%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --card-w: 200px;
+    --card-h: 280px;
+    --radius: 360px;
+  }
+  .logo { letter-spacing: 0.26em; }
+}
