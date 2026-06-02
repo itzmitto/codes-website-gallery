@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="nl">
+  <head> 
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise - Multiple Choice</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="box">
+      <h1>
+        Exercise Html Styles
+        <div class="tooltip-wrapper">
+          <span class="help-icon" aria-label="Meer info">?</span>
+          <div class="tooltip-box" role="tooltip">
+            <p class="tooltip-title">Hulp nodig????</p>
+            <p class="tooltip-text">
+              Het antwoord is eerste.
+            </p>
+          </div>
+        </div>
+      </h1>
+
+      <p class="question" id="question-text"></p>
+
+      <div class="choices-container" id="choices-container"></div>
+
+      <button class="submit-btn" onclick="checkAnswer()">
+        Submit Answer »
+      </button>
+
+      <p class="feedback" id="feedback"></p>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

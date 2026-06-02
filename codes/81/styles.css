@@ -1,0 +1,220 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #869bb7;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.box {
+    background-color: #2d3848;
+    border-radius: 14px;
+    padding: 40px 50px;
+    width: 760px;
+    color: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.box h1 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.help-icon {
+    background-color: #3e4b5e;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 13px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #ccc;
+    font-weight: 700;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.help-icon:hover {
+    background-color: #4f5e75;
+    color: #ffffff;
+}
+
+.question {
+    text-align: center;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 28px;
+    line-height: 1.6;
+}
+
+.inline-code {
+    background-color: #1e2530;
+    color: #ffffff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 16px;
+}
+
+.choices-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.choice-row {
+    background-color: #3d4959;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.choice-row:hover {
+    background-color: #465466;
+}
+
+.choice-row.selected {
+    background-color: #414f61;
+    border-color: #5294e2;
+}
+
+.radio-circle {
+    width: 14px;
+    height: 14px;
+    border: 2px solid #b2bfc7;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+    position: relative;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.choice-row.selected .radio-circle {
+    border-color: #5294e2;
+    background-color: #2d3848;
+}
+
+.choice-row.selected .radio-circle::after {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background-color: #5294e2;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.choice-text {
+    font-size: 15px;
+    color: #d1dbe3;
+    line-height: 1.4;
+}
+
+.submit-btn {
+    display: block;
+    margin: 0 auto;
+    background-color: #00a86b;
+    color: white;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.submit-btn:hover {
+    background-color: #008f5d;
+}
+
+.feedback {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    min-height: 24px;
+}
+
+.feedback.correct {
+    color: #4caf50;
+}
+
+.feedback.wrong {
+    color: #ff5252;
+}
+
+.tooltip-wrapper {
+    position: relative;
+    display: inline-block;
+    line-height: 0;
+}
+
+.tooltip-box {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%) translateY(6px);
+    width: 250px;
+    background-color: #1e2530;
+    border-radius: 10px;
+    padding: 16px 18px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.22s ease, transform 0.22s ease;
+    z-index: 10;
+}
+
+.tooltip-box::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 7px solid transparent;
+    border-top-color: #1e2530;
+}
+
+.tooltip-wrapper:hover .tooltip-box {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+
+.tooltip-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 6px;
+    line-height: 1.2;
+}
+
+.tooltip-text {
+    font-size: 13px;
+    color: #a8b2cc;
+    line-height: 1.4;
+}
