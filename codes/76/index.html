@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Color Picker</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container-items">
+      <button
+        class="item-color"
+        style="--color: #e11d48"
+        aria-color="#e11d48"
+      ></button>
+      <button
+        class="item-color"
+        style="--color: #f472b6"
+        aria-color="#f472b6"
+      ></button>
+      <button
+        class="item-color"
+        style="--color: #fb923c"
+        aria-color="#fb923c"
+      ></button>
+      <button
+        class="item-color"
+        style="--color: #facc15"
+        aria-color="#facc15"
+      ></button>
+      <button
+        class="item-color"
+        style="--color: #84cc16"
+        aria-color="#84cc16"
+      ></button>
+      <button
+        class="item-color"
+        style="--color: #10b981"
+        aria-color="#10b981"
+      ></button>
+      <button
+        class="item-color"
+        style="--color: #0ea5e9"
+        aria-color="#0ea5e9"
+      ></button>
+      <button
+        class="item-color"
+        style="--color: #3b82f6"
+        aria-color="#3b82f6"
+      ></button>
+      <button
+        class="item-color"
+        style="--color: #8b5cf6"
+        aria-color="#8b5cf6"
+      ></button>
+      <button
+        class="item-color"
+        style="--color: #a78bfa"
+        aria-color="#a78bfa"
+      ></button>
+    </div>
+
+    <script>
+      const buttons = document.querySelectorAll(".item-color");
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const colorCode = button.getAttribute("aria-color");
+
+          navigator.clipboard.writeText(colorCode).then(() => {
+            button.classList.add("copied");
+            setTimeout(() => {
+              button.classList.remove("copied");
+            }, 1500);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
