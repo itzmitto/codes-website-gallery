@@ -8,7 +8,19 @@
   </head>
   <body>
     <div class="box">
-      <h1>Exercise <span class="help-icon">?</span></h1>
+      <h1>
+        Exercise
+        <div class="tooltip-wrapper">
+          <span class="help-icon" aria-label="Meer info">?</span>
+          <div class="tooltip-box" role="tooltip">
+            <p class="tooltip-title">Hulp nodig?</p>
+            <p class="tooltip-text">
+              Sleep de juiste code-blokken naar de lege vakken.
+            </p>
+          </div>
+        </div>
+      </h1>
+
       <p class="question" id="question-text"></p>
 
       <div class="code-block" id="code-block"></div>

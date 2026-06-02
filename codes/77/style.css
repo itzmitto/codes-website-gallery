@@ -42,6 +42,13 @@ body {
     justify-content: center;
     cursor: pointer;
     color: #ccc;
+    font-weight: 700;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.help-icon:hover {
+    background-color: #2e3548;
+    color: #ffffff;
 }
 
 .question {
@@ -164,4 +171,60 @@ body {
 
 .feedback.wrong {
     color: #f44336;
+}
+
+/* DE TOOLTIP */
+
+.tooltip-wrapper {
+    position: relative;
+    display: inline-block;
+    line-height: 0;
+}
+
+.tooltip-box {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%) translateY(6px);
+    width: 250px;
+    background-color: #2b3147;
+    border-radius: 10px;
+    padding: 16px 18px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.22s ease, transform 0.22s ease;
+    z-index: 10;
+}
+
+.tooltip-box::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 7px solid transparent;
+    border-top-color: #2b3147;
+}
+
+.tooltip-wrapper:hover .tooltip-box {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+
+.tooltip-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 8px;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+}
+
+.tooltip-text {
+    font-size: 0.9rem;
+    color: #a8b2cc;
+    line-height: 1.4;
 }
