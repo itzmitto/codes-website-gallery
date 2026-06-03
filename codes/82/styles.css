@@ -1,0 +1,97 @@
+:root {
+  --primary:          #A3E635;
+  --primary-hover:    #84CC16;
+  --primary-light:    #D9F99D;
+  --background:       #F8FAFC;
+  --surface:          #FFFFFF;
+  --surface-secondary:#F1F5F9;
+  --text-primary:     #0F172A;
+  --text-secondary:   #64748B;
+  --text-muted:       #94A3B8;
+  --border:           #E2E8F0;
+  --shadow-color:     rgba(15, 23, 42, 0.08);
+  --radius:           12px;
+  --radius-sm:        8px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--background);
+  color: var(--text-primary);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+/* ── Card wrapper ── */
+.card-wrapper {
+  width: 100%;
+  max-width: 340px;
+}
+
+/* ── Chart card ── */
+.chart-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: 0 1px 4px var(--shadow-color);
+}
+
+.chart-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.chart-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ── Legend ── */
+.legend-col {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 1rem;
+}
+
+.leg-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.leg-item strong {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-left: auto;
+}
+
+.leg-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* ── Canvas ── */
+.canvas-wrap {
+  position: relative;
+  height: 180px;
+}

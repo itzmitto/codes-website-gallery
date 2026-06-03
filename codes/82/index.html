@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Uitgaven totaal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="card-wrapper">
+    <div class="chart-card">
+      <div class="chart-card-header">
+        <span class="chart-title">Uitgaven totaal</span>
+      </div>
+      <div class="legend-col" id="donutLegend"></div>
+      <div class="canvas-wrap">
+        <canvas id="chartDonut"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const CATS     = ['Huur', 'Eten', 'Abonnementen', 'Transport', 'Overig'];
+    const CAT_COLS = ['#0F172A', '#A3E635', '#38BDF8', '#F59E0B', '#94A3B8'];
+    const totals   = [3700, 1460, 365, 2430, 1685];
+
+    // Build legend
+    const dl = document.getElementById('donutLegend');
+    CATS.forEach((label, i) => {
+      const span = document.createElement('span');
+      span.className = 'leg-item';
+      span.innerHTML = `
+        <span class="leg-dot" style="background:${CAT_COLS[i]}"></span>
+        ${label}
+        <strong>€${totals[i].toLocaleString('nl-NL')}</strong>
+      `;
+      dl.appendChild(span);
+    });
+
+    // Draw donut
+    new Chart(document.getElementById('chartDonut'), {
+      type: 'doughnut',
+      data: {
+        labels: CATS,
+        datasets: [{
+          data: totals,
+          backgroundColor: CAT_COLS,
+          borderWidth: 2,
+          borderColor: '#fff',
+          hoverOffset: 5
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '62%',
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: ctx => ` ${ctx.label}: €${ctx.parsed.toLocaleString('nl-NL')}`
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
