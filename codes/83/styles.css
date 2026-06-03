@@ -1,0 +1,112 @@
+:root {
+  --primary:          #A3E635;
+  --primary-hover:    #84CC16;
+  --primary-light:    #D9F99D;
+  --background:       #F8FAFC;
+  --surface:          #FFFFFF;
+  --surface-secondary:#F1F5F9;
+  --text-primary:     #0F172A;
+  --text-secondary:   #64748B;
+  --text-muted:       #94A3B8;
+  --border:           #E2E8F0;
+  --shadow-color:     rgba(15, 23, 42, 0.08);
+  --radius:           12px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--background);
+  color: var(--text-primary);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  padding: 2rem 2.5rem;
+}
+
+/* PAGE WRAPPER */
+.page-wrapper {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+/* SECTION HEADER */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.section-header h2 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.section-tag {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+}
+
+/* TREND CARD */
+.trend-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: 0 1px 4px var(--shadow-color);
+}
+
+/* CHART CARD HEADER */
+.chart-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chart-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* LEGEND */
+.legend-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.leg-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.leg-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  flex-shrink: 0;
+  background: var(--primary);
+}
+
+/* CHART CANVAS WRAPPER */
+.chart-wrap {
+  position: relative;
+  height: 160px;
+}
