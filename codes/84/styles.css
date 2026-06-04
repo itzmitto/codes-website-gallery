@@ -123,12 +123,61 @@ img {
 .card:has(.card__article:not(.card__active):hover) .card__active {
     flex: 0 0 64px;
 }
+
 .card:has(.card__article:not(.card__active):hover) .card__active .card__data {
     opacity: 0;
-    transform:translateY(2rem);
+    transform: translateY(2rem);
 }
 
-.card__article:hover .card__data{
+.card__article:hover .card__data {
     opacity: 1;
     transform: translateY(0);
+}
+
+@media (width >=540px) {
+    .card {
+        align-items: center;
+    }
+
+    .card__article {
+        width: 400px;
+        justify-self: center;
+    }
+}
+
+@media (width >=1150px) {
+    .card {
+        max-width: 1120px;
+        margin-inline: auto;
+        flex-direction: row;
+        column-gap: 1.5rem;
+    }
+
+    .card__article {
+        flex: 0 0 80px;
+        height: 460px;
+    }
+
+    .card__active,
+    .card__article:hover {
+        flex: 5;
+    }
+
+    .card:has(.card__article:not(.card__active):hover).card__active {
+        flex: 0 0 80px;
+    }
+
+    .card__data {
+        left: 1.5rem;
+        bottom: 1.5rem;
+    }
+
+    .card__title {
+        white-space: nowrap;
+    }
+
+    .card__description {
+        font-size: var(--normal-font-size);
+        white-space: nowrap;
+    }
 }
