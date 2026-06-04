@@ -1,0 +1,46 @@
+* {
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #111;
+    font-family: sans-serif;
+}
+
+.container{
+    width: 90%;
+    max-width: 350px;
+}
+.skill{
+    margin-bottom: 20px;
+}
+.info{
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+.bar{
+    height:10px;
+    background-color: #333;
+    border-radius: 999px;
+    overflow: hidden;
+}
+.progress {
+    height: 100%;
+    width: 0;
+    background-color: #00d0ff;
+    border-radius: inherit;
+    animation: fill 2s forwards;
+}
+
+@keyframes fill {
+    to {
+        width:var(--width)
+    }
+}
