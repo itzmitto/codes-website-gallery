@@ -1,0 +1,15 @@
+.carousel {
+    margin: 3em autp;
+    display: flex;
+    gap:1em;
+}
+
+.card{
+    height: 12em;
+    background-color: var(--primary-color);
+    padding: 1em;
+    border-radius: .5em;
+    text-align: center;
+    align-content: center;
+    flex: 0 0 20em;
+}
