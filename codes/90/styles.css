@@ -1,10 +1,10 @@
 body {
-    background-color: #000;
+    background-color: #00000069;
 }
 
-.modal{
+.modal {
     position: fixed;
-    inset:0;
+    inset: 0;
     background: rgba(0, 0, 0, 0.6);
     display: flex;
     justify-content: center;
@@ -19,11 +19,14 @@ body {
     padding: 20px;
     border-radius: 12px;
     transform: scale(0.7);
-    transition: 0.3;
-
+    transition: 0.3s;
 }
 
-.modal.show  {
+.modal.show {
     opacity: 1;
     pointer-events: auto;
+}
+
+.modal.show .modal-box {
+    transform: scale(1);
 }
