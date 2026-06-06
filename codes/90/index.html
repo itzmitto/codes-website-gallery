@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popup venster met fade-in effect</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <button onclick="openModal()">open modal</button>
+    <div class="modal">
+        <div class="modal-box">
+            <h2>123456789</h2>
+            <p>hfsggfhyryfd</p>
+            <button onclick="closeModal()">close</button>
+        </div>
+    </div>
+    <script>
+        function openModal(){document.querySelector(".modal").classList.add("show");}
+        function closeModal(){document.querySelector(".modal").classList.remove("show");} 
+    </script>
+</body>
+</html>
