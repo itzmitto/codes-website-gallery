@@ -1,25 +1,31 @@
-:root{
+:root {
     --bg: #131318;
     --bg2: #670ca3;
     --bg3: #242738;
     --text-color: white;
 }
-body{
+
+body {
     background-color: var(--bg);
 }
+
 .carousel {
     margin: 3em autp;
     display: flex;
     gap: 1em;
     width: 100%;
     overflow-x: auto;
+    scroll-behavior: smooth;
+    anchor-name: --carousel;
+    scroll-snap-type: x mandatory;
 }
 
 .carousel::-webkit-scrollbar {
     display: none;
 }
 
-.carousel::scroll-button(right) {
+.carousel::scroll-button(right),
+.carousel::scroll-button(left) {
     content: '→';
     border: none;
     background-color: var(--bg2);
@@ -31,10 +37,26 @@ body{
     border-radius: 50%;
     padding-bottom: .1em;
     cursor: pointer;
+    position: fixed;
+    position-anchor: --carousel;
+    position-area: right center ;
+    translate: -50%;
+}
 
+.carousel::scroll-button(left) {
+    content: '←';
+    position-area: left center;
+    translate: 50%;
+}
+
+.carousel::scroll-button(right):disabled,
+.carousel::scroll-button(left):disabled {
+    opacity: 0.5;
+    cursor: auto;
 }
 
 .card {
+    scroll-snap-align: start;
     height: 12em;
     background-color: var(--bg3);
     padding: 1em;
