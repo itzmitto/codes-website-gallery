@@ -1,67 +1,91 @@
-:root {
-    --bg: #131318;
-    --bg2: #670ca3;
-    --bg3: #242738;
-    --text-color: white;
-}
+    :root {
+        --bg: #131318;
+        --bg2: #670ca3;
+        --bg3: #242738;
+        --text-color: white;
+    }
 
-body {
-    background-color: var(--bg);
-}
+    body {
+        background-color: var(--bg);
+    }
 
-.carousel {
-    margin: 3em autp;
-    display: flex;
-    gap: 1em;
-    width: 100%;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    anchor-name: --carousel;
-    scroll-snap-type: x mandatory;
-}
+    .carousel {
+        margin: 3em auto;
+        display: flex;
+        gap: 1em;
+        width: 100%;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        anchor-name: --carousel;
+        scroll-snap-type: x mandatory;
+        scroll-marker-group: after;
+    }
 
-.carousel::-webkit-scrollbar {
-    display: none;
-}
+    .carousel::scroll-marker-group {
+        display: flex;
+        justify-content: center;
+        gap: .5em;
+    }
 
-.carousel::scroll-button(right),
-.carousel::scroll-button(left) {
-    content: '→';
-    border: none;
-    background-color: var(--bg2);
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 3rem;
-    color: var(--text-color);
-    height: 60px;
-    width: 60px;
-    border-radius: 50%;
-    padding-bottom: .1em;
-    cursor: pointer;
-    position: fixed;
-    position-anchor: --carousel;
-    position-area: right center ;
-    translate: -50%;
-}
+    .card::scroll-marker {
+        content: '';
+        height: 1em;
+        width: 1em;
+        background-color: var(--bg3);
+        border-radius: 50%;
+    }
 
-.carousel::scroll-button(left) {
-    content: '←';
-    position-area: left center;
-    translate: 50%;
-}
+    .card::scroll-marker:target-current {
+        background-color: var(--bg2);
+    }
 
-.carousel::scroll-button(right):disabled,
-.carousel::scroll-button(left):disabled {
-    opacity: 0.5;
-    cursor: auto;
-}
+    .carousel::-webkit-scrollbar {
+        display: none;
+    }
 
-.card {
-    scroll-snap-align: start;
-    height: 12em;
-    background-color: var(--bg3);
-    padding: 1em;
-    border-radius: .5em;
-    text-align: center;
-    align-content: center;
-    flex: 0 0 20em;
-}
+    .carousel::scroll-button(right),
+    .carousel::scroll-button(left) {
+        content: '→';
+        border: none;
+        background-color: var(--bg2);
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-size: 3rem;
+        color: var(--text-color);
+        height: 60px;
+        width: 60px;
+        border-radius: 50%;
+        padding-bottom: .1em;
+        cursor: pointer;
+        position: fixed;
+        position-anchor: --carousel;
+        position-area: right center;
+        translate: -50%;
+    }
+
+    .carousel::scroll-button(left) {
+        content: '←';
+        position-area: left center;
+        translate: 50%;
+    }
+
+    .carousel::scroll-button(right):disabled,
+    .carousel::scroll-button(left):disabled {
+        opacity: 0.5;
+        cursor: auto;
+    }
+
+    .card {
+        scroll-snap-align: start;
+        flex: 0 0 350px;
+        width: 250px;
+        height: 350px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    @media (max-width: 500px) {
+        .card {
+            flex: 0 0 100%;
+            width: 100%;
+        }
+    }
