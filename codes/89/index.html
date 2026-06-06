@@ -10,26 +10,67 @@
 </head>
 
 <body>
-<aside class="sidebar">
-    <header>
-        <button type="button" className="sidebar-burger" onClick="toggleSidebar()">
-            <i class="ai-three-line-horizontal"></i>
-        </button>
-        <img src="logo.svg" />
-    </header>
-    <nav class="menu">
-        <button type="button">
-            <i class="ai-home-altl"></i>
-            <p>Home</p>
-        </button>
-        <button type="button">
-            <i class="ai-eye-open"></i>
-        </button>
 
-    </nav>
+    <div class="bg-image"></div>
 
-</aside>
+    <aside class="sidebar">
+        <header>
+            <button type="button" class="sidebar-burger" onclick="toggleOpen()">
+                <i class="ai-three-line-horizontal"></i>
+            </button>
+            <span class="logo-text">hallo</span>
+        </header>
+
+        <nav class="menu">
+            <button type="button">
+                <i class="ai-home-alt"></i>
+                <p>Home</p>
+            </button>
+            <button type="button">
+                <i class="ai-eye-open"></i>
+                <p>Explore</p>
+            </button>
+            <button type="button">
+                <i class="ai-bar-chart"></i>
+                <p>Analytics</p>
+            </button>
+            <button type="button">
+                <i class="ai-bell"></i>
+                <p>Notifications</p>
+            </button>
+            <button type="button">
+                <i class="ai-message"></i>
+                <p>Messages</p>
+            </button>
+            <button type="button">
+                <i class="ai-bookmark"></i>
+                <p>Saved</p>
+            </button>
+            <button type="button">
+                <i class="ai-settings"></i>
+                <p>Settings</p>
+            </button>
+        </nav>
+
+        <footer class="sidebar-footer">
+            <div class="avatar">
+                <span>A</span>
+            </div>
+            <div class="user-info">
+                <p class="user-name">Andre</p>
+                <p class="user-role">Pro Member</p>
+            </div>
+            <button type="button" class="logout-btn">
+                <i class="ai-log-out"></i>
+            </button>
+        </footer>
+    </aside>
+
+    <main class="main-content">
+        <h1>Welcome back Andre</h1>
+        <p>javascript sidebar</p>
+    </main>
+    <script src="script.js"></script>
 </body>
-<script src="script.js"></script>
 
 </html>

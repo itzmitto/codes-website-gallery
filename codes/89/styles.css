@@ -1,3 +1,40 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --width-closed: 72px;
+    --width-open: 260px;
+    --accent: #02fdf1;
+    --accent-glow: rgb(97 153 247 / 25%);
+    --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+    font-family: var(--font-body);
+    color: #fff;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.bg-image {
+    position: fixed;
+    inset: 0;
+    background: url('bg.png') center / cover no-repeat;
+    z-index: -2;
+}
+
+.bg-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgb(0 0 0 / 45%);
+}
+
 .sidebar {
     position: fixed;
     top: 24px;
@@ -5,42 +42,89 @@
     bottom: 36px;
     display: flex;
     flex-direction: column;
-    width: 260px;
+    width: var(--width-closed);
     border-radius: 28px;
-    border: 5px solid rgb(255 255 255 / 10%);
-    background: rgb(0 0 0 / 12%);
-    backdrop-filter: blur(20px);
+    border: 1px solid rgb(255 255 255 / 12%);
+    background: rgb(0 0 0 / 30%);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    overflow: hidden;
+    transition: width var(--transition);
+    z-index: 100;
+}
+
+.sidebar.open {
+    width: var(--width-open);
 }
 
 .sidebar header {
     display: flex;
     align-items: center;
     height: 72px;
-    padding: 0 24px 0 0;
+    padding: 0 16px;
+    gap: 14px;
+    flex-shrink: 0;
+    border-bottom: 1px solid rgb(255 255 255 / 8%);
 }
 
-.sidebar header button {
-    width: 58px;
+.sidebar-burger {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    opacity: 0.8;
+    transition: background var(--transition), opacity var(--transition);
+    cursor: pointer;
+    background: transparent;
+    border: none;
 }
 
-.sidebar header img {
-    height: 18px;
+.sidebar-burger:hover {
+    background: rgb(255 255 255 / 10%);
+    opacity: 1;
+}
+
+.logo-text {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: opacity var(--transition), transform var(--transition);
+    color: #fff;
+}
+
+.sidebar.open .logo-text {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .sidebar .menu {
     position: relative;
     display: grid;
+    flex: 1;
+    align-content: start;
+    padding: 12px 0;
+    --top: 0px;
 }
 
-.sidebar .menu::after {
+.sidebar .menu::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: -4px;
+    top: calc(12px + var(--top));
+    left: 0;
     height: 56px;
-    width: 4px;
-    background: #6199f7;
-    translate: 0.3s;
+    width: 3px;
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent-glow);
+    border-radius: 0 3px 3px 0;
+    transition: top var(--transition);
 }
 
 .sidebar button {
@@ -48,18 +132,149 @@
     gap: 16px;
     align-items: center;
     height: 56px;
-    width: var(--width-closed);
-    padding: 0 22px;
-    color: inherit;
-    opacity: 0.6;
+    width: 100%;
+    padding: 0 16px;
+    color: #fff;
+    opacity: 0.5;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 400;
+    transition: background var(--transition), opacity var(--transition);
+    white-space: nowrap;
+}
+
+.sidebar button i {
+    font-size: 20px;
+    flex-shrink: 0;
+    width: 40px;
+    text-align: center;
+}
+
+.sidebar button p {
+    overflow: hidden;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity var(--transition), transform var(--transition);
+    pointer-events: none;
+}
+
+.sidebar.open button p {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .sidebar .menu button:hover {
-    background: rgb(255, 255, 255 / 4%);
-    opacity: 0.85;
+    background: rgb(255 255 255 / 6%);
+    opacity: 0.8;
 }
 
-.sidebar .menu button:hover {
-    background: rgb(255, 255, 255 / 4%);
-    opacity: 0.85;
+.sidebar .menu button:active {
+    background: rgb(255 255 255 / 10%);
+}
+
+.sidebar .menu .active {
+    opacity: 1;
+    cursor: default;
+    background: rgb(255 255 255 / 5%);
+}
+
+.sidebar-footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-top: 1px solid rgb(255 255 255 / 8%);
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.avatar {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: linear-gradient(var(--accent), #ee0202fb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+
+.user-info {
+    flex: 1;
+    min-width: 0;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity var(--transition), transform var(--transition);
+}
+
+.sidebar.open .user-info {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.user-name {
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.user-role {
+    font-size: 11px;
+    opacity: 0.5;
+    white-space: nowrap;
+}
+
+.logout-btn {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: #fff;
+    opacity: 0;
+    cursor: pointer;
+    transition: background var(--transition), opacity var(--transition);
+}
+
+.sidebar.open .logout-btn {
+    opacity: 0.5;
+}
+
+.logout-btn:hover {
+    background: rgb(255 100 100 / 15%);
+    opacity: 1;
+}
+
+.main-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.main-content h1 {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+}
+
+.main-content p {
+    opacity: 0.55;
+    font-size: 16px;
 }
