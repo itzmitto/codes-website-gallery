@@ -1,0 +1,24 @@
+ body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #111;
+        }
+
+        .card {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                #f43f5e,
+                #fb923c,
+                #facc15,
+                #4ade80,
+                #38bdf8,
+                #818cf8,
+                #f43f5e
+            );
+        }
