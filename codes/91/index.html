@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal Animations</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="card" data-animation="fade">Fade</div>
+        <div class="card" data-animation="slide">Slide</div>
+        <div class="card" data-animation="scale">Scale</div>
+        <div class="card" data-animation="swing">Swing</div>
+        <div class="card" data-animation="flip">Flip</div>
+        <div class="card" data-animation="blur">Blur</div>
+        <div class="card" data-animation="unfold">Unfold</div>
+        <div class="card" data-animation="rotate">Rotate</div>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <button class="close">close</button>
+            <h2 id="title"></h2>
+
+            <h3>Animation CSS</h3>
+            <pre id="cssCode"></pre>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
