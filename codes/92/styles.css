@@ -45,6 +45,7 @@
      width: 300px;
      height: 300px;
      border-radius: 50%;
-     background: radial-gradient(circle,
-     #0f0f1b 40%, transparent 41%), conic-gradient( #665ae2 0 75%, #2a2a3e 75%);
+     background: repeating-conic-gradient(
+        #2a2a3e 0 25%, #1e1e2e 25% 50% );   
+    background-size: 20px 20px;
  }
