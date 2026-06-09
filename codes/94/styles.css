@@ -1,0 +1,42 @@
+* {
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Times New Roman', Times, serif;
+    overflow: hidden;
+    background: #000;
+}
+
+.wrapper {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.side {
+    width: 50vw;
+    height: 100vh;
+}
+
+.white {
+    background: #ffffff;
+}
+
+.black {
+    background: #000000;
+}
+
+#blend-text {
+    position: absolute;
+    font-size: 15vw;
+    font-weight: 900;
+    color: white;
+    mix-blend-mode: difference;
+    letter-spacing: -0.05em;
+    pointer-events: none;
+}
