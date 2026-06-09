@@ -1,11 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="day">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Password Validator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    
+
+  <div class="card">
+    <div class="card__header">
+      <h2 class="card__title">Password Validator</h2>
+      <p class="card__subtitle">
+        Your password must meet all requirements below
+      </p>
+    </div>
+
+    <div class="input-group">
+      <div class="input-group__field-wrapper">
+        <input
+          id="password"
+          type="password"
+          class="input-group__field"
+          placeholder="Your Password"
+          autocomplete="new-password"
+        />
+        <label for="password" class="input-group__label">
+          Password
+        </label>
+        <button
+          type="button"
+          class="input-group__toggle"
+          aria-label="Toggle password visibility"
+        ></button>
+      </div>
+    </div>
+
+    <div class="strength">
+      <div class="strength__bar-wrapper">
+        <div class="strength__bar-track">
+          <div class="strength__bar-fill" id="strength-fill"></div>
+        </div>
+      </div>
+      <div class="strength__bar-label">
+        <span class="strength__bar-text">Password strength</span>
+        <span
+          class="strength__bar-level"
+          id="strength-level"
+        ></span>
+      </div>
+    </div>
+
+    <ul class="rules" role="list">
+      <li class="rules__item" data-rule="low-upper-case">
+        <span class="rules__icon"></span>
+        <span class="rules__text">Lowercase Uppercase</span>
+      </li>
+      <li class="rules__item" data-rule="one-number">
+        <span class="rules__icon"></span>
+        <span class="rules__text">At least one number</span>
+      </li>
+      <li class="rules__item" data-rule="one-special-char">
+        <span class="rules__icon"></span>
+        <span class="rules__text">At least one special character</span>
+      </li>
+      <li class="rules__item" data-rule="eight-character">
+        <span class="rules__icon"></span>
+        <span class="rules__text">At least 8 characters</span>
+      </li>
+    </ul>
+
+    <button
+      type="button"
+      class="btn-primary"
+      id="submit-btn"
+      disabled
+    >
+      Continue
+    </button>
+  </div>
+
+  <script src="script.js"></script>
 </body>
-</html>
+</html> 
