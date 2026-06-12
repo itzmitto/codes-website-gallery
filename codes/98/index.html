@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animation Cards</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h2 class="sr-only">
+      8 animatiekaarten — klik op een kaart om een popup te zien met die
+      animatie
+    </h2>
+
+    <div class="page-wrapper">
+      <div class="grid" id="cardGrid">
+        <div class="card" onclick="openModal('fadeIn')" tabindex="0">
+          <div class="icon"><i class="ti ti-sun" aria-hidden="true"></i></div>
+          fade in
+        </div>
+        <div class="card" onclick="openModal('slideUp')" tabindex="0">
+          <div class="icon">
+            <i class="ti ti-arrow-up" aria-hidden="true"></i>
+          </div>
+          slide up
+        </div>
+        <div class="card" onclick="openModal('scale')" tabindex="0">
+          <div class="icon">
+            <i class="ti ti-maximize" aria-hidden="true"></i>
+          </div>
+          scale
+        </div>
+        <div class="card" onclick="openModal('swing')" tabindex="0">
+          <div class="icon">
+            <i class="ti ti-rotate-clockwise" aria-hidden="true"></i>
+          </div>
+          swing
+        </div>
+        <div class="card" onclick="openModal('flip')" tabindex="0">
+          <div class="icon">
+            <i class="ti ti-refresh" aria-hidden="true"></i>
+          </div>
+          flip
+        </div>
+        <div class="card" onclick="openModal('blur')" tabindex="0">
+          <div class="icon">
+            <i class="ti ti-focus-2" aria-hidden="true"></i>
+          </div>
+          blur
+        </div>
+        <div class="card" onclick="openModal('unfold')" tabindex="0">
+          <div class="icon">
+            <i class="ti ti-layout-bottombar-expand" aria-hidden="true"></i>
+          </div>
+          unfold
+        </div>
+        <div class="card" onclick="openModal('rotate')" tabindex="0">
+          <div class="icon">
+            <i class="ti ti-rotate" aria-hidden="true"></i>
+          </div>
+          rotate
+        </div>
+      </div>
+
+      <div class="overlay" id="overlay" onclick="closeModal()">
+        <div
+          class="modal"
+          id="modal"
+          onclick="event.stopPropagation()"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modalTitle"
+        >
+          <div class="anim-icon" id="modalIcon"></div>
+          <h3 id="modalTitle"></h3>
+          <p id="modalDesc"></p>
+          <button class="close-btn" onclick="closeModal()">Sluiten</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
