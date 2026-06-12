@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bento Features — CSS Interactive Tutorial</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="page">
+
+    <!-- Header -->
+    <header class="head">
+      <p class="eyebrow">CSS interactive tutorial</p>
+      <h1 class="title">Bento <span class="accent">Features</span></h1>
+      <p class="subtitle">Drag to resize · watch the layout reflow</p>
+
+      <!-- Breakpoint presets -->
+      <div class="presets" role="tablist" aria-label="Viewport presets">
+        <button class="preset active" data-width="375" role="tab" aria-selected="true">Mobile</button>
+        <button class="preset" data-width="600" role="tab" aria-selected="false">Tablet</button>
+        <button class="preset" data-width="900" role="tab" aria-selected="false">Laptop</button>
+        <button class="preset" data-width="1280" role="tab" aria-selected="false">Desktop</button>
+      </div>
+
+      <!-- Ruler -->
+      <div class="ruler">
+        <span class="ruler__current" id="rulerCurrent">375px</span>
+        <div class="ruler__track">
+          <div class="ruler__fill" id="rulerFill"></div>
+          <span class="ruler__mark" style="left:30%"><b>480px</b></span>
+          <span class="ruler__mark" style="left:55.5%"><b>768px</b></span>
+          <span class="ruler__mark" style="left:78.5%"><b>1024px</b></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Resizable preview stage -->
+    <section class="stage">
+      <div class="stage__inner">
+        <div class="frame" id="frame">
+
+          <div class="bento" id="bento">
+
+            <!-- AI -->
+            <div class="cell cell--ai" style="grid-area: ai;">
+              <span class="badge badge--ai">AI</span>
+              <div class="line w-100"></div>
+              <div class="line w-80"></div>
+              <div class="line w-90"></div>
+              <div class="line w-55"></div>
+              <div class="tag-row">
+                <span class="tag tag--sm"></span>
+                <span class="tag tag--sm"></span>
+                <span class="tag tag--sm"></span>
+              </div>
+              <div class="tag-row">
+                <span class="tag tag--sm"></span>
+                <span class="tag tag--md"></span>
+                <span class="tag tag--sm"></span>
+              </div>
+              <div class="line line--accent w-100"></div>
+              <div class="tag-row">
+                <span class="tag tag--sm"></span>
+                <span class="tag tag--md"></span>
+              </div>
+            </div>
+
+            <!-- BOARD -->
+            <div class="cell cell--board" style="grid-area: board;">
+              <span class="badge badge--board">Board</span>
+              <div class="board-head">
+                <div class="line w-55"></div>
+                <div class="line w-15"></div>
+              </div>
+              <div class="board-meta">
+                <div class="line w-15"></div>
+                <div class="board-dot-label">
+                  <span class="dot dot--board"></span>
+                  <div class="line w-35"></div>
+                </div>
+                <div class="board-dot-label">
+                  <span class="dot dot--board"></span>
+                  <div class="line w-35"></div>
+                </div>
+              </div>
+              <div class="board-grid">
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+                <div class="board-cell board-cell--ghost"></div>
+                <div class="board-cell"></div>
+              </div>
+            </div>
+
+            <!-- CONFIG -->
+            <div class="cell cell--config" style="grid-area: config;">
+              <span class="badge badge--config">Config</span>
+              <div class="toggle-row">
+                <div class="line w-70"></div>
+                <span class="switch"></span>
+              </div>
+              <div class="toggle-row">
+                <div class="line w-85"></div>
+                <span class="switch switch--on"></span>
+              </div>
+              <div class="toggle-row">
+                <div class="line w-60"></div>
+                <span class="switch"></span>
+              </div>
+              <div class="toggle-row">
+                <div class="line w-90"></div>
+                <span class="switch switch--on"></span>
+              </div>
+            </div>
+
+            <!-- APPS -->
+            <div class="cell cell--apps" style="grid-area: apps;">
+              <span class="badge badge--apps">Apps</span>
+              <div class="line line--lg w-95"></div>
+              <div class="line w-70"></div>
+              <div class="apps-grid">
+                <div class="apps-icon">
+                  <span class="apps-icon__box"></span>
+                  <span class="apps-icon__label"></span>
+                </div>
+                <div class="apps-icon">
+                  <span class="apps-icon__box"></span>
+                  <span class="apps-icon__label"></span>
+                </div>
+                <div class="apps-icon apps-icon--ghost">
+                  <span class="apps-icon__box"></span>
+                  <span class="apps-icon__label"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- SEARCH -->
+            <div class="cell cell--search" style="grid-area: search;">
+              <span class="badge badge--search">Search</span>
+              <div class="line line--lg w-80"></div>
+              <div class="search-input"></div>
+              <div class="search-row">
+                <span class="dot dot--search"></span>
+                <div class="line w-95"></div>
+              </div>
+              <div class="search-row">
+                <span class="dot dot--search"></span>
+                <div class="line w-90"></div>
+              </div>
+              <div class="search-row">
+                <span class="dot dot--search"></span>
+                <div class="line w-60"></div>
+              </div>
+            </div>
+
+            <!-- TASKS -->
+            <div class="cell cell--tasks" style="grid-area: tasks;">
+              <span class="badge badge--tasks">Tasks</span>
+              <div class="line line--lg w-90"></div>
+              <div class="line w-100"></div>
+              <div class="line w-75"></div>
+              <div class="dots-menu"><span></span><span></span><span></span></div>
+            </div>
+
+            <!-- STATS -->
+            <div class="cell cell--stats" style="grid-area: stats;">
+              <span class="badge badge--stats">Stats</span>
+              <div class="stats-row">
+                <div class="line line--lg w-45"></div>
+                <div class="line line--lg w-45"></div>
+              </div>
+              <div class="chart">
+                <span style="--h:38%"></span>
+                <span style="--h:62%"></span>
+                <span style="--h:30%"></span>
+                <span style="--h:75%"></span>
+                <span style="--h:50%"></span>
+                <span style="--h:68%"></span>
+                <span style="--h:42%"></span>
+                <span style="--h:58%"></span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Drag handle -->
+          <div class="handle" id="handle" tabindex="0" role="slider" aria-label="Resize preview" aria-valuemin="320" aria-valuemax="1280" aria-valuenow="375">
+            <span class="handle__grip">
+              <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="14 6 20 12 14 18"/></svg>
+              <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 18 4 12 10 6"/></svg>
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live CSS panel -->
+    <section class="code">
+      <div class="code__head">
+        <span class="code__lang">CSS</span>
+        <div class="code__tabs" id="codeTabs">
+          <button class="code__tab active" data-bp="base">Base</button>
+          <button class="code__tab" data-bp="480">&ge; 480</button>
+          <button class="code__tab" data-bp="768">&ge; 768</button>
+          <button class="code__tab" data-bp="1024">&ge; 1024</button>
+        </div>
+      </div>
+      <pre class="code__body"><code id="codeBody"></code></pre>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
