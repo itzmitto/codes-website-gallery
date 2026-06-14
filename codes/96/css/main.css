@@ -1,1 +1,25 @@
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+ }
+
+ :root {
+    --primary:  #ff3700;
+ }
  
+ body {
+    /* background: #000000; */
+    font-family: 'Poppins', sans-serif;
+ }
+
+ header{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 100px;
+ }
