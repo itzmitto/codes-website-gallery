@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8"> 
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="./css/main.css">
@@ -32,7 +32,8 @@
                 <span>2026</span><span><i>12+</i></span><span>2h 30min</span><span>Adventure</span>
             </h4>
             <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit quaerat expedita, quasi deleniti beatae enim vitae eos sapiente at, corporis optio nam nemo vel voluptas in fugiat! Quasi, placeat sequi.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit quaerat expedita, quasi deleniti beatae
+                enim vitae eos sapiente at, corporis optio nam nemo vel voluptas in fugiat! Quasi, placeat sequi.
             </p>
             <div class="button">
                 <a href="#"><i class="fa-solid fa-play"></i>watch</a>
@@ -58,7 +59,9 @@
                 </div>
             </div>
         </div>
-        <a href="#" class="play"><i class="fa-solid fa-circle-play"></i>watch trailer</a>
+        <a href="#" class="play" onClick="toggleVideo();"
+        > 
+            <i class="fa-solid fa-circle-play"></i>watch trailer</a>
         <ul class="sci">
             <li><a href="#"></a><i class="fa-brands fa-facebook-f"></i></li>
             <li><a href="#"></a><i class="fa-brands fa-youtube"></i></li>
@@ -66,20 +69,17 @@
         </ul>
     </div>
     <div class="trailer">
-        <video src="./images/movies/Bezig met opnemen 2026-06-15 214854.mp4"
-        muted
-        controls="true"
-        autoplay="true"
-        ></video>
-        <img class="close" src="./images/close.png" alt="">
+        <video src="./images/movies/Bezig met opnemen 2026-06-15 214854.mp4" muted controls="true"
+            autoplay="true"></video>
+        <img class="close" src="./images/close.png" alt="" onClick="toggleVideo();">
     </div>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./js/script.js"></script>
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('.carousel').carousel();
-            });
+        });
     </script>
 </body>
 
