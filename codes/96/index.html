@@ -38,7 +38,25 @@
                 <a href="#"><i class="fa-solid fa-plus"></i>my list</a>
             </div>
         </div>
-        <div class="carousel-box"></div>
+        <div class="carousel-box">
+            <div class="carousel">
+                <div class="carousel-item">
+                    <img src="./images/movies/jw.jpg" alt="">
+                </div>
+                <div class="carousel-item">
+                    <img src="./images/movies/avatar.jpg" alt="">
+                </div>
+                <div class="carousel-item">
+                    <img src="./images/movies/Interstellar.jpg" alt="">
+                </div>
+                <div class="carousel-item">
+                    <img src="./images/movies/marvel.jpg" alt="">
+                </div>
+                <div class="carousel-item">
+                    <img src="./images/movies/matrix.jpg" alt="">
+                </div>
+            </div>
+        </div>
         <a href="#" class="play"><i class="fa-solid fa-circle-play"></i>watch trailer</a>
         <ul class="sci">
             <li><a href="#"></a><i class="fa-brands fa-facebook-f"></i></li>
@@ -49,6 +67,11 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./js/script.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.carousel').carousel();
+            });
+    </script>
 </body>
 
 </html>
