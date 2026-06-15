@@ -300,4 +300,25 @@
    align-items: center;
    backdrop-filter: blur(20px);
    visibility: hidden;
+   opacity: 0;
+   transition: 0.5s;
+ }
+
+ .trailer.active {
+   visibility: visible;
+   opacity: 1;
+ }
+
+ .tailer video {
+   max-width: 900px;
+   outline: none;
+ }
+
+ .close{
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  cursor: pointer;
+  filter: invert(1);
+  max-width: 30px;
  }
