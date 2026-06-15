@@ -145,3 +145,47 @@
    padding: 0 10px;
    border-right: 1px solid rgba(255, 255, 255, 0.5);
  }
+
+ 
+ .banner .content h4 span:first-child{
+   padding-left: 0;
+ }
+
+ 
+ .banner .content h4 span:last-child{
+   border-right: none;
+ }
+
+ 
+ .banner .content h4 span i{
+   background: var(--primary);
+   color: #ffffff;
+   padding: 0 8px;
+   display:inline-block;
+   border-radius: 2px;
+ } 
+ .banner .content p {
+   font-size: 1em;
+   font-weight: 300;
+   line-height: 1.5em;
+   color: #ffffff;
+   margin: 10px 0 20px;
+ }
+
+ .banner .content .button{
+   position: relative;
+ }
+
+ .banner .content .button a {
+   position: relative;
+   display: inline-block;
+   margin-right: 10px;
+   background: var(--primary);
+   color: #ffffff;
+   padding: 6px 20px;
+   font-weight: 500;
+   letter-spacing: 1px;
+   text-transform: uppercase;
+   transition: 0.5s;
+   cursor: pointer;
+ }
