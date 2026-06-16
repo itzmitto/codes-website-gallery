@@ -141,3 +141,34 @@ header .author img{
     transition: 0.7s;
     z-index: 1;
 }
+
+.rock{
+    position: absolute;
+    inset: 0 0 0 0;
+    width: 100%;
+    pointer-events: none;
+}
+.rock img:nth-child(1){
+    position: absolute;
+    height: 190px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
+    transition: 0.7s;
+    z-index: 1;
+}
+.rock img:nth-child(2){
+    position: absolute;
+    height: 60%;
+    left: 0;
+    bottom: 0;
+    transition: 0.7s;
+}
+.rock img:nth-child(3){
+    position: absolute;
+    height: 100%;
+    right: 0;
+    bottom: -180px;
+    rotate: -50deg;
+    transition: 0.7s;
+}
