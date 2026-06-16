@@ -1,10 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Karantina:wght@300;400;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    font-family: Poppins;
+    color: #1E1E1E;
+    background-color: #CDCDCD;
+    background-image:
+        repeating-linear-gradient(to right, transparent 0 150px, #0001 150px 151px),
+        repeating-linear-gradient(to bottom, transparent 0 150px, #0001 150px 151px),
+        linear-gradient(to right, #CDCDCDcc, #CDCDCDcc),
+        url(images/bg.jpg);
+    overflow: hidden;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    width: min(1200px, 90vw);
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 50px;
+    height: 0px;
+    flex-wrap: wrap;
+}
+
 .banner {
     height: 100vh;
     overflow: hidden;
     position: relative;
 }
 
-.banner .product{
+.banner .product {
     background-color: red;
     width: 500px;
     height: 500px;
@@ -16,11 +47,13 @@
     transition: 0.7s;
 }
 
-.banner .product .soda{
-    background: url(images/mockup.png),url(images/bg.png);
+.banner .product .soda {
+    background: url(images/mockup.png), url(images/bg.png);
     background-size: auto 100%;
     width: 280px;
     /* height:400px; */
     aspect-ratio: 2 / 4;
     background-blend-mode: multiply;
+    mask-image: url(images/mockup.png);
+    mask-size: auto 100%;
 }
