@@ -112,3 +112,32 @@ header .author img{
 .product:hover{
     bottom: 150px;
 }
+
+.product:hover .soda {
+    transform: translateX(-50%) translateY(-30px); 
+}
+.product:hover .soda:nth-child(2){
+    opacity: 1;
+    --left: 500px;
+}
+.product:hover .soda:nth-child(1){
+    opacity: 0;
+    --left: 500px;
+}
+
+
+.rock{
+    position: absolute;
+    inset: 0 0 0 0;
+    width: 100%;
+    pointer-events: none;
+}
+.rock img:nth-child(1){
+    position: absolute;
+    height: 190px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
+    transition: 0.7s;
+    z-index: 1;
+}
