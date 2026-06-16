@@ -16,7 +16,11 @@
     transition: 0.7s;
 }
 
-.banner .product .sode{
-    background: url(images/mockup.png);
-
+.banner .product .soda{
+    background: url(images/mockup.png),url(images/bg.png);
+    background-size: auto 100%;
+    width: 280px;
+    /* height:400px; */
+    aspect-ratio: 2 / 4;
+    background-blend-mode: multiply;
 }
