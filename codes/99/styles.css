@@ -32,6 +32,28 @@ header {
     height: 0px;
     flex-wrap: wrap;
 }
+header .author{
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+header h3{
+    font-family: "Karantina", system-ui;
+    font-size: 5vw;
+}
+header .author div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header .author div p:nth-child(2){
+    font-weight: 500;
+}
+
+header .author img{
+    width: 250px;
+}
 
 .banner {
     height: 100vh;
@@ -60,4 +82,12 @@ header {
     background-blend-mode: multiply;
     mask-image: url(images/mockup.png);
     mask-size: auto 100%;
+}
+
+
+.product .soda{
+    position: absolute;
+    bottom: 0;
+    left: calc(50%);
+    transform: translateX(-50%);
 }
