@@ -68,7 +68,6 @@ header .author img {
 }
 
 .banner .product {
-    background-color: red;
     width: 500px;
     height: 500px;
     position: absolute;
@@ -78,18 +77,6 @@ header .author img {
     z-index: 1;
     transition: 0.7s;
 }
-
-.banner .product .soda {
-    background: url(images/mockup.png), url(images/bg.png);
-    background-size: auto 100%;
-    width: 280px;
-    /* height:400px; */
-    aspect-ratio: 2 / 4;
-    background-blend-mode: multiply;
-    mask-image: url(images/mockup.png);
-    mask-size: auto 100%;
-}
-
 
 .product .soda {
     position: absolute;
@@ -132,24 +119,6 @@ header .author img {
 .product:hover .soda:nth-child(1) {
     opacity: 0;
     --left: 500px;
-}
-
-
-.rock {
-    position: absolute;
-    inset: 0 0 0 0;
-    width: 100%;
-    pointer-events: none;
-}
-
-.rock img:nth-child(1) {
-    position: absolute;
-    height: 190px;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 20px;
-    transition: 0.7s;
-    z-index: 1;
 }
 
 .rock {
