@@ -1,0 +1,16 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #232323;
+    overflow-x: hidden;
+    height: 100vh;
+    font-family: 'Urbanist', sans-serif;
+}
+
+a{
+text-decoration: none;     
+}
+input{
+    display: none;
+}
