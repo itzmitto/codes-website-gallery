@@ -8,23 +8,12 @@ body {
     font-family: 'Urbanist', sans-serif;
 }
 
-a{
-text-decoration: none;     
+a {
+    text-decoration: none;
 }
-input{
+
+input {
     display: none;
-}
-
-#s1:checked-.cards #slide4,
-#s2:checked-.cards #slide5,
-#s3:checked-.cards #slide1,
-#s4:checked-.cards #slide2,
-#s5:checked-.cards #slide3{
-
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 45%);
-    transform: translate3d(-70%, 0, -220px);
-    --current-color1: #eceaed;
-    --currente-color2: #404457;
 }
 
 
@@ -42,7 +31,7 @@ input{
 }
 
 
-.cards{
+.cards {
     position: relative;
     height: 500px;
     width: 430px;
@@ -51,7 +40,7 @@ input{
     transform-style: preserve-3d;
 }
 
-.cards label{
+.cards label {
     position: absolute;
     width: 430px;
     left: 0;
@@ -61,7 +50,7 @@ input{
     transition: transform 0.55s ease;
 }
 
-.cards .card{
+.cards .card {
     position: relative;
     height: 100%;
     background-color: #323444;
@@ -69,7 +58,7 @@ input{
     padding: 30px 35px;
 }
 
-.cards .image img{
+.cards .image img {
     border-radius: 5px;
     box-shadow: 15px 15px 40px rgba(0, 0, 0, 50%);
     margin-top: 23px;
@@ -78,39 +67,57 @@ input{
     transition: all .7s;
 }
 
-.cards .image img:hover{
+.cards .image img:hover {
     transform: scale(1.05);
 }
 
-.cards .image .dots{
+.cards .image .dots {
     text-align: center;
 }
 
-.dots div{
+.dots div {
     width: 10px;
     height: 10px;
-    border-radius:50%;
+    border-radius: 50%;
     margin-bottom: 10px;
 }
 
-.dots div:nth-child(1){
+.dots div:nth-child(1) {
     background-color: var(--current-color1);
-} 
+}
 
-.dots div:nth-child(2){
+.dots div:nth-child(2) {
     background-color: #5b85f9;
-} 
+}
 
-.dots div:nth-child(3){
+.dots div:nth-child(3) {
     background-color: #000;
-} 
+}
 
+.cards .infos {
+    display: block;
+    text-align: end;
+    padding-top: 60px;
+}
 
+.cards .infos span {
+    display: block;
+}
 
+.infos .name {
+    font-size: 30px;
+    color: var(--current-color1);
+    letter-spacing: 8px;
+}
 
 #s1:checked-.cards #slide4,
 #s2:checked-.cards #slide5,
 #s3:checked-.cards #slide1,
 #s4:checked-.cards #slide2,
-#s5:checked-.cards #slide3{
+#s5:checked-.cards #slide3 {
+
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 45%);
+    transform: translate3d(-70%, 0, -220px);
+    --current-color1: #eceaed;
+    --currente-color2: #404457;
 }
