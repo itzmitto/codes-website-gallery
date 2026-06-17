@@ -52,7 +52,7 @@ input{
 }
 
 .cards label{
-    position: relative;
+    position: absolute;
     width: 430px;
     left: 0;
     right: 0;
@@ -79,8 +79,31 @@ input{
 }
 
 .cards .image img:hover{
-    
+    transform: scale(1.05);
 }
+
+.cards .image .dots{
+    text-align: center;
+}
+
+.dots div{
+    width: 10px;
+    height: 10px;
+    border-radius:50%;
+    margin-bottom: 10px;
+}
+
+.dots div:nth-child(1){
+    background-color: var(--current-color1);
+} 
+
+.dots div:nth-child(2){
+    background-color: #5b85f9;
+} 
+
+.dots div:nth-child(3){
+    background-color: #000;
+} 
 
 
 
