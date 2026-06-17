@@ -63,5 +63,31 @@ input{
 
 .cards .card{
     position: relative;
+    height: 100%;
+    background-color: #323444;
+    border-radius: 10px;
+    padding: 30px 35px;
+}
+
+.cards .image img{
+    border-radius: 5px;
+    box-shadow: 15px 15px 40px rgba(0, 0, 0, 50%);
+    margin-top: 23px;
+    height: 220px;
+    object-fit: cover;
+    transition: all .7s;
+}
+
+.cards .image img:hover{
     
+}
+
+
+
+
+#s1:checked-.cards #slide4,
+#s2:checked-.cards #slide5,
+#s3:checked-.cards #slide1,
+#s4:checked-.cards #slide2,
+#s5:checked-.cards #slide3{
 }
