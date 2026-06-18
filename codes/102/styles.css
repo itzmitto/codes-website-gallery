@@ -7,20 +7,28 @@
 
 .carousel {
     width: 90%;
+    overflow: hidden;
 }
 
 .track{
     display: flex;
     width: max-content;
     will-change: transform;
+    animation: scroll 10s linear infinite;
 }
 
+@keyframes scroll {
+    to {
+        transform: translateX(-50%);
+    }
+}
 .item{
     width: 240px;
     height: 200px;
     flex-shrink: 0;
     border-radius: 15px;
     margin-right: 15px;
+    overflow: hidden;
 }
 
 .item img{
@@ -28,4 +36,18 @@
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform .5s filter .4s;
+}
+
+.carousel:hover .item img{
+    filter: grayscale(.8);
+}
+
+.item:hover img{
+    filter: grayscale(0) !important;
+    transform: scale(1.06);
+}
+
+.carousel:hover .track{
+    animation-play-state: paused ;
 }
