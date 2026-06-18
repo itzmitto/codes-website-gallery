@@ -8,6 +8,7 @@
 .carousel {
     width: 90%;
     overflow: hidden;
+    mask-image: linear-gradient(to right, transparent, #000 10% 90%, transparent);
 }
 
 .track{
