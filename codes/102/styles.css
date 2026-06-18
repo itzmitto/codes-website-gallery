@@ -6,5 +6,26 @@
 
 
 .carousel {
-    
+    width: 90%;
+}
+
+.track{
+    display: flex;
+    width: max-content;
+    will-change: transform;
+}
+
+.item{
+    width: 240px;
+    height: 200px;
+    flex-shrink: 0;
+    border-radius: 15px;
+    margin-right: 15px;
+}
+
+.item img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
