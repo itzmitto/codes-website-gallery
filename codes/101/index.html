@@ -1,146 +1,196 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carousel slider</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carousel Slider</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
     <div class="container">
-        <input type="radio" name="slider" id="s1"
-        checked>
-        <input type="radio" name="slider" id="s2">
-        <input type="radio" name="slider" id="s3">
-        <input type="radio" name="slider" id="s4">
-        <input type="radio" name="slider" id="s5">
+      <input type="radio" name="slider" id="s1" checked />
+      <input type="radio" name="slider" id="s2" />
+      <input type="radio" name="slider" id="s3" />
+      <input type="radio" name="slider" id="s4" />
+      <input type="radio" name="slider" id="s5" />
 
-        <label class="s1" id="slide1">
-            <div class="card">
-
+      <div class="cards">
+        <!-- Slide 1 -->
+        <label for="s1" id="slide1">
+          <div class="card">
             <div class="image">
-                <img src="./images/dragon_1.jpg" alt="dragon1">
-                <div class="dots">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-            </div>
-            <div class="infos">
-                <span class="name">dragon first img</span>
-                <span class="lorem">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo excepturi doloribus vero beatae placeat cumque aut ipsa sapiente, quisquam explicabo assumenda modi ea magnam molestiae molestias dolor, optio ex itaque?</span>
-                <a href="/details" class="btn.-details">details</a>
+              <img src="./images/dragon_1.jpg" alt="Dragon 1" />
 
-                <div class="actions"></div>
+              <div class="dots">
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+
+            <div class="infos">
+              <span class="name">Dragon First Img</span>
+
+              <span class="lorem">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo
+                excepturi doloribus vero beatae placeat cumque aut ipsa
+                sapiente.
+              </span>
+
+              <a href="/details" class="btn-details">Details</a>
+
+              <div class="actions">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <i class="fa-regular fa-heart"></i>
                 <i class="fa-regular fa-bookmark"></i>
                 <i class="fa-solid fa-share-nodes"></i>
+              </div>
             </div>
+          </div>
         </label>
 
-
-        <label class="s2" id="slide2">
-            <div class="card">
-
+        <!-- Slide 2 -->
+        <label for="s2" id="slide2">
+          <div class="card">
             <div class="image">
-                <img src="./images/dragon_2.jpg" alt="dragon2">
-                <div class="dots">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-            </div>
-            <div class="infos">
-                <span class="name">dragon 2 img</span>
-                <span class="lorem">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo excepturi doloribus vero beatae placeat cumque aut ipsa sapiente, quisquam explicabo assumenda modi ea magnam molestiae molestias dolor, optio ex itaque?</span>
-                <a href="/details" class="btn.-details">details</a>
+              <img src="./images/dragon_2.jpg" alt="Dragon 2" />
 
-                <div class="actions"></div>
+              <div class="dots">
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+
+            <div class="infos">
+              <span class="name">Dragon 2 Img</span>
+
+              <span class="lorem">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo
+                excepturi doloribus vero beatae placeat cumque aut ipsa
+                sapiente.
+              </span>
+
+              <a href="/details" class="btn-details">Details</a>
+
+              <div class="actions">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <i class="fa-regular fa-heart"></i>
                 <i class="fa-regular fa-bookmark"></i>
                 <i class="fa-solid fa-share-nodes"></i>
+              </div>
             </div>
+          </div>
         </label>
 
-
-        <label class="s3" id="slide3">
-            <div class="card">
-
+        <label for="s3" id="slide3">
+          <div class="card">
             <div class="image">
-                <img src="./images/dragon_3.jpg" alt="dragon3">
-                <div class="dots">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-            </div>
-            <div class="infos">
-                <span class="name">dragon 3 img</span>
-                <span class="lorem">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo excepturi doloribus vero beatae placeat cumque aut ipsa sapiente, quisquam explicabo assumenda modi ea magnam molestiae molestias dolor, optio ex itaque?</span>
-                <a href="/details" class="btn.-details">details</a>
+              <img src="./images/dragon_3.jpg" alt="Dragon 3" />
 
-                <div class="actions"></div>
+              <div class="dots">
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+
+            <div class="infos">
+              <span class="name">Dragon 3 Img</span>
+
+              <span class="lorem">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo
+                excepturi doloribus vero beatae placeat cumque aut ipsa
+                sapiente.
+              </span>
+
+              <a href="/details" class="btn-details">Details</a>
+
+              <div class="actions">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <i class="fa-regular fa-heart"></i>
                 <i class="fa-regular fa-bookmark"></i>
                 <i class="fa-solid fa-share-nodes"></i>
+              </div>
             </div>
+          </div>
         </label>
-
-
-        <label class="s4" id="slide4">
-            <div class="card">
-
+        <label for="s4" id="slide4">
+          <div class="card">
             <div class="image">
-                <img src="./images/dragon_4.jpg" alt="dragon4">
-                <div class="dots">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-            </div>
-            <div class="infos">
-                <span class="name">dragon 4 img</span>
-                <span class="lorem">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo excepturi doloribus vero beatae placeat cumque aut ipsa sapiente, quisquam explicabo assumenda modi ea magnam molestiae molestias dolor, optio ex itaque?</span>
-                <a href="/details" class="btn.-details">details</a>
+              <img src="./images/dragon_4.jpg" alt="Dragon 4" />
 
-                <div class="actions"></div>
+              <div class="dots">
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+
+            <div class="infos">
+              <span class="name">Dragon 4 Img</span>
+
+              <span class="lorem">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo
+                excepturi doloribus vero beatae placeat cumque aut ipsa
+                sapiente.
+              </span>
+
+              <a href="/details" class="btn-details">Details</a>
+
+              <div class="actions">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <i class="fa-regular fa-heart"></i>
                 <i class="fa-regular fa-bookmark"></i>
                 <i class="fa-solid fa-share-nodes"></i>
+              </div>
             </div>
+          </div>
         </label>
 
-
-        <label class="s5" id="slide5">
-            <div class="card">
-
+        <label for="s5" id="slide5">
+          <div class="card">
             <div class="image">
-                <img src="./images/dragon_5.jpg" alt="dragon5">
-                <div class="dots">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-            </div>
-            <div class="infos">
-                <span class="name">dragon 5 img</span>
-                <span class="lorem">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo excepturi doloribus vero beatae placeat cumque aut ipsa sapiente, quisquam explicabo assumenda modi ea magnam molestiae molestias dolor, optio ex itaque?</span>
-                <a href="/details" class="btn.-details">details</a>
+              <img src="./images/dragon_5.jpg" alt="Dragon 5" />
 
-                <div class="actions"></div>
+              <div class="dots">
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+
+            <div class="infos">
+              <span class="name">Dragon 5 Img</span>
+
+              <span class="lorem">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo
+                excepturi doloribus vero beatae placeat cumque aut ipsa
+                sapiente.
+              </span>
+
+              <a href="/details" class="btn-details">Details</a>
+
+              <div class="actions">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <i class="fa-regular fa-heart"></i>
                 <i class="fa-regular fa-bookmark"></i>
                 <i class="fa-solid fa-share-nodes"></i>
+              </div>
             </div>
+          </div>
         </label>
+      </div>
     </div>
-    </div>
-
-</body>
+  </body>
 </html>
