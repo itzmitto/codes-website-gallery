@@ -80,3 +80,57 @@
     }
 }
 
+
+
+
+.logo-item{
+    --glow: rgba(255,255,255.12);
+    width: 160px;
+    height: 110px;
+    flex-shrink: 0 ;
+    margin-right: 16px;
+    border-radius: 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: border-color .35s, transform .35s, box-shadow .35s;
+}
+
+.logo-item img{
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+    filter:grayscale(1) brightness(1.4);
+    opacity: .55;
+    transition: filter .35s, opacity .35s, transform .35s;
+    position: relative;
+    z-index: 2;
+}
+
+.logo-item:hover img{
+    filter:grayscale(0) drop-shadow(0 0 8px var (--glow));
+    opacity: 1;
+    transform: scale(1.15);
+}
+
+
+
+.tech-name {
+    font-family: var(--font);
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .28);
+    transition: color .35s;
+    position: relative;
+    z-index: 2;
+
+}
