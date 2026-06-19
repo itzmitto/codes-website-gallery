@@ -69,13 +69,15 @@
         mask-image: linear-gradient(to right, transparent, #000 5% 95%, transparent);
         -webkit-mask-image: linear-gradient(to right, transparent, #000 5% 95%, transparent);
     }
-    .item{
+
+    .item {
         width: 140px;
         height: 110px;
         border-radius: 10px;
         margin-right: 10px;
     }
-    .track{
+
+    .track {
         animation-duration: 14s;
     }
 }
@@ -83,11 +85,11 @@
 
 
 
-.logo-item{
-    --glow: rgba(255,255,255.12);
+.logo-item {
+    --glow: rgba(255, 255, 255.12);
     width: 160px;
     height: 110px;
-    flex-shrink: 0 ;
+    flex-shrink: 0;
     margin-right: 16px;
     border-radius: 16px;
     background: var(--card);
@@ -103,24 +105,22 @@
     transition: border-color .35s, transform .35s, box-shadow .35s;
 }
 
-.logo-item img{
+.logo-item img {
     width: 44px;
     height: 44px;
     object-fit: contain;
-    filter:grayscale(1) brightness(1.4);
+    filter: grayscale(1) brightness(1.4);
     opacity: .55;
     transition: filter .35s, opacity .35s, transform .35s;
     position: relative;
     z-index: 2;
 }
 
-.logo-item:hover img{
-    filter:grayscale(0) drop-shadow(0 0 8px var (--glow));
+.logo-item:hover img {
+    filter: grayscale(0) drop-shadow(0 0 8px var (--glow));
     opacity: 1;
     transform: scale(1.15);
 }
-
-
 
 .tech-name {
     font-family: var(--font);
@@ -132,5 +132,49 @@
     transition: color .35s;
     position: relative;
     z-index: 2;
+}
 
+
+.logo-item:hover .tech-name {
+    color: rgba(255, 255, 255, .75);
+}
+
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 40px 16px 32px;
+    }
+
+    .logo-item {
+        width: 130px;
+        height: 90px;
+        border-radius: 12px;
+        margin-right: 12px;
+        gap: 8px;
+    }
+
+    .logo-item img {
+        width: 36px;
+        height: 36px;
+    }
+
+    .tech-name {
+        font-size: 8.5px;
+    }
+
+    .carousel-wrapper {
+        gap: 18px;
+        padding-bottom: 40px;
+    }
+}
+
+
+@media (max-width: 480px){
+    .hero{
+        padding: 28px 12px 24px;
+    }
+
+    .hero .eyebrow{
+        
+    }   
 }
