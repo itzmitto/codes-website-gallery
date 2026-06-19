@@ -63,4 +63,20 @@
     }
 }
 
-@media (max-width: 480) {}
+@media (max-width: 480) {
+    .carousel {
+        width: 100%;
+        mask-image: linear-gradient(to right, transparent, #000 5% 95%, transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, #000 5% 95%, transparent);
+    }
+    .item{
+        width: 140px;
+        height: 110px;
+        border-radius: 10px;
+        margin-right: 10px;
+    }
+    .track{
+        animation-duration: 14s;
+    }
+}
+
