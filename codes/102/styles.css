@@ -1,171 +1,190 @@
-.carousel {
-    width: 90%;
-    overflow: hidden;
-    mask-image: linear-gradient(to right, transparent, #000 10% 90%, transparent);
-}
+ :root {
+     --bg: #0a0a0a;
+     --card: #141414;
+     --border: rgba(255, 255, 255, 0.08);
+     --font: 'Inter', sans-serif;
+ }
 
-.track {
-    display: flex;
-    width: max-content;
-    will-change: transform;
-    animation: scroll 10s linear infinite;
-}
+ body {
+     background: var(--bg);
+     margin: 0;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+ }
 
-@keyframes scroll {
-    to {
-        transform: translateX(-50%);
-    }
-}
+ .carousel-wrapper {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     gap: 1rem;
+     width: 100%;
+     padding-bottom: 60px;
+ }
 
-.item {
-    width: 240px;
-    height: 200px;
-    flex-shrink: 0;
-    border-radius: 15px;
-    margin-right: 15px;
-    overflow: hidden;
-}
+ .carousel {
+     width: 90%;
+     overflow: hidden;
+     mask-image: linear-gradient(to right, transparent, #000 10% 90%, transparent);
+     -webkit-mask-image: linear-gradient(to right, transparent, #000 10% 90%, transparent);
+ }
 
-.item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform .5s filter .4s;
-}
+ .track {
+     display: flex;
+     width: max-content;
+     will-change: transform;
+     animation: scroll 25s linear infinite;
+ }
 
-.carousel:hover .item img {
-    filter: grayscale(.8);
-}
+ @keyframes scroll {
+     to {
+         transform: translateX(-50%);
+     }
+ }
 
-.item:hover img {
-    filter: grayscale(0) !important;
-    transform: scale(1.06);
-}
+ .item {
+     width: 240px;
+     height: 200px;
+     flex-shrink: 0;
+     border-radius: 15px;
+     margin-right: 15px;
+     overflow: hidden;
+ }
 
-.carousel:hover .track {
-    animation-play-state: paused;
-}
+ .item img {
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+     display: block;
+     transition: transform .5s, filter .4s;
+ }
 
+ .carousel:hover .item img {
+     filter: grayscale(.8);
+ }
 
+ .item:hover img {
+     filter: grayscale(0) !important;
+     transform: scale(1.06);
+ }
 
+ .carousel:hover .track {
+     animation-play-state: paused;
+ }
 
-@media (max-width: 768px) {
-    .carousel {
-        width: 95%;
-    }
+ @media (max-width: 768px) {
+     .carousel {
+         width: 95%;
+     }
 
-    .item {
-        width: 180px;
-        height: 150px;
-        border-radius: 12px;
-        margin-right: 12px;
-    }
-}
+     .item {
+         width: 180px;
+         height: 150px;
+         border-radius: 12px;
+         margin-right: 12px;
+     }
+ }
 
-@media (max-width: 480) {
-    .carousel {
-        width: 100%;
-        mask-image: linear-gradient(to right, transparent, #000 5% 95%, transparent);
-        -webkit-mask-image: linear-gradient(to right, transparent, #000 5% 95%, transparent);
-    }
+ @media (max-width: 480px) {
+     .carousel {
+         width: 100%;
+         mask-image: linear-gradient(to right, transparent, #000 5% 95%, transparent);
+         -webkit-mask-image: linear-gradient(to right, transparent, #000 5% 95%, transparent);
+     }
 
-    .item {
-        width: 140px;
-        height: 110px;
-        border-radius: 10px;
-        margin-right: 10px;
-    }
+     .item {
+         width: 140px;
+         height: 110px;
+         border-radius: 10px;
+         margin-right: 10px;
+     }
 
-    .track {
-        animation-duration: 14s;
-    }
-}
+     .track {
+         animation-duration: 14s;
+     }
+ }
 
+ .logo-item {
+     --glow: rgba(255, 255, 255, 0.12);
+     width: 160px;
+     height: 110px;
+     flex-shrink: 0;
+     margin-right: 16px;
+     border-radius: 16px;
+     background: var(--card);
+     border: 1px solid var(--border);
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     gap: 10px;
+     cursor: pointer;
+     position: relative;
+     overflow: hidden;
+     transition: border-color .35s, transform .35s, box-shadow .35s;
+ }
 
+ .logo-item img {
+     width: 44px;
+     height: 44px;
+     object-fit: contain;
+     filter: grayscale(1) brightness(1.4);
+     opacity: .55;
+     transition: filter .35s, opacity .35s, transform .35s;
+     position: relative;
+     z-index: 2;
+ }
 
+ .logo-item:hover img {
+     filter: grayscale(0) drop-shadow(0 0 8px var(--glow));
+     opacity: 1;
+     transform: scale(1.15);
+ }
 
-.logo-item {
-    --glow: rgba(255, 255, 255.12);
-    width: 160px;
-    height: 110px;
-    flex-shrink: 0;
-    margin-right: 16px;
-    border-radius: 16px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: border-color .35s, transform .35s, box-shadow .35s;
-}
+ .tech-name {
+     font-family: var(--font);
+     font-size: 9.5px;
+     font-weight: 600;
+     letter-spacing: .15em;
+     text-transform: uppercase;
+     color: rgba(255, 255, 255, .28);
+     transition: color .35s;
+     position: relative;
+     z-index: 2;
+ }
 
-.logo-item img {
-    width: 44px;
-    height: 44px;
-    object-fit: contain;
-    filter: grayscale(1) brightness(1.4);
-    opacity: .55;
-    transition: filter .35s, opacity .35s, transform .35s;
-    position: relative;
-    z-index: 2;
-}
+ .logo-item:hover .tech-name {
+     color: rgba(255, 255, 255, .75);
+ }
 
-.logo-item:hover img {
-    filter: grayscale(0) drop-shadow(0 0 8px var (--glow));
-    opacity: 1;
-    transform: scale(1.15);
-}
+ @media (max-width: 768px) {
+     .hero {
+         padding: 40px 16px 32px;
+     }
 
-.tech-name {
-    font-family: var(--font);
-    font-size: 9.5px;
-    font-weight: 600;
-    letter-spacing: .15em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, .28);
-    transition: color .35s;
-    position: relative;
-    z-index: 2;
-}
+     .logo-item {
+         width: 130px;
+         height: 90px;
+         border-radius: 12px;
+         margin-right: 12px;
+         gap: 8px;
+     }
 
+     .logo-item img {
+         width: 36px;
+         height: 36px;
+     }
 
-.logo-item:hover .tech-name {
-    color: rgba(255, 255, 255, .75);
-}
+     .tech-name {
+         font-size: 8.5px;
+     }
 
+     .carousel-wrapper {
+         gap: 18px;
+         padding-bottom: 40px;
+     }
+ }
 
-@media (max-width: 768px) {
-    .hero {
-        padding: 40px 16px 32px;
-    }
-
-    .logo-item {
-        width: 130px;
-        height: 90px;
-        border-radius: 12px;
-        margin-right: 12px;
-        gap: 8px;
-    }
-
-    .logo-item img {
-        width: 36px;
-        height: 36px;
-    }
-
-    .tech-name {
-        font-size: 8.5px;
-    }
-
-    .carousel-wrapper {
-        gap: 18px;
-        padding-bottom: 40px;
-    }
-}
-
-
+ .carousel[reverse="true"] .track {
+     animation-direction: reverse;
+ }
