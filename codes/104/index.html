@@ -1,11 +1,515 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-     
-</body>
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Expenses Card</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div
+      class="ui-card relative h-96 border card-border-color overflow-hidden card-background-color flex flex-col"
+      style="width: 360px"
+    >
+      <div
+        class="trigger-single-example-modal absolute right-2 top-2 rounded-full border border-white/20 bg-black/20 text-white/80 w-7 h-7 z-20 flex items-center justify-center cursor-pointer"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="w-5"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.22 14.78a.75.75 0 0 0 1.06 0l7.22-7.22v5.69a.75.75 0 0 0 1.5 0v-7.5a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0 0 1.5h5.69l-7.22 7.22a.75.75 0 0 0 0 1.06Z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+      </div>
+
+      <div class="p-4 pb-2">
+        <div class="flex items-center gap-1.5">
+          <div class="text-color font-medium">Expenses</div>
+        </div>
+      </div>
+
+      <div class="pl-4 text-2xl mt-0 font-medium text-color">$12,543</div>
+
+      <div class="p-4 mt-auto">
+        <div
+          class="border-b border-color h-52"
+          style="
+            display: grid;
+            grid-template-columns: repeat(17, 1fr);
+            grid-template-rows: repeat(10, 1fr);
+            gap: 4px 6%;
+          "
+        >
+          <div class="bar-wrap" style="grid-area: 11 / 1 / 7 / 3">
+            <div
+              class="rounded-sm"
+              style="
+                background-color: rgb(3, 162, 183);
+                width: 100%;
+                height: 100%;
+              "
+            ></div>
+            <div class="bar-tooltip">
+              <div class="tooltip-label">Background</div>
+              <div class="tooltip-row">
+                <span class="tooltip-name">Turquoise Blue</span>
+                <span class="tooltip-value"
+                  >600 · #03a2b7
+                  <span
+                    class="swatch"
+                    style="background-color: rgb(3, 162, 183)"
+                  ></span
+                ></span>
+              </div>
+            </div>
+          </div>
+          <div class="bar-wrap" style="grid-area: 7 / 1 / 4 / 3">
+            <div
+              class="rounded-sm"
+              style="
+                background-color: rgb(0, 214, 230);
+                width: 100%;
+                height: 100%;
+              "
+            ></div>
+            <div class="bar-tooltip">
+              <div class="tooltip-label">Background</div>
+              <div class="tooltip-row">
+                <span class="tooltip-name">Turquoise Blue</span>
+                <span class="tooltip-value"
+                  >400 · #00d6e6
+                  <span
+                    class="swatch"
+                    style="background-color: rgb(0, 214, 230)"
+                  ></span
+                ></span>
+              </div>
+            </div>
+          </div>
+          <div class="bar-wrap" style="grid-area: 4 / 1 / 2 / 3">
+            <div
+              class="rounded-sm"
+              style="
+                background-color: rgb(28, 232, 244);
+                width: 100%;
+                height: 100%;
+              "
+            ></div>
+            <div class="bar-tooltip">
+              <div class="tooltip-label">Background</div>
+              <div class="tooltip-row">
+                <span class="tooltip-name">Turquoise Blue</span>
+                <span class="tooltip-value"
+                  >300 · #1ce8f4
+                  <span
+                    class="swatch"
+                    style="background-color: rgb(28, 232, 244)"
+                  ></span
+                ></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bar-wrap" style="grid-area: 11 / 4 / 8 / 6">
+            <div
+              class="rounded-sm"
+              style="
+                background-color: rgb(3, 162, 183);
+                width: 100%;
+                height: 100%;
+              "
+            ></div>
+            <div class="bar-tooltip">
+              <div class="tooltip-label">Background</div>
+              <div class="tooltip-row">
+                <span class="tooltip-name">Turquoise Blue</span>
+                <span class="tooltip-value"
+                  >600 · #03a2b7
+                  <span
+                    class="swatch"
+                    style="background-color: rgb(3, 162, 183)"
+                  ></span
+                ></span>
+              </div>
+            </div>
+          </div>
+          <div class="bar-wrap" style="grid-area: 8 / 4 / 6 / 6">
+            <div
+              class="rounded-sm"
+              style="
+                background-color: rgb(0, 214, 230);
+                width: 100%;
+                height: 100%;
+              "
+            ></div>
+            <div class="bar-tooltip">
+              <div class="tooltip-label">Background</div>
+              <div class="tooltip-row">
+                <span class="tooltip-name">Turquoise Blue</span>
+                <span class="tooltip-value"
+                  >400 · #00d6e6
+                  <span
+                    class="swatch"
+                    style="background-color: rgb(0, 214, 230)"
+                  ></span
+                ></span>
+              </div>
+            </div>
+          </div>
+          <div class="bar-wrap" style="grid-area: 6 / 4 / 3 / 6">
+            <div
+              class="rounded-sm"
+              style="
+                background-color: rgb(28, 232, 244);
+                width: 100%;
+                height: 100%;
+              "
+            ></div>
+            <div class="bar-tooltip">
+              <div class="tooltip-label">Background</div>
+              <div class="tooltip-row">
+                <span class="tooltip-name">Turquoise Blue</span>
+                <span class="tooltip-value"
+                  >300 · #1ce8f4
+                  <span
+                    class="swatch"
+                    style="background-color: rgb(28, 232, 244)"
+                  ></span
+                ></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bar-wrap" style="grid-area: 11 / 7 / 9 / 9">
+            <div
+              class="rounded-sm"
+              style="
+                background-color: rgb(3, 162, 183);
+                width: 100%;
+                height: 100%;
+              "
+            ></div>
+            <div class="bar-tooltip">
+              <div class="tooltip-label">Background</div>
+              <div class="tooltip-row">
+                <span class="tooltip-name">Turquoise Blue</span>
+                <span class="tooltip-value"
+                  >600 · #03a2b7
+                  <span
+                    class="swatch"
+                    style="background-color: rgb(3, 162, 183)"
+                  ></span
+                ></span>
+              </div>
+            </div>
+          </div>
+          <div class="bar-wrap" style="grid-area: 9 / 7 / 7 / 9">
+            <div
+              class="rounded-sm"
+              style="
+                background-color: rgb(0, 214, 230);
+                width: 100%;
+                height: 100%;
+              "
+            ></div>
+            <div class="bar-tooltip">
+              <div class="tooltip-label">Background</div>
+              <div class="tooltip-row">
+                <span class="tooltip-name">Turquoise Blue</span>
+                <span class="tooltip-value"
+                  >400 · #00d6e6
+                  <span
+                    class="swatch"
+                    style="background-color: rgb(0, 214, 230)"
+                  ></span
+                ></span>
+              </div>
+            </div>
+          </div>
+          <div class="bar-wrap" style="grid-area: 7 / 7 / 6 / 9">
+            <div
+              class="rounded-sm"
+              style="
+                background-color: rgb(28, 232, 244);
+                width: 100%;
+                height: 100%;
+              "
+            ></div>
+            <div class="bar-tooltip">
+              <div class="tooltip-label">Background</div>
+              <div class="tooltip-row">
+                <span class="tooltip-name">Turquoise Blue</span>
+                <span class="tooltip-value"
+                  >300 · #1ce8f4
+                  <span
+                    class="swatch"
+                    style="background-color: rgb(28, 232, 244)"
+                  ></span
+                ></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bar-wrap" style="grid-area: 11 / 10 / 5 / 12">
+            <div
+              class="rounded-sm"
+              style="
+                background-color: rgb(3, 162, 183);
+                width: 100%;
+                height: 100%;
+              "
+            ></div>
+            <div class="bar-tooltip">
+              <div class="tooltip-label">Background</div>
+              <div class="tooltip-row">
+                <span class="tooltip-name">Turquoise Blue</span>
+                <span class="tooltip-value"
+                  >600 · #03a2b7
+                  <span
+                    class="swatch"
+                    style="background-color: rgb(3, 162, 183)"
+                  ></span
+                ></span>
+              </div>
+            </div>
+          </div>
+          <div class="bar-wrap" style="grid-area: 5 / 10 / 3 / 12">
+            <div
+              class="rounded-sm"
+              style="
+                background-color: rgb(0, 214, 230);
+                width: 100%;
+                height: 100%;
+              "
+            ></div>
+            <div class="bar-tooltip">
+              <div class="tooltip-label">Background</div>
+              <div class="tooltip-row">
+                <span class="tooltip-name">Turquoise Blue</span>
+                <span class="tooltip-value"
+                  >400 · #00d6e6
+                  <span
+                    class="swatch"
+                    style="background-color: rgb(0, 214, 230)"
+                  ></span
+                ></span>
+              </div>
+            </div>
+          </div>
+          <div class="bar-wrap" style="grid-area: 3 / 10 / 2 / 12">
+            <div
+              class="rounded-sm"
+              style="
+                background-color: rgb(28, 232, 244);
+                width: 100%;
+                height: 100%;
+              "
+            ></div>
+            <div class="bar-tooltip">
+              <div class="tooltip-label">Background</div>
+              <div class="tooltip-row">
+                <span class="tooltip-name">Turquoise Blue</span>
+                <span class="tooltip-value"
+                  >300 · #1ce8f4
+                  <span
+                    class="swatch"
+                    style="background-color: rgb(28, 232, 244)"
+                  ></span
+                ></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bar-wrap" style="grid-area: 11 / 13 / 7 / 15">
+            <div
+              class="rounded-sm"
+              style="
+                background-color: rgb(3, 162, 183);
+                width: 100%;
+                height: 100%;
+              "
+            ></div>
+            <div class="bar-tooltip">
+              <div class="tooltip-label">Background</div>
+              <div class="tooltip-row">
+                <span class="tooltip-name">Turquoise Blue</span>
+                <span class="tooltip-value"
+                  >600 · #03a2b7
+                  <span
+                    class="swatch"
+                    style="background-color: rgb(3, 162, 183)"
+                  ></span
+                ></span>
+              </div>
+            </div>
+          </div>
+          <div class="bar-wrap" style="grid-area: 7 / 13 / 4 / 15">
+            <div
+              class="rounded-sm"
+              style="
+                background-color: rgb(0, 214, 230);
+                width: 100%;
+                height: 100%;
+              "
+            ></div>
+            <div class="bar-tooltip">
+              <div class="tooltip-label">Background</div>
+              <div class="tooltip-row">
+                <span class="tooltip-name">Turquoise Blue</span>
+                <span class="tooltip-value"
+                  >400 · #00d6e6
+                  <span
+                    class="swatch"
+                    style="background-color: rgb(0, 214, 230)"
+                  ></span
+                ></span>
+              </div>
+            </div>
+          </div>
+          <div class="bar-wrap" style="grid-area: 4 / 13 / 1 / 15">
+            <div
+              class="rounded-sm"
+              style="
+                background-color: rgb(28, 232, 244);
+                width: 100%;
+                height: 100%;
+              "
+            ></div>
+            <div class="bar-tooltip">
+              <div class="tooltip-label">Background</div>
+              <div class="tooltip-row">
+                <span class="tooltip-name">Turquoise Blue</span>
+                <span class="tooltip-value"
+                  >300 · #1ce8f4
+                  <span
+                    class="swatch"
+                    style="background-color: rgb(28, 232, 244)"
+                  ></span
+                ></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bar-wrap" style="grid-area: 11 / 16 / 9 / 18">
+            <div
+              class="rounded-sm"
+              style="
+                background-color: rgb(3, 162, 183);
+                width: 100%;
+                height: 100%;
+              "
+            ></div>
+            <div class="bar-tooltip">
+              <div class="tooltip-label">Background</div>
+              <div class="tooltip-row">
+                <span class="tooltip-name">Turquoise Blue</span>
+                <span class="tooltip-value"
+                  >600 · #03a2b7
+                  <span
+                    class="swatch"
+                    style="background-color: rgb(3, 162, 183)"
+                  ></span
+                ></span>
+              </div>
+            </div>
+          </div>
+          <div class="bar-wrap" style="grid-area: 9 / 16 / 5 / 18">
+            <div
+              class="rounded-sm"
+              style="
+                background-color: rgb(0, 214, 230);
+                width: 100%;
+                height: 100%;
+              "
+            ></div>
+            <div class="bar-tooltip">
+              <div class="tooltip-label">Background</div>
+              <div class="tooltip-row">
+                <span class="tooltip-name">Turquoise Blue</span>
+                <span class="tooltip-value"
+                  >400 · #00d6e6
+                  <span
+                    class="swatch"
+                    style="background-color: rgb(0, 214, 230)"
+                  ></span
+                ></span>
+              </div>
+            </div>
+          </div>
+          <div class="bar-wrap" style="grid-area: 5 / 16 / 4 / 18">
+            <div
+              class="rounded-sm"
+              style="
+                background-color: rgb(28, 232, 244);
+                width: 100%;
+                height: 100%;
+              "
+            ></div>
+            <div class="bar-tooltip">
+              <div class="tooltip-label">Background</div>
+              <div class="tooltip-row">
+                <span class="tooltip-name">Turquoise Blue</span>
+                <span class="tooltip-value"
+                  >300 · #1ce8f4
+                  <span
+                    class="swatch"
+                    style="background-color: rgb(28, 232, 244)"
+                  ></span
+                ></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(17, 1fr);
+            grid-column-gap: 12px;
+          "
+        >
+          <div
+            class="text-color-muted-extra col-span-2 text-center text-xs pt-3"
+          >
+            Jan
+          </div>
+          <div></div>
+          <div
+            class="text-color-muted-extra col-span-2 text-center text-xs pt-3"
+          >
+            Feb
+          </div>
+          <div></div>
+          <div
+            class="text-color-muted-extra col-span-2 text-center text-xs pt-3"
+          >
+            Mar
+          </div>
+          <div></div>
+          <div
+            class="text-color-muted-extra col-span-2 text-center text-xs pt-3"
+          >
+            Apr
+          </div>
+          <div></div>
+          <div
+            class="text-color-muted-extra col-span-2 text-center text-xs pt-3"
+          >
+            May
+          </div>
+          <div></div>
+          <div
+            class="text-color-muted-extra col-span-2 text-center text-xs pt-3"
+          >
+            Jun
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
