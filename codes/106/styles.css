@@ -82,24 +82,15 @@ main {
 
 .dark-left {
     width: 140px;
-    height: 140px;
+    height: 190px;
     left: 150px;
     top: 335px;
 }
 
-
-.middle {
-    width: 130px;
-    height: 70px;
-    left: 300px;
-    top: 335px;
-}
-
-
 .accent {
     position: absolute;
-    width: 160px;
-    height: 70px;
+    width: 183px;
+    height: 90px;
     right: 0;
     top: 335px;
     border-radius: 12px;
@@ -114,9 +105,15 @@ main {
 
 .bottom-light {
     width: 130px;
-    height: 70px;
+    height: 90px;
     left: 300px;
     bottom: 35px;
+}
+.middle {
+    width: 130px;
+    height: 90px;
+    left: 300px;
+    top: 335px;
 }
 
 .bottom-right {
@@ -129,7 +126,7 @@ main {
 
 .small-dark {
     width: 130px;
-    height: 34px;
+    height: 30px;
     left: 300px;
     bottom: 0;
 }
