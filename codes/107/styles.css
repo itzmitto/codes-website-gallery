@@ -1,0 +1,124 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --blue: #4338ff;
+    --pink: #ff00d9;
+    --dark: #03001f;
+    --light: #dddddf;
+    --accent: #c6c3eb;
+}
+
+body {
+    background: #f5f5f5;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.color-layout {
+    position: relative;
+    width: 620px;
+    height: 560px;
+}
+
+.block {
+    position: absolute;
+    border-radius: 12px;
+}
+
+.blok1 {
+    background: var(--light);
+    width: 190px;
+    height: 48px;
+    left: 85px;
+    top: 0;
+}
+
+.blok2 {
+    background: var(--blue);
+    width: 280px;
+    height: 270px;
+    left: 150px;
+    top: 55px;
+}
+
+.blok3 {
+    background: var(--pink);
+    width: 280px;
+    height: 50px;
+    right: 0;
+    top: 0;
+}
+
+.blok4 {
+    background: var(--pink);
+    width: 183px;
+    height: 170px;
+    right: 0;
+    top: 58px;
+}
+
+.blok5 {
+    background: var(--dark);
+    width: 140px;
+    height: 190px;
+    left: 150px;
+    top: 335px;
+}
+
+.blok6 {
+    background: var(--light);
+    width: 130px;
+    height: 90px;
+    left: 300px;
+    top: 335px;
+}
+
+.blok7 {
+    background: var(--accent);
+    width: 183px;
+    height: 90px;
+    right: 0;
+    top: 335px;
+}
+
+.blok8 {
+    background: var(--pink);
+    width: 58px;
+    height: 400px;
+    left: 85px;
+    bottom: 0.1px;
+}
+
+.blok9 {
+    background: var(--pink);
+    width: 130px;
+    height: 90px;
+    left: 300px;
+    bottom: 35px;
+}
+
+.blok10 {
+    background: var(--blue);
+    width: 183px;
+    height: 125px;
+    right: 0;
+    bottom: 0;
+}
+
+.blok11 {
+    background: var(--dark);
+    width: 130px;
+    height: 30px;
+    left: 300px;
+    bottom: 0;
+}
