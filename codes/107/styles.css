@@ -26,7 +26,7 @@ main {
 
 .color-layout {
     position: relative;
-    width: 620px;
+    width: 535px;
     height: 560px;
 }
 
@@ -39,7 +39,7 @@ main {
     background: var(--light);
     width: 190px;
     height: 48px;
-    left: 85px;
+    left: 0;
     top: 0;
 }
 
@@ -47,7 +47,7 @@ main {
     background: var(--blue);
     width: 280px;
     height: 270px;
-    left: 150px;
+    left: 65px;
     top: 55px;
 }
 
@@ -71,7 +71,7 @@ main {
     background: var(--dark);
     width: 140px;
     height: 190px;
-    left: 150px;
+    left: 65px;
     top: 335px;
 }
 
@@ -79,7 +79,7 @@ main {
     background: var(--light);
     width: 130px;
     height: 90px;
-    left: 300px;
+    left: 215px;
     top: 335px;
 }
 
@@ -91,11 +91,19 @@ main {
     top: 335px;
 }
 
-.blok8 {
+.blok8a {
     background: var(--pink);
     width: 58px;
-    height: 400px;
-    left: 85px;
+    height: 200px;
+    left: 0;
+    bottom: 200px;
+}
+
+.blok8b {
+    background: var(--blue);
+    width: 58px;
+    height: 200px;
+    left: 0;
     bottom: 0.1px;
 }
 
@@ -103,7 +111,7 @@ main {
     background: var(--pink);
     width: 130px;
     height: 90px;
-    left: 300px;
+    left: 215px;
     bottom: 35px;
 }
 
@@ -119,6 +127,6 @@ main {
     background: var(--dark);
     width: 130px;
     height: 30px;
-    left: 300px;
+    left: 215px;
     bottom: 0;
 }
