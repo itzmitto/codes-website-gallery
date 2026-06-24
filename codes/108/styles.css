@@ -1,0 +1,21 @@
+body {
+    background: url("bg.svg");
+    background-size: cover;
+    color: #f9f9f9;
+}
+
+nav {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    left: 16px;
+    display: flex;
+    padding: 0 32px;
+    height: 72px;
+    border-radius: 36px;
+    background:rgb(255 255 255/6%);
+    background: color-mix(in oklab, rgb(255 255 255/8%) 72%, transparent);
+    backdrop-filter: blur(16px) saturate(1.2);
+    box-shadow: inset 0 1px 0 color-mix(in oklab, 255 255, 255/12%) 65%, transparent),
+
+}
