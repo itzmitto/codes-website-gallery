@@ -21,3 +21,23 @@ const linkAction = () => {
    navMenu.classList.remove('show-menu')
 }
 navLink.forEach(n => n.addEventListener('click', linkAction))
+
+
+
+
+const swiperHome = new Swiper('.home__swiper', {
+  loop: true,
+  effect: 'fade',
+  parallax: true,
+  speed: 1000,
+  grabCursor: true,
+
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+  },
+   autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+   }
+})
