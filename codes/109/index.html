@@ -1,12 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Theme Toggle</title>
+
+<style>
+body{
+    margin:0;
+    background:#ffffff;
+    transition:0.4s;
+    font-family:Arial,sans-serif;
+}
+
+.toggle-btn{
+    margin:20px;
+    padding:12px 24px;
+    border:none;
+    border-radius:30px;
+    background:#0e0e11;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+    transition:0.4s;
+}
+
+.dark{
+    background:#0e0e11;
+}
+
+.dark .toggle-btn{
+    background:white;
+    color:#0e0e11;
+}
+</style>
 </head>
 <body>
-    
+
+<button class="toggle-btn" id="themeBtn">
+    Moon
+</button>
+
+<script>
+const btn = document.getElementById("themeBtn");
+
+btn.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+
+    if(document.body.classList.contains("dark")){
+        btn.textContent = "Sun";
+    } else {
+        btn.textContent = "Moon";
+    }
+});
+</script>
+
 </body>
 </html>
