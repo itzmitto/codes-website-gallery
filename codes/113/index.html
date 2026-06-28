@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tailwind Colors - Interactief</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap');
+        
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+        
+        .swatch {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .swatch:hover {
+            transform: scale(1.08);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        
+        .color-info {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+            padding: 24px;
+            z-index: 50;
+            display: none;
+            min-width: 280px;
+            text-align: center;
+        }
+        
+        .color-preview {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 16px;
+            border-radius: 12px;
+            border: 4px solid #f3f4f6;
+        }
+    </style>
+</head>
+<body class="bg-zinc-50 text-zinc-900">
+    <div class="max-w-7xl mx-auto px-6 py-12">
+        <!-- Header -->
+        <div class="text-center mb-16">
+            <h1 class="text-5xl font-semibold mb-4">Tailwind Colors</h1>
+            <p class="text-xl text-zinc-600 max-w-md mx-auto">
+                Hover over een kleur om de HEX-code te zien en te kopiëren
+            </p>
+            <div class="mt-6 flex justify-center gap-4">
+                <div class="px-4 py-2 bg-white rounded-full text-sm font-medium shadow-sm border">v4</div>
+            </div>
+        </div>
+
+        <!-- Color Palettes -->
+        <div class="space-y-20">
+            <!-- Red -->
+            <div>
+                <h2 class="text-3xl font-semibold mb-8 flex items-center gap-4">
+                    <span class="w-8 h-8 rounded-full bg-red-500"></span>
+                    Red
+                </h2>
+                <div class="grid grid-cols-5 md:grid-cols-11 gap-3" id="red"></div>
+            </div>
+
+            <!-- Orange -->
+            <div>
+                <h2 class="text-3xl font-semibold mb-8 flex items-center gap-4">
+                    <span class="w-8 h-8 rounded-full bg-orange-500"></span>
+                    Orange
+                </h2>
+                <div class="grid grid-cols-5 md:grid-cols-11 gap-3" id="orange"></div>
+            </div>
+
+            <!-- Amber -->
+            <div>
+                <h2 class="text-3xl font-semibold mb-8 flex items-center gap-4">
+                    <span class="w-8 h-8 rounded-full bg-amber-500"></span>
+                    Amber
+                </h2>
+                <div class="grid grid-cols-5 md:grid-cols-11 gap-3" id="amber"></div>
+            </div>
+
+            <!-- Yellow -->
+            <div>
+                <h2 class="text-3xl font-semibold mb-8 flex items-center gap-4">
+                    <span class="w-8 h-8 rounded-full bg-yellow-500"></span>
+                    Yellow
+                </h2>
+                <div class="grid grid-cols-5 md:grid-cols-11 gap-3" id="yellow"></div>
+            </div>
+
+            <!-- Lime -->
+            <div>
+                <h2 class="text-3xl font-semibold mb-8 flex items-center gap-4">
+                    <span class="w-8 h-8 rounded-full bg-lime-500"></span>
+                    Lime
+                </h2>
+                <div class="grid grid-cols-5 md:grid-cols-11 gap-3" id="lime"></div>
+            </div>
+
+            <!-- Green -->
+            <div>
+                <h2 class="text-3xl font-semibold mb-8 flex items-center gap-4">
+                    <span class="w-8 h-8 rounded-full bg-green-500"></span>
+                    Green
+                </h2>
+                <div class="grid grid-cols-5 md:grid-cols-11 gap-3" id="green"></div>
+            </div>
+
+            <!-- Emerald -->
+            <div>
+                <h2 class="text-3xl font-semibold mb-8 flex items-center gap-4">
+                    <span class="w-8 h-8 rounded-full bg-emerald-500"></span>
+                    Emerald
+                </h2>
+                <div class="grid grid-cols-5 md:grid-cols-11 gap-3" id="emerald"></div>
+            </div>
+
+            <!-- Teal -->
+            <div>
+                <h2 class="text-3xl font-semibold mb-8 flex items-center gap-4">
+                    <span class="w-8 h-8 rounded-full bg-teal-500"></span>
+                    Teal
+                </h2>
+                <div class="grid grid-cols-5 md:grid-cols-11 gap-3" id="teal"></div>
+            </div>
+
+            <!-- Cyan -->
+            <div>
+                <h2 class="text-3xl font-semibold mb-8 flex items-center gap-4">
+                    <span class="w-8 h-8 rounded-full bg-cyan-500"></span>
+                    Cyan
+                </h2>
+                <div class="grid grid-cols-5 md:grid-cols-11 gap-3" id="cyan"></div>
+            </div>
+
+            <!-- Sky -->
+            <div>
+                <h2 class="text-3xl font-semibold mb-8 flex items-center gap-4">
+                    <span class="w-8 h-8 rounded-full bg-sky-500"></span>
+                    Sky
+                </h2>
+                <div class="grid grid-cols-5 md:grid-cols-11 gap-3" id="sky"></div>
+            </div>
+
+            <!-- Blue -->
+            <div>
+                <h2 class="text-3xl font-semibold mb-8 flex items-center gap-4">
+                    <span class="w-8 h-8 rounded-full bg-blue-500"></span>
+                    Blue
+                </h2>
+                <div class="grid grid-cols-5 md:grid-cols-11 gap-3" id="blue"></div>
+            </div>
+
+            <!-- Indigo -->
+            <div>
+                <h2 class="text-3xl font-semibold mb-8 flex items-center gap-4">
+                    <span class="w-8 h-8 rounded-full bg-indigo-500"></span>
+                    Indigo
+                </h2>
+                <div class="grid grid-cols-5 md:grid-cols-11 gap-3" id="indigo"></div>
+            </div>
+
+            <!-- Violet -->
+            <div>
+                <h2 class="text-3xl font-semibold mb-8 flex items-center gap-4">
+                    <span class="w-8 h-8 rounded-full bg-violet-500"></span>
+                    Violet
+                </h2>
+                <div class="grid grid-cols-5 md:grid-cols-11 gap-3" id="violet"></div>
+            </div>
+
+            <!-- Purple -->
+            <div>
+                <h2 class="text-3xl font-semibold mb-8 flex items-center gap-4">
+                    <span class="w-8 h-8 rounded-full bg-purple-500"></span>
+                    Purple
+                </h2>
+                <div class="grid grid-cols-5 md:grid-cols-11 gap-3" id="purple"></div>
+            </div>
+
+            <!-- Fuchsia -->
+            <div>
+                <h2 class="text-3xl font-semibold mb-8 flex items-center gap-4">
+                    <span class="w-8 h-8 rounded-full bg-fuchsia-500"></span>
+                    Fuchsia
+                </h2>
+                <div class="grid grid-cols-5 md:grid-cols-11 gap-3" id="fuchsia"></div>
+            </div>
+
+            <!-- Pink -->
+            <div>
+                <h2 class="text-3xl font-semibold mb-8 flex items-center gap-4">
+                    <span class="w-8 h-8 rounded-full bg-pink-500"></span>
+                    Pink
+                </h2>
+                <div class="grid grid-cols-5 md:grid-cols-11 gap-3" id="pink"></div>
+            </div>
+
+            <!-- Rose -->
+            <div>
+                <h2 class="text-3xl font-semibold mb-8 flex items-center gap-4">
+                    <span class="w-8 h-8 rounded-full bg-rose-500"></span>
+                    Rose
+                </h2>
+                <div class="grid grid-cols-5 md:grid-cols-11 gap-3" id="rose"></div>
+            </div>
+
+            <!-- Neutrals -->
+            <div>
+                <h2 class="text-3xl font-semibold mb-8">Neutrals</h2>
+                <div class="grid grid-cols-5 md:grid-cols-11 gap-3" id="slate"></div>
+                <div class="grid grid-cols-5 md:grid-cols-11 gap-3 mt-8" id="gray"></div>
+                <div class="grid grid-cols-5 md:grid-cols-11 gap-3 mt-8" id="zinc"></div>
+                <div class="grid grid-cols-5 md:grid-cols-11 gap-3 mt-8" id="neutral"></div>
+                <div class="grid grid-cols-5 md:grid-cols-11 gap-3 mt-8" id="stone"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hover Info Modal -->
+    <div id="colorInfo" class="color-info">
+        <div id="colorPreview" class="color-preview"></div>
+        <div id="colorName" class="text-xl font-semibold mb-1"></div>
+        <div id="colorHex" class="text-3xl font-mono text-zinc-800 mb-6 cursor-pointer hover:text-violet-600"></div>
+        <button onclick="copyColor()" 
+                class="w-full bg-zinc-900 hover:bg-black text-white py-3 rounded-xl font-medium transition">
+            Kopieer HEX-code
+        </button>
+        <button onclick="closeInfo()" 
+                class="mt-3 w-full text-zinc-500 hover:text-zinc-700 py-2 text-sm">
+            Sluiten
+        </button>
+    </div>
+
+    <script>
+        // Tailwind color data (hex codes)
+        const colors = {
+            red: [
+                "#FEF2F2", "#FFE2E2", "#FFC9C9", "#FFA2A2", "#FF6467",
+                "#FB2C36", "#E7180B", "#C11007", "#9F0712", "#82181A", "#460809"
+            ],
+            orange: [
+                "#FFF7ED", "#FFEDD4", "#FFD6A7", "#FFB86A", "#FF8904",
+                "#FF692A", "#F54927", "#CA3519", "#9F2D01", "#7E2A0C", "#441306"
+            ],
+            amber: [
+                "#FFFBEB", "#FEF3C6", "#FEE685", "#FFD230", "#FFB93B",
+                "#FE9A37", "#E1712B", "#BB4D1A", "#973C08", "#7B3306", "#461901"
+            ],
+            yellow: [
+                "#FEFCE8", "#FEF9C2", "#FFF085", "#FFDF20", "#FDC745",
+                "#F0B13B", "#D0872E", "#A65F1B", "#894B0A", "#733E0A", "#432004"
+            ],
+            lime: [
+                "#F7FEE7", "#ECFCCA", "#D8F999", "#BBF451", "#9AE630",
+                "#7CCF35", "#5EA529", "#497D15", "#3C6301", "#35530E", "#192E03"
+            ],
+            green: [
+                "#F0FDF4", "#DCFCE7", "#B9F8CF", "#7BF1A8", "#05DF72",
+                "#31C950", "#2AA63E", "#178236", "#016630", "#0D542B", "#032E15"
+            ],
+            emerald: [
+                "#ECFDF5", "#D0FAE5", "#A4F4CF", "#5EE9B5", "#31D492",
+                "#37BC7D", "#2D9966", "#1F7A55", "#116045", "#034F3B", "#012C22"
+            ],
+            teal: [
+                "#F0FDFA", "#CBFBF1", "#96F7E4", "#46ECD5", "#38D5BE",
+                "#36BBA7", "#2A9689", "#18786F", "#075F5A", "#0B4F4A", "#022F2E"
+            ],
+            cyan: [
+                "#ECFEFF", "#CEFAFE", "#A2F4FD", "#53EAFD", "#42D3F2",
+                "#3BB8DB", "#2C92B8", "#1A7595", "#015F78", "#104E64", "#053345"
+            ],
+            sky: [
+                "#F0F9FF", "#DFF2FE", "#B8E6FE", "#74D4FF", "#21BCFF",
+                "#34A6F4", "#2984D1", "#1C69A8", "#10598A", "#024A70", "#052F4A"
+            ],
+            blue: [
+                "#EFF6FF", "#DBEAfe", "#BEDBFF", "#8EC5FF", "#51A2FF",
+                "#2B7FFF", "#155DFC", "#1447E6", "#193CB8", "#1C398E", "#162456"
+            ],
+            indigo: [
+                "#EEF2FF", "#E0E7FF", "#C6D2FF", "#A3B3FF", "#7C86FF",
+                "#615FFF", "#4F39F6", "#432DD7", "#372AAC", "#312C85", "#1E1A4D"
+            ],
+            violet: [
+                "#F5F3FF", "#EDE9FE", "#DDD6FF", "#C4B4FF", "#A684FF",
+                "#8E51FF", "#7F22FE", "#7008E7", "#5D0EC0", "#4D179A", "#2F0D68"
+            ],
+            purple: [
+                "#FAF5FF", "#F3E8FF", "#E9D4FF", "#DAB2FF", "#C27AFF",
+                "#AD46FF", "#9810FA", "#8207DB", "#6E11B0", "#59168B", "#3C0366"
+            ],
+            fuchsia: [
+                "#FDF4FF", "#FAE8FF", "#F6CFFF", "#F4A8FF", "#ED6AFF",
+                "#E12AFB", "#C81CDE", "#A813B7", "#8A0194", "#721378", "#4B004F"
+            ],
+            pink: [
+                "#FDF2F8", "#FCE7F3", "#FCCEE8", "#FDA5D5", "#FB64B6",
+                "#F6339A", "#E61876", "#C6185C", "#A3044C", "#861043", "#510424"
+            ],
+            rose: [
+                "#FFF1F2", "#FFE4E6", "#FFCCD3", "#FFA1AD", "#FF637E",
+                "#FF2056", "#EC253F", "#C71D36", "#A50C36", "#8B0836", "#4D0218"
+            ],
+            slate: [
+                "#F8FAFC", "#F1F5F9", "#E2E8F0", "#CAD5E2", "#90A1B9",
+                "#62748E", "#45556C", "#314158", "#1D293D", "#0F172B", "#020618"
+            ],
+            gray: [
+                "#F9FAFB", "#F3F4F6", "#E5E7EB", "#D1D5DC", "#99A1AF",
+                "#6A7282", "#4A5565", "#364153", "#1E2939", "#101828", "#030712"
+            ],
+            zinc: [
+                "#FAFAFA", "#F4F4F5", "#E4E4E7", "#D4D4D8", "#9F9FA9",
+                "#71717B", "#52525C", "#3F3F46", "#27272A", "#18181B", "#09090B"
+            ],
+            neutral: [
+                "#FAFAFA", "#F5F5F5", "#E5E5E5", "#D4D4D4", "#A1A1A1",
+                "#737373", "#525252", "#404040", "#262626", "#171717", "#0A0A0A"
+            ],
+            stone: [
+                "#FAFAF9", "#F5F5F4", "#E7E5E4", "#D6D3D1", "#A6A09B",
+                "#79716B", "#57534D", "#44403B", "#292524", "#1C1917", "#0C0A09"
+            ]
+        };
+
+        // Function to create swatches
+        function createSwatches(containerId, colorName, shades) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            shades.forEach((hex, index) => {
+                const shadeNum = index === 0 ? 50 : (index * 100);
+                
+                const swatch = document.createElement('div');
+                swatch.className = `swatch w-full aspect-square rounded-2xl shadow-sm border border-white/30 flex flex-col items-center justify-end pb-3 text-xs font-medium`;
+                swatch.style.backgroundColor = hex;
+                
+                if (shadeNum >= 700) {
+                    swatch.style.color = 'white';
+                } else {
+                    swatch.style.color = '#1f2937';
+                }
+                
+                swatch.innerHTML = `
+                    <div class="font-mono text-[10px] opacity-70">${shadeNum}</div>
+                `;
+                
+                swatch.addEventListener('click', () => {
+                    showColorInfo(colorName, shadeNum, hex);
+                });
+                
+                container.appendChild(swatch);
+            });
+        }
+
+        // Initialize all palettes
+        function initPalettes() {
+            createSwatches('red', 'Red', colors.red);
+            createSwatches('orange', 'Orange', colors.orange);
+            createSwatches('amber', 'Amber', colors.amber);
+            createSwatches('yellow', 'Yellow', colors.yellow);
+            createSwatches('lime', 'Lime', colors.lime);
+            createSwatches('green', 'Green', colors.green);
+            createSwatches('emerald', 'Emerald', colors.emerald);
+            createSwatches('teal', 'Teal', colors.teal);
+            createSwatches('cyan', 'Cyan', colors.cyan);
+            createSwatches('sky', 'Sky', colors.sky);
+            createSwatches('blue', 'Blue', colors.blue);
+            createSwatches('indigo', 'Indigo', colors.indigo);
+            createSwatches('violet', 'Violet', colors.violet);
+            createSwatches('purple', 'Purple', colors.purple);
+            createSwatches('fuchsia', 'Fuchsia', colors.fuchsia);
+            createSwatches('pink', 'Pink', colors.pink);
+            createSwatches('rose', 'Rose', colors.rose);
+            
+            // Neutrals
+            createSwatches('slate', 'Slate', colors.slate);
+            createSwatches('gray', 'Gray', colors.gray);
+            createSwatches('zinc', 'Zinc', colors.zinc);
+            createSwatches('neutral', 'Neutral', colors.neutral);
+            createSwatches('stone', 'Stone', colors.stone);
+        }
+
+        // Show color info
+        let currentHex = '';
+        
+        function showColorInfo(name, shade, hex) {
+            currentHex = hex;
+            
+            const modal = document.getElementById('colorInfo');
+            document.getElementById('colorPreview').style.backgroundColor = hex;
+            document.getElementById('colorName').textContent = `${name} ${shade}`;
+            document.getElementById('colorHex').textContent = hex;
+            
+            modal.style.display = 'block';
+        }
+        
+        function closeInfo() {
+            document.getElementById('colorInfo').style.display = 'none';
+        }
+        
+        function copyColor() {
+            if (!currentHex) return;
+            
+            navigator.clipboard.writeText(currentHex).then(() => {
+                const btn = document.querySelector('#colorInfo button');
+                const originalText = btn.textContent;
+                btn.textContent = 'Gekopieerd! ✓';
+                btn.style.backgroundColor = '#22c55e';
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.backgroundColor = '';
+                }, 2000);
+            });
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(e) {
+            const modal = document.getElementById('colorInfo');
+            if (e.target === modal) {
+                closeInfo();
+            }
+        });
+
+        // Keyboard escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === "Escape") {
+                closeInfo();
+            }
+        });
+
+        // Initialize everything
+        window.onload = initPalettes;
+    </script>
+</body>
+</html>
