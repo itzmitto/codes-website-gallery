@@ -1,0 +1,65 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eef1fb;
+}
+
+.card {
+    position: relative;
+    width: 280px;
+    height: 380px;
+    background-color: #b3c8ff;
+    border-radius: 28px;
+    overflow: hidden;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 30px rgba(70, 90, 200, 0.18);
+}
+
+.card__decoration {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+        radial-gradient(circle at 90% 78%, transparent 0, transparent 58px, #85a3ff 58px, #85a3ff 60px, transparent 60px),
+        radial-gradient(circle at 90% 78%, transparent 0, transparent 96px, #85a3ff 96px, #85a3ff 98px, transparent 98px),
+        radial-gradient(circle at 90% 78%, transparent 0, transparent 134px, #85a3ff 134px, #85a3ff 136px, transparent 136px),
+        radial-gradient(circle at 90% 78%, transparent 0, transparent 172px, #85a3ff 172px, #85a3ff 174px, transparent 174px);
+    opacity: 0.55;
+}
+
+.card__image-wrap {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+.card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.card__title {
+    position: relative;
+    z-index: 1;
+    margin-top: 24px;
+    color: #14146e;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+}
