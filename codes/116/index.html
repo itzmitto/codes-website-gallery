@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Does it Work</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: #ececec;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .container {
+            width: 1450px;
+            height: 620px;
+            background: #efc3e7;
+            border-radius: 24px;
+
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            padding: 70px 90px;
+            gap: 80px;
+        }
+
+        .left h1 {
+            font-size: 60px;
+            font-weight: 800;
+            color: black;
+            margin-bottom: 40px;
+        }
+
+        .left p {
+            font-size: 28px;
+            line-height: 1.5;
+            max-width: 350px;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px 60px;
+        }
+
+        .step {
+            display: flex;
+            gap: 25px;
+        }
+
+        .number {
+            color: #4d47ff;
+            font-size: 56px;
+            font-weight: 800;
+            min-width: 45px;
+        }
+
+        .text {
+            font-size: 18px;
+            line-height: 2;
+            color: #111;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="left">
+            <h1>How Does it Work?</h1>
+
+            <p>
+                Get your personalized color palette in 4 steps.
+            </p>
+        </div>
+
+        <div class="steps">
+
+            <div class="step">
+                <div class="number">1</div>
+
+                <div class="text">
+                    Start with two neutral colors for the text and the background.
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="number">2</div>
+
+                <div class="text">
+                    Choose your primary and secondary colors. Primary is for main CTAs and sections, and Secondary is
+                    for less important buttons and info cards.
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="number">3</div>
+
+                <div class="text">
+                    Accent color is an additional color. It appears in images, highlights, hyperlinks, boxes, cards,
+                    etc.
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="number">4</div>
+
+                <div class="text">
+                    Happy with the results? Press on “Export” and choose among different options to export in various
+                    formats, like .zip, .png, CSS, SCSS, QR Code, and more.
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
