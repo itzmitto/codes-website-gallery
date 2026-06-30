@@ -32,29 +32,77 @@
     </div>
 
     <script>
+      // ===========================================================
+      // Deze functie bouwt automatisch alle projectknoppen op.
+      // In plaats van 130 knoppen handmatig in HTML te typen,
+      // gebruiken we een loop (for-lus) om ze dynamisch aan te maken.
+      // ===========================================================
       function createProjectButtons() {
+        // We zoeken het lege <div> element op waar de knoppen in moeten komen
         const list = document.getElementById("projectList");
 
+        // We lopen van 1 t/m 130 (één keer per project)
         for (let i = 1; i <= 130; i++) {
+          // Voor elk project maken we een nieuw <button> element aan in het geheugen
           const btn = document.createElement("button");
+
+          // We geven de knop een CSS-klasse, zodat hij gestyled wordt via style.css
           btn.className = "project-btn";
+
+          // We vullen de knop met tekst, bv. "Project 1", "Project 2", ...
           btn.innerHTML = `<span>Project ${i}</span>`;
+
+          // We koppelen een click-event aan de knop.
+          // Een "arrow function" (=>) zorgt ervoor dat we het juiste
+          // projectnummer (i) kunnen meegeven aan loadProject().
           btn.onclick = () => loadProject(i);
+
+          // Tot slot voegen we de knop daadwerkelijk toe aan de pagina
           list.appendChild(btn);
         }
       }
+
+      // ===========================================================
+      // Deze functie wordt aangeroepen zodra je op een projectknop klikt.
+      // Hij zorgt ervoor dat het juiste project getoond wordt in de iframe.
+      // ===========================================================
       function loadProject(num) {
+        // We zoeken de iframe op (het "venster" waarin het project geladen wordt)
         const frame = document.getElementById("projectFrame");
+
+        // We zoeken de welkomsttekst op die in het begin getoond wordt
         const empty = document.getElementById("emptyMessage");
+
+        // We passen de 'src' van de iframe aan, zodat de bijbehorende
+        // index.html van dat project geladen wordt.
+        // Bijvoorbeeld: project 5 -> "./codes/5/index.html"
         frame.src = `./codes/${num}/index.html`;
+
+        // We verbergen de welkomstboodschap, want er wordt nu een project getoond
         empty.style.display = "none";
       }
+
+      // ===========================================================
+      // Deze functie wordt aangeroepen als je op "Terug naar overzicht" klikt.
+      // Hij reset de pagina naar de beginstaat (geen project geladen).
+      // ===========================================================
       function goHome() {
         const frame = document.getElementById("projectFrame");
         const empty = document.getElementById("emptyMessage");
+
+        // We maken de iframe leeg, zodat er geen project meer getoond wordt
         frame.src = "";
+
+        // We laten de welkomstboodschap weer zien
         empty.style.display = "block";
       }
+
+      // ===========================================================
+      // Zodra de hele pagina geladen is (window.onload), wordt
+      // de functie createProjectButtons() automatisch uitgevoerd.
+      // Zo staan de knoppen meteen klaar zonder dat de gebruiker
+      // hoeft te wachten of iets handmatig hoeft te doen.
+      // ===========================================================
       window.onload = createProjectButtons;
     </script>
   </body>
