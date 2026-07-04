@@ -1,0 +1,484 @@
+!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Koffie Atlas — Een Reis door Koffieregio's</title>
+  <meta name="description" content="Een curated atlas van 's werelds mooiste koffieregio's, smaken en zetmethodes. Een stille gids voor de rustige koffieliefhebber." />
+
+  <!-- ─── Tailwind via CDN — geen installatie nodig ─── -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- ─── Eigen design tokens: kleuren + fonts + animaties ─── -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream:  '#faf6f0',  // papier-achtergrond
+            paper:  '#f3ede1',  // zachtere tint voor stroken
+            ink:    '#241712',  // diepe koffiebruine tekst
+            bark:   '#5a3d28',  // secundaire tekst
+            tan:    '#a0714f',  // warme midtoon
+            clay:   '#c4654a',  // terracotta accent
+            sage:   '#87a878',  // zweem van groen
+            honey:  '#d4a574',  // honingkleurig detail
+          },
+          fontFamily: {
+            display: ['"Fraunces"', 'Georgia', 'serif'],
+            sans:    ['"Inter"', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Web fonts via Google Fonts (display + body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300..700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* Body — Inter + twee subtiele radial gradients voor diepte */
+    body {
+      font-family: 'Inter', sans-serif;
+      background-image:
+        radial-gradient(circle at 15% 10%, rgba(212, 165, 116, 0.10), transparent 45%),
+        radial-gradient(circle at 85% 90%, rgba(196, 101, 74, 0.08), transparent 45%);
+      background-attachment: fixed;
+    }
+
+    /* Smooth scroll voor anker-links */
+    html { scroll-behavior: smooth; }
+
+    /* ── Filter pills (Origins-sectie) ── */
+    .filter-btn {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .filter-btn.active {
+      background-color: #241712;
+      color: #faf6f0;
+      border-color: #241712;
+    }
+
+    /* ── Region card hover ── */
+    .region-card {
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.5s ease;
+    }
+    .region-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 30px 60px -30px rgba(36, 23, 18, 0.25);
+    }
+
+    /* ── Custom scrollbar ── */
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #faf6f0; }
+    ::-webkit-scrollbar-thumb { background: #a0714f; border-radius: 5px; }
+    ::-webkit-scrollbar-thumb:hover { background: #5a3d28; }
+
+    /* ── Marquee strip ── */
+    @keyframes marquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 35s linear infinite;
+    }
+
+    /* ── Stoom-animaties boven de kop ── */
+    @keyframes steam {
+      0%, 100% { opacity: 0.25; transform: translateY(0)   scale(1); }
+      50%      { opacity: 0.7;  transform: translateY(-22px) scale(1.25); }
+    }
+    .steam-wisp {
+      animation: steam 3.5s ease-in-out infinite;
+    }
+
+    /* ── Fade-up animatie voor elementen die in beeld scrollen ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Grain overlay op donkere sectie ── */
+    .grain::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.06;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    }
+  </style>
+</head>
+
+<body class="bg-cream text-ink antialiased">
+
+  <!-- ═══════════════════════════════════════════════════════════ NAV -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-cream/80 backdrop-blur-lg border-b border-ink/5">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+      <a href="#" class="font-display text-2xl font-bold tracking-tight">
+        Koffie<span class="text-clay">.</span>Atlas
+      </a>
+      <div class="hidden md:flex items-center gap-10 text-sm font-medium">
+        <a href="#origins" class="hover:text-clay transition-colors">Origins</a>
+        <a href="#brews" class="hover:text-clay transition-colors">Zetmethodes</a>
+        <a href="#ritual" class="hover:text-clay transition-colors">Ritueel</a>
+      </div>
+      <a href="#origins" class="bg-ink text-cream text-sm px-5 py-2.5 rounded-full hover:bg-clay transition-colors font-medium">
+        Verken
+      </a>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════════ HERO -->
+  <section class="relative min-h-screen flex items-center pt-32 pb-20 px-6 overflow-hidden">
+    <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-12 gap-12 items-center">
+
+      <!-- Linker kolom: tekst -->
+      <div class="lg:col-span-7 relative z-10">
+        <div class="inline-flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-bark mb-8">
+          <span class="w-10 h-px bg-clay"></span>
+          <span>Vol. 01 — A Curated Guide</span>
+        </div>
+
+        <h1 class="font-display text-[clamp(3.5rem,9vw,7.5rem)] font-light leading-[0.95] tracking-tight">
+          Van <em class="italic text-clay">boon</em><br />
+          naar kop,<br />
+          een wereld <span class="italic text-sage">ver</span>.
+        </h1>
+
+        <p class="mt-10 text-lg md:text-xl text-bark/80 max-w-xl leading-relaxed">
+          Een stille atlas van 's werelds meest geliefde koffieregio's —
+          de smaken die ze schenken, en de rituelen die ze thuis brengen.
+        </p>
+
+        <div class="mt-12 flex flex-wrap gap-4">
+          <a href="#origins"
+             class="bg-ink text-cream px-7 py-3.5 rounded-full hover:bg-clay transition-colors font-medium">
+            Ontdek regio's
+          </a>
+          <a href="#brews"
+             class="border border-ink/20 px-7 py-3.5 rounded-full hover:bg-ink hover:text-cream transition-colors font-medium">
+            Zetmethodes →
+          </a>
+        </div>
+      </div>
+
+      <!-- Rechter kolom: gestileerde koffie + stoom -->
+      <div class="lg:col-span-5 relative aspect-square max-w-md mx-auto w-full">
+        <!-- Concentrische ringen = de "kop" -->
+        <div class="absolute inset-0 rounded-full bg-gradient-to-br from-tan via-clay to-ink shadow-2xl"></div>
+        <div class="absolute inset-7 rounded-full bg-gradient-to-br from-cream via-paper to-honey"></div>
+        <div class="absolute inset-16 rounded-full bg-gradient-to-br from-bark to-ink flex items-center justify-center">
+          <span class="font-display text-cream text-7xl font-light italic">caffe</span>
+        </div>
+        <!-- Stoom boven de kop -->
+        <div class="absolute top-2 left-1/2 -translate-x-1/2 flex gap-3">
+          <div class="steam-wisp w-1.5 h-12 bg-cream/50 rounded-full"></div>
+          <div class="steam-wisp w-1.5 h-16 bg-cream/40 rounded-full" style="animation-delay:.6s"></div>
+          <div class="steam-wisp w-1.5 h-10 bg-cream/50 rounded-full" style="animation-delay:1.2s"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll-indicator onderaan -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-xs uppercase tracking-[0.3em] text-bark/60">
+      <span>Scroll</span>
+      <div class="w-px h-10 bg-bark/40"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ MARQUEE -->
+  <section class="border-y border-ink/10 py-6 overflow-hidden bg-paper">
+    <div class="marquee-track text-sm uppercase tracking-[0.3em] text-bark">
+      <!-- Twee identieke blokken zodat de animatie naadloos loopt -->
+      <div class="flex gap-12 px-6">
+        <span>★ Single Origin</span><span>★ Third Wave</span>
+        <span>★ Hand Roasted</span><span>★ Slow Brewed</span>
+        <span>★ Earthy Notes</span><span>★ Floral</span>
+        <span>★ Citrus Bright</span><span>★ Caramel Sweet</span>
+      </div>
+      <div class="flex gap-12 px-6" aria-hidden="true">
+        <span>★ Single Origin</span><span>★ Third Wave</span>
+        <span>★ Hand Roasted</span><span>★ Slow Brewed</span>
+        <span>★ Earthy Notes</span><span>★ Floral</span>
+        <span>★ Citrus Bright</span><span>★ Caramel Sweet</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ STATS -->
+  <section id="stats" class="py-24 px-6">
+    <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
+      <div>
+        <div class="font-display text-6xl md:text-7xl font-light text-clay">
+          <span data-counter="23">0</span>
+        </div>
+        <div class="mt-3 text-xs uppercase tracking-[0.3em] text-bark/70">Producerende landen</div>
+      </div>
+      <div>
+        <div class="font-display text-6xl md:text-7xl font-light text-clay">
+          <span data-counter="6">0</span>
+        </div>
+        <div class="mt-3 text-xs uppercase tracking-[0.3em] text-bark/70">Zetmethodes</div>
+      </div>
+      <div>
+        <div class="font-display text-6xl md:text-7xl font-light text-clay">
+          <span data-counter="2200">0</span>
+        </div>
+        <div class="mt-3 text-xs uppercase tracking-[0.3em] text-bark/70">Hoogste plantage (m)</div>
+      </div>
+      <div>
+        <div class="font-display text-6xl md:text-7xl font-light text-clay">
+          <span data-counter="2.25" data-decimals="2">0</span><span class="text-3xl">B</span>
+        </div>
+        <div class="mt-3 text-xs uppercase tracking-[0.3em] text-bark/70">Koppen per dag</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ ORIGINS -->
+  <section id="origins" class="py-32 px-6">
+    <div class="max-w-7xl mx-auto">
+
+      <!-- Sectie-header -->
+      <div class="max-w-3xl mb-20 reveal">
+        <div class="text-xs uppercase tracking-[0.3em] text-clay mb-4">Origins</div>
+        <h2 class="font-display text-5xl md:text-7xl font-light leading-[1.05] tracking-tight">
+          Waar smaak <em class="italic text-sage">begint</em>.
+        </h2>
+        <p class="text-bark/80 mt-8 text-lg leading-relaxed max-w-2xl">
+          Elke kop draagt een plek mee — aarde, hoogte, zon en de handen die de bessen plukten.
+          Filter de atlas per continent en proef de wereld.
+        </p>
+      </div>
+
+      <!-- Filter pills: sturen de JS filter aan -->
+      <div class="flex flex-wrap gap-2 mb-12">
+        <button data-filter="all"      class="filter-btn active px-5 py-2 rounded-full border border-ink/20 text-sm font-medium">Alle regio's</button>
+        <button data-filter="africa"   class="filter-btn        px-5 py-2 rounded-full border border-ink/20 text-sm font-medium">Afrika</button>
+        <button data-filter="americas" class="filter-btn        px-5 py-2 rounded-full border border-ink/20 text-sm font-medium">Amerika</button>
+        <button data-filter="asia"     class="filter-btn        px-5 py-2 rounded-full border border-ink/20 text-sm font-medium">Azië &amp; Pacific</button>
+      </div>
+
+      <!-- Region cards — script.js vult deze -->
+      <div id="region-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ BREWING METHODS -->
+  <section id="brews" class="py-32 px-6 bg-ink text-cream relative grain overflow-hidden">
+    <div class="max-w-7xl mx-auto relative z-10">
+
+      <div class="max-w-3xl mb-20 reveal">
+        <div class="text-xs uppercase tracking-[0.3em] text-honey mb-4">Zetmethodes</div>
+        <h2 class="font-display text-5xl md:text-7xl font-light leading-[1.05] tracking-tight">
+          De kunst van het <em class="italic text-clay">wachten</em>.
+        </h2>
+        <p class="text-cream/70 mt-8 text-lg leading-relaxed max-w-2xl">
+          Zes methodes die elke boon een andere stem geven. Van traag en meditatief tot snel en intens — kies je ritme.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Brew 1 — V60 -->
+        <div class="group border border-cream/10 rounded-3xl p-8 hover:border-clay/50 transition-all duration-500 hover:-translate-y-1 bg-cream/5">
+          <div class="flex items-start justify-between mb-6">
+            <div class="w-12 h-12 rounded-2xl bg-clay/20 flex items-center justify-center">
+              <span class="font-display text-2xl italic text-clay">01</span>
+            </div>
+            <span class="text-xs uppercase tracking-widest text-cream/50">3-4 min</span>
+          </div>
+          <h3 class="font-display text-3xl font-light mb-3">V60 Pour-over</h3>
+          <p class="text-cream/70 leading-relaxed">
+            Helder, schoon, delicaat. Laat de boon zich uitspreken in lange, langzame cirkels heet water.
+          </p>
+        </div>
+
+        <!-- Brew 2 — French Press -->
+        <div class="group border border-cream/10 rounded-3xl p-8 hover:border-clay/50 transition-all duration-500 hover:-translate-y-1 bg-cream/5">
+          <div class="flex items-start justify-between mb-6">
+            <div class="w-12 h-12 rounded-2xl bg-clay/20 flex items-center justify-center">
+              <span class="font-display text-2xl italic text-clay">02</span>
+            </div>
+            <span class="text-xs uppercase tracking-widest text-cream/50">4 min</span>
+          </div>
+          <h3 class="font-display text-3xl font-light mb-3">French Press</h3>
+          <p class="text-cream/70 leading-relaxed">
+            Vol, romig, ongefilterd. Volledige onderdompeling in een glazen cilinder — geen geheimen.
+          </p>
+        </div>
+
+        <!-- Brew 3 — AeroPress -->
+        <div class="group border border-cream/10 rounded-3xl p-8 hover:border-clay/50 transition-all duration-500 hover:-translate-y-1 bg-cream/5">
+          <div class="flex items-start justify-between mb-6">
+            <div class="w-12 h-12 rounded-2xl bg-clay/20 flex items-center justify-center">
+              <span class="font-display text-2xl italic text-clay">03</span>
+            </div>
+            <span class="text-xs uppercase tracking-widest text-cream/50">1-2 min</span>
+          </div>
+          <h3 class="font-display text-3xl font-light mb-3">AeroPress</h3>
+          <p class="text-cream/70 leading-relaxed">
+            Snel, veelzijdig, speels. Een experimentele reis tussen espresso en filter in één klein apparaat.
+          </p>
+        </div>
+
+        <!-- Brew 4 — Espresso -->
+        <div class="group border border-cream/10 rounded-3xl p-8 hover:border-clay/50 transition-all duration-500 hover:-translate-y-1 bg-cream/5">
+          <div class="flex items-start justify-between mb-6">
+            <div class="w-12 h-12 rounded-2xl bg-clay/20 flex items-center justify-center">
+              <span class="font-display text-2xl italic text-clay">04</span>
+            </div>
+            <span class="text-xs uppercase tracking-widest text-cream/50">25-30 sec</span>
+          </div>
+          <h3 class="font-display text-3xl font-light mb-3">Espresso</h3>
+          <p class="text-cream/70 leading-relaxed">
+            Geconcentreerd, intens, dik van crema. Negen bar druk in een shot van dertig milliliter.
+          </p>
+        </div>
+
+        <!-- Brew 5 — Cold Brew -->
+        <div class="group border border-cream/10 rounded-3xl p-8 hover:border-clay/50 transition-all duration-500 hover:-translate-y-1 bg-cream/5">
+          <div class="flex items-start justify-between mb-6">
+            <div class="w-12 h-12 rounded-2xl bg-clay/20 flex items-center justify-center">
+              <span class="font-display text-2xl italic text-clay">05</span>
+            </div>
+            <span class="text-xs uppercase tracking-widest text-cream/50">12-18 uur</span>
+          </div>
+          <h3 class="font-display text-3xl font-light mb-3">Cold Brew</h3>
+          <p class="text-cream/70 leading-relaxed">
+            Zoet, zacht, bijna thee-achtig. Een nacht in de koelkast en de zuurtegraad verdwijnt als sneeuw.
+          </p>
+        </div>
+
+        <!-- Brew 6 — Moka Pot -->
+        <div class="group border border-cream/10 rounded-3xl p-8 hover:border-clay/50 transition-all duration-500 hover:-translate-y-1 bg-cream/5">
+          <div class="flex items-start justify-between mb-6">
+            <div class="w-12 h-12 rounded-2xl bg-clay/20 flex items-center justify-center">
+              <span class="font-display text-2xl italic text-clay">06</span>
+            </div>
+            <span class="text-xs uppercase tracking-widest text-cream/50">5 min</span>
+          </div>
+          <h3 class="font-display text-3xl font-light mb-3">Moka Pot</h3>
+          <p class="text-cream/70 leading-relaxed">
+            Italiaans erfgoed op een gaspit. Stoomdruk in een achtkantig koffertje — klein, krachtig, iconisch.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ RITUAL -->
+  <section id="ritual" class="py-32 px-6">
+    <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+
+      <!-- Linker: tekst + stappen -->
+      <div class="reveal">
+        <div class="text-xs uppercase tracking-[0.3em] text-clay mb-4">Een ochtendritueel</div>
+        <h2 class="font-display text-5xl md:text-7xl font-light leading-[1.05] tracking-tight">
+          Het perfecte <em class="italic text-clay">kopje</em>.
+        </h2>
+        <p class="text-bark/80 mt-8 text-lg leading-relaxed max-w-xl">
+          Een langzame ochtend, een vaste volgorde, een goede kop. Het recept van een V60 die je elke keer weer even laat stoppen.
+        </p>
+
+        <ol class="mt-12 space-y-6">
+          <li class="flex gap-5">
+            <span class="font-display text-3xl italic text-clay shrink-0">i.</span>
+            <div>
+              <div class="font-medium">Kook water tot 94°C</div>
+              <div class="text-bark/70 mt-1">Net onder het kookpunt — een minuut wachten na het koken.</div>
+            </div>
+          </li>
+          <li class="flex gap-5">
+            <span class="font-display text-3xl italic text-clay shrink-0">ii.</span>
+            <div>
+              <div class="font-medium">15 gram koffie, medium-fijn</div>
+              <div class="text-bark/70 mt-1">Vers gemalen, twee tellen voor je begint.</div>
+            </div>
+          </li>
+          <li class="flex gap-5">
+            <span class="font-display text-3xl italic text-clay shrink-0">iii.</span>
+            <div>
+              <div class="font-medium">Bloem met 50 gram water, wacht 30 sec</div>
+              <div class="text-bark/70 mt-1">Laat de koffie "bloeien" — de geur alleen al is de helft van de ritueel.</div>
+            </div>
+          </li>
+          <li class="flex gap-5">
+            <span class="font-display text-3xl italic text-clay shrink-0">iv.</span>
+            <div>
+              <div class="font-medium">Giet in drie cirkels, klaar in 3:30</div>
+              <div class="text-bark/70 mt-1">Vanuit het midden, naar buiten, terug naar het midden. Langzaam, aandachtig.</div>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <!-- Rechter: een tweede "kop" als illustratie -->
+      <div class="relative aspect-square max-w-md mx-auto w-full reveal">
+        <div class="absolute inset-0 rounded-[3rem] bg-gradient-to-br from-honey via-clay to-bark shadow-2xl"></div>
+        <div class="absolute inset-8 rounded-[2.5rem] bg-gradient-to-br from-paper to-cream"></div>
+        <div class="absolute inset-20 rounded-[2rem] bg-gradient-to-br from-ink to-bark flex items-center justify-center">
+          <div class="text-center">
+            <div class="font-display text-cream text-5xl font-light italic">94°</div>
+            <div class="text-cream/60 text-xs uppercase tracking-[0.3em] mt-2">Celsius</div>
+          </div>
+        </div>
+        <!-- Decoratieve elementen -->
+        <div class="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-sage/30 blur-2xl"></div>
+        <div class="absolute -bottom-6 -left-6 w-32 h-32 rounded-full bg-clay/30 blur-2xl"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ FOOTER -->
+  <footer class="border-t border-ink/10 py-16 px-6">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-12 items-start">
+
+      <div>
+        <a href="#" class="font-display text-2xl font-bold tracking-tight">
+          Koffie<span class="text-clay">.</span>Atlas
+        </a>
+        <p class="text-bark/70 mt-4 text-sm leading-relaxed max-w-xs">
+          Een stille, curated gids voor wie koffie serieus neemt — zonder pretentie, met aandacht.
+        </p>
+      </div>
+
+      <div>
+        <div class="text-xs uppercase tracking-[0.3em] text-bark/60 mb-4">Verken</div>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#origins" class="hover:text-clay transition-colors">Origins</a></li>
+          <li><a href="#brews"   class="hover:text-clay transition-colors">Zetmethodes</a></li>
+          <li><a href="#ritual"  class="hover:text-clay transition-colors">Ritueel</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="text-xs uppercase tracking-[0.3em] text-bark/60 mb-4">Sluit aan</div>
+        <p class="text-sm text-bark/70 leading-relaxed">
+          Geschreven met liefde voor de boon.<br>
+          Geen database, geen API — alleen text en koffie.
+        </p>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-ink/10 flex flex-wrap justify-between items-center gap-4">
+      <div class="text-xs text-bark/60 uppercase tracking-[0.3em]">© Koffie Atlas — Vol. 01</div>
+      <div class="text-xs text-bark/60">Gemaakt met <span class="text-clay">♥</span> en heel veel cafeïne</div>
+    </div>
+  </footer>
+
+  <!-- Eigen JavaScript: laadt als laatste zodat DOM klaar is -->
+  <script src="script.js"></script>
+</body>
+</html>
