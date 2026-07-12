@@ -1,0 +1,144 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: white;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.world-map {
+    position: absolute;
+    inset: 0;
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 80%;
+    opacity: .10;
+    filter: brightness(0) saturate(100%) invert(76%) sepia(24%) saturate(701%) hue-rotate(171deg) brightness(104%) contrast(98%);
+    z-index: -1;
+}
+
+header {
+    width: 90%;
+    margin: auto;
+    height: 90px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+nav {
+    display: flex;
+    gap: 35px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #222;
+    font-size: 15px;
+}
+
+.right-nav {
+    display: flex;
+    gap: 15px;
+}
+
+.search {
+    background: none;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.signin {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 30px;
+    background: black;
+    color: white;
+    cursor: pointer;
+}
+
+.hero {
+    width: 90%;
+    margin: auto;
+    height: calc(100vh - 90px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.hero-left {
+    width: 45%;
+}
+
+.hero-left h1 {
+    font-size: 68px;
+    line-height: 1.1;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.hero-left span {
+    color: #6baed6;
+}
+
+.hero-left p {
+    width: 520px;
+    line-height: 1.8;
+    color: #666;
+    margin-bottom: 35px;
+}
+
+.trip-btn {
+    background: black;
+    color: white;
+    border: none;
+    padding: 18px 34px;
+    border-radius: 40px;
+    cursor: pointer;
+}
+
+.hero-right {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.big-card {
+    width: 280px;
+    height: 430px;
+    border-radius: 28px;
+    background: #d9d9d9;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.small-card {
+    width: 220px;
+    border-radius: 28px;
+    background: #d9d9d9;
+}
+
+.top {
+    height: 270px;
+}
+
+.bottom {
+    height: 170px;
+}
