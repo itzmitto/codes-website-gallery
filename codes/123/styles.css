@@ -4,19 +4,30 @@
     box-sizing: border-box;
 }
 
-:root {
-    --map-color: lightblue;
+:root{
+    --map-color: blue;
 }
 
-.world-map {
-    position: absolute;
-    inset: 0;
+.world-map{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    opacity:.12;
+    color:var(--map-color);
+    pointer-events:none;
+    z-index:-1;
+}
+
+.world-map svg {
     width: 100%;
     height: 100%;
-    opacity: .12;
-    pointer-events: none;
-    z-index: -1;
 }
+
+.world-map path {
+    fill: var(--map-color);
+}
+
 
 body {
     font-family: 'Poppins', sans-serif;
