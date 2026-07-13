@@ -186,7 +186,21 @@ nav a {
     overflow:hidden;
     box-shadow:0 15px 40px rgba(0,0,0,.06);
 }
+.tall{
+    min-height:620px;
+}
 
+.medium{
+    min-height:420px;
+}
+
+.small{
+    min-height:260px;
+}
+
+.wide{
+    grid-column:span 2;
+}
 .card {
     background: white;
     border-radius: 22px;
