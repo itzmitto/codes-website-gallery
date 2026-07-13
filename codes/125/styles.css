@@ -5,11 +5,20 @@
     --cyan-light: #c9f2fb;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #fff;
+}
+
 .logo-slider {
     width: 100%;
     overflow: hidden;
     padding: 80px 0;
-    background: #fff;
     position: relative;
 }
 
@@ -25,29 +34,33 @@
 
 .logo-slider::before {
     left: 0;
-    background: linear-gradient(to right, #fff 0%, transparent 100%);
+    background: linear-gradient(to right, #fff, transparent);
 }
 
 .logo-slider::after {
     right: 0;
-    background: linear-gradient(to left, #fff 0%, transparent 100%);
+    background: linear-gradient(to left, #fff, transparent);
 }
 
 .logo-track {
     display: flex;
     width: max-content;
+    animation: scroll 10s linear infinite;
+}
+
+.logo-group {
+    display: flex;
+    align-items: center;
     gap: 90px;
-    animation: scroll 22s linear infinite;
+    padding-right: 90px;
 }
 
 .logo {
     font-size: 42px;
     font-weight: 700;
-    color: #111;
     white-space: nowrap;
-    user-select: none;
+    color: #111;
 }
-
 
 @keyframes scroll {
     from {
