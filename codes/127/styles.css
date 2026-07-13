@@ -172,11 +172,19 @@ nav a {
     font-weight: 500;
 }
 
-.grid {
-    margin-top: 50px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 26px;
+.grid{
+    margin-top:60px;
+    display:grid;
+    grid-template-columns:repeat(4,minmax(260px,1fr));
+    gap:28px;
+    align-items:start;
+}
+
+.card{
+    background:#fff;
+    border-radius:24px;
+    overflow:hidden;
+    box-shadow:0 15px 40px rgba(0,0,0,.06);
 }
 
 .card {
