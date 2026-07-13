@@ -1,6 +1,18 @@
 :root {
     --text: #111827;
     --background: #ffffff;
-    --cyan: #56d9f3;
-    --cyan-light: #c9f2fb;
+    --cyan-50: #ecfeff;
+    --cyan-100: #cffafe;
+    --cyan-200: #a5f3fc;
+    --cyan-300: #67e8f9;
+    --cyan-400: #22d3ee;
+    --cyan-500: #06b6d4;
+    --cyan-600: #0891b2;
+    --cyan-700: #0e7490;
+    --cyan-800: #155e75;
+    --cyan-900: #164e63;
+    --cyan-950: #083344;
+    --radius: 22px;
+    --shadow: 0 8px 24px rgba(0, 0, 0, .08);
+    --border: #e5e7eb;
 }
