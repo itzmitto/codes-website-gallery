@@ -20,27 +20,21 @@ body {
 }
 
 .hero-image {
-
     width: 55%;
-
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .world-map {
-
     width: 100%;
     max-width: 900px;
-
     color: var(--map-color);
 }
 
 .world-map svg {
-
     width: 100%;
     height: auto;
-
     display: block;
 }
 
