@@ -1091,8 +1091,8 @@ body::after {
 
     .hero-grid,
     .cta-grid,
-    why-grid,
-    showcase-grid,
+    .why-grid,
+    .showcase-grid,
     .newsletter-box {
         grid-template-columns: 1fr;
     }
