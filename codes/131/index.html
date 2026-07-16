@@ -36,7 +36,28 @@
             </nav>
         </div>
     </header>
+    <div class="bg-shapes">
 
+        <svg class="blob blob1" viewBox="0 0 600 600">
+            <path fill="var(--primary)"
+                d="M503 317Q494 434 389 503Q284 572 168 513Q52 454 61 323Q70 192 177 121Q284 50 391 109Q498 168 503 317Z" />
+        </svg>
+
+        <svg class="blob blob2" viewBox="0 0 600 600">
+            <path fill="var(--secondary)"
+                d="M531 322Q492 444 372 489Q252 534 144 464Q36 394 53 261Q70 128 190 80Q310 32 415 96Q520 160 531 322Z" />
+        </svg>
+
+        <svg class="grid-pattern" viewBox="0 0 400 400">
+            <defs>
+                <pattern id="grid" width="25" height="25" patternUnits="userSpaceOnUse">
+                    <path d="M25 0H0V25" fill="none" stroke="var(--accent)" stroke-width="1" />
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
+
+    </div>
     <section class="hero">
         <div class="container hero-grid">
             <div class="hero-left">
