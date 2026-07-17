@@ -236,3 +236,163 @@ nav a:hover {
     }
 }
 
+@media(max-width:1300px) {
+    .hero {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    .left {
+        padding: 60px;
+    }
+
+    .right {
+        height: 700px;
+    }
+
+    .hero-content {
+        margin-top: 90px;
+    }
+
+    .hero-content h1 {
+        font-size: 48px;
+    }
+
+    nav {
+        margin-top: 80px;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+
+    .lid {
+        width: 150px;
+        left: 40px;
+    }
+
+    .cup-small {
+        width: 220px;
+        left: 30px;
+        top: 210px;
+    }
+
+    .cup-big {
+        width: 270px;
+        right: 60px;
+        top: 180px;
+    }
+
+    .shape-top {
+        width: 260px;
+    }
+
+    .shape-bottom {
+        width: 340px;
+    }
+}
+
+@media(max-width:900px) {
+    .left {
+        padding: 40px;
+    }
+
+    .hero-content {
+        margin-top: 70px;
+    }
+
+    .hero-content h1 {
+        font-size: 40px;
+        letter-spacing: -1px;
+    }
+
+    .hero-content p {
+        font-size: 16px;
+    }
+
+    nav {
+        gap: 20px;
+    }
+
+    .right {
+        height: 560px;
+    }
+
+    .lid {
+        width: 120px;
+        top: 40px;
+        left: 10px;
+    }
+
+    .cup-small {
+        width: 180px;
+        left: 0;
+        top: 170px;
+    }
+
+    .cup-big {
+        width: 220px;
+        right: 30px;
+        top: 150px;
+    }
+}
+
+@media(max-width:650px) {
+    .hero {
+        width: 100%;
+        margin: 0;
+        box-shadow: none;
+    }
+
+    .left {
+        padding: 30px;
+    }
+
+    .hero-content {
+        margin-top: 50px;
+    }
+
+    .hero-content h1 {
+        font-size: 32px;
+        line-height: 1.15;
+    }
+
+    .hero-content p {
+        font-size: 15px;
+        margin-bottom: 30px;
+    }
+
+    nav {
+        margin-top: 50px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+    }
+
+    .right {
+        height: 430px;
+    }
+
+    .lid {
+        width: 95px;
+        left: 5px;
+    }
+
+    .cup-small {
+        width: 140px;
+        top: 145px;
+        left: -5px;
+    }
+
+    .cup-big {
+        width: 180px;
+        right: 15px;
+        top: 125px;
+    }
+
+    .shape-top {
+        width: 190px;
+    }
+
+    .shape-bottom {
+        width: 240px;
+    }
+}
