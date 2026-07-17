@@ -3,5 +3,139 @@
     --background: #f6f4f4;
     --primary: #4040f5;
     --secondary: #ee0bd6;
-    --accent: #c4c5ee;
+    --accent: #d9d9df;
+    --dark: #222224;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background: #ececec;
+    color: var(--text);
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.hero {
+    width: min(1450px, 95%);
+    height: 820px;
+    margin: 40px auto;
+    background: white;
+    display: grid;
+    grid-template-columns: 62% 38%;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, .08);
+}
+
+.left {
+    padding: 55px 70px;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-box {
+    width: 34px;
+    height: 34px;
+    border: 2px solid var(--text);
+}
+
+.logo-text h4 {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.hero-content {
+    margin-top: 130px;
+    max-width: 520px;
+}
+
+.hero-content h1 {
+    font-size: 58px;
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 25px;
+}
+
+.hero-content p {
+    font-size: 17px;
+    color: #666;
+    margin-bottom: 40px;
+}
+
+.hero-content a {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 600;
+    position: relative;
+}
+
+.hero-content a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background: var(--text);
+    transition: .3s;
+}
+
+.hero-content a:hover::after {
+    width: 45%;
+}
+
+nav {
+    margin-top: auto;
+    display: flex;
+    gap: 45px;
+}
+
+nav a {
+    font-size: 14px;
+    color: #777;
+    transition: .3s;
+}
+
+nav a:hover {
+    color: var(--text);
+}
+
+.right {
+    position: relative;
+    background: linear-gradient(135deg, #262628, #1d1d1f);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
