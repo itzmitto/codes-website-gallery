@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+.gradients-section {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.gradients-section h1 {
+    font-size: 2rem;
+    font-weight: 500;
+    color: #111827;
+    margin-bottom: 35px;
+}
+
+.gradient-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 240px);
+    gap: 20px;
+}
+
+.gradient-card {
+    width: 240px;
+    height: 180px;
+    border-radius: 16px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+    transition: transform .25s ease;
+}
+
+.gradient-card:hover {
+    transform: translateY(-5px);
+}
+
+
+.gradient-1 {
+    background: linear-gradient(180deg, #cffafe 0%, #a5f3fc 100%);
+}
+
+.gradient-2 {
+    background: linear-gradient(180deg, #cffafe 0%, #67e8f9 100%);
+}
+
+.gradient-3 {
+    background: linear-gradient(180deg, #a5f3fc 0%, #67e8f9 100%);
+}
+
+
+.gradient-4 {
+    background: linear-gradient(180deg, #67e8f9 0%, #06b6d4 100%);
+}
+
+.gradient-5 {
+    background: linear-gradient(180deg, #06b6d4 0%, #0891b2 100%);
+}
+
+.gradient-6 {
+    background: linear-gradient(180deg, #0891b2 0%, #0e7490 100%);
+}
+
+
+.gradient-7 {
+    background: linear-gradient(180deg, #0891b2 0%, #155e75 100%);
+}
+
+.gradient-8 {
+    background: linear-gradient(180deg, #0e7490 0%, #164e63 100%);
+}
+
+.gradient-9 {
+    background: linear-gradient(180deg, #155e75 0%, #083344 100%);
+}
