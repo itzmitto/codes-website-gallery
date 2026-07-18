@@ -46,7 +46,7 @@ body {
 
 .gradient-1 {
     background: linear-gradient(180deg, #cffafe 0%, #a5f3fc 100%);
-}
+}   
 
 .gradient-2 {
     background: linear-gradient(180deg, #cffafe 0%, #67e8f9 100%);
@@ -83,7 +83,7 @@ body {
 }
 
 .gradient-card {
-    position: relative;
+    position: relative;   
     width: 240px;
     height: 180px;
     border-radius: 16px;
