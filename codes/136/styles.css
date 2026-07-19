@@ -195,3 +195,10 @@ body {
     font-weight: 500;
     color: var(--text);
 }
+
+.expense-card2 {
+    background: #06b6d4;
+}
+.expense-card2 {
+    background: #22d3ee;
+}
