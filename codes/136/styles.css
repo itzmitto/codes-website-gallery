@@ -77,3 +77,121 @@ body {
     line-height: 1.25;
     letter-spacing: -0.01em;
 }
+
+
+:root {
+    --cyan-400: #22d3ee;
+    --cyan-500: #06b6d4;
+    --cyan-600: #0891b2;
+    --text: #111827;
+    --border: #e5e7eb;
+}
+
+.card2 {
+    width: 250px;
+    height: 340px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .05);
+    padding: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden;
+}
+
+.card2 h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 10px;
+}
+
+.card2 .chart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0 20px;
+}
+
+.card2 .donut {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background:
+        conic-gradient(var(--cyan-600) 0deg 116deg,
+            white 116deg 121deg,
+            var(--cyan-500) 121deg 238deg,
+            white 238deg 243deg,
+            var(--cyan-400) 243deg 356deg,
+            white 356deg 360deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card2 .hole {
+    width: 108px;
+    height: 108px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card2 .hole span {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.card2 .list {
+    width: 100%;
+}
+
+.card2 .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-top: 1px solid #f1f5f9;
+}
+
+.card2 .row:first-child {
+    border-top: none;
+}
+
+.card2 .left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card2 .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 4px;
+}
+
+.card2 .dot1 {
+    background: var(--cyan-600);
+}
+
+.card2 .dot2 {
+    background: var(--cyan-500);
+}
+
+.card2 .dot3 {
+    background: var(--cyan-400);
+}
+
+.card2 .left span:last-child {
+    font-size: 14px;
+    color: var(--text);
+}
+
+.card2 .amount {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+}
