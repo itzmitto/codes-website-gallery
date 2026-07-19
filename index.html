@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Codes - 1 tot 20</title>
+    <title>My Codes 1 tot hoeveel ik wil</title>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
@@ -12,7 +12,7 @@
       <button class="back-btn" onclick="goHome()">
         ← Terug naar overzicht
       </button>
-      <div class="header-info">Leerprojecten 1 - 20</div>
+      <div class="header-info">Leerprojecten 1 tot hoeveel ik wil</div>
     </header>
 
     <div class="container"> 
@@ -32,17 +32,15 @@
     </div>
 
     <script>
-      // ===========================================================
       // Deze functie bouwt automatisch alle projectknoppen op.
       // In plaats van 130 knoppen handmatig in HTML te typen,
       // gebruiken we een loop (for-lus) om ze dynamisch aan te maken.
-      // ===========================================================
       function createProjectButtons() {
         // We zoeken het lege <div> element op waar de knoppen in moeten komen
         const list = document.getElementById("projectList");
 
         // We lopen van 1 t/m 130 (één keer per project)
-        for (let i = 1; i <= 130; i++) {
+        for (let i = 1; i <= 150; i++) {
           // Voor elk project maken we een nieuw <button> element aan in het geheugen
           const btn = document.createElement("button");
 
@@ -62,10 +60,8 @@
         }
       }
 
-      // ===========================================================
       // Deze functie wordt aangeroepen zodra je op een projectknop klikt.
       // Hij zorgt ervoor dat het juiste project getoond wordt in de iframe.
-      // ===========================================================
       function loadProject(num) {
         // We zoeken de iframe op (het "venster" waarin het project geladen wordt)
         const frame = document.getElementById("projectFrame");
@@ -82,10 +78,8 @@
         empty.style.display = "none";
       }
 
-      // ===========================================================
       // Deze functie wordt aangeroepen als je op "Terug naar overzicht" klikt.
       // Hij reset de pagina naar de beginstaat (geen project geladen).
-      // ===========================================================
       function goHome() {
         const frame = document.getElementById("projectFrame");
         const empty = document.getElementById("emptyMessage");
@@ -97,12 +91,10 @@
         empty.style.display = "block";
       }
 
-      // ===========================================================
       // Zodra de hele pagina geladen is (window.onload), wordt
       // de functie createProjectButtons() automatisch uitgevoerd.
       // Zo staan de knoppen meteen klaar zonder dat de gebruiker
       // hoeft te wachten of iets handmatig hoeft te doen.
-      // ===========================================================
       window.onload = createProjectButtons;
     </script>
   </body>
