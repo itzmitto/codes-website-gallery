@@ -228,12 +228,64 @@ body {
     background: #22d3ee;
 }
 
-
-
 .expense-card3 {
-    background:#22d3ee;
+    background: #22d3ee;
 }
 
 .expense-card3 {
     background: #67e8f9;
+}
+
+
+
+
+.card4 {
+    width: 250px;
+    height: 340px;
+    background: #67e8f9;
+    border-radius: 24px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .05);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.card4 .menu {
+    width: 205px;
+    height: 290px;
+    background: #bfeaf4;
+    border-radius: 18px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card4 .menu-item {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    text-decoration: none;
+    color: #111827;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all .25s ease;
+}
+
+.card4 .menu-item i {
+    width: 20px;
+    text-align: center;
+    font-size: 18px;
+    color: #111827;
+    transition: color .25s ease;
+}
+
+.card4 .menu-item:hover {
+    transform: translateX(6px);
+}
+
+.card4 .menu-item:hover i {
+    color: #0891b2;
 }
