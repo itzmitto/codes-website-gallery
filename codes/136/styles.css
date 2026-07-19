@@ -357,3 +357,74 @@ body {
     background: #fff;
     transform: scale(1.08);
 }
+
+.card6 {
+    position: relative;
+    width: 250px;
+    height: 340px;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .05);
+    cursor: pointer;
+}
+
+.card6__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .5s ease;
+}
+
+.card6:hover .card6__image {
+    transform: scale(1.04);
+}
+
+.card6__overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(to top,
+            rgba(0, 132, 175, .95) 0%,
+            rgba(0, 155, 205, .72) 32%,
+            rgba(0, 170, 220, .25) 55%,
+            rgba(0, 0, 0, 0) 78%);
+}
+
+.card6__content {
+    position: absolute;
+    left: 22px;
+    right: 22px;
+    bottom: 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.card6__content h2 {
+    color: #fff;
+    font-size: 25px;
+    font-weight: 500;
+    line-height: 1.05;
+    font-family: "Inter", sans-serif;
+}
+
+.card6__button {
+    width: 60px;
+    height: 50px;
+    border-radius: 50%;
+    background: #bff4ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #237897;
+    text-decoration: none;
+    font-size: 18px;
+    transition: .3s ease;
+}
+
+.card6__button:hover {
+    background: #fff;
+    transform: scale(1.08);
+}
