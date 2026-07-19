@@ -286,3 +286,74 @@ body {
 .card4 .menu-item:hover i {
     color: #0891b2;
 }
+
+.card5 {
+    position: relative;
+    width: 250px;
+    height: 340px;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .05);
+    cursor: pointer;
+}
+
+.card5__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .5s ease;
+}
+
+.card5:hover .card5__image {
+    transform: scale(1.04);
+}
+
+.card5__overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(to top,
+            rgba(0, 132, 175, .95) 0%,
+            rgba(0, 155, 205, .72) 32%,
+            rgba(0, 170, 220, .25) 55%,
+            rgba(0, 0, 0, 0) 78%);
+}
+
+.card5__content {
+    position: absolute;
+    left: 22px;
+    right: 22px;
+    bottom: 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.card5__content h2 {
+    color: #fff;
+    font-size: 25px;
+    font-weight: 500;
+    line-height: 1.05;
+    font-family: "Inter", sans-serif;
+}
+
+.card5__button {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #bff4ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #237897;
+    text-decoration: none;
+    font-size: 18px;
+    transition: .3s ease;
+}
+
+.card5__button:hover {
+    background: #fff;
+    transform: scale(1.08);
+}
