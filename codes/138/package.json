@@ -1,0 +1,10 @@
+{
+    "contributes": {
+        "commands": [
+            {
+                "command": "ridiculousCoding.hello",
+                "title": "Ridiculous Coding: Hello"
+            }
+        ]
+    }
+}
