@@ -1,27 +1,155 @@
-.loading img {
-    filter: grayscale(100%);
-    opacity: .2;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.loading h1,
-.loading p {
-    color: transparent;
-    background: #ddd;
+body {
+    background: #1d1d1d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px;
+}
+
+.website {
+    width: 1450px;
+    background: #2b2b2b;
+    border-radius: 30px;
+    padding: 18px;
+    border: 2px solid #444;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .5);
+}
+
+.navbar {
+    height: 70px;
+    background: #333;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    margin-bottom: 18px;
+}
+
+.logo {
+    width: 130px;
+    height: 36px;
     border-radius: 20px;
 }
 
-.loading button {
-    background: #ddd;
-    color: transparent;
+nav {
+    display: flex;
+    gap: 35px;
 }
 
-img {
-    transition: 1s;
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 15px;
+    opacity: .8;
 }
 
-h1,
-p,
-button {
-    transition: 1s;
+.store-btn {
+    width: 140px;
+    height: 40px;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+}
 
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    width: 85%;
+    height: 42px;
+    border-radius: 30px;
+    margin-bottom: 15px;
+}
+
+.title.small {
+    width: 70%;
+}
+
+.line {
+    width: 85%;
+    height: 18px;
+    border-radius: 30px;
+    margin-bottom: 25px;
+}
+
+.buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.button {
+    width: 140px;
+    height: 42px;
+    border-radius: 999px;
+}
+
+.circles {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 30px;
+}
+
+.circle {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+}
+
+.bottom-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    height: 180px;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.hero {
+    height: 470px;
+    border-radius: 22px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    height: 180px;
+}
+
+.card {
+    border-radius: 22px;
+}
+
+.skeleton {
+    background: #d9d9d9;
+}
+
+.loading .card {
+    background: #474747;
+}
+
+.loading .hero {
+    background: #474747;
 }
