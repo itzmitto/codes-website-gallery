@@ -261,3 +261,17 @@ nav a {
     opacity: 0;
     pointer-events: none;
 }
+
+.hero {
+    height: 470px;
+    border-radius: 22px;
+    overflow: hidden;
+    position: relative;
+}
+
+.hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
