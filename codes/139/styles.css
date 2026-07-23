@@ -1,0 +1,27 @@
+.loading img {
+    filter: grayscale(100%);
+    opacity: .2;
+}
+
+.loading h1,
+.loading p {
+    color: transparent;
+    background: #ddd;
+    border-radius: 20px;
+}
+
+.loading button {
+    background: #ddd;
+    color: transparent;
+}
+
+img {
+    transition: 1s;
+}
+
+h1,
+p,
+button {
+    transition: 1s;
+
+}

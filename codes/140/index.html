@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midori — Sip better. Feel brighter.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FAF7EE;
+            --deep-green: #173A2A;
+            --matcha: #6B9B37;
+            --matcha-dark: #4F7A28;
+            --yellow: #F2E1A0;
+            --pink: #F4D3DA;
+            --ink: #15221A;
+            --wire-bg: #141516;
+            --wire-panel: #1d1e20;
+            --wire-block: #3a3b3d;
+            --wire-light: #d9d9d9;
+            --x: 50%;
+            --y: 50%;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--ink);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .logo-pill,
+        .btn,
+        .flavor span,
+        .badge-tag {
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        .page {
+            max-width: 1180px;
+            margin: 2.2vh auto;
+            background: var(--cream);
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px -20px rgba(23, 58, 42, 0.25);
+            position: relative;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 32px;
+            background: var(--deep-green);
+            position: relative;
+            z-index: 5;
+        }
+
+        .logo-pill {
+            color: var(--cream);
+            font-weight: 700;
+            font-size: 20px;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .logo-pill::before {
+            content: "✿";
+            color: var(--yellow);
+            font-size: 16px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-link {
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 14.5px;
+            font-weight: 500;
+            padding: 9px 16px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.06);
+            cursor: pointer;
+            transition: background .25s ease;
+            border: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.14);
+        }
+
+        .cta-pill {
+            background: var(--cream);
+            color: var(--deep-green);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+
+        main.hero {
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: 0;
+            background: var(--cream);
+        }
+
+        .hero-left {
+            padding: 44px 40px 36px;
+        }
+
+        .hero-left h1 {
+            font-size: 44px;
+            line-height: 1.08;
+            color: var(--deep-green);
+            margin: 0 0 14px;
+            font-weight: 700;
+        }
+
+        .flower-ico {
+            color: var(--matcha);
+        }
+
+        .sub {
+            font-size: 15.5px;
+            color: #3d4a42;
+            max-width: 390px;
+            line-height: 1.55;
+            margin: 0 0 22px;
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 34px;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 999px;
+            padding: 12px 22px;
+            font-weight: 600;
+            font-size: 14.5px;
+            cursor: pointer;
+        }
+
+        .btn-outline {
+            background: var(--yellow);
+            color: var(--deep-green);
+        }
+
+        .btn-solid {
+            background: var(--matcha);
+            color: #fff;
+        }
+
+        .flavors-row {
+            display: flex;
+            gap: 22px;
+            margin-bottom: 32px;
+        }
+
+        .flavor {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .flavor span {
+            font-size: 12.5px;
+            color: var(--deep-green);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .flavor-circle {
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.5);
+        }
+
+        .flavor-circle.classic {
+            background: radial-gradient(circle at 35% 30%, #a8d15e, #6B9B37 70%);
+        }
+
+        .flavor-circle.ocean {
+            background: radial-gradient(circle at 35% 30%, #7fd6e8, #2f8fb0 70%);
+        }
+
+        .flavor-circle.strawberry {
+            background: radial-gradient(circle at 35% 30%, #f5b3c4, #e26f8c 70%);
+        }
+
+        .flavor-circle.menu {
+            background: var(--deep-green);
+            color: var(--cream);
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .bottom-cards {
+            display: flex;
+            gap: 14px;
+        }
+
+        .card {
+            border-radius: 18px;
+            padding: 16px;
+            flex: 1;
+        }
+
+        .card.best-seller {
+            background: var(--matcha);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 110px;
+        }
+
+        .card.best-seller .badge-tag {
+            align-self: flex-start;
+            background: var(--yellow);
+            color: var(--deep-green);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 999px;
+        }
+
+        .card.best-seller p.label {
+            margin: 0;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .card.art-matcha {
+            background: var(--pink);
+            min-height: 110px;
+        }
+
+        .card.art-matcha .eyebrow {
+            margin: 0 0 4px;
+            font-size: 11px;
+            color: #8a4a58;
+            font-weight: 600;
+        }
+
+        .card.art-matcha h4 {
+            margin: 0 0 4px;
+            font-size: 15px;
+            color: var(--deep-green);
+        }
+
+        .card.art-matcha .desc {
+            margin: 0;
+            font-size: 12px;
+            color: #5c4048;
+            line-height: 1.4;
+        }
+
+        .hero-right {
+            display: grid;
+            grid-template-rows: 1.4fr 1fr;
+            gap: 10px;
+            padding: 20px 20px 20px 0;
+        }
+
+        .img-main {
+            border-radius: 20px;
+            position: relative;
+            background: linear-gradient(135deg, #2c4a34, #173A2A 60%, #0d1f16);
+            min-height: 230px;
+            overflow: hidden;
+        }
+
+        .img-main::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.10), transparent 55%);
+        }
+
+        .tag {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--deep-green);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 999px;
+        }
+
+        .img-sub {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .img-small {
+            border-radius: 18px;
+            min-height: 120px;
+        }
+
+        .img-small.iced {
+            background: linear-gradient(160deg, #bfe08a, #6B9B37 70%, #3d5f21);
+        }
+
+        .img-small.pocket {
+            background: linear-gradient(160deg, #8a95a6, #4a5568 60%, #2b3140);
+        }
+
+        .wire-overlay {
+            position: absolute;
+            inset: 0;
+            background: var(--wire-bg);
+            z-index: 20;
+            transition: opacity .7s ease;
+            pointer-events: none;
+        }
+
+        .wire-overlay .w-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 32px;
+        }
+
+        .w-pill {
+            background: var(--wire-light);
+            border-radius: 999px;
+        }
+
+        .w-pill.logo {
+            width: 110px;
+            height: 34px;
+        }
+
+        .w-pill.small {
+            width: 64px;
+            height: 26px;
+            background: var(--wire-block);
+        }
+
+        .w-nav-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .w-pill.cta {
+            width: 120px;
+            height: 34px;
+        }
+
+        .w-body {
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: 16px;
+            padding: 20px 20px 20px 32px;
+        }
+
+        .w-bar {
+            background: var(--wire-light);
+            border-radius: 999px;
+            height: 22px;
+        }
+
+        .w-bar.short {
+            width: 70%;
+        }
+
+        .w-bar.med {
+            height: 12px;
+            width: 90%;
+            background: #8a8a8a;
+            border-radius: 6px;
+        }
+
+        .w-bar.thin {
+            height: 8px;
+            width: 60%;
+            background: #6b6b6b;
+            border-radius: 4px;
+        }
+
+        .w-row-gap {
+            margin: 10px 0;
+        }
+
+        .w-circle-dot {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--wire-light);
+        }
+
+        .w-flex {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .w-pillbtn {
+            width: 110px;
+            height: 30px;
+            background: var(--wire-light);
+            border-radius: 999px;
+        }
+
+        .w-pillbtn-row {
+            display: flex;
+            gap: 10px;
+            margin: 18px 0;
+        }
+
+        .w-circles-row {
+            display: flex;
+            gap: 18px;
+            margin: 20px 0;
+        }
+
+        .w-circle-lg {
+            width: 66px;
+            height: 66px;
+            border-radius: 50%;
+            background: var(--wire-light);
+        }
+
+        .w-circle-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .w-underline {
+            width: 40px;
+            height: 6px;
+            background: var(--wire-light);
+            border-radius: 3px;
+        }
+
+        .w-cards-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .w-card {
+            background: var(--wire-panel);
+            border-radius: 14px;
+            padding: 14px;
+            flex: 1;
+            min-height: 90px;
+        }
+
+        .w-card .w-circle-dot {
+            margin-bottom: 10px;
+        }
+
+        .w-card .w-bar.thin {
+            margin-bottom: 8px;
+        }
+
+        .w-right-col {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .w-box-lg {
+            background: var(--wire-panel);
+            border-radius: 16px;
+            min-height: 210px;
+            position: relative;
+            padding: 14px;
+        }
+
+        .w-box-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .w-box-sm {
+            background: var(--wire-panel);
+            border-radius: 14px;
+            flex: 1;
+            min-height: 110px;
+        }
+
+        .wash {
+            position: fixed;
+            inset: 0;
+            z-index: 30;
+            pointer-events: none;
+            background: radial-gradient(circle at var(--x) var(--y), var(--matcha) 0%, rgba(107, 155, 55, 0.4) 35%, transparent 65%);
+            transform: scale(0);
+            transform-origin: var(--x) var(--y);
+            opacity: 0;
+            transition: transform .9s cubic-bezier(.2, .8, .2, 1), opacity .5s ease;
+        }
+
+        .wash.grow {
+            transform: scale(2.6);
+            opacity: 1;
+        }
+
+        .wash.fade {
+            opacity: 0;
+        }
+
+        .hint {
+            text-align: center;
+            font-size: 13px;
+            color: #7d8a82;
+            margin: 14px auto 0;
+            max-width: 1180px;
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page" id="page">
+
+        <nav class="navbar">
+            <button class="logo-pill" id="logoReset">MIDORI</button>
+            <div class="nav-links">
+                <a class="nav-link" data-reveal>Shop</a>
+                <a class="nav-link" data-reveal>Menu</a>
+                <a class="nav-link" data-reveal>Our Story</a>
+                <a class="nav-link" data-reveal>Journal</a>
+            </div>
+            <button class="cta-pill" data-reveal>Find a Store ↗</button>
+        </nav>
+
+        <main class="hero">
+            <div class="hero-left">
+                <h1>Sip better.<br>Feel brighter. <span class="flower-ico">✿</span></h1>
+                <p class="sub">From classic lattes to seasonal blends, discover drinks made with clean ingredients and
+                    bold flavor.</p>
+                <div class="btn-row">
+                    <button class="btn btn-outline" data-reveal>Our Story</button>
+                    <button class="btn btn-solid" data-reveal>Find Your Matcha</button>
+                </div>
+                <div class="flavors-row">
+                    <div class="flavor" data-reveal>
+                        <div class="flavor-circle classic"></div>
+                        <span>Classic Matcha</span>
+                    </div>
+                    <div class="flavor" data-reveal>
+                        <div class="flavor-circle ocean"></div>
+                        <span>Ocean Blue Matcha</span>
+                    </div>
+                    <div class="flavor" data-reveal>
+                        <div class="flavor-circle strawberry"></div>
+                        <span>Strawberry Matcha</span>
+                    </div>
+                    <div class="flavor" data-reveal>
+                        <div class="flavor-circle menu">Menu ↗</div>
+                        <span>&nbsp;</span>
+                    </div>
+                </div>
+                <div class="bottom-cards">
+                    <div class="card best-seller" data-reveal>
+                        <span class="badge-tag">🏆 Top pick</span>
+                        <p class="label">Best Seller</p>
+                    </div>
+                    <div class="card art-matcha" data-reveal>
+                        <p class="eyebrow">Behind the brew</p>
+                        <h4>The Art of Matcha</h4>
+                        <p class="desc">Watch how every cup is refined to perfection.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-right">
+                <div class="img-main" data-reveal>
+                    <span class="tag">Summer Special</span>
+                </div>
+                <div class="img-sub">
+                    <div class="img-small iced" data-reveal></div>
+                    <div class="img-small pocket" data-reveal></div>
+                </div>
+            </div>
+        </main>
+
+        <div class="wire-overlay" id="wireOverlay">
+            <div class="w-nav">
+                <div class="w-pill logo"></div>
+                <div class="w-nav-links">
+                    <div class="w-pill small"></div>
+                    <div class="w-pill small"></div>
+                    <div class="w-pill small"></div>
+                    <div class="w-pill small"></div>
+                </div>
+                <div class="w-pill cta"></div>
+            </div>
+            <div class="w-body">
+                <div class="w-left">
+                    <div class="w-flex w-row-gap">
+                        <div class="w-bar short" style="flex:1"></div>
+                        <div class="w-circle-dot"></div>
+                    </div>
+                    <div class="w-bar w-row-gap" style="width:92%"></div>
+                    <div class="w-bar med w-row-gap"></div>
+                    <div class="w-bar thin w-row-gap"></div>
+                    <div class="w-pillbtn-row">
+                        <div class="w-pillbtn"></div>
+                        <div class="w-pillbtn" style="width:140px"></div>
+                    </div>
+                    <div class="w-circles-row">
+                        <div class="w-circle-wrap">
+                            <div class="w-circle-lg"></div>
+                            <div class="w-underline"></div>
+                        </div>
+                        <div class="w-circle-wrap">
+                            <div class="w-circle-lg"></div>
+                            <div class="w-underline"></div>
+                        </div>
+                        <div class="w-circle-wrap">
+                            <div class="w-circle-lg"></div>
+                            <div class="w-underline"></div>
+                        </div>
+                        <div class="w-circle-wrap">
+                            <div class="w-circle-lg"></div>
+                            <div class="w-underline"></div>
+                        </div>
+                    </div>
+                    <div class="w-cards-row">
+                        <div class="w-card">
+                            <div class="w-circle-dot"></div>
+                            <div class="w-bar thin"></div>
+                        </div>
+                        <div class="w-card">
+                            <div class="w-bar thin" style="width:50%"></div>
+                            <div class="w-bar thin" style="width:80%"></div>
+                            <div class="w-bar thin" style="width:65%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-right-col">
+                    <div class="w-box-lg">
+                        <div class="w-pill small"></div>
+                    </div>
+                    <div class="w-box-row">
+                        <div class="w-box-sm"></div>
+                        <div class="w-box-sm"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="wash" id="wash"></div>
+    </div>
+
+    <p class="hint" id="hint">Click any item in the navbar to bring the page to life.</p>
+
+    <script>
+        const page = document.getElementById('page');
+        const overlay = document.getElementById('wireOverlay');
+        const wash = document.getElementById('wash');
+        const hint = document.getElementById('hint');
+        let revealed = false;
+
+        function setOrigin(e) {
+            const rect = page.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            page.style.setProperty('--x', x + '%');
+            page.style.setProperty('--y', y + '%');
+        }
+
+        function reveal(e) {
+            if (revealed) return;
+            revealed = true;
+            setOrigin(e);
+            wash.classList.add('grow');
+            hint.style.opacity = '0';
+            setTimeout(() => overlay.style.opacity = '0', 200);
+            setTimeout(() => { overlay.style.pointerEvents = 'none'; }, 900);
+            setTimeout(() => wash.classList.add('fade'), 850);
+            setTimeout(() => { wash.classList.remove('grow', 'fade'); }, 1400);
+        }
+
+        function resetWire() {
+            if (!revealed) return;
+            revealed = false;
+            overlay.style.opacity = '1';
+            hint.style.opacity = '1';
+        }
+
+        document.querySelectorAll('[data-reveal]').forEach(el => {
+            el.addEventListener('click', reveal);
+        });
+        document.getElementById('logoReset').addEventListener('click', resetWire);
+    </script>
+
+</body>
+
+</html>
