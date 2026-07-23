@@ -69,6 +69,8 @@ nav a {
 .left {
     display: flex;
     flex-direction: column;
+    position: relative;
+    min-height: 700px;
 }
 
 .title {
@@ -187,4 +189,75 @@ nav a {
 .logo,
 .store-btn {
     transition: .8s ease;
+}
+
+.hero img,
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 22px;
+    opacity: 0;
+    transition: 1s;
+}
+
+.website:not(.loading) img {
+    opacity: 1;
+}
+
+.content {
+    position: absolute;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 1s;
+    width: 520px;
+}
+
+.content h1 {
+    font-size: 68px;
+    line-height: 1;
+    font-weight: 800;
+    color: #245b24;
+    margin-bottom: 20px;
+}
+
+.content p {
+    font-size: 18px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 18px;
+}
+
+.hero-buttons button {
+    padding: 16px 32px;
+    border: none;
+    border-radius: 999px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.btn-light {
+    background: #fff5cc;
+}
+
+.btn-green {
+    background: #2f6d2f;
+    color: white;
+}
+
+.website:not(.loading) .content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.website:not(.loading) .title,
+.website:not(.loading) .line {
+    opacity: 0;
+    pointer-events: none;
 }
