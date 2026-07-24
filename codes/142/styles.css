@@ -20,7 +20,7 @@ header {
 }
 
 .logo h1 {
-    color: black;
+    color: #4d828f;
     font-size: 2rem;
     font-weight: 700;
     margin: 0;
@@ -36,7 +36,7 @@ nav ul {
 }
 
 nav a {
-    color: black;
+    color: #4d828f;
     text-decoration: none;
     font-size: 1.05rem;
     font-weight: 500;
@@ -75,10 +75,6 @@ nav a {
     line-height: 1;
 }
 
-
-
-
-
 .hero {
     position: relative;
     z-index: 10;
@@ -88,8 +84,8 @@ nav a {
     border-radius: 2rem;
 }
 
-.eyebrow {
-    color: #eaf6ff;
+.hero-titles {
+    color: #4d828f;
     font-size: 1.2rem;
     font-weight: 500;
     margin: 0 0 8px;
@@ -102,20 +98,16 @@ nav a {
     line-height: 1.1;
 }
 
-.hero-title span {
-    display: block;
-}
-
 .hero-title .light {
-    color: #bfe9f5;
+    color: #4d828f;
 }
 
 .hero-title .dark {
-    color: #ffffff;
+    color: #4d828f;
 }
 
 .hero-text {
-    color: #eef6fb;
+    color: #4d828f;
     font-size: 1.05rem;
     line-height: 1.7;
     font-weight: 400;
@@ -142,12 +134,12 @@ nav a {
 
 .btn-outline {
     background: transparent;
-    color: #ffffff;
-    border: 2px solid #ffffff;
+    color: #4d828f;
+    border: 2px solid #4d828f;
 }
 
 .btn-filled {
-    background: #eaf3fb;
+    background: #4d828f;
     color: #0d1b4c;
-    border: 2px solid #eaf3fb;
+    border: 2px solid #4d828f;
 }
