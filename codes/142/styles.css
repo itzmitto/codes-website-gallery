@@ -82,6 +82,9 @@ nav a {
     max-width: 640px;
     background-color: #680606;
     border-radius: 2rem;
+    margin-left: 50px;
+    margin-top:50px;
+    
 }
 
 .hero-titles {
