@@ -9,7 +9,7 @@ body {
     background-attachment: fixed;
     position: relative;
     overflow-x: hidden;
-} 
+}
 
 header {
     display: flex;
@@ -43,6 +43,7 @@ nav a {
     opacity: 0.95;
     transition: opacity 0.2s ease;
 }
+
 .header-right {
     display: flex;
     align-items: center;
@@ -72,4 +73,81 @@ nav a {
     align-items: center;
     justify-content: center;
     line-height: 1;
+}
+
+
+
+
+
+.hero {
+    position: relative;
+    z-index: 10;
+    padding: 90px 60px 120px;
+    max-width: 640px;
+    background-color: #680606;
+    border-radius: 2rem;
+}
+
+.eyebrow {
+    color: #eaf6ff;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 0 0 8px;
+}
+
+.hero-title {
+    margin: 0 0 24px;
+    font-size: 3.6rem;
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.hero-title span {
+    display: block;
+}
+
+.hero-title .light {
+    color: #bfe9f5;
+}
+
+.hero-title .dark {
+    color: #ffffff;
+}
+
+.hero-text {
+    color: #eef6fb;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    font-weight: 400;
+    max-width: 480px;
+    margin: 0 0 40px;
+    opacity: 0.92;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 18px;
+}
+
+.btn-outline,
+.btn-filled {
+    font-family: inherit;
+    font-size: 1.05rem;
+    font-weight: 600;
+    padding: 14px 32px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-outline {
+    background: transparent;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+}
+
+.btn-filled {
+    background: #eaf3fb;
+    color: #0d1b4c;
+    border: 2px solid #eaf3fb;
 }
