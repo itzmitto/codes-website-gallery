@@ -7,3 +7,67 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
+
+header {
+    width: 100%;
+    padding: 35px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1 {
+    font-size: 3rem;
+    color: white;
+    font-weight: 700;
+}
+
+nav ul {
+    display: flex;
+    align-items: center;
+    gap: 55px;
+    list-style: none;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.35rem;
+    font-weight: 500;
+    transition: .3s;
+}
+
+nav a:hover {
+    opacity: .7;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.login-btn {
+    background: #25165f;
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 12px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, .18);
+}
+
+.profile-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 3px solid #25165f;
+    background: transparent;
+    color: #25165f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
