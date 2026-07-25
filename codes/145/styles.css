@@ -1,0 +1,190 @@
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    background-image: url("bg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
+    overflow-x: hidden;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 60px;
+    position: relative;
+}
+
+.logo h1 {
+    color: #4d828f;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+nav ul {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    color: #4d828f;
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-weight: 500;
+    opacity: 0.95;
+    transition: opacity 0.2s ease;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.login-btn {
+    background: #680606;
+    color: black;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.profile-btn {
+    background: transparent;
+    border: none;
+    color: #680606;
+    font-size: 1.7rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.hero {
+    position: relative;
+    z-index: 10;
+    padding: 90px 60px 120px;
+    max-width: 640px;
+    background-color: #680606;
+    border-radius: 2rem;
+    margin-left: 50px;
+    margin-top:50px;
+    
+}
+
+.hero-titles {
+    color: #4d828f;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 0 0 8px;
+}
+
+.hero-title {
+    margin: 0 0 24px;
+    font-size: 3.6rem;
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.hero-title .light {
+    color: #4d828f;
+}
+
+.hero-title .dark {
+    color: #4d828f;
+}
+
+.hero-text {
+    color: #4d828f;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    font-weight: 400;
+    max-width: 480px;
+    margin: 0 0 40px;
+    opacity: 0.92;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 18px;
+}
+
+.btn-outline,
+.btn-filled {
+    font-family: inherit;
+    font-size: 1.05rem;
+    font-weight: 600;
+    padding: 14px 32px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-outline {
+    background: transparent;
+    color: #4d828f;
+    border: 2px solid #4d828f;
+}
+
+.btn-filled {
+    background: #4d828f;
+    color: #0d1b4c;
+    border: 2px solid #4d828f;
+}
+
+.info-wrapper {
+    position: absolute;
+    right: 120px;
+    top: 250px;
+    width: 320px;
+    height: 210px;
+}
+
+.info-shadow {
+    position: absolute;
+    width: 320px;
+    height: 210px;
+    top: 25px;
+    left: 25px;
+    background: rgba(255, 255, 255, .08);
+    border: 1px solid rgba(255, 255, 255, .08);
+}
+
+.info-card {
+    position: absolute;
+    width: 320px;
+    height: 210px;
+    background: #680606;
+    border: 1px solid black;
+    padding: 22px;
+    color: #4d828f;
+    font-size: 17px;
+    line-height: 1.8;
+}
+
+.info-card p {
+    margin: 0;
+}
+
+.arrow {
+    position: absolute;
+    right: 20px;
+    bottom: 15px;
+    font-size: 28px;
+    color: #4d828f;
+}
