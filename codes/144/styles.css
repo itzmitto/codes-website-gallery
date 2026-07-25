@@ -1,0 +1,102 @@
+:root {
+    --ink: #0b0b0c;
+    --paper: #f4f2ee;
+    --accent: #c9ff3d;
+    --dot-idle: rgba(244, 242, 238, 0.35);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    background: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.scroll-container {
+    height: 300vh; 
+    scroll-snap-type: y proximity;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+.panel {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    scroll-snap-align: start;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+}
+
+.panel-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transform: scale(1.06);
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+}
+
+.panel.in-view .panel-img {
+    transform: scale(1);
+}
+
+.panel-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(11,11,12,0) 55%, rgba(11,11,12,0.55) 100%);
+    pointer-events: none;
+}
+
+.panel-index {
+    position: relative;
+    z-index: 2;
+    color: var(--paper);
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    padding: 3rem clamp(1.5rem, 5vw, 4rem);
+    opacity: 0.9;
+    mix-blend-mode: difference;
+}
+
+.dots {
+    position: fixed;
+    right: clamp(1rem, 3vw, 2.5rem);
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    z-index: 10;
+}
+
+.dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--dot-idle);
+    border: 1px solid rgba(244, 242, 238, 0.5);
+    transition: background 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+}
+
+.dot.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: scale(1.3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .scroll-container { scroll-behavior: auto; }
+    .panel-img { transition: none; transform: none; }
+}
