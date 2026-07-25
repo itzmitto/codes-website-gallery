@@ -20,7 +20,7 @@ header {
 }
 
 .logo h1 {
-    color: #4d828f;
+    color: #047570;
     font-size: 2rem;
     font-weight: 700;
     margin: 0;
@@ -36,7 +36,7 @@ nav ul {
 }
 
 nav a {
-    color: #4d828f;
+    color: #047570;
     text-decoration: none;
     font-size: 1.05rem;
     font-weight: 500;
@@ -51,7 +51,7 @@ nav a {
 }
 
 .login-btn {
-    background: #680606;
+    background: #047570;
     color: black;
     border: none;
     padding: 12px 30px;
@@ -66,7 +66,7 @@ nav a {
 .profile-btn {
     background: transparent;
     border: none;
-    color: #680606;
+    color: #047570;
     font-size: 1.7rem;
     cursor: pointer;
     display: flex;
@@ -80,7 +80,7 @@ nav a {
     z-index: 10;
     padding: 90px 60px 120px;
     max-width: 640px;
-    background-color: #680606;
+    background-color: #047570;
     border-radius: 2rem;
     margin-left: 50px;
     margin-top:50px;
@@ -169,7 +169,7 @@ nav a {
     position: absolute;
     width: 320px;
     height: 210px;
-    background: #680606;
+    background: #047570;
     border: 1px solid black;
     padding: 22px;
     color: #4d828f;
