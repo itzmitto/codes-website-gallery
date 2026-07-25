@@ -188,3 +188,46 @@ nav a {
     font-size: 28px;
     color: #4d828f;
 }
+
+.info-wrapper2 {
+    position: absolute;
+    right: 1000px;
+    top: 800px;
+    width: 320px;
+    height: 210px;
+}
+
+.info-shadow2 {
+    position: absolute;
+    width: 320px;
+    height: 210px;
+    top: 25px;
+    left: 25px;
+    background: rgba(255, 255, 255, .08);
+    border: 1px solid rgba(255, 255, 255, .08);
+}
+
+.info-card2 {
+    position: absolute;
+    width: 320px;
+    height: 210px;
+    background: #047570;
+    border: 1px solid black;
+    padding: 22px;
+    color: black;
+    font-size: 17px;
+    line-height: 1.8;
+    border-radius: 2rem;
+}
+
+.info-card2 p {
+    margin: 0;
+}
+
+.arrow2 {
+    position: absolute;
+    right: 20px;
+    bottom: 15px;
+    font-size: 28px;
+    color: black;
+}
