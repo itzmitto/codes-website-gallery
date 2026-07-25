@@ -1,11 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ab-colors website preview #7 landing page</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    
+
+    <div class="scroll-container">
+
+        <section class="panel" id="panel-1">
+            <img src="img1.png" alt="Slide 1" class="panel-img">
+            <div class="panel-overlay"></div>
+            <div class="panel-index">01</div>
+        </section>
+
+        <section class="panel" id="panel-2">
+            <img src="img2.png" alt="Slide 2" class="panel-img">
+            <div class="panel-overlay"></div>
+            <div class="panel-index">02</div>
+        </section>
+
+        <section class="panel" id="panel-3">
+            <img src="img3.png" alt="Slide 3" class="panel-img">
+            <div class="panel-overlay"></div>
+            <div class="panel-index">03</div>
+        </section>
+
+    </div>
+
+    <nav class="dots">
+        <a href="#panel-1" class="dot active" data-index="0"></a>
+        <a href="#panel-2" class="dot" data-index="1"></a>
+        <a href="#panel-3" class="dot" data-index="2"></a>
+    </nav>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
