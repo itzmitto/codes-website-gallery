@@ -1,0 +1,165 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-image: ("bg.png");
+    color: white;
+    overflow-x: hidden;
+}
+
+header {
+    position: fixed;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 92%;
+    height: 80px;
+    padding: 0 45px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 22px;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: #4c8dff;
+}
+
+nav {
+    display: flex;
+    gap: 45px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    opacity: .75;
+    transition: .3s;
+}
+
+nav a:hover {
+    opacity: 1;
+}
+
+.nav-btn {
+    height: 48px;
+    padding: 0 28px;
+    border: none;
+    border-radius: 40px;
+    background: white;
+    color: #111;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 9%;
+    background: url(bg.png) center center/cover no-repeat;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 650px;
+}
+
+.subtitle {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 18px;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, .08);
+    border: 1px solid rgba(255, 255, 255, .12);
+    color: #7db4ff;
+}
+
+.hero h1 {
+    font-size: 72px;
+    line-height: 1.05;
+    margin-bottom: 25px;
+}
+
+.description {
+    font-size: 18px;
+    color: #cfcfcf;
+    line-height: 1.8;
+    margin-bottom: 45px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.primary {
+    width: 180px;
+    height: 58px;
+    border: none;
+    border-radius: 50px;
+    background: #4c8dff;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.secondary {
+    width: 180px;
+    height: 58px;
+    border: 1px solid rgba(255, 255, 255, .2);
+    border-radius: 50px;
+    background: rgba(255, 255, 255, .05);
+    color: white;
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+}
+
+.features {
+    width: 100%;
+    padding: 80px 9% 120px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    background: #0d0d0d;
+}
+
+.card {
+    padding: 45px;
+    border-radius: 28px;
+    background: #171717;
+    border: 1px solid rgba(255, 255, 255, .08);
+    transition: .35s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card h3 {
+    font-size: 52px;
+    margin-bottom: 12px;
+}
+
+.card p {
+    color: #bdbdbd;
+    font-size: 17px;
+}
