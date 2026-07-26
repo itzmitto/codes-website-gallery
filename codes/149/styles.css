@@ -220,3 +220,57 @@ main {
 .work-right a:hover {
     transform: translateY(-3px);
 }
+
+.work-process {
+    margin-top: 90px;
+    position: relative;
+}
+
+.process-line {
+    position: absolute;
+    top: 34px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #2f4720;
+}
+
+.process-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 60px;
+    position: relative;
+    z-index: 2;
+}
+
+.process-card {
+    position: relative;
+    padding-top: 70px;
+}
+
+.process-icon {
+    width: 68px;
+    height: 68px;
+    background: #b8ff39;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 35px;
+    box-shadow: 0 0 35px rgba(184, 255, 57, .25);
+}
+
+.process-card h3 {
+    font-size: 24px;
+    margin-bottom: 18px;
+    line-height: 1.3;
+}
+
+.process-card p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #9c9c9c;
+}
