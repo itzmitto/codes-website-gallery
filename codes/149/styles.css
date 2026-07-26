@@ -335,3 +335,61 @@ main {
 .benefit-card.large p {
     color: #222;
 }
+
+.benefit-icon {
+    width: 90px;
+    height: 90px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, .18);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 42px;
+    margin-bottom: 80px;
+}
+
+.benefit-icon.small {
+    width: 70px;
+    height: 70px;
+    border-radius: 20px;
+    background: #2d2d2d;
+    font-size: 32px;
+    margin-bottom: 40px;
+    color: #b8ff39;
+}
+
+.benefit-card.large {
+    position: relative;
+    overflow: hidden;
+}
+
+.benefit-card.large::before {
+    content: "";
+    position: absolute;
+    top: -160px;
+    right: -160px;
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .08);
+}
+
+.benefit-card.large::after {
+    content: "";
+    position: absolute;
+    bottom: -140px;
+    left: -140px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .06);
+}
+
+.benefit-card {
+    transition: .35s;
+    cursor: pointer;
+}
+
+.benefit-card:hover {
+    transform: translateY(-8px);
+}
