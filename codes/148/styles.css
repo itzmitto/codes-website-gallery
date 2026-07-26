@@ -415,3 +415,66 @@ blockquote {
 .footer-copy {
     color: #6e766f;
 }
+
+.navbar {
+    width: 100%;
+    background: #09100d;
+    border-bottom: 1px solid rgba(255, 255, 255, .06);
+    padding: 18px 0;
+}
+
+.nav-container {
+    width: 900px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-logo {
+    color: white;
+    font-weight: 700;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 32px;
+}
+
+.nav-links a {
+    color: #b9c1ba;
+    text-decoration: none;
+    font-size: 15px;
+    transition: .3s;
+}
+
+.nav-links a:hover {
+    color: white;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.nav-lang,
+.nav-signin {
+    color: #b9c1ba;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.nav-signin:hover,
+.nav-lang:hover {
+    color: white;
+}
+
+.nav-cta {
+    padding: 10px 20px;
+    font-size: 15px;
+}
