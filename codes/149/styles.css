@@ -117,3 +117,49 @@ main {
     color: #6c8f2b;
     transform: rotate(18deg);
 }
+
+.brands {
+    padding-bottom: 120px;
+}
+
+.brands-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 35px;
+}
+
+.brands-title span {
+    width: 90px;
+    height: 2px;
+    background: #b8ff39;
+}
+
+.brands-title p {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #ffffff;
+}
+
+.brands-box {
+    background: #242424;
+    border-radius: 18px;
+    padding: 28px 45px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    font-size: 24px;
+    font-weight: 700;
+    color: #d6d6d6;
+    opacity: .9;
+    transition: .3s;
+}
+
+.brand:hover {
+    color: #b8ff39;
+}
