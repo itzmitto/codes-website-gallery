@@ -163,3 +163,60 @@ main {
 .brand:hover {
     color: #b8ff39;
 }
+
+.work {
+    padding: 120px 0 90px;
+}
+
+.work-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 120px;
+}
+
+.work-left {
+    width: 50%;
+}
+
+.section-tag {
+    display: block;
+    color: #b8ff39;
+    font-size: 12px;
+    letter-spacing: 3px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.work-left h2 {
+    font-size: 58px;
+    line-height: 1.1;
+    font-weight: 800;
+    max-width: 520px;
+}
+
+.work-right {
+    width: 420px;
+}
+
+.work-right p {
+    color: #9c9c9c;
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 35px;
+}
+
+.work-right a {
+    display: inline-block;
+    padding: 16px 34px;
+    background: #b8ff39;
+    color: #000;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 10px;
+    transition: .3s;
+}
+
+.work-right a:hover {
+    transform: translateY(-3px);
+}
