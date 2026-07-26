@@ -6,7 +6,6 @@
 }
 
 body {
-    background-image: ("bg.png");
     color: white;
     overflow-x: hidden;
 }
@@ -148,10 +147,6 @@ nav a:hover {
     background: #171717;
     border: 1px solid rgba(255, 255, 255, .08);
     transition: .35s;
-}
-
-.card:hover {
-    transform: translateY(-10px);
 }
 
 .card h3 {
