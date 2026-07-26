@@ -291,3 +291,127 @@ blockquote {
     color: #aeb4af;
     line-height: 1.8;
 }
+
+.footer {
+    position: relative;
+    overflow: hidden;
+    background: #09100d;
+    padding: 180px 0 60px;
+}
+
+.footer-container {
+    width: 900px;
+    margin: auto;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.footer h2 {
+    font-size: 68px;
+    line-height: 1.1;
+    color: #f5f5ef;
+    margin: 25px 0;
+    font-family: Georgia, serif;
+}
+
+.footer p {
+    color: #94a096;
+    font-size: 20px;
+    line-height: 1.8;
+    max-width: 650px;
+    margin: 0 auto 60px;
+}
+
+.footer-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.btn-primary {
+    padding: 18px 34px;
+    background: #2bb673;
+    color: white;
+    border-radius: 14px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: .35s;
+}
+
+.btn-primary:hover {
+    background: #37cb82;
+    transform: translateY(-4px);
+}
+
+.btn-secondary {
+    padding: 18px 34px;
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 14px;
+    color: white;
+    text-decoration: none;
+    transition: .35s;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, .05);
+}
+
+.footer-glow {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    width: 1300px;
+    height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+            rgba(46, 200, 118, .45) 0%,
+            rgba(46, 200, 118, .18) 35%,
+            rgba(46, 200, 118, 0) 72%);
+    filter: blur(90px);
+}
+
+.footer-bottom {
+    width: 1200px;
+    margin: 140px auto 0;
+    border-top: 1px solid rgba(255, 255, 255, .06);
+    padding-top: 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-logo {
+    color: white;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #35d27e;
+}
+
+.footer-links {
+    display: flex;
+    gap: 28px;
+}
+
+.footer-links a {
+    color: #8f9891;
+    text-decoration: none;
+    transition: .3s;
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+.footer-copy {
+    color: #6e766f;
+}
