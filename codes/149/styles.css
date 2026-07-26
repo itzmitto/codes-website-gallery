@@ -61,3 +61,59 @@ main {
 .nav-btn:hover {
     transform: translateY(-2px);
 }
+
+.hero {
+    position: relative;
+    padding: 110px 0 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 760px;
+}
+
+.hero h1 {
+    font-size: 84px;
+    line-height: 1.05;
+    font-weight: 800;
+    margin-bottom: 30px;
+}
+
+.hero h1 span {
+    color: #b8ff39;
+}
+
+.hero p {
+    width: 620px;
+    margin: 0 auto 45px;
+    font-size: 18px;
+    line-height: 1.8;
+    color: #9c9c9c;
+}
+
+.hero-btn {
+    display: inline-block;
+    padding: 18px 42px;
+    background: #b8ff39;
+    color: #000;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 10px;
+    transition: .3s;
+}
+
+.hero-btn:hover {
+    transform: translateY(-3px);
+}
+
+.hero-star {
+    position: absolute;
+    right: 120px;
+    top: 120px;
+    font-size: 90px;
+    color: #6c8f2b;
+    transform: rotate(18deg);
+}
