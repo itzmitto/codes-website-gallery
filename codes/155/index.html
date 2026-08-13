@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS → Tailwind Spiekkaart</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="app">
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">DEVELOPER CHEAT SHEET</p>
+                <h1>CSS → Tailwind</h1>
+                <p class="subtitle">Een snelle spiekwebsite voor CSS en de Tailwind CSS equivalent.</p>
+            </div>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Zoek bijvoorbeeld: padding, flex, color...">
+            </div>
+        </header>
+        <div class="layout">
+            <aside class="sidebar">
+                <p class="sidebar-title">Categorieën</p>
+                <button class="category active" data-category="all">Alles</button>
+                <button class="category" data-category="display">Display</button>
+                <button class="category" data-category="spacing">Spacing</button>
+                <button class="category" data-category="flex">Flexbox</button>
+                <button class="category" data-category="grid">Grid</button>
+                <button class="category" data-category="text">Text</button>
+                <button class="category" data-category="background">Background</button>
+                <button class="category" data-category="border">Border</button>
+                <button class="category" data-category="sizing">Sizing</button>
+                <button class="category" data-category="position">Position</button>
+            </aside>
+            <main class="content">
+                <div class="content-header">
+                    <div>
+                        <p class="eyebrow">SNEL OVERZICHT</p>
+                        <h2>CSS eigenschappen</h2>
+                    </div>
+                    <span class="result-count" id="resultCount">9 resultaten</span>
+                </div>
+                <section class="cards" id="cards">
+                    <article class="cheat-card" data-category="display"
+                        data-search="display block inline flex grid none">
+                        <div class="card-top">
+                            <span class="tag">Display</span>
+                            <span class="number">01</span>
+                        </div>
+                        <h3>Display</h3>
+                        <div class="code-row">
+                            <div class="code-box">
+                                <span class="code-label">CSS</span>
+                                <code>display: flex;</code>
+                            </div>
+                            <div class="arrow">→</div>
+                            <div class="code-box tailwind">
+                                <span class="code-label">TAILWIND</span>
+                                <code>flex</code>
+                            </div>
+                        </div>
+                        <p>Maak een element een flex container.</p>
+                    </article>
+                    <article class="cheat-card" data-category="spacing" data-search="padding margin gap space">
+                        <div class="card-top">
+                            <span class="tag">Spacing</span>
+                            <span class="number">02</span>
+                        </div>
+                        <h3>Padding</h3>
+                        <div class="code-row">
+                            <div class="code-box">
+                                <span class="code-label">CSS</span>
+                                <code>padding: 24px;</code>
+                            </div>
+                            <div class="arrow">→</div>
+                            <div class="code-box tailwind">
+                                <span class="code-label">TAILWIND</span>
+                                <code>p-6</code>
+                            </div>
+                        </div>
+                        <p>24px ruimte aan alle kanten.</p>
+                    </article>
+                    <article class="cheat-card" data-category="spacing"
+                        data-search="margin margin top bottom left right">
+                        <div class="card-top">
+                            <span class="tag">Spacing</span>
+                            <span class="number">03</span>
+                        </div>
+                        <h3>Margin</h3>
+                        <div class="code-row">
+                            <div class="code-box">
+                                <span class="code-label">CSS</span>
+                                <code>margin-top: 16px;</code>
+                            </div>
+                            <div class="arrow">→</div>
+                            <div class="code-box tailwind">
+                                <span class="code-label">TAILWIND</span>
+                                <code>mt-4</code>
+                            </div>
+                        </div>
+                        <p>16px ruimte boven een element.</p>
+                    </article>
+                    <article class="cheat-card" data-category="flex" data-search="justify center between around evenly">
+                        <div class="card-top">
+                            <span class="tag">Flexbox</span>
+                            <span class="number">04</span>
+                        </div>
+                        <h3>Justify Content</h3>
+                        <div class="code-row">
+                            <div class="code-box">
+                                <span class="code-label">CSS</span>
+                                <code>justify-content: center;</code>
+                            </div>
+                            <div class="arrow">→</div>
+                            <div class="code-box tailwind">
+                                <span class="code-label">TAILWIND</span>
+                                <code>justify-center</code>
+                            </div>
+                        </div>
+                        <p>Centreer flex-items horizontaal.</p>
+                    </article>
+                    <article class="cheat-card" data-category="flex" data-search="align items center start end stretch">
+                        <div class="card-top">
+                            <span class="tag">Flexbox</span>
+                            <span class="number">05</span>
+                        </div>
+                        <h3>Align Items</h3>
+                        <div class="code-row">
+                            <div class="code-box">
+                                <span class="code-label">CSS</span>
+                                <code>align-items: center;</code>
+                            </div>
+                            <div class="arrow">→</div>
+                            <div class="code-box tailwind">
+                                <span class="code-label">TAILWIND</span>
+                                <code>items-center</code>
+                            </div>
+                        </div>
+                        <p>Centreer flex-items verticaal.</p>
+                    </article>
+                    <article class="cheat-card" data-category="text" data-search="font size text color font weight">
+                        <div class="card-top">
+                            <span class="tag">Text</span>
+                            <span class="number">06</span>
+                        </div>
+                        <h3>Font Size</h3>
+                        <div class="code-row">
+                            <div class="code-box">
+                                <span class="code-label">CSS</span>
+                                <code>font-size: 24px;</code>
+                            </div>
+                            <div class="arrow">→</div>
+                            <div class="code-box tailwind">
+                                <span class="code-label">TAILWIND</span>
+                                <code>text-2xl</code>
+                            </div>
+                        </div>
+                        <p>Een standaard Tailwind tekstgrootte.</p>
+                    </article>
+                    <article class="cheat-card" data-category="background" data-search="background color bg color">
+                        <div class="card-top">
+                            <span class="tag">Background</span>
+                            <span class="number">07</span>
+                        </div>
+                        <h3>Background Color</h3>
+                        <div class="code-row">
+                            <div class="code-box">
+                                <span class="code-label">CSS</span>
+                                <code>background: #000;</code>
+                            </div>
+                            <div class="arrow">→</div>
+                            <div class="code-box tailwind">
+                                <span class="code-label">TAILWIND</span>
+                                <code>bg-black</code>
+                            </div>
+                        </div>
+                        <p>Geef een element een zwarte achtergrond.</p>
+                    </article>
+                    <article class="cheat-card" data-category="border" data-search="border radius rounded color">
+                        <div class="card-top">
+                            <span class="tag">Border</span>
+                            <span class="number">08</span>
+                        </div>
+                        <h3>Border Radius</h3>
+                        <div class="code-row">
+                            <div class="code-box">
+                                <span class="code-label">CSS</span>
+                                <code>border-radius: 12px;</code>
+                            </div>
+                            <div class="arrow">→</div>
+                            <div class="code-box tailwind">
+                                <span class="code-label">TAILWIND</span>
+                                <code>rounded-xl</code>
+                            </div>
+                        </div>
+                        <p>Maak hoeken afgerond met een standaard waarde.</p>
+                    </article>
+                    <article class="cheat-card" data-category="sizing" data-search="width height full screen w h max">
+                        <div class="card-top">
+                            <span class="tag">Sizing</span>
+                            <span class="number">09</span>
+                        </div>
+                        <h3>Width 100%</h3>
+                        <div class="code-row">
+                            <div class="code-box">
+                                <span class="code-label">CSS</span>
+                                <code>width: 100%;</code>
+                            </div>
+                            <div class="arrow">→</div>
+                            <div class="code-box tailwind">
+                                <span class="code-label">TAILWIND</span>
+                                <code>w-full</code>
+                            </div>
+                        </div>
+                        <p>Laat een element de volledige breedte gebruiken.</p>
+                    </article>
+                </section>
+                <div class="empty-state hidden" id="emptyState">
+                    <h3>Geen resultaten</h3>
+                    <p>Probeer een andere zoekterm of categorie.</p>
+                </div>
+            </main>
+        </div>
+        <footer class="footer">
+            <span>CSS → Tailwind Spiekkaart</span>
+            <span>Gebouwd om snel te leren 🚀</span>
+        </footer>
+    </div>
+    <script>
+        const searchInput = document.getElementById("searchInput");
+        const cards = [...document.querySelectorAll(".cheat-card")];
+        const buttons = [...document.querySelectorAll(".category")];
+        const resultCount = document.getElementById("resultCount");
+        const emptyState = document.getElementById("emptyState");
+        let activeCategory = "all";
+        function filterCards() {
+            const query = searchInput.value.trim().toLowerCase();
+            let visible = 0;
+            cards.forEach(card => {
+                const categoryMatch = activeCategory === "all" || card.dataset.category === activeCategory;
+                const searchMatch = !query || card.dataset.search.includes(query) || card.textContent.toLowerCase().includes(query);
+                const show = categoryMatch && searchMatch;
+                card.classList.toggle("hidden", !show);
+                if (show) visible++;
+            });
+            resultCount.textContent = `${visible} ${visible === 1 ? "resultaat" : "resultaten"}`;
+            emptyState.classList.toggle("hidden", visible !== 0);
+        }
+        buttons.forEach(button => {
+            button.addEventListener("click", () => {
+                buttons.forEach(item => item.classList.remove("active"));
+                button.classList.add("active");
+                activeCategory = button.dataset.category;
+                filterCards();
+            });
+        });
+        searchInput.addEventListener("input", filterCards);
+        filterCards();
+    </script>
+</body>
+
+</html>
