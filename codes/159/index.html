@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Ashen Depths</title>
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div id="game">
+        <div id="game-container"></div>
+
+        <div class="hud">
+            <div class="hud-left">
+                <div class="level">
+                    Level <span id="player-level">1</span>
+                </div>
+
+                <div class="bar health-bar">
+                    <div class="bar-fill" id="health-fill"></div>
+
+                    <span class="bar-text">
+                        <span id="health-value">100</span>
+                        /
+                        <span id="health-max">100</span>
+                    </span>
+                </div>
+
+                <div class="bar stamina-bar">
+                    <div class="bar-fill" id="stamina-fill"></div>
+
+                    <span class="bar-text">
+                        <span id="stamina-value">100</span>
+                        /
+                        <span id="stamina-max">100</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="hud-right">
+                <div class="souls">
+                    <span class="souls-icon">◆</span>
+                    <span id="souls-value">0</span>
+                    Souls
+                </div>
+            </div>
+        </div>
+
+        <div class="floor-info">
+            <span>ASHEN DEPTHS</span>
+
+            <strong>
+                Floor
+                <span id="floor-number">1</span>
+            </strong>
+        </div>
+
+        <div id="interaction-message" class="interaction-message">
+            <span id="interaction-key">F</span>
+            <span id="interaction-text">Interact</span>
+        </div>
+
+        <div id="boss-ui" class="boss-ui hidden">
+            <div id="boss-name" class="boss-name">
+                Grave Warden
+            </div>
+
+            <div class="boss-health-bar">
+                <div id="boss-health-fill" class="boss-health-fill"></div>
+            </div>
+        </div>
+
+        <div id="death-screen" class="death-screen hidden">
+            <h1>YOU DIED</h1>
+
+            <p>Your souls remain where you fell.</p>
+        </div>
+
+        <div id="start-screen" class="start-screen">
+            <div class="start-content">
+                <p class="eyebrow">
+                    PROJECT 159
+                </p>
+
+                <h1>
+                    ASHEN
+                    <span>DEPTHS</span>
+                </h1>
+
+                <p class="description">
+                    Descend into the forgotten dungeon.
+                    Fight corrupted creatures, discover secret rooms,
+                    collect powerful loot and defeat the guardians below.
+                </p>
+
+                <button id="start-button">
+                    ENTER THE DEPTHS
+                </button>
+
+                <div class="controls">
+                    <div>
+                        <kbd>WASD</kbd>
+                        <span>Move</span>
+                    </div>
+
+                    <div>
+                        <kbd>SPACE</kbd>
+                        <span>Dodge</span>
+                    </div>
+
+                    <div>
+                        <kbd>CLICK</kbd>
+                        <span>Attack</span>
+                    </div>
+
+                    <div>
+                        <kbd>F</kbd>
+                        <span>Interact</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="./js/main.js"></script>
+</body>
+
+</html>
