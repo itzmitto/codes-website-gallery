@@ -1,89 +1,94 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#f8f9fa">
-    <meta name="description"
-        content="CodeForge — Ship production code 10x faster with AI. A pixel-inspired interactive landing page.">
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="#f8f9fa" name="theme-color" />
+    <meta content="CodeForge — Ship production code 10x faster with AI. A pixel-inspired interactive landing page."
+        name="description" />
     <title>CodeForge — Ship production code 10x faster with AI</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="main.js" defer></script>
+    <link href="styles.css" rel="stylesheet" />
+    <script defer="" src="main.js"></script>
+    <link href="effects.css" rel="stylesheet" />
+    <script defer="True" src="effects.js"></script>
 </head>
 
 <body>
     <svg aria-hidden="true" class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
         <defs>
-            <symbol id="i-sun" viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6" />
+            <symbol id="i-sun" viewbox="0 0 24 24">
+                <circle cx="12" cy="12" fill="none" r="4" stroke="currentColor" stroke-width="1.6"></circle>
                 <path
                     d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"
-                    fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                    fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.6"></path>
             </symbol>
-            <symbol id="i-moon" viewBox="0 0 24 24">
-                <path d="M20 15.2A8 8 0 018.8 4a8 8 0 1011.2 11.2Z" fill="none" stroke="currentColor" stroke-width="1.6"
-                    stroke-linejoin="round" />
+            <symbol id="i-moon" viewbox="0 0 24 24">
+                <path d="M20 15.2A8 8 0 018.8 4a8 8 0 1011.2 11.2Z" fill="none" stroke="currentColor"
+                    stroke-linejoin="round" stroke-width="1.6"></path>
             </symbol>
-            <symbol id="i-chevron" viewBox="0 0 24 24">
-                <path d="m9 18 6-6-6-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-                    stroke-linejoin="round" />
+            <symbol id="i-chevron" viewbox="0 0 24 24">
+                <path d="m9 18 6-6-6-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                    stroke-width="1.6"></path>
             </symbol>
-            <symbol id="i-down" viewBox="0 0 24 24">
-                <path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-                    stroke-linejoin="round" />
+            <symbol id="i-down" viewbox="0 0 24 24">
+                <path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                    stroke-width="1.6"></path>
             </symbol>
-            <symbol id="i-check" viewBox="0 0 24 24">
-                <path d="m5 12 4 4 10-10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-                    stroke-linejoin="round" />
+            <symbol id="i-check" viewbox="0 0 24 24">
+                <path d="m5 12 4 4 10-10" fill="none" stroke="currentColor" stroke-linecap="round"
+                    stroke-linejoin="round" stroke-width="1.8"></path>
             </symbol>
-            <symbol id="i-globe" viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6" />
+            <symbol id="i-globe" viewbox="0 0 24 24">
+                <circle cx="12" cy="12" fill="none" r="9" stroke="currentColor" stroke-width="1.6"></circle>
                 <path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18" fill="none" stroke="currentColor"
-                    stroke-width="1.5" />
+                    stroke-width="1.5"></path>
             </symbol>
-            <symbol id="i-terminal" viewBox="0 0 24 24">
-                <rect x="3" y="4" width="18" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.5" />
-                <path d="m7 9 3 3-3 3m6 0h4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                    stroke-linejoin="round" />
+            <symbol id="i-terminal" viewbox="0 0 24 24">
+                <rect fill="none" height="16" rx="3" stroke="currentColor" stroke-width="1.5" width="18" x="3" y="4">
+                </rect>
+                <path d="m7 9 3 3-3 3m6 0h4" fill="none" stroke="currentColor" stroke-linecap="round"
+                    stroke-linejoin="round" stroke-width="1.5"></path>
             </symbol>
-            <symbol id="i-spark" viewBox="0 0 24 24">
+            <symbol id="i-spark" viewbox="0 0 24 24">
                 <path
                     d="m12 2 1.9 7.1L21 11l-7.1 1.9L12 20l-1.9-7.1L3 11l7.1-1.9L12 2ZM19 17l.8 2.2L22 20l-2.2.8L19 23l-.8-2.2L16 20l2.2-.8L19 17Z"
-                    fill="currentColor" />
+                    fill="currentColor"></path>
             </symbol>
-            <symbol id="i-code" viewBox="0 0 24 24">
-                <path d="m8 8-4 4 4 4m8-8 4 4-4 4m-3-12-2 16" fill="none" stroke="currentColor" stroke-width="1.5"
-                    stroke-linecap="round" />
+            <symbol id="i-code" viewbox="0 0 24 24">
+                <path d="m8 8-4 4 4 4m8-8 4 4-4 4m-3-12-2 16" fill="none" stroke="currentColor" stroke-linecap="round"
+                    stroke-width="1.5"></path>
             </symbol>
-            <symbol id="i-layers" viewBox="0 0 24 24">
+            <symbol id="i-layers" viewbox="0 0 24 24">
                 <path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5" fill="none" stroke="currentColor"
-                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
             </symbol>
-            <symbol id="i-lightning" viewBox="0 0 24 24">
-                <path d="m13 2-9 12h7l-1 8 10-13h-7l0-7Z" fill="none" stroke="currentColor" stroke-width="1.5"
-                    stroke-linejoin="round" />
+            <symbol id="i-lightning" viewbox="0 0 24 24">
+                <path d="m13 2-9 12h7l-1 8 10-13h-7l0-7Z" fill="none" stroke="currentColor" stroke-linejoin="round"
+                    stroke-width="1.5"></path>
             </symbol>
-            <symbol id="i-plus" viewBox="0 0 24 24">
-                <path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.7"
-                    stroke-linecap="round" />
+            <symbol id="i-plus" viewbox="0 0 24 24">
+                <path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7">
+                </path>
             </symbol>
-            <symbol id="i-list" viewBox="0 0 24 24">
+            <symbol id="i-list" viewbox="0 0 24 24">
                 <path d="M7 7h13M7 12h13M7 17h13M3 7h.01M3 12h.01M3 17h.01" fill="none" stroke="currentColor"
-                    stroke-width="1.7" stroke-linecap="round" />
+                    stroke-linecap="round" stroke-width="1.7"></path>
             </symbol>
         </defs>
     </svg>
     <header class="site-header" id="top">
         <div class="nav-inner page-width">
-            <a href="#top" class="brand" aria-label="CodeForge homepage"><span class="brand-mark"
-                    aria-hidden="true">✺</span><span>CodeForge</span></a>
-            <nav class="desktop-navigation" aria-label="Main navigation">
-                <div class="nav-dropdown-wrap"><button type="button" class="nav-link nav-product" id="product-menu-btn"
-                        aria-controls="product-menu" aria-expanded="false">Products <svg class="icon down-mini">
+            <a aria-label="CodeForge homepage" class="brand" href="#top"><span aria-hidden="true"
+                    class="brand-mark">✺</span><span>CodeForge</span></a>
+            <nav aria-label="Main navigation" class="desktop-navigation">
+                <div class="nav-dropdown-wrap"><button aria-controls="product-menu" aria-expanded="false"
+                        class="nav-link nav-product" id="product-menu-btn" type="button">Products <svg
+                            class="icon down-mini">
                             <use href="#i-down"></use>
                         </svg></button>
-                    <div class="nav-dropdown" id="product-menu" hidden><a href="#features"><svg class="icon">
+                    <div class="nav-dropdown" hidden="" id="product-menu"><a href="#features"><svg class="icon">
                                 <use href="#i-code"></use>
                             </svg> Code generation</a><a href="#workflow"><svg class="icon">
                                 <use href="#i-layers"></use>
@@ -94,66 +99,86 @@
                 <a class="nav-link" href="#features">features</a><a class="nav-link" href="#pricing">pricing</a><a
                     class="nav-link" href="#how-it-works">Docs</a><a class="nav-link" href="#community">Company</a>
             </nav>
-            <div class="nav-actions"><button type="button" id="theme-toggle" class="theme-toggle"
-                    aria-label="Switch to dark mode" title="Toggle theme"><svg class="icon icon-sun">
+            <div class="nav-actions"><button aria-label="Switch to dark mode" class="theme-toggle" id="theme-toggle"
+                    title="Toggle theme" type="button"><svg class="icon icon-sun">
                         <use href="#i-sun"></use>
                     </svg><svg class="icon icon-moon">
                         <use href="#i-moon"></use>
-                    </svg></button><a href="#pricing" class="button button-primary nav-cta">Get Started</a><button
-                    type="button" class="mobile-menu-button" id="mobile-menu-toggle" aria-label="Open menu"
-                    aria-expanded="false"><span></span><span></span><span></span></button></div>
+                    </svg></button><a class="button button-primary nav-cta" href="#pricing">Get Started</a><button
+                    aria-expanded="false" aria-label="Open menu" class="mobile-menu-button" id="mobile-menu-toggle"
+                    type="button"><span></span><span></span><span></span></button></div>
         </div>
-        <nav class="mobile-navigation" id="mobile-navigation" aria-label="Mobile navigation" hidden><a
+        <nav aria-label="Mobile navigation" class="mobile-navigation" hidden="" id="mobile-navigation"><a
                 href="#features">Products &amp; Features</a><a href="#workflow">Workflow</a><a
                 href="#integrations">Integrations</a><a href="#pricing">Pricing</a><a href="#community">Company</a>
         </nav>
     </header>
     <main class="page-width page-frame">
-        <section class="hero" aria-labelledby="hero-heading">
+        <section aria-labelledby="hero-heading" class="hero">
+            <div aria-hidden="true" class="hero-glow"></div>
             <div class="hero-content">
                 <div class="eyebrow"><span class="eyebrow-glyph">✺</span> Introducing intelligent code generation</div>
-                <h1 id="hero-heading">Ship production code<br>10x faster with AI</h1>
-                <p>Your AI coding partner writes, reviews, and refactors<br class="desktop-only"> code instantly. Build
-                    features in minutes, not hours.</p><a href="#pricing"
-                    class="button button-primary hero-button">Start for free</a>
+                <h1 id="hero-heading">Ship production code<br />10x faster with AI</h1>
+                <p>Your AI coding partner writes, reviews, and refactors<br class="desktop-only" /> code instantly.
+                    Build features in minutes, not hours.</p><a class="button button-primary hero-button"
+                    href="#pricing">Start for free</a>
             </div>
-            <span class="corner-mark hero-corner-left" aria-hidden="true"></span><span
-                class="corner-mark hero-corner-right" aria-hidden="true"></span>
+            <span aria-hidden="true" class="corner-mark hero-corner-left"></span><span aria-hidden="true"
+                class="corner-mark hero-corner-right"></span>
         </section>
-        <section class="product-showcase" aria-label="Product capabilities">
-            <div class="showcase-tabs" role="tablist" aria-label="Product previews"><button type="button"
-                    class="showcase-tab is-active" id="tab-generate" data-tab="generation" role="tab"
-                    aria-selected="true" aria-controls="preview-panel">Code Generation</button><button type="button"
-                    class="showcase-tab" id="tab-review" data-tab="review" role="tab" aria-selected="false"
-                    aria-controls="preview-panel">Smart Review</button><button type="button" class="showcase-tab"
-                    id="tab-test" data-tab="testing" role="tab" aria-selected="false" aria-controls="preview-panel">Auto
-                    Testing</button><button type="button" class="showcase-tab" id="tab-deploy" data-tab="deploy"
-                    role="tab" aria-selected="false" aria-controls="preview-panel">Deploy Ready</button></div>
-            <div class="showcase-preview" id="preview-panel" role="tabpanel" aria-labelledby="tab-generate"><img
-                    src="assets/night-sky.webp"
+        <section aria-label="Product capabilities" class="product-showcase">
+            <div aria-label="Product previews" class="showcase-tabs" role="tablist"><button
+                    aria-controls="preview-panel" aria-selected="true" class="showcase-tab is-active"
+                    data-tab="generation" id="tab-generate" role="tab" type="button">Code Generation<span
+                        aria-hidden="true" class="tab-progress"></span></button><button aria-controls="preview-panel"
+                    aria-selected="false" class="showcase-tab" data-tab="review" id="tab-review" role="tab"
+                    type="button">Smart Review<span aria-hidden="true" class="tab-progress"></span></button><button
+                    aria-controls="preview-panel" aria-selected="false" class="showcase-tab" data-tab="testing"
+                    id="tab-test" role="tab" type="button">Auto Testing<span aria-hidden="true"
+                        class="tab-progress"></span></button><button aria-controls="preview-panel" aria-selected="false"
+                    class="showcase-tab" data-tab="deploy" id="tab-deploy" role="tab" type="button">Deploy Ready<span
+                        aria-hidden="true" class="tab-progress"></span></button></div>
+            <div aria-labelledby="tab-generate" class="showcase-preview" id="preview-panel" role="tabpanel"><img
                     alt="A person beneath the Milky Way, illuminating a desert landscape under a star-filled sky"
-                    width="736" height="491">
-                <div class="preview-status" id="preview-status" aria-live="polite"></div>
+                    decoding="async" fetchpriority="high" height="491" id="gallery-image" src="assets/night-sky.webp"
+                    width="736" />
+                <div aria-live="polite" class="preview-status" id="preview-status"></div>
             </div>
         </section>
-        <section class="trusted" aria-label="Trusted companies">
+        <section aria-label="Trusted companies" class="trusted" data-reveal-section="">
             <div class="trusted-lead">Trusted by <a href="#community">fast-growing</a> startups</div>
             <div class="logo-grid">
-                <div class="partner partner-openai"><span class="partner-symbol openai-symbol">◎</span>OpenAI</div>
-                <div class="partner partner-retool"><span class="retool-bars"><i></i><i></i><i></i></span>Retool</div>
-                <div class="partner partner-stripe">stripe</div>
-                <div class="partner partner-wise"><span>➤</span> WISE</div>
-                <div class="partner partner-loom"><span class="loom-symbol">✺</span>loom</div>
-                <div class="partner partner-medium"><span>●◖</span>Medium</div>
-                <div class="partner partner-cash"><span class="cash-symbol">$</span>Cash App</div>
-                <div class="partner partner-linear"><span class="linear-symbol">◒</span>Linear</div>
+                <div class="partner partner-openai"><img alt="OpenAI" decoding="async" loading="eager"
+                        src="assets/logo-openai.png" /></div>
+                <div class="partner partner-retool"><img alt="Retool" decoding="async" loading="eager"
+                        src="assets/logo-retool.png" /></div>
+                <div class="partner partner-stripe"><img alt="Stripe" decoding="async" loading="eager"
+                        src="assets/logo-stripe.png" /></div>
+                <div class="partner partner-wise"><img alt="Wise" decoding="async" loading="eager"
+                        src="assets/logo-wise.png" /></div>
+                <div class="partner partner-loom"><img alt="Loom" decoding="async" loading="eager"
+                        src="assets/logo-loom.png" /></div>
+                <div class="partner partner-medium"><img alt="Medium" decoding="async" loading="eager"
+                        src="assets/logo-medium.png" /></div>
+                <div class="partner partner-cashapp"><img alt="Cash App" decoding="async" loading="eager"
+                        src="assets/logo-cashapp.png" /></div>
+                <div class="partner partner-linear"><img alt="Linear" decoding="async" loading="eager"
+                        src="assets/logo-linear.png" /></div>
             </div>
         </section>
-        <div class="section-lead-in" aria-hidden="true"></div>
-        <section class="split-story" id="features" aria-label="AI-powered development workflow">
+        <section aria-hidden="true" aria-label="Your AI partner for every commit"
+            class="section-lead-in center-headline commit-headline" data-reveal-section="" id="commit"><span
+                class="eyebrow small-eyebrow"><svg class="icon">
+                    <use href="#i-terminal"></use>
+                </svg> Scale</span>
+            <h2>Your AI partner<br />for <span class="accent-animated">every commit</span></h2>
+            <p>CodeForge writes boilerplate, refactors<br /> legacy code, and reviews every line so you<br /> can focus
+                on architecture and innovation</p>
+        </section>
+        <section aria-label="AI-powered development workflow" class="split-story" data-reveal-section="" id="features">
             <div class="story-copy">
                 <div class="sticky-copy">
-                    <h2>AI meets your<br>workflow in seconds</h2>
+                    <h2>AI meets your<br />workflow in seconds</h2>
                     <p>Start coding with AI by cloning any GitHub repository. Review smart suggestions and apply code
                         changes with a single click.</p><a class="button button-small button-outline"
                         href="#how-it-works">Learn More <svg class="icon">
@@ -163,7 +188,7 @@
             </div>
             <div class="story-stages">
                 <div class="story-stage corner-frame" id="how-it-works">
-                    <div class="clone-window mini-window">
+                    <div class="clone-window mini-window" data-reveal="">
                         <div class="window-top">
                             <div class="traffic-lights"><i></i><i></i><i></i></div><span class="window-pill"><svg
                                     class="icon">
@@ -179,7 +204,7 @@
                             <div class="muted-code">✓ Repository cloned successfully</div>
                         </div>
                     </div>
-                    <div class="stage-caption">
+                    <div class="stage-caption" data-reveal="">
                         <div class="caption-label"><svg class="icon">
                                 <use href="#i-terminal"></use>
                             </svg> Clone and activate your AI agent</div>
@@ -188,7 +213,7 @@
                     </div>
                 </div>
                 <div class="story-stage corner-frame">
-                    <div class="code-window mini-window" id="code-suggestion-window">
+                    <div class="code-window mini-window" data-reveal="" id="code-suggestion-window">
                         <div class="window-top">
                             <div class="traffic-lights"><i></i><i></i><i></i></div><span
                                 class="file-label">utils.ts</span>
@@ -208,10 +233,10 @@
                             <div class="code-add">+ }, [count]);</div>
                             <div> return { count, setCount };</div>
                             <div>}</div>
-                        </div><button type="button" id="apply-suggestion" class="floating-apply button">Apply
+                        </div><button class="floating-apply button" id="apply-suggestion" type="button">Apply
                             suggestion</button>
                     </div>
-                    <div class="stage-caption">
+                    <div class="stage-caption" data-reveal="">
                         <div class="caption-label"><svg class="icon">
                                 <use href="#i-lightning"></use>
                             </svg> Review and apply AI suggestions</div>
@@ -221,11 +246,12 @@
                 </div>
             </div>
         </section>
-        <div class="texture-divider" aria-hidden="true"></div>
-        <section class="split-story split-story-tools" id="workflow" aria-label="Connected tools and agents">
+        <div aria-hidden="true" class="texture-divider"></div>
+        <section aria-label="Connected tools and agents" class="split-story split-story-tools" data-reveal-section=""
+            id="workflow">
             <div class="story-copy">
                 <div class="sticky-copy">
-                    <h2>Connect tools.<br>Run agents.<br>Build anything.</h2>
+                    <h2>Connect tools.<br />Run agents.<br />Build anything.</h2>
                     <p>Choose from hundreds of MCP servers to extend capabilities. Run multiple AI agents in parallel to
                         complete complex tasks faster.</p><a class="button button-small button-outline"
                         href="#integrations">Learn More <svg class="icon">
@@ -236,21 +262,21 @@
             <div class="story-stages">
                 <div class="story-stage corner-frame">
                     <div class="prompt-mini"><span class="prompt-label">Plan, search</span>
-                        <div class="prompt-toolbar"><button type="button" class="icon-button"
-                                aria-label="Add tools to prompt" data-open-integrations><svg class="icon">
+                        <div class="prompt-toolbar"><button aria-label="Add tools to prompt" class="icon-button"
+                                data-open-integrations="" type="button"><svg class="icon">
                                     <use href="#i-plus"></use>
                                 </svg></button><svg class="icon globe-icon">
                                 <use href="#i-globe"></use>
-                            </svg><button type="button" class="sources-trigger" data-open-integrations><svg
+                            </svg><button class="sources-trigger" data-open-integrations="" type="button"><svg
                                     class="icon">
                                     <use href="#i-list"></use>
-                                </svg> Sources</button><button type="button" class="send-round"
-                                aria-label="Run agent demo" id="run-demo-button"><svg class="icon arrow-up">
+                                </svg> Sources</button><button aria-label="Run agent demo" class="send-round"
+                                id="run-demo-button" type="button"><svg class="icon arrow-up">
                                     <use href="#i-chevron"></use>
                                 </svg></button></div>
-                        <div class="demo-toast" id="run-demo-toast" aria-live="polite"></div>
+                        <div aria-live="polite" class="demo-toast" id="run-demo-toast"></div>
                     </div>
-                    <div class="stage-caption">
+                    <div class="stage-caption" data-reveal="">
                         <div class="caption-label"><svg class="icon">
                                 <use href="#i-spark"></use>
                             </svg> Install MCP servers with one click</div>
@@ -259,12 +285,12 @@
                     </div>
                 </div>
                 <div class="story-stage corner-frame">
-                    <div class="agent-diagram"
-                        aria-label="Three connected AI agents: architect, innovator and researcher"><svg
-                            class="flow-connectors" viewBox="0 0 420 245" preserveAspectRatio="none" aria-hidden="true">
-                            <path d="M176 39H210Q222 39 222 52V90" />
-                            <path d="M220 126H156Q143 126 143 139V176" />
-                            <path class="blue-node" d="M176 39h.2M220 126h.2" />
+                    <div aria-label="Three connected AI agents: architect, innovator and researcher"
+                        class="agent-diagram" data-reveal=""><svg aria-hidden="true" class="flow-connectors"
+                            preserveaspectratio="none" viewbox="0 0 420 245">
+                            <path d="M176 39H210Q222 39 222 52V90"></path>
+                            <path d="M220 126H156Q143 126 143 139V176"></path>
+                            <path class="blue-node" d="M176 39h.2M220 126h.2"></path>
                         </svg>
                         <div class="agent-card agent-one">
                             <div class="agent-name"><svg class="icon">
@@ -285,7 +311,7 @@
                             <div class="agent-sub">Conducting user interviews... <span>Step 3 of 3</span></div>
                         </div>
                     </div>
-                    <div class="stage-caption">
+                    <div class="stage-caption" data-reveal="">
                         <div class="caption-label"><svg class="icon">
                                 <use href="#i-spark"></use>
                             </svg> Run multiple agents in parallel</div>
@@ -295,19 +321,19 @@
                 </div>
             </div>
         </section>
-        <section class="center-headline" aria-label="Build features faster"><span class="eyebrow small-eyebrow"><svg
-                    class="icon">
+        <section aria-label="Build features faster" class="center-headline" data-reveal-section=""><span
+                class="eyebrow small-eyebrow"><svg class="icon">
                     <use href="#i-globe"></use>
                 </svg> Scale</span>
-            <h2>Stop writing<br>boilerplate. <span>Start<br>building features.</span></h2>
-            <p>Your AI agent handles repetitive coding tasks,<br> reviews every commit, and catches bugs before<br>
+            <h2>Stop writing<br />boilerplate. <span>Start<br />building features.</span></h2>
+            <p>Your AI agent handles repetitive coding tasks,<br /> reviews every commit, and catches bugs before<br />
                 deployment. Spend time on architecture, not syntax.</p>
         </section>
-        <div class="texture-divider" aria-hidden="true"></div>
-        <section class="split-story team-story" id="teams" aria-label="Built for growing teams">
+        <div aria-hidden="true" class="texture-divider"></div>
+        <section aria-label="Built for growing teams" class="split-story team-story" data-reveal-section="" id="teams">
             <div class="story-copy">
                 <div class="sticky-copy">
-                    <h2>Built for teams<br>scaling at<br>warp speed</h2>
+                    <h2>Built for teams<br />scaling at<br />warp speed</h2>
                     <p>From solo developers to 100+ person engineering teams. Trusted by companies that need to ship
                         fast and stay lean.</p><a class="button button-small button-outline" href="#community">Learn
                         More <svg class="icon">
@@ -316,9 +342,14 @@
                 </div>
             </div>
             <div class="story-stages">
-                <div class="team-stage"><img src="assets/network-visual.webp" width="507" height="242"
-                        alt="Connected engineering teams shown as a network diagram" class="network-art">
-                    <div class="stage-caption">
+                <div class="team-stage"><img alt="Connected engineering teams shown as a network diagram"
+                        class="network-art" height="242" src="assets/network-visual.webp" width="507" />
+                    <div aria-hidden="true" class="network-pulses"><i style="--x:50%;--y:50%;--delay:0.0s"></i><i
+                            style="--x:33%;--y:29%;--delay:0.36s"></i><i style="--x:65%;--y:20%;--delay:0.72s"></i><i
+                            style="--x:39%;--y:72%;--delay:1.08s"></i><i style="--x:61%;--y:74%;--delay:1.44s"></i><i
+                            style="--x:69%;--y:52%;--delay:1.7999999999999998s"></i><i
+                            style="--x:20%;--y:50%;--delay:2.16s"></i></div>
+                    <div class="stage-caption" data-reveal="">
                         <div class="caption-label"><svg class="icon">
                                 <use href="#i-spark"></use>
                             </svg> Used by teams at innovative companies</div>
@@ -326,9 +357,13 @@
                             while maintaining quality and standards.</p>
                     </div>
                 </div>
-                <div class="team-stage"><img src="assets/world-dots.webp" width="505" height="257"
-                        alt="Dotted world map highlighting global developer activity" class="world-art">
-                    <div class="stage-caption">
+                <div class="team-stage"><img alt="Dotted world map highlighting global developer activity"
+                        class="world-art" height="257" src="assets/world-dots.webp" width="505" />
+                    <div aria-hidden="true" class="world-pulses"><i style="--x:27%;--y:34%;--delay:0.0s"></i><i
+                            style="--x:34%;--y:62%;--delay:0.54s"></i><i style="--x:52%;--y:38%;--delay:1.08s"></i><i
+                            style="--x:57%;--y:62%;--delay:1.62s"></i><i style="--x:77%;--y:44%;--delay:2.16s"></i><i
+                            style="--x:83%;--y:70%;--delay:2.7s"></i></div>
+                    <div class="stage-caption" data-reveal="">
                         <div class="caption-label"><svg class="icon">
                                 <use href="#i-globe"></use>
                             </svg> Active in 120+ countries worldwide</div>
@@ -338,59 +373,57 @@
                 </div>
             </div>
         </section>
-        <section class="center-headline center-headline-setup" id="integrations"><span
+        <section class="center-headline center-headline-setup" data-reveal-section="" id="integrations"><span
                 class="eyebrow small-eyebrow"><svg class="icon">
                     <use href="#i-terminal"></use>
                 </svg> Scale</span>
-            <h2>Setup. Connect.<br><span>Build.Ship.</span></h2>
+            <h2>Setup. Connect.<br /><span>Build.Ship.</span></h2>
             <p>Collaborate seamlessly with your team using AI-powered tools</p>
         </section>
-        <section class="setup-steps" aria-label="How to get started">
-            <div class="setup-step">
+        <section aria-label="How to get started" class="setup-steps">
+            <div class="setup-step" data-reveal-section="">
                 <div class="step-visual">
-                    <div class="prompt-mini setup-prompt"><span class="connected-pill"><svg class="icon">
+                    <div class="prompt-mini setup-prompt" data-reveal=""><span class="connected-pill"><svg class="icon">
                                 <use href="#i-check"></use>
                             </svg> Connected</span><span class="prompt-label">Plan, search</span>
-                        <div class="prompt-toolbar"><button type="button" class="icon-button"
-                                aria-label="Open integrations" data-open-integrations><svg class="icon">
+                        <div class="prompt-toolbar"><button aria-label="Open integrations" class="icon-button"
+                                data-open-integrations="" type="button"><svg class="icon">
                                     <use href="#i-plus"></use>
                                 </svg></button><svg class="icon globe-icon">
                                 <use href="#i-globe"></use>
-                            </svg><button type="button" class="sources-trigger" data-open-integrations><svg
+                            </svg><button class="sources-trigger" data-open-integrations="" type="button"><svg
                                     class="icon">
                                     <use href="#i-list"></use>
-                                </svg> Sources</button><button type="button" class="send-round"
-                                aria-label="Advance to the next step" data-scroll-next="step-integrations"><svg
-                                    class="icon arrow-up">
+                                </svg> Sources</button><button aria-label="Advance to the next step" class="send-round"
+                                data-scroll-next="step-integrations" type="button"><svg class="icon arrow-up">
                                     <use href="#i-chevron"></use>
                                 </svg></button></div>
                     </div>
                 </div>
-                <div class="step-copy">
-                    <h3>Connect your<br>GitHub or repository</h3>
+                <div class="step-copy" data-reveal="">
+                    <h3>Connect your<br />GitHub or repository</h3>
                     <p>Sign in with GitHub or clone any repository to activate your AI agent. Instant setup with zero
                         configuration required.</p>
                 </div>
             </div>
-            <div class="setup-step" id="step-integrations">
+            <div class="setup-step" data-reveal-section="" id="step-integrations">
                 <div class="step-visual">
-                    <div class="prompt-mini setup-prompt"><span class="prompt-label">Plan, search</span>
-                        <div class="prompt-toolbar"><button type="button" class="icon-button"
-                                aria-label="Open integrations" data-open-integrations><svg class="icon">
+                    <div class="prompt-mini setup-prompt" data-reveal=""><span class="prompt-label">Plan, search</span>
+                        <div class="prompt-toolbar"><button aria-label="Open integrations" class="icon-button"
+                                data-open-integrations="" type="button"><svg class="icon">
                                     <use href="#i-plus"></use>
                                 </svg></button><svg class="icon globe-icon">
                                 <use href="#i-globe"></use>
-                            </svg><button type="button" class="sources-trigger source-active"
-                                data-open-integrations><svg class="icon">
+                            </svg><button class="sources-trigger source-active" data-open-integrations=""
+                                type="button"><svg class="icon">
                                     <use href="#i-list"></use>
-                                </svg> Sources</button><button type="button" class="send-round"
-                                aria-label="Advance to the next step" data-scroll-next="step-prompt"><svg
-                                    class="icon arrow-up">
+                                </svg> Sources</button><button aria-label="Advance to the next step" class="send-round"
+                                data-scroll-next="step-prompt" type="button"><svg class="icon arrow-up">
                                     <use href="#i-chevron"></use>
                                 </svg></button></div>
                         <div class="integrations-menu">
-                            <div class="integrations-search"><span>⌕</span><input id="integrations-search" type="search"
-                                    placeholder="Search for servers" aria-label="Search integrations"></div>
+                            <div class="integrations-search"><span>⌕</span><input aria-label="Search integrations"
+                                    id="integrations-search" placeholder="Search for servers" type="search" /></div>
                             <div class="integration-item" data-search="figma"><span class="integration-icon">♧</span>
                                 Figma <span class="installed">Installed</span></div>
                             <div class="integration-item" data-search="shadcn ui"><span
@@ -402,50 +435,50 @@
                             <div class="integration-item" data-search="tailwind css"><span
                                     class="integration-icon">≋</span> Tailwind CSS <span
                                     class="installed">Installed</span></div>
-                            <div class="integrations-empty" hidden>No integrations found.</div>
+                            <div class="integrations-empty" hidden="">No integrations found.</div>
                         </div>
                     </div>
                 </div>
-                <div class="step-copy">
-                    <h3>Choose your<br>integrations and<br>tools</h3>
+                <div class="step-copy" data-reveal="">
+                    <h3>Choose your<br />integrations and<br />tools</h3>
                     <p>Add design tools, frameworks, databases, and APIs to extend your agent's capabilities. Everything
                         connects seamlessly to your workflow.</p>
                 </div>
             </div>
-            <div class="setup-step setup-step-last" id="step-prompt">
+            <div class="setup-step setup-step-last" data-reveal-section="" id="step-prompt">
                 <div class="step-visual">
-                    <div class="prompt-mini setup-prompt"><label for="demo-prompt" class="visually-hidden">Try a demo
-                            prompt</label><textarea id="demo-prompt" rows="2"
-                            placeholder="Please make me a e-commerce website"></textarea>
-                        <div class="prompt-toolbar"><button type="button" class="icon-button" aria-label="Add tools"
-                                data-open-integrations><svg class="icon">
+                    <div class="prompt-mini setup-prompt" data-reveal=""><label class="visually-hidden"
+                            for="demo-prompt">Try a demo prompt</label><textarea id="demo-prompt"
+                            placeholder="Please make me a e-commerce website" rows="2"></textarea>
+                        <div class="prompt-toolbar"><button aria-label="Add tools" class="icon-button"
+                                data-open-integrations="" type="button"><svg class="icon">
                                     <use href="#i-plus"></use>
                                 </svg></button><svg class="icon globe-icon">
                                 <use href="#i-globe"></use>
-                            </svg><button type="button" class="sources-trigger" data-open-integrations><svg
+                            </svg><button class="sources-trigger" data-open-integrations="" type="button"><svg
                                     class="icon">
                                     <use href="#i-list"></use>
-                                </svg> Sources</button><button type="button" class="send-round" id="demo-prompt-send"
-                                aria-label="Send demo prompt"><svg class="icon arrow-up">
+                                </svg> Sources</button><button aria-label="Send demo prompt" class="send-round"
+                                id="demo-prompt-send" type="button"><svg class="icon arrow-up">
                                     <use href="#i-chevron"></use>
-                                </svg></button></div><span class="prompt-feedback" id="prompt-feedback"
-                            aria-live="polite"></span>
+                                </svg></button></div><span aria-live="polite" class="prompt-feedback"
+                            id="prompt-feedback"></span>
                     </div>
                 </div>
-                <div class="step-copy">
-                    <h3>Start building with<br>AI assistance</h3>
+                <div class="step-copy" data-reveal="">
+                    <h3>Start building with<br />AI assistance</h3>
                     <p>Ask your agent to write features, review code, or fix bugs in plain English. Get intelligent
                         suggestions with context from your entire codebase.</p>
                 </div>
             </div>
         </section>
-        <section class="center-headline community-header" id="community"><span
+        <section class="center-headline community-header" data-reveal-section="" id="community"><span
                 class="eyebrow small-eyebrow"><span>♡</span> Scale</span>
-            <h2>Hear from<br>our <span>developer</span><br>community</h2>
-            <p>Thousands of engineers trust our AI agents daily.<br>Discover how teams accelerate development<br>while
-                maintaining code quality and standards.</p>
+            <h2>Hear from<br />our <span>developer</span><br />community</h2>
+            <p>Thousands of engineers trust our AI agents daily.<br />Discover how teams accelerate
+                development<br />while maintaining code quality and standards.</p>
         </section>
-        <section class="testimonials" aria-label="Developer community testimonials">
+        <section aria-label="Developer community testimonials" class="testimonials">
             <div class="marquee marquee-left">
                 <div class="marquee-track" id="marquee-one"></div>
             </div>
@@ -453,26 +486,25 @@
                 <div class="marquee-track" id="marquee-two"></div>
             </div>
         </section>
-        <section class="pricing-grid" id="pricing" aria-labelledby="pricing-heading">
+        <section aria-labelledby="pricing-heading" class="pricing-grid" data-reveal-section="" id="pricing">
             <div class="pricing-intro">
-                <h2 id="pricing-heading">Build more. Pay less.<br>Scale smart.</h2>
+                <h2 id="pricing-heading">Build more. Pay less.<br />Scale smart.</h2>
                 <p>Try free for 14 days with full access to all features. Upgrade only when your AI agent proves value.
                 </p>
-                <div class="billing-toggle" role="group" aria-label="Billing period"><button type="button"
-                        class="billing-option active" data-billing="monthly" aria-pressed="true">Monthly</button><button
-                        type="button" class="billing-option" data-billing="annually"
-                        aria-pressed="false">Annually</button></div>
+                <div aria-label="Billing period" class="billing-toggle" role="group"><button aria-pressed="true"
+                        class="billing-option active" data-billing="monthly" type="button">Monthly</button><button
+                        aria-pressed="false" class="billing-option" data-billing="annually"
+                        type="button">Annually</button></div>
             </div>
             <div class="pricing-main">
-                <div class="texture-divider pricing-texture" aria-hidden="true"></div>
+                <div aria-hidden="true" class="texture-divider pricing-texture"></div>
                 <div class="pricing-cards">
-                    <article class="plan startup-plan">
+                    <article class="plan startup-plan" data-reveal="">
                         <div class="plan-label">Startup <span class="popular">Popular</span></div>
-                        <div class="plan-cost"><span class="currency">$</span><span class="price" data-monthly="12"
-                                data-annually="10">12</span><span class="per-month">/month</span></div>
-                        <p>Ideal for professionals and small teams</p><a
-                            href="mailto:sales@codeforge.example?subject=CodeForge%20Startup%20plan"
-                            class="button button-primary pricing-button">Upgrade to Pro</a>
+                        <div class="plan-cost"><span class="currency">$</span><span class="price" data-annually="10"
+                                data-monthly="12">12</span><span class="per-month">/month</span></div>
+                        <p>Ideal for professionals and small teams</p><a class="button button-primary pricing-button"
+                            href="mailto:sales@codeforge.example?subject=CodeForge%20Startup%20plan">Upgrade to Pro</a>
                         <div class="plan-divider"></div>
                         <div class="plan-kicker">Everything in Free +</div>
                         <ul class="check-list">
@@ -486,13 +518,14 @@
                             <li>Real-time collaboration tools</li>
                         </ul>
                     </article>
-                    <article class="plan enterprise-plan">
+                    <article class="plan enterprise-plan" data-reveal="">
                         <div class="plan-label">Enterprise</div>
-                        <div class="plan-cost"><span class="currency">$</span><span class="price" data-monthly="24"
-                                data-annually="20">24</span><span class="per-month">/month</span></div>
+                        <div class="plan-cost"><span class="currency">$</span><span class="price" data-annually="20"
+                                data-monthly="24">24</span><span class="per-month">/month</span></div>
                         <p>Best for large teams and enterprise-level organizations</p><a
-                            href="mailto:sales@codeforge.example?subject=CodeForge%20Enterprise%20plan"
-                            class="button button-dark pricing-button">Contact Sales</a>
+                            class="button button-dark pricing-button"
+                            href="mailto:sales@codeforge.example?subject=CodeForge%20Enterprise%20plan">Contact
+                            Sales</a>
                         <div class="plan-divider"></div>
                         <div class="plan-kicker">Everything in Startup +</div>
                         <ul class="check-list">
@@ -509,9 +542,8 @@
                         <div class="plan-label">Free</div>
                         <div class="plan-cost"><span class="currency">$</span><span>0</span><span
                                 class="per-month">/month</span></div>
-                        <p>Perfect for individual users</p><a
-                            href="mailto:hello@codeforge.example?subject=CodeForge%20Free%20plan"
-                            class="button button-outline free-button">Start Free</a>
+                        <p>Perfect for individual users</p><a class="button button-outline free-button"
+                            href="mailto:hello@codeforge.example?subject=CodeForge%20Free%20plan">Start Free</a>
                     </div>
                     <div class="free-right"><span class="plan-kicker">Get Started today:</span>
                         <ul class="check-list">
@@ -522,52 +554,52 @@
                         </ul>
                     </div>
                 </div>
-                <div class="texture-divider pricing-texture" aria-hidden="true"></div>
+                <div aria-hidden="true" class="texture-divider pricing-texture"></div>
             </div>
         </section>
-        <section class="faq" id="faq">
+        <section class="faq" data-reveal-section="" id="faq">
             <div class="faq-intro">
-                <h2>Frequently<br>Asked<br>Questions</h2>
+                <h2>Frequently<br />Asked<br />Questions</h2>
                 <p>Answers to common questions about SkyAgent and its features. If you have any other questions, please
                     don't hesitate to contact us.</p>
             </div>
             <div class="faq-list">
-                <details>
+                <details data-reveal="">
                     <summary>What is an AI Agent? <svg class="icon">
                             <use href="#i-down"></use>
                         </svg></summary>
                     <p>An AI agent is a software assistant that can understand requests, analyze code, suggest
                         improvements, and help complete development tasks.</p>
                 </details>
-                <details>
+                <details data-reveal="">
                     <summary>How does SkyAgent work? <svg class="icon">
                             <use href="#i-down"></use>
                         </svg></summary>
                     <p>CodeForge connects to your repository and tools, then uses AI to help write, review, test, and
                         improve your code within your workflow.</p>
                 </details>
-                <details>
+                <details data-reveal="">
                     <summary>How secure is my data? <svg class="icon">
                             <use href="#i-down"></use>
                         </svg></summary>
                     <p>Use secure, approved integrations and review the permissions you grant. This recreated demo
                         doesn't transmit or store any repository data.</p>
                 </details>
-                <details>
+                <details data-reveal="">
                     <summary>Can I integrate my existing tools? <svg class="icon">
                             <use href="#i-down"></use>
                         </svg></summary>
                     <p>Yes. The interface shows integrations with design tools, frameworks, repositories, and developer
                         utilities.</p>
                 </details>
-                <details>
+                <details data-reveal="">
                     <summary>Is there a free trial available? <svg class="icon">
                             <use href="#i-down"></use>
                         </svg></summary>
                     <p>The illustrated pricing offers a 14-day trial. This is a frontend demonstration, not an active
                         subscription service.</p>
                 </details>
-                <details>
+                <details data-reveal="">
                     <summary>How does SkyAgent save me time? <svg class="icon">
                             <use href="#i-down"></use>
                         </svg></summary>
@@ -576,10 +608,10 @@
                 </details>
             </div>
         </section>
-        <section class="final-cta" aria-label="Get started">
-            <h2>Ship your next feature 10x<br>faster with CodeForge</h2>
-            <p>Stop writing boilerplate. Let AI handle the repetitive<br>work. Start coding smarter today, completely
-                free.</p><a href="#free-plan" class="button button-primary hero-button">Start for free</a>
+        <section aria-label="Get started" class="final-cta" data-reveal-section="">
+            <h2>Ship your next feature 10x<br />faster with CodeForge</h2>
+            <p>Stop writing boilerplate. Let AI handle the repetitive<br />work. Start coding smarter today, completely
+                free.</p><a class="button button-primary hero-button" href="#free-plan">Start for free</a>
         </section>
         <footer class="footer">
             <div class="footer-column">
@@ -599,18 +631,18 @@
                     href="mailto:hello@codeforge.example">Contact</a><a href="#faq">Legal</a>
             </div>
             <div class="footer-column footer-badges">
-                <div class="security-badge">AICPA<br><strong>SOC 2</strong></div>
-                <div class="security-badge security-hipaa">◈<br><strong>HIPAA<br>COMPLIANT</strong></div>
-                <div class="security-badge security-gdpr">✶ ✶ ✶<br><strong>GDPR</strong><br>✶ ✶ ✶</div>
+                <div class="security-badge">AICPA<br /><strong>SOC 2</strong></div>
+                <div class="security-badge security-hipaa">◈<br /><strong>HIPAA<br />COMPLIANT</strong></div>
+                <div class="security-badge security-gdpr">✶ ✶ ✶<br /><strong>GDPR</strong><br />✶ ✶ ✶</div>
             </div>
         </footer>
         <div class="copyright">© 2026 Codeforge. All rights reserved.</div>
     </main>
-    <div class="integrations-popover" id="integrations-popover" role="dialog" aria-label="Available integrations"
-        hidden><button class="popover-close" type="button" id="popover-close"
-            aria-label="Close integrations">×</button><strong>Connect your tools</strong>
-        <p>Explore the available integrations in the setup section.</p><a href="#step-integrations"
-            class="button button-small button-primary" id="popover-jump">Browse integrations</a>
+    <div aria-label="Available integrations" class="integrations-popover" hidden="" id="integrations-popover"
+        role="dialog"><button aria-label="Close integrations" class="popover-close" id="popover-close"
+            type="button">×</button><strong>Connect your tools</strong>
+        <p>Explore the available integrations in the setup section.</p><a class="button button-small button-primary"
+            href="#step-integrations" id="popover-jump">Browse integrations</a>
     </div>
 </body>
 

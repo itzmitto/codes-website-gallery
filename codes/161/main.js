@@ -217,98 +217,86 @@ const testimonials = [
   {
     quote:
       "By integrating #GreenTech’s sustainable energy solutions, we've seen a significant reduction in carbon footprint. <mark>Leading the way in eco-friendly business practices.</mark> Pioneering change in the industry.",
-    name: "Carlos Gomez",
-    role: "Head of R&D at EcoInnovate",
-    initials: "CG",
-    tone: "#648e77",
   },
   {
     quote:
       "The AI-driven analytics from #QuantumInsights have revolutionized our product development cycle. Insights are now more accurate and faster than ever. A game-changer for tech companies.",
-    name: "Alex Rivera",
-    role: "CTO at InnovateTech",
-    initials: "AR",
-    tone: "#515861",
   },
   {
     quote:
       "Implementing #AIStream’s customer prediction model has drastically improved our targeting strategy. Seeing a 50% increase in conversion rates! Highly recommend their solutions.",
-    name: "Samantha Lee",
-    role: "Marketing Director at NextGen Solutions",
-    initials: "SL",
-    tone: "#936c5e",
   },
   {
     quote:
       "As a startup, we need to move fast and stay ahead. #CodeAI's automated coding assistant helps us do just that. Our development speed has doubled, tool for any startup.",
-    name: "Raj Patel",
-    role: "Founder & CEO at StartUp Grid",
-    initials: "RP",
-    tone: "#987e89",
   },
   {
     quote:
       "#DataFlow's supply chain optimization tools transformed our workflow and our operational efficiency. <mark>Results in logistics have surpassed expectations.</mark>",
-    name: "Maya Johnson",
-    role: "Operations Lead at LogiChain Solutions",
-    initials: "MJ",
-    tone: "#b08f74",
   },
   {
     quote:
       "Our team's development process is so much faster. Code review is consistent, clear, and much easier to follow throughout every sprint.",
-    name: "Jamie Wilson",
-    role: "Senior Software Engineer",
-    initials: "JW",
-    tone: "#687eb8",
   },
 ];
 const testimonialsTwo = [
   {
     quote:
       "#FashionForward's market analysis AI has revolutionized how we approach fashion campaigns. <mark>New data-driven ways to build customer engagement.</mark> Revolutionizing the world of marketing.",
-    name: "Aisha Khan",
-    role: "Chief Marketing Officer at Fashion Forward",
-    initials: "AK",
-    tone: "#af8e7b",
   },
   {
     quote:
       "Implementing #MediCareAI in our patient care systems has improved patient outcomes significantly. <mark>Technology and healthcare working hand in hand for better health.</mark> A milestone in medical technology.",
-    name: "Tom Chen",
-    role: "Director of IT at HealthTech Solutions",
-    initials: "TC",
-    tone: "#849caa",
   },
   {
     quote:
       "#LearnSmart’s AI-driven personalized learning plans have doubled student performance metrics. <mark>Education tailored to every learner’s needs.</mark> Transforming the educational landscape.",
-    name: "Sofia Patel",
-    role: "CEO at EduTech Innovations",
-    initials: "SP",
-    tone: "#b4a178",
   },
   {
     quote:
       "With #CyberShield’s AI-powered security systems, our data is safer and our uptime unmatched. <mark>Security with no compromises.</mark>",
-    name: "Jake Turner",
-    role: "CTO at SecureCloud",
-    initials: "JT",
-    tone: "#8f8bba",
   },
   {
     quote:
       "Our team can prototype new features in less time than ever before, without sacrificing reliability or the standards our engineers care about.",
-    name: "Elena Martin",
-    role: "Product Engineer at BuildLabs",
-    initials: "EM",
-    tone: "#6b9f91",
   },
 ];
+testimonials.splice(
+  4,
+  2,
+  {
+    quote:
+      "#VoiceGen's AI-driven voice synthesis has made creating global products a breeze. Localization is now seamless and efficient. <mark>A must-have for global product teams.</mark>",
+  },
+  {
+    quote:
+      "Leveraging #DataCrunch's AI for our financial models has given us an edge in predictive accuracy. Our investment strategies are now powered by <mark>real-time data analytics.</mark>",
+  },
+  {
+    quote:
+      "#LogiTech's supply chain optimization tools have drastically reduced our operational costs. <mark>Efficiency and accuracy in logistics have never been better.</mark>",
+  },
+);
+testimonialsTwo.splice(
+  3,
+  2,
+  {
+    quote:
+      "With #CyberShield's AI-powered security systems, our data protection levels are unmatched. <mark>Ensuring safety and trust in digital spaces.</mark> Redefining cybersecurity standards.",
+  },
+  {
+    quote:
+      "#DesignPro's AI has streamlined our creative process, enhancing productivity and innovation. <mark>Bringing creativity and technology together.</mark>",
+  },
+  {
+    quote:
+      "#VentureAI's insights into startup ecosystems have been invaluable for our growth and funding strategies. <mark>Empowering startups with data-driven decisions.</mark>",
+  },
+);
 function makeTestimonial(testimonial) {
   const article = document.createElement("article");
   article.className = "testimonial-card";
-  article.innerHTML = `<p>${testimonial.quote}</p><div class="testimonial-person"><div class="avatar" style="background:linear-gradient(135deg,${testimonial.tone},#e3c1aa)" aria-hidden="true">${testimonial.initials}</div><div><strong>${testimonial.name}</strong><span>${testimonial.role}</span></div></div>`;
+  article.innerHTML = `<p>${testimonial.quote}</p>`;
   return article;
 }
 for (const [container, data] of [

@@ -1,0 +1,604 @@
+/* CodeForge gallery fidelity and subtle motion enhancements */
+.partner {
+  overflow: hidden;
+  position: relative;
+  transition: background-color 0.25s ease;
+}
+.partner img {
+  display: block;
+  object-fit: contain;
+  object-position: center;
+  max-width: 89%;
+  width: auto;
+  height: 27px;
+  filter: none;
+  transition:
+    transform 0.35s cubic-bezier(0.2, 0.85, 0.2, 1),
+    filter 0.35s;
+  will-change: transform;
+}
+.partner-medium img {
+  height: 25px;
+  max-width: 88%;
+}
+.partner-wise img {
+  height: 26px;
+}
+.partner-stripe img {
+  height: 30px;
+}
+.partner-cashapp img {
+  height: 26px;
+}
+.partner:hover {
+  background: rgba(10, 166, 239, 0.032);
+}
+.partner:hover img {
+  transform: scale(1.075);
+}
+.dark-mode .partner img {
+  filter: invert(1);
+}
+.dark-mode .partner:hover img {
+  filter: invert(1) drop-shadow(0 0 8px #ffffff24);
+}
+.commit-headline {
+  height: 275px;
+  padding-top: 56px;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+.commit-headline h2 {
+  font-size: 35px;
+  line-height: 1.02;
+  letter-spacing: -1.6px;
+  margin: 12px 0 15px;
+  font-weight: 590;
+}
+.commit-headline p {
+  font-size: 10px;
+  line-height: 1.57;
+  color: #80838a;
+}
+.accent-animated {
+  background: linear-gradient(95deg, #67b5ff 8%, #20cafa 52%, #71aefb 94%);
+  background-size: 220% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent !important;
+  animation: accent-flow 7s linear infinite alternate;
+}
+@keyframes accent-flow {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 100% 0;
+  }
+}
+.hero-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.6;
+  background:
+    radial-gradient(ellipse 30% 38% at 35% 77%, #a2dcff7a, transparent 85%),
+    radial-gradient(ellipse 20% 30% at 72% 78%, #f0e1ff66, transparent 90%);
+  animation: glow-breathe 9s ease-in-out infinite alternate;
+  z-index: 0;
+}
+@keyframes glow-breathe {
+  0% {
+    opacity: 0.28;
+    transform: translate3d(-2%, 2%, 0) scale(1);
+  }
+  100% {
+    opacity: 0.7;
+    transform: translate3d(2%, -3%, 0) scale(1.08);
+  }
+}
+.hero-content {
+  animation: hero-enter 0.8s both cubic-bezier(0.24, 0.85, 0.22, 1);
+}
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+    filter: blur(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+.hero-button,
+.nav-cta {
+  position: relative;
+  overflow: hidden;
+}
+.hero-button:before,
+.nav-cta:before {
+  content: "";
+  position: absolute;
+  inset: -30% auto -30% -100%;
+  width: 75%;
+  background: linear-gradient(110deg, transparent, #ffffff47, transparent);
+  transform: skewX(-17deg);
+  transition: left 0.7s;
+}
+.hero-button:hover:before,
+.nav-cta:hover:before {
+  left: 140%;
+}
+.showcase-preview {
+  isolation: isolate;
+}
+.showcase-preview > img {
+  transition:
+    opacity 0.35s ease,
+    filter 0.35s ease;
+  animation: gallery-drift 14s ease-in-out infinite alternate;
+  transform-origin: 50% 47%;
+}
+.showcase-preview > img.is-swapping {
+  opacity: 0.13;
+  filter: blur(7px);
+}
+@keyframes gallery-drift {
+  from {
+    object-position: 50% 50%;
+    filter: saturate(0.99);
+  }
+  to {
+    object-position: 50% 45%;
+    filter: saturate(1.08);
+  }
+}
+.showcase-tabs {
+  isolation: isolate;
+}
+.showcase-tab {
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+.showcase-tab .tab-progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  background: #05adf6;
+  width: 0;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+.showcase-tab.is-active .tab-progress {
+  opacity: 0.95;
+  animation: tab-progress-fill 7.2s linear forwards;
+}
+@keyframes tab-progress-fill {
+  to {
+    width: 100%;
+  }
+}
+.showcase-preview .preview-status {
+  display: none;
+}
+.corner-mark {
+  animation: corner-appear 0.7s 1.2s both;
+}
+@keyframes corner-appear {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  to {
+    opacity: 0.43;
+    transform: scale(1);
+  }
+}
+.motion-ready [data-reveal] {
+  opacity: 0;
+  filter: blur(6px);
+  transition:
+    opacity 0.7s ease,
+    filter 0.7s ease;
+}
+.motion-ready [data-reveal].in-view {
+  opacity: 1;
+  filter: blur(0);
+}
+.motion-ready .step-copy[data-reveal] {
+  transform: translateY(13px);
+  transition:
+    opacity 0.6s ease,
+    filter 0.6s ease,
+    transform 0.65s cubic-bezier(0.2, 0.85, 0.2, 1);
+}
+.motion-ready .step-copy[data-reveal].in-view {
+  transform: translateY(0);
+}
+.motion-ready .faq details[data-reveal]:nth-child(2) {
+  transition-delay: 0.07s;
+}
+.motion-ready .faq details[data-reveal]:nth-child(3) {
+  transition-delay: 0.14s;
+}
+.motion-ready .faq details[data-reveal]:nth-child(4) {
+  transition-delay: 0.21s;
+}
+.motion-ready .faq details[data-reveal]:nth-child(5) {
+  transition-delay: 0.28s;
+}
+.motion-ready .faq details[data-reveal]:nth-child(6) {
+  transition-delay: 0.35s;
+}
+.mini-window:hover,
+.prompt-mini:hover {
+  box-shadow: 0 10px 32px #00000009;
+  border-color: #ccdce4;
+}
+.mini-window,
+.prompt-mini {
+  transition:
+    box-shadow 0.3s,
+    border-color 0.3s,
+    opacity 0.7s ease,
+    filter 0.7s ease;
+}
+.traffic-lights i {
+  animation: status-led 4s ease-in-out infinite;
+}
+.traffic-lights i:nth-child(2) {
+  animation-delay: 1s;
+}
+.traffic-lights i:nth-child(3) {
+  animation-delay: 2s;
+}
+@keyframes status-led {
+  0%,
+  80%,
+  100% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 0.36;
+  }
+}
+.clone-window.is-live .terminal-lines > div {
+  animation: terminal-line 0.43s ease both;
+}
+.clone-window.is-live .terminal-lines > div:nth-child(1) {
+  animation-delay: 0.16s;
+}
+.clone-window.is-live .terminal-lines > div:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.clone-window.is-live .terminal-lines > div:nth-child(3) {
+  animation-delay: 0.69s;
+}
+.clone-window.is-live .terminal-lines > div:nth-child(4) {
+  animation-delay: 1s;
+}
+.clone-window.is-live .terminal-lines > div:nth-child(5) {
+  animation-delay: 1.3s;
+}
+.clone-window.is-live .terminal-lines > div:nth-child(6) {
+  animation-delay: 1.6s;
+}
+@keyframes terminal-line {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.clone-window.is-live .window-pill {
+  animation: pill-arrive 0.55s 1.8s backwards;
+}
+@keyframes pill-arrive {
+  from {
+    opacity: 0;
+    scale: 0.8;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+.code-remove,
+.code-add {
+  transition:
+    background 0.4s,
+    color 0.4s;
+}
+.floating-apply {
+  transition:
+    box-shadow 0.2s,
+    background 0.2s,
+    transform 0.2s;
+}
+.floating-apply:hover {
+  box-shadow:
+    0 6px 20px #009dee25,
+    0 2px 8px #0002;
+}
+.agent-diagram .flow-connectors path:not(.blue-node) {
+  stroke-dasharray: 8 4;
+  animation: agent-path 3s linear infinite;
+}
+@keyframes agent-path {
+  to {
+    stroke-dashoffset: -48;
+  }
+}
+.agent-card {
+  transition:
+    box-shadow 0.3s,
+    border-color 0.3s,
+    opacity 0.7s ease,
+    filter 0.7s ease;
+}
+.agent-card:hover {
+  box-shadow: 0 8px 22px #08a5ed13;
+  border-color: #80cdf4;
+}
+.agent-diagram.in-view .agent-one {
+  animation: agent-appear 0.6s 0.1s both;
+}
+.agent-diagram.in-view .agent-two {
+  animation: agent-appear 0.6s 0.5s both;
+}
+.agent-diagram.in-view .agent-three {
+  animation: agent-appear 0.6s 0.95s both;
+}
+@keyframes agent-appear {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.send-round {
+  transition:
+    background 0.25s,
+    transform 0.25s,
+    box-shadow 0.25s;
+}
+.send-round:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 10px #02aafa59;
+}
+.connected-pill {
+  animation: connect-shine 4s ease-in-out infinite;
+}
+@keyframes connect-shine {
+  0%,
+  100% {
+    box-shadow: 0 1px 3px #00000012;
+  }
+  50% {
+    box-shadow:
+      0 0 0 5px #05a5ed1a,
+      0 1px 8px #09b5ec2c;
+  }
+}
+.network-pulses,
+.world-pulses {
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: 1;
+  pointer-events: none;
+  height: 242px;
+}
+.world-pulses {
+  height: 257px;
+}
+.network-pulses i,
+.world-pulses i {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  height: 6px;
+  width: 6px;
+  border-radius: 50%;
+  background: #02a5f5;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  animation: map-pulse 3.6s ease-out infinite;
+  animation-delay: var(--delay);
+}
+.network-pulses i:after,
+.world-pulses i:after {
+  position: absolute;
+  content: "";
+  inset: -5px;
+  border: 1px solid #119ff4;
+  border-radius: 50%;
+  animation: pulse-ring 3.6s ease-out infinite;
+  animation-delay: var(--delay);
+}
+.world-pulses i {
+  width: 4px;
+  height: 4px;
+  background: #f39773;
+  animation-duration: 4.7s;
+}
+.world-pulses i:after {
+  border-color: #f3b18c;
+  animation-duration: 4.7s;
+}
+@keyframes map-pulse {
+  0%,
+  20% {
+    opacity: 0;
+  }
+  27% {
+    opacity: 0.9;
+  }
+  60% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes pulse-ring {
+  0%,
+  20% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  26% {
+    opacity: 0.75;
+  }
+  60%,
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+.network-art,
+.world-art {
+  transition: filter 0.7s ease;
+}
+.team-stage:hover .network-art,
+.team-stage:hover .world-art {
+  filter: contrast(1.07);
+}
+.integrations-menu {
+  transition: box-shadow 0.3s ease;
+}
+.integrations-menu:focus-within {
+  box-shadow: 0 10px 23px #00000015;
+}
+.integration-item {
+  transition: background 0.2s;
+}
+.integration-item:hover {
+  background: #e6edf4;
+}
+.testimonial-card {
+  transition:
+    box-shadow 0.2s,
+    transform 0.2s;
+}
+.testimonial-card:hover {
+  box-shadow: 0 6px 19px #00000015;
+  transform: translateY(-3px);
+}
+.pricing-cards .plan {
+  transition:
+    box-shadow 0.3s,
+    background 0.3s,
+    opacity 0.7s,
+    filter 0.7s;
+}
+.pricing-cards .plan:hover {
+  box-shadow: inset 0 0 25px #009ef208;
+}
+.faq-list details {
+  transition: background 0.2s ease;
+}
+.faq-list details[open] {
+  background: linear-gradient(90deg, #eff9ff66, transparent);
+}
+.faq-list details[open] p {
+  animation: faq-expand 0.28s both;
+}
+@keyframes faq-expand {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.final-cta {
+  background-size: 100% 100%;
+  animation: footer-glow 10s ease-in-out infinite alternate;
+}
+@keyframes footer-glow {
+  to {
+    background-position: 5% 0;
+  }
+}
+@media (max-width: 760px) {
+  .partner img {
+    height: clamp(17px, 3.3vw, 27px);
+  }
+  .partner-medium img {
+    height: clamp(14px, 2.8vw, 25px);
+  }
+  .partner-wise img {
+    height: clamp(17px, 3vw, 26px);
+  }
+  .partner-stripe img {
+    height: clamp(18px, 3.5vw, 30px);
+  }
+  .partner-cashapp img {
+    height: clamp(15px, 3vw, 26px);
+  }
+}
+@media (max-width: 540px) {
+  .commit-headline {
+    height: 245px;
+    padding-top: 48px;
+  }
+  .commit-headline h2 {
+    font-size: clamp(27px, 7vw, 34px);
+    letter-spacing: -1.3px;
+  }
+  .commit-headline p {
+    font-size: 9px;
+  }
+  .partner img {
+    max-width: 92%;
+  }
+  .partner-medium img {
+    max-width: 93%;
+  }
+  .showcase-tab .tab-progress {
+    height: 2px;
+  }
+  .network-pulses,
+  .world-pulses {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-glow,
+  .hero-content,
+  .accent-animated,
+  .showcase-preview > img,
+  .corner-mark,
+  .showcase-tab.is-active .tab-progress,
+  .agent-diagram .flow-connectors path,
+  .traffic-lights i,
+  .connected-pill,
+  .network-pulses i,
+  .world-pulses i,
+  .final-cta {
+    animation: none !important;
+  }
+  .motion-ready [data-reveal] {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+  .motion-ready .mini-window[data-reveal],
+  .motion-ready .agent-diagram[data-reveal],
+  .motion-ready .prompt-mini[data-reveal] {
+    transform: translateX(-50%) !important;
+  }
+}
