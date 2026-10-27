@@ -9,16 +9,62 @@
         body {
             margin: 0;
             padding: 0;
+            min-height: 100vh;
             background: #383838;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        h1 {
+            font-size: 40px;
+            margin: 0;
+        }
+
+        .info {
+            font-size: 18px;
+            border-radius: 8px;
+            margin: 0;
+        }
+
+        #btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        #list {
+            padding: 0;
+            list-style: none;
+        }
+
+        #list li {
+            background: #282828;
+            padding: 12px 24px;
+            color: green;
+            border-radius: 50px;
         }
     </style>
 </head>
 
 <body>
-    <!-- <script src="script.js"></script> -->
-    <!-- <script src="main.js"></script> -->
-    <script src="script2.js"></script>
+    <h1 id="title">Javascript Tutorial</h1>
+    <p class="info">Welcome</p>
+    <button id="btn">Click Me</button>
+    <ul id="list"></ul>
+    <!-- <script src="main.js"></script>
+    <script src="script.js"></script>
+    <script src="script2.js"></script> -->
+    <script src="script3.js"></script>
 </body>
-
 
 </html>
