@@ -1,0 +1,520 @@
+/* ELSEWHERE / 165 — de volledige opmaak, zonder externe bibliotheken. */
+:root {
+  color-scheme: light;
+  --paper: #edece6;
+  --ink: #26352b;
+  --muted: #6b736a;
+  --line: #26352b24;
+  --accent: #697b4b;
+  --card-width: clamp(240px, 27vw, 346px);
+  --card-height: calc(var(--card-width) * 1.25);
+}
+
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+button {
+  font: inherit;
+  color: inherit;
+}
+button,
+a {
+  touch-action: manipulation;
+}
+button {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+button[hidden] {
+  display: none;
+}
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 5px;
+}
+button svg {
+  display: block;
+  width: 21px;
+  height: 21px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+.app {
+  min-height: 100svh;
+  padding-bottom: 20px;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 40%, #f7f6ef 0%, var(--paper) 75%);
+}
+.shell {
+  width: calc(100% - 88px);
+  max-width: 1260px;
+  margin-inline: auto;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Header en typografie */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 96px;
+  border-bottom: 1px solid var(--line);
+}
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: -1.3px;
+}
+.wordmark > svg {
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+}
+.wordmark-dot {
+  color: var(--accent);
+  margin-left: -9px;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.project-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.8px;
+}
+.project-label span {
+  color: var(--muted);
+  margin-left: 16px;
+}
+.icon-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border-color 0.2s;
+}
+.icon-button:hover {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+.info-button {
+  width: 34px;
+  height: 34px;
+  border: 0;
+}
+.info-button svg {
+  width: 22px;
+  height: 22px;
+}
+.intro {
+  text-align: center;
+  padding-top: 37px;
+}
+.eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin: 0;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2.1px;
+  line-height: 1.5;
+}
+.status-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px #697b4b10;
+}
+h1 {
+  margin: 13px 0 12px;
+  font-size: clamp(40px, 5.2vw, 76px);
+  font-weight: 400;
+  letter-spacing: -3.6px;
+  line-height: 1.07;
+}
+h1 em,
+dialog h2 em {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+}
+.intro-copy {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.1px;
+}
+
+/* Elke kaart staat op een eigen plek in dezelfde 3D-ruimte. */
+.gallery-stage {
+  position: relative;
+  width: 100%;
+  height: calc(var(--card-height) + 58px);
+  margin-top: 17px;
+  display: grid;
+  place-items: center;
+  perspective: 1200px;
+  touch-action: pan-y;
+  isolation: isolate;
+  user-select: none;
+  outline: none;
+}
+.gallery-stage:focus-visible {
+  outline: 1px dashed #697b4b80;
+  outline-offset: -8px;
+}
+.stage-orbit {
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  width: min(80%, 1010px);
+  height: 58px;
+  border: 1px solid #26352b0b;
+  border-radius: 50%;
+  transform: translateX(-50%);
+}
+.stage-orbit::after {
+  content: "";
+  position: absolute;
+  inset: 11px 60px;
+  border: 1px solid #26352b08;
+  border-radius: inherit;
+}
+.stage-marker {
+  position: absolute;
+  top: 50%;
+  font-size: 8px;
+  letter-spacing: 2.2px;
+  color: #81877b;
+  writing-mode: vertical-rl;
+  pointer-events: none;
+}
+.marker-left {
+  left: 35px;
+  transform: translateY(-50%) rotate(180deg);
+}
+.marker-right {
+  right: 35px;
+  transform: translateY(-50%);
+}
+.card {
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  position: absolute;
+  width: var(--card-width);
+  height: var(--card-height);
+  padding: 0;
+  border: none;
+  border-radius: 12px;
+  background: transparent;
+  transform-style: preserve-3d;
+  transition:
+    transform 0.75s cubic-bezier(0.22, 0.7, 0.18, 1),
+    filter 0.75s,
+    opacity 0.75s;
+}
+.card[data-position="current"] {
+  transform: translate3d(0, -4px, 45px) rotateY(0deg);
+  z-index: 3;
+}
+.card[data-position="prev"] {
+  transform: translate3d(-110%, 3px, -100px) rotateY(30deg) scale(0.9);
+  z-index: 1;
+  filter: saturate(0.7) brightness(0.92);
+}
+.card[data-position="next"] {
+  transform: translate3d(110%, 3px, -100px) rotateY(-30deg) scale(0.9);
+  z-index: 1;
+  filter: saturate(0.7) brightness(0.92);
+}
+.card-inner {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: inherit;
+  background: #768773;
+  box-shadow:
+    0 22px 30px -17px #26352b66,
+    0 2px 4px #26352b20;
+  transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+  transition:
+    transform 0.2s ease-out,
+    box-shadow 0.5s;
+}
+.card[data-position="current"] .card-inner {
+  box-shadow:
+    0 30px 42px -20px #26352b75,
+    0 3px 6px #26352b26;
+}
+.card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+.card-shade {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    180deg,
+    #0002 0%,
+    transparent 38%,
+    #00150a05 50%,
+    #071a13a8 100%
+  );
+  pointer-events: none;
+}
+.card-inner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid #ffffff25;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.photo-label {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 10px;
+  border: 1px solid #ffffff55;
+  border-radius: 30px;
+  background: #ffffff0d;
+  color: white;
+  backdrop-filter: blur(12px);
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  font-weight: 500;
+}
+.photo-dot {
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  border-radius: 50%;
+}
+.photo-caption {
+  position: absolute;
+  bottom: 25px;
+  left: 23px;
+  text-align: left;
+  color: #fffef4;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(21px, 2vw, 29px);
+  line-height: 1.2;
+  letter-spacing: -0.7px;
+}
+.photo-number {
+  position: absolute;
+  bottom: 28px;
+  right: 22px;
+  color: #ffffffb0;
+  font-size: 9px;
+  letter-spacing: 1.2px;
+}
+.card:not([data-position="current"]) .photo-caption {
+  opacity: 0.85;
+}
+.card:focus-visible {
+  outline-color: var(--accent);
+}
+
+/* Beschrijving van het gekozen beeld */
+.gallery-details {
+  display: grid;
+  grid-template-columns: 1fr 2.4fr 1fr;
+  align-items: center;
+  min-height: 111px;
+  padding-top: 8px;
+  padding-bottom: 23px;
+}
+.slide-meter {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+#slide-count {
+  font-size: 10px;
+  letter-spacing: 2px;
+  font-variant-numeric: tabular-nums;
+}
+progress {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 74px;
+  height: 2px;
+  border: 0;
+  border-radius: 1px;
+  overflow: hidden;
+  background: #26352b20;
+  color: var(--accent);
+}
+progress::-webkit-progress-bar {
+  background: #26352b20;
+}
+progress::-webkit-progress-value {
+  background: var(--ink);
+  transition: width 0.6s ease;
+}
+progress::-moz-progress-bar {
+  background: var(--ink);
+}
+.slide-copy {
+  text-align: center;
+}
+.slide-region {
+  margin: 0 0 7px;
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: var(--accent);
+  font-weight: 600;
+}
+.slide-copy h2 {
+  margin: 0;
+  font-size: 23px;
+  font-weight: 500;
+  letter-spacing: -0.7px;
+}
+.slide-note {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+.text-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 0;
+  border: none;
+  background: transparent;
+  font-size: 10px;
+  white-space: nowrap;
+}
+.text-button:hover {
+  color: var(--accent);
+}
+.text-button svg {
+  width: 16px;
+  height: 16px;
+}
+.fullscreen-button {
+  justify-self: end;
+}
+
+/* Bedieningsbalk */
+.gallery-toolbar {
+  display: grid;
+  grid-template-columns: 1fr 1.7fr 1fr;
+  align-items: center;
+  gap: 20px;
+  min-height: 96px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.thumbnails {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.thumb {
+  display: block;
+  padding: 3px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  opacity: 0.55;
+  transition:
+    opacity 0.2s,
+    border-color 0.2s,
+    transform 0.2s;
+}
+.thumb:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+.thumb[aria-pressed="true"] {
+  border-color: var(--accent);
+  opacity: 1;
+}
+.thumb img {
+  display: block;
+  width: 32px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 3px;
+  pointer-events: none;
+}
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.navigation-hint {
+  font-size: 8px;
+  letter-spacing: 1.6px;
+  white-space: nowrap;
+  color: var(--muted);
+}
+.navigation .icon-button {
+  width: 40px;
+  height: 40px;
+}

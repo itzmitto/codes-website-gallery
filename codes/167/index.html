@@ -1,11 +1,129 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="theme-color" content="#edece6">
+    <meta name="description" content="Even ergens anders. Ontdek drie originele landschappen in een interactieve 3D-fotogalerij.">
+    <title>Elsewhere — Even ergens anders</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    
+    <main class="app">
+        <header class="site-header shell">
+            <a class="wordmark" href="./" aria-label="Elsewhere, terug naar het begin">
+                <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M4 23V5h18M10 23V11h12M16 23v-6h6"/></svg>
+                elsewhere<span class="wordmark-dot">.</span>
+            </a>
+            <div class="header-right">
+                <span class="project-label">VISUEEL EXPERIMENT <span>/ 165</span></span>
+                <button class="icon-button info-button" id="info-open" type="button" aria-label="Over deze galerij" aria-haspopup="dialog">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7v.2"/></svg>
+                </button>
+            </div>
+        </header>
+
+        <div class="intro shell">
+            <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> EEN KLEINE ONTSNAPPING</p>
+            <h1>Even ergens <em>anders.</em></h1>
+            <p class="intro-copy">Drie landschappen. Een ander perspectief.</p>
+        </div>
+
+        <section class="gallery" aria-label="Interactieve landschapgalerij">
+            <p id="gallery-help" class="sr-only">Wissel met de linker- en rechterpijl, Home of End. Je kunt ook over een afbeelding vegen of op een miniatuur klikken.</p>
+            <div class="gallery-stage" tabindex="0" role="group" aria-roledescription="carrousel" aria-label="Drie landschappen" aria-describedby="gallery-help">
+                <span class="stage-orbit" aria-hidden="true"></span>
+                <span class="stage-marker marker-left" aria-hidden="true">NEEM DE TIJD</span>
+                <span class="stage-marker marker-right" aria-hidden="true">VERANDER JE PERSPECTIEF</span>
+
+                <button class="card" type="button" data-index="0" data-position="current" aria-label="Huidige afbeelding: Tussen de toppen" aria-current="true">
+                    <span class="card-inner">
+                        <img src="assets/alpine-lake.webp" alt="Turkoois bergmeer met dennen en hoge rotswanden in zacht ochtendlicht." width="1122" height="1402" fetchpriority="high" draggable="false">
+                        <span class="card-shade" aria-hidden="true"></span>
+                        <span class="photo-label" aria-hidden="true"><span class="photo-dot"></span> ALPEN</span>
+                        <span class="photo-caption" aria-hidden="true">Adem in.<br>En kijk om je heen.</span>
+                        <span class="photo-number" aria-hidden="true">01</span>
+                    </span>
+                </button>
+
+                <button class="card" type="button" data-index="1" data-position="next" aria-label="Toon Waar de stilte begint">
+                    <span class="card-inner">
+                        <img src="assets/desert-dunes.webp" alt="Zachte, goudkleurige zandduinen met lange schaduwen en een rustige hemel." width="1122" height="1402" draggable="false">
+                        <span class="card-shade" aria-hidden="true"></span>
+                        <span class="photo-label" aria-hidden="true"><span class="photo-dot"></span> WOESTIJN</span>
+                        <span class="photo-caption" aria-hidden="true">Niets hoeft.<br>Alles mag vertragen.</span>
+                        <span class="photo-number" aria-hidden="true">02</span>
+                    </span>
+                </button>
+
+                <button class="card" type="button" data-index="2" data-position="prev" aria-label="Toon Langs de wilde kust">
+                    <span class="card-inner">
+                        <img src="assets/wild-coast.webp" alt="Groene kliffen boven een ruige oceaan met witte golven en zachte nevel." width="1122" height="1402" draggable="false">
+                        <span class="card-shade" aria-hidden="true"></span>
+                        <span class="photo-label" aria-hidden="true"><span class="photo-dot"></span> WILDE KUST</span>
+                        <span class="photo-caption" aria-hidden="true">Volg de wind.<br>Vergeet de tijd.</span>
+                        <span class="photo-number" aria-hidden="true">03</span>
+                    </span>
+                </button>
+            </div>
+
+            <div class="gallery-details shell">
+                <div class="slide-meter" aria-label="Positie in de galerij">
+                    <span id="slide-count">01 / 03</span>
+                    <progress id="slide-progress" value="1" max="3" aria-label="Afbeelding 1 van 3"></progress>
+                </div>
+                <div class="slide-copy">
+                    <p class="slide-region" id="slide-region">ALPEN · 01</p>
+                    <h2 id="slide-title">Tussen de toppen</h2>
+                    <p class="slide-note" id="slide-note">Stil water. Hoge pieken. Even helemaal weg.</p>
+                </div>
+                <button class="text-button fullscreen-button" id="fullscreen-toggle" type="button" aria-label="Galerij op volledig scherm openen" aria-pressed="false">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5"/></svg>
+                    <span>Volledig scherm</span>
+                </button>
+            </div>
+
+            <div class="gallery-toolbar shell">
+                <div class="thumbnails" role="group" aria-label="Kies een landschap">
+                    <button class="thumb" type="button" data-index="0" aria-label="Tussen de toppen" aria-pressed="true"><img src="assets/alpine-lake.webp" alt="" width="40" height="50" draggable="false"></button>
+                    <button class="thumb" type="button" data-index="1" aria-label="Waar de stilte begint" aria-pressed="false"><img src="assets/desert-dunes.webp" alt="" width="40" height="50" draggable="false"></button>
+                    <button class="thumb" type="button" data-index="2" aria-label="Langs de wilde kust" aria-pressed="false"><img src="assets/wild-coast.webp" alt="" width="40" height="50" draggable="false"></button>
+                </div>
+                <div class="navigation" role="group" aria-label="Vorige en volgende afbeelding">
+                    <button class="icon-button nav-prev" type="button" aria-label="Vorige afbeelding"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6M8 12h12"/></svg></button>
+                    <span class="navigation-hint">SLEEP OM TE ONTDEKKEN</span>
+                    <button class="icon-button nav-next" type="button" aria-label="Volgende afbeelding"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 6 6 6-6 6M4 12h12"/></svg></button>
+                </div>
+                <button class="text-button autoplay-button" id="autoplay-toggle" type="button" aria-label="Automatisch afspelen starten" aria-pressed="false">
+                    <span class="play-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 5 11 7-11 7Z"/></svg></span>
+                    <span class="pause-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 5v14M15 5v14"/></svg></span>
+                    <span class="autoplay-label">Automatisch</span>
+                    <span class="toggle-track" aria-hidden="true"></span>
+                </button>
+            </div>
+
+            <p id="gallery-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+            <noscript><p class="noscript-message">Zet JavaScript aan om door de galerij te bladeren. De landschappen blijven hieronder zichtbaar.</p></noscript>
+        </section>
+
+        <footer class="site-footer shell">
+            <span>GEMAAKT OM EVEN BIJ STIL TE STAAN.</span>
+            <span>ORIGINELE AI-LANDSCHAPPEN <span class="footer-plus" aria-hidden="true">✳</span> 2026</span>
+        </footer>
+    </main>
+
+    <dialog id="info-dialog" aria-labelledby="info-title" aria-describedby="info-description">
+        <button class="icon-button dialog-close" id="info-close" type="button" aria-label="Venster sluiten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button>
+        <p class="eyebrow">ELSEWHERE / 165</p>
+        <h2 id="info-title">Neem even<br><em>de tijd.</em></h2>
+        <p id="info-description">Een kleine galerij voor grootse landschappen. De beelden zijn met AI gemaakt; jij bepaalt waar je blijft hangen.</p>
+        <div class="dialog-tips">
+            <p><span>01</span> Klik op een beeld of een miniatuur om te wisselen.</p>
+            <p><span>02</span> Sleep, veeg of gebruik de pijltjestoetsen in de galerij.</p>
+            <p><span>03</span> Zet automatisch afspelen aan en leun even achterover.</p>
+        </div>
+    </dialog>
 </body>
 </html>
