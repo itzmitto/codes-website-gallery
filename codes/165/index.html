@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse Follow Animation</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .circle {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            will-change: transform;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="circle"></div>
+    </div>
+
+    <script>
+        const circle = document.querySelector(".circle");
+
+        let x = window.innerWidth / 2;
+        let y = window.innerHeight / 2;
+
+        let targetX = x;
+        let targetY = y;
+
+        window.addEventListener("mousemove", (e) => {
+            targetX = e.clientX;
+            targetY = e.clientY;
+        });
+
+        const tick = () => {
+            x += (targetX - x) * 0.15;
+            y += (targetY - y) * 0.15;
+
+            circle.style.transform = `translate3d(${x - 50}px, ${y - 50}px, 0)`;
+
+            requestAnimationFrame(tick);
+        };
+
+        requestAnimationFrame(tick);
+    </script>
+</body>
+</html>
