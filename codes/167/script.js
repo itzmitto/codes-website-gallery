@@ -60,7 +60,8 @@
   function scheduleAutoplay() {
     window.clearInterval(autoplayTimer);
     autoplayTimer = null;
-    if (!autoplay || document.hidden || dialog?.open || reducedMotion.matches) return;
+    if (!autoplay || document.hidden || dialog?.open || reducedMotion.matches)
+      return;
     autoplayTimer = window.setInterval(() => selectSlide(current + 1), 5000);
   }
 
@@ -68,7 +69,9 @@
     if (!autoplayButton) return;
     const label = reducedMotion.matches
       ? "Automatisch afspelen uitgeschakeld: minder beweging is ingeschakeld"
-      : autoplay ? "Automatisch afspelen pauzeren" : "Automatisch afspelen starten";
+      : autoplay
+        ? "Automatisch afspelen pauzeren"
+        : "Automatisch afspelen starten";
     autoplayButton.setAttribute("aria-pressed", String(autoplay));
     autoplayButton.setAttribute("aria-label", label);
     autoplayButton.title = label;
@@ -82,14 +85,20 @@
     cards.forEach((card) => {
       const cardIndex = Number(card.dataset.index);
       const offset = (cardIndex - current + slides.length) % slides.length;
-      card.dataset.position = offset === 0 ? "current" : offset === 1 ? "next" : "prev";
+      card.dataset.position =
+        offset === 0 ? "current" : offset === 1 ? "next" : "prev";
       if (cardIndex === current) {
         card.setAttribute("aria-current", "true");
       } else {
         card.removeAttribute("aria-current");
       }
       if (slides[cardIndex]) {
-        card.setAttribute("aria-label", cardIndex === current ? `Huidige afbeelding: ${slides[cardIndex].title}` : `Bekijk afbeelding: ${slides[cardIndex].title}`);
+        card.setAttribute(
+          "aria-label",
+          cardIndex === current
+            ? `Huidige afbeelding: ${slides[cardIndex].title}`
+            : `Bekijk afbeelding: ${slides[cardIndex].title}`,
+        );
       }
     });
 
@@ -100,16 +109,23 @@
       else thumb.removeAttribute("aria-current");
     });
 
-    if (count) count.textContent = `${String(current + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
+    if (count)
+      count.textContent = `${String(current + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
     if (title) title.textContent = slide.title;
     if (region) region.textContent = slide.region;
     if (note) note.textContent = slide.note;
     if (progress) {
       progress.max = slides.length;
       progress.value = current + 1;
-      progress.setAttribute("aria-label", `Foto ${current + 1} van ${slides.length}`);
+      progress.setAttribute(
+        "aria-label",
+        `Foto ${current + 1} van ${slides.length}`,
+      );
     }
-    stage.setAttribute("aria-label", `Fotogalerij, foto ${current + 1} van ${slides.length}`);
+    stage.setAttribute(
+      "aria-label",
+      `Fotogalerij, foto ${current + 1} van ${slides.length}`,
+    );
 
     if (userInitiated) {
       autoplay = false;
@@ -119,13 +135,22 @@
     }
   }
 
-  document.querySelector(".nav-prev")?.addEventListener("click", () => selectSlide(current - 1, true));
-  document.querySelector(".nav-next")?.addEventListener("click", () => selectSlide(current + 1, true));
+  document
+    .querySelector(".nav-prev")
+    ?.addEventListener("click", () => selectSlide(current - 1, true));
+  document
+    .querySelector(".nav-next")
+    ?.addEventListener("click", () => selectSlide(current + 1, true));
 
   [...cards, ...thumbs].forEach((button) => {
     button.addEventListener("click", () => {
       const index = Number(button.dataset.index);
-      if (Number.isInteger(index) && index >= 0 && index < slides.length && index !== current) {
+      if (
+        Number.isInteger(index) &&
+        index >= 0 &&
+        index < slides.length &&
+        index !== current
+      ) {
         selectSlide(index, true);
       }
     });
@@ -134,7 +159,12 @@
   gallery.addEventListener("keydown", (event) => {
     if (event.altKey || event.ctrlKey || event.metaKey || dialog?.open) return;
     const target = event.target;
-    if (target instanceof HTMLElement && (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName))) return;
+    if (
+      target instanceof HTMLElement &&
+      (target.isContentEditable ||
+        /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName))
+    )
+      return;
     const destinations = {
       ArrowLeft: current - 1,
       ArrowRight: current + 1,
@@ -148,7 +178,12 @@
   });
 
   gallery.addEventListener("focusin", (event) => {
-    if (!autoplay || event.target === autoplayButton || autoplayButton?.contains(event.target)) return;
+    if (
+      !autoplay ||
+      event.target === autoplayButton ||
+      autoplayButton?.contains(event.target)
+    )
+      return;
     autoplay = false;
     updateAutoplayButton();
     scheduleAutoplay();
@@ -165,7 +200,10 @@
     const distanceX = event.clientX - gesture.x;
     const distanceY = event.clientY - gesture.y;
     gesture = null;
-    if (Math.abs(distanceX) > 40 && Math.abs(distanceX) > Math.abs(distanceY) * 1.25) {
+    if (
+      Math.abs(distanceX) > 40 &&
+      Math.abs(distanceX) > Math.abs(distanceY) * 1.25
+    ) {
       suppressClickUntil = performance.now() + 500;
       selectSlide(current + (distanceX < 0 ? 1 : -1), true);
     }
@@ -176,22 +214,38 @@
     resetTilt();
   });
 
-  stage.addEventListener("click", (event) => {
-    if (performance.now() < suppressClickUntil && event.detail !== 0) {
-      event.preventDefault();
-      event.stopImmediatePropagation();
-      suppressClickUntil = 0;
-    }
-  }, true);
+  stage.addEventListener(
+    "click",
+    (event) => {
+      if (performance.now() < suppressClickUntil && event.detail !== 0) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        suppressClickUntil = 0;
+      }
+    },
+    true,
+  );
 
   cards.forEach((card) => {
     card.addEventListener("pointermove", (event) => {
-      if (reducedMotion.matches || !finePointer.matches || event.pointerType !== "mouse" || Number(card.dataset.index) !== current) return;
+      if (
+        reducedMotion.matches ||
+        !finePointer.matches ||
+        event.pointerType !== "mouse" ||
+        Number(card.dataset.index) !== current
+      )
+        return;
       const inner = card.querySelector(".card-inner");
       if (!inner) return;
       const bounds = card.getBoundingClientRect();
-      const x = Math.max(-1, Math.min(1, ((event.clientX - bounds.left) / bounds.width - 0.5) * 2));
-      const y = Math.max(-1, Math.min(1, ((event.clientY - bounds.top) / bounds.height - 0.5) * 2));
+      const x = Math.max(
+        -1,
+        Math.min(1, ((event.clientX - bounds.left) / bounds.width - 0.5) * 2),
+      );
+      const y = Math.max(
+        -1,
+        Math.min(1, ((event.clientY - bounds.top) / bounds.height - 0.5) * 2),
+      );
       inner.style.setProperty("--tilt-x", `${(-y * 6).toFixed(2)}deg`);
       inner.style.setProperty("--tilt-y", `${(x * 6).toFixed(2)}deg`);
     });
@@ -201,13 +255,19 @@
 
   autoplayButton?.addEventListener("click", () => {
     if (reducedMotion.matches) {
-      announce("Automatisch afspelen staat uit vanwege je voorkeur voor minder beweging.");
+      announce(
+        "Automatisch afspelen staat uit vanwege je voorkeur voor minder beweging.",
+      );
       return;
     }
     autoplay = !autoplay;
     updateAutoplayButton();
     scheduleAutoplay();
-    announce(autoplay ? "Automatisch afspelen gestart. Elke vijf seconden verschijnt een nieuwe foto." : "Automatisch afspelen gepauzeerd.");
+    announce(
+      autoplay
+        ? "Automatisch afspelen gestart. Elke vijf seconden verschijnt een nieuwe foto."
+        : "Automatisch afspelen gepauzeerd.",
+    );
   });
 
   document.addEventListener("visibilitychange", scheduleAutoplay);
@@ -222,12 +282,17 @@
   finePointer.addEventListener("change", resetTilt);
 
   if (fullscreenButton) {
-    if (typeof fullscreenTarget.requestFullscreen !== "function" || document.fullscreenEnabled === false) {
+    if (
+      typeof fullscreenTarget.requestFullscreen !== "function" ||
+      document.fullscreenEnabled === false
+    ) {
       fullscreenButton.hidden = true;
     } else {
       const updateFullscreenButton = () => {
         const active = Boolean(document.fullscreenElement);
-        const label = active ? "Volledig scherm afsluiten" : "Volledig scherm openen";
+        const label = active
+          ? "Volledig scherm afsluiten"
+          : "Volledig scherm openen";
         fullscreenButton.setAttribute("aria-label", label);
         fullscreenButton.setAttribute("aria-pressed", String(active));
         fullscreenButton.title = label;
@@ -237,7 +302,9 @@
           if (document.fullscreenElement) await document.exitFullscreen();
           else await fullscreenTarget.requestFullscreen();
         } catch {
-          announce("Volledig scherm kon niet worden geopend. Je kunt de galerij gewoon blijven gebruiken.");
+          announce(
+            "Volledig scherm kon niet worden geopend. Je kunt de galerij gewoon blijven gebruiken.",
+          );
         }
       });
       document.addEventListener("fullscreenchange", updateFullscreenButton);
@@ -251,12 +318,19 @@
       resetTilt();
       scheduleAutoplay();
     });
-    document.querySelector("#info-close")?.addEventListener("click", () => dialog.close());
+    document
+      .querySelector("#info-close")
+      ?.addEventListener("click", () => dialog.close());
     dialog.addEventListener("close", scheduleAutoplay);
     dialog.addEventListener("click", (event) => {
       if (event.target !== dialog) return;
       const bounds = dialog.getBoundingClientRect();
-      if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) {
+      if (
+        event.clientX < bounds.left ||
+        event.clientX > bounds.right ||
+        event.clientY < bounds.top ||
+        event.clientY > bounds.bottom
+      ) {
         dialog.close();
       }
     });
